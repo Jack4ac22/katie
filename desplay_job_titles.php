@@ -17,8 +17,10 @@ if ($connect) {
     if ($results) {
         $titles = mysqli_fetch_all($results, MYSQLI_ASSOC);
         foreach ($titles as $title) {
+            $id = $title['id'];
             echo '<h2>' . $title['title'] . '</h2>';
             echo '<p>' . $title['description'] . '</p>';
+            echo "<a href=\"http://localhost:8888/Katie/edit_job_title_form.php?id=$id\">edite</a>";
         }
     }
 }
