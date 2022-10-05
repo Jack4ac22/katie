@@ -19,7 +19,7 @@ if ($connect) {
         $updating_query = "UPDATE job_titles SET title = '$title', description = '$description' WHERE job_titles.id = $id";
         $results = mysqli_query($connect, $updating_query);
         if ($results) {
-            header("Location: http://localhost:8888/Katie/desplay_job_titles.php?id=$id");
+            header("Location: http://localhost:8888/Katie/display_job_titles.php?id=$id");
             exit();
         }
     } else echo "the entery already exsiste";

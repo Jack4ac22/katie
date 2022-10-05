@@ -3,7 +3,7 @@ require "./required/database.php";
 
 require "./required/header.php";
 require "./required/menue.php"; ?>
-<form action="add_job_title.php" method="post">
+<form action="./job_title/add_job_title.php" method="post">
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Job Title</label>
         <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="insert the new job title" name="job_title">
