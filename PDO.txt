@@ -1,0 +1,35 @@
+sample:
+
+$host = 'localhost';
+$user = 'root';
+$password = 'root';
+$dbname = 'katie';
+
+$dsn = "mysql:host=$host;dbname=$dbname";
+
+$pdo = new PDO($dsn, $user, $password);
+$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+
+
+fetching
+$number = 4;
+
+$sql = 'SELECT * FROM job_titles WHERE id > :number';
+$statment = $pdo->prepare($sql);
+$statment->execute(['number' => $number]);
+
+$titles = $statment->fetchAll();
+
+
+
+
+adding
+
+
+$title = 'Brave JET';
+$description = 'always FLYING...';
+
+$sql = "INSERT INTO job_titles ( title, description) VALUES (:title, :description)";
+$statment = $pdo->prepare($sql);
+$statment->execute(['title' => $title, 'description' => $description]);
+echo "success";
