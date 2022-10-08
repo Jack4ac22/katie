@@ -27,6 +27,25 @@ class User
 
 
     /**
+     * login()
+     * @param array
+     * @return bool
+     */
+
+    public function login($email, $password)
+    {
+        $this->db->query('SELECT * FROM users WHERE user_name = :email');
+        $this->db->bind(':email', $email);
+        $row = $this->db->single();
+        $hashed_password = $row->password;
+        if (password_verify($password, $hashed_password)) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * check if the user_name already taken
      * @param user_name
      * @return bool

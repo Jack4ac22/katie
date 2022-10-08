@@ -120,17 +120,30 @@ class Users extends Controller
                 $data['user_name_error'] = 'Username is required.';
             } elseif (strip_tags(trim($_POST['user_name'])) !== $_POST['user_name']) {
                 $data['user_name_error'] = 'Username should be letters only.';
-            } elseif (strlen($data['user_name']) < 6) {
-                $data['user_name_error'] = 'Username should be at least 6 characters.';
+            } elseif (strlen($data['user_name']) < 4) {
+                $data['user_name_error'] = 'Username should be at least 4 characters.';
             };
             //password
             if (empty($data['password'])) {
                 $data['password_error'] = 'password is required.';
             };
+            //check if the user_name exist in the database
+            if ($this->userModel->findUserByUserName($data['user_name'])) {
+            } else {
+                $data['user_name_error'] = 'Username was not found.';
+            }
             //check the errors
             if (empty($data['user_name_error']) && empty($data['password_error'])) {
                 //validates
-                die('success');
+                //check the data 
+                $logedin_user = $this->userModel->login($data['user_name'], $data['password']);
+                if ($logedin_user) {
+                    //creat session
+                    $this->creat_user_session($logedin_user);
+                } else {
+                    $data['password_error'] = 'password is incorrect.';
+                    $this->view('users/login', $data);
+                }
             } else {
                 //load the view with errors
                 $this->view('users/login', $data);
@@ -148,4 +161,48 @@ class Users extends Controller
             $this->view('users/login', $data);
         }
     }
+
+
+    /**
+     * creat_user_session()
+     * @param user
+     * @return creating session variables
+     */
+
+    public function creat_user_session($user)
+    {
+        $_SESSION['user_id'] = $user->id;
+        $_SESSION['user_user_name'] = $user->user_name;
+        redirect_to('pages/index');
+    }
+
+
+    /**
+     * logout()
+     * redirect to home
+     */
+
+    public function logout()
+    {
+        unset($_SESSION['user_id']);
+        unset($_SESSION['user_user_name']);
+        redirect_to('users/login');
+    }
+
+
+    /**
+     * islogged()
+     * @return boolean
+     */
+
+    public function islogged()
+    {
+        if (isset($_SESSION['user_id'])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 }

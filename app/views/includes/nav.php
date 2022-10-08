@@ -13,31 +13,38 @@
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="<?php echo URLROOT; ?>">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown link
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="<?php echo URLROOT; ?>/pages/about">about</a></li>
-                    </ul>
-                </li>
+                <?php if (!isset($_SESSION['user_id'])) {
+                    echo "</ul></div>";
+                } ?>
+                <?php if (isset($_SESSION['user_id'])) : ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo URLROOT; ?>/people/index">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown link
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="<?php echo URLROOT; ?>/pages/about">about</a></li>
+                        </ul>
+                    </li>
             </ul>
         </div>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="<?php echo URLROOT; ?>/users/login">login</a>
-            </li>
-            <li class="nav-item active">
                 <a class="nav-link" href="<?php echo URLROOT; ?>/users/logout">logout</a>
             </li>
-        </ul>
+        <?php else : ?>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="<?php echo URLROOT; ?>/users/login">login</a>
+                </li>
+            <?php endif; ?>
+            </ul>
     </div>
 </nav>
