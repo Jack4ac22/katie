@@ -9,6 +9,6 @@ define('DB_NAME', 'katie');
 // App Root
 define('APPROOT', dirname(dirname(__FILE__)));
 // URL Root
-define('URLROOT', 'http://localhost/Katie');
+define('URLROOT', 'http://localhost:8888/Katie');
 // Site Name
 define('SITENAME', 'Katie');
