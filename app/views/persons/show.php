@@ -32,9 +32,7 @@
                                 <?php foreach ($data['person']['phones'] as $phone) : ?>
                                     <div class="input-group m-3">
                                         <a href="tel:<?php echo $phone->number ?>" class="input-group-text" id="basic-addon1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
-                                                <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
-                                            </svg>
+                                            <i class="fa-sharp fa-solid fa-phone"></i>
                                         </a>
                                         <input type="phone" class="form-control" placeholder="Input group example" aria-label="Input group example" aria-describedby="basic-addon1" value="<?php echo $phone->number; ?>" name="phone" disabled>
                                     </div>
@@ -48,20 +46,17 @@
 
                             <?php endif; ?>
                             <div class="m-3">
-                                <?php if ($data['person']['person']->sex == 'male') {
-                                    echo "<span class=\"badge text-bg-primary\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"26\" height=\"16\" fill=\"currentColor\" class=\"bi bi-gender-male\" viewBox=\"0 0 16 16\">
-                                        <path fill-rule=\"evenodd\" d=\"M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2H9.5zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8z\"/></svg> male</span>
-                                
-                                ";
-                                } else {
-                                    echo "<span class=\"badge text-bg-primary\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"26\" height=\"16\" fill=\"currentColor\" class=\"bi bi-gender-female\" viewBox=\"0 0 16 16\">
-                                    <path fill-rule=\"evenodd\" d=\"M8 1a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM3 5a5 5 0 1 1 5.5 4.975V12h2a.5.5 0 0 1 0 1h-2v2.5a.5.5 0 0 1-1 0V13h-2a.5.5 0 0 1 0-1h2V9.975A5 5 0 0 1 3 5z\"/></svg> female</span>";
-                                }; ?></a>
+                                <?php if ($data['person']['person']->sex == 'male') : ?>
+                                    <h2><span class="badge text-bg-primary"><i class="fa-sharp fa-solid fa-person"></i></i> male</span> </h2>
+                                <?php else : ?>
+                                    <h2><span class="badge text-bg-primary"><i class="fa-sharp fa-solid fa-person-dress fa-2xl"></i> female</span></h2>
+                                <?php endif; ?>
+                                </a>
                             </div>
                             <!-- Modal  -->
                             <div class="m-3">
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-sharp fa-solid fa-pen-to-square"></i>
                                     edit
                                 </button>
 
@@ -76,8 +71,8 @@
                                             <div class="modal-body">
                                                 Are you sure that you want to edite the information. </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <a href="<?php echo URLROOT . '/persons/edite/' . $data['person']['person']->id; ?>" type="button" class="btn btn-primary">Edit</a>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-sharp fa-solid fa-xmark"></i> Close</button>
+                                                <a href="<?php echo URLROOT . '/persons/edite/' . $data['person']['person']->id; ?>" type="button" class="btn btn-primary"><i class="fa-sharp fa-solid fa-pen-to-square"></i> Edit</a>
                                             </div>
                                         </div>
                                     </div>
