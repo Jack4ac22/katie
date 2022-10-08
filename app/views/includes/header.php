@@ -16,4 +16,37 @@
     <?php
     require_once APPROOT . '/views/includes/nav.php';
     ?>
+
+    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling" <?php if (!isset($_SESSION['user_id'])) {
+                                                                                                                                                            echo 'disabled';
+                                                                                                                                                        } ?>>+</button>
+
+    <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasScrollingLabel">add item</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <p>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#">new person</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">new job title</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">new language</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">new time zone</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">new comment</a>
+                </li>
+            </ul>
+            </p>
+        </div>
+    </div>
+
     <div class="container mainContainer">
