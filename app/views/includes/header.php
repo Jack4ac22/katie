@@ -16,7 +16,6 @@
     <?php
     require_once APPROOT . '/views/includes/nav.php';
     ?>
-
     <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling" <?php if (!isset($_SESSION['user_id'])) {
                                                                                                                                                             echo 'disabled';
                                                                                                                                                         } ?>>+</button>
@@ -30,7 +29,7 @@
             <p>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">new person</a>
+                    <a class="nav-link" aria-current="page" href="<?php echo URLROOT . '/persons/add/'; ?>">new person</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">new job title</a>

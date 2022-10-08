@@ -173,7 +173,7 @@ class Users extends Controller
     {
         $_SESSION['user_id'] = $user->id;
         $_SESSION['user_user_name'] = $user->user_name;
-        redirect_to('pages/index');
+        redirect_to('persons/index');
     }
 
 
@@ -188,21 +188,5 @@ class Users extends Controller
         unset($_SESSION['user_user_name']);
         redirect_to('users/login');
     }
-
-
-    /**
-     * islogged()
-     * @return boolean
-     */
-
-    public function islogged()
-    {
-        if (isset($_SESSION['user_id'])) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 
 }

@@ -26,3 +26,18 @@ function flash($name = '', $message = '', $class = 'alert alert-success alert-di
         }
     }
 }
+
+
+/**
+ * islogged()
+ * @return boolean
+ */
+
+function islogged()
+{
+    if (isset($_SESSION['user_id'])) {
+        return true;
+    } else {
+        return false;
+    }
+}
