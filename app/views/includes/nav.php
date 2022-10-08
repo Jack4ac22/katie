@@ -18,19 +18,20 @@
                 } ?>
                 <?php if (isset($_SESSION['user_id'])) : ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo URLROOT; ?>/people/index">Features</a>
+                        <a class="nav-link" href="<?php echo URLROOT; ?>/people/index">People</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
+                        <a class="nav-link" href="#">search</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown link
+                        <a class="nav-link dropdown-toggle" href="<?php echo URLROOT; ?>/people/index" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            inserting
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="<?php echo URLROOT; ?>/pages/about">about</a></li>
+                            <li><a class="dropdown-item nav-link" href="<?php echo URLROOT; ?>/persons/index">person</a></li>
+                            <li><a class="dropdown-item nav-link" href="<?php echo URLROOT; ?>/job_titles/index">job title</a></li>
+                            <li><a class="dropdown-item nav-link" href="<?php echo URLROOT; ?>/languages/index">language</a></li>
+                            <li><a class="dropdown-item nav-link" href="<?php echo URLROOT; ?>/timezones/index">time zone</a></li>
                         </ul>
                     </li>
             </ul>

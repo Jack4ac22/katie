@@ -16,4 +16,11 @@ class Pages extends Controller
         $data = ['title' => 'About', 'description' => 'Be Safe'];
         $this->view('pages/about', $data);
     }
+
+
+    public function faq()
+    {
+        $data = ['title' => 'FAQs', 'description' => ''];
+        $this->view('pages/faq', $data);
+    }
 }
