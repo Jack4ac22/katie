@@ -44,6 +44,23 @@ class Person
     }
 
     /**
+     * getPersonByEmail_edit()
+     * @return bool
+     * @param $email
+     */
+    public function getPersonByEmail_edit($email)
+    {
+        $this->db->query('SELECT *  FROM people WHERE email = :email');
+        $this->db->bind(':email', $email);
+        $row = $this->db->single();
+        if ($this->db->rowCount() > 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * add_person()
      * @param array
      * @return bool
@@ -80,7 +97,7 @@ class Person
     /**
      * get_person_by_id($id)
      * @param $id
-     * @return onject - person - 
+     * @return array with two objects - person - 
      */
 
     public function get_person_by_id($id)
@@ -95,7 +112,29 @@ class Person
         $person = [
             'person' => $row,
             'phones' => $phones
+            
         ];
         return $person;
+    }
+
+    /**
+     * edit_person($data)
+     * @param $id
+     * $return bool
+     */
+
+    public function edit_person($data)
+    {
+        $this->db->query("UPDATE people SET first_name = :first_name, last_name = :last_name, email= :email, sex= :sex WHERE people.id = :id");
+        $this->db->bind('first_name', $data['first_name']);
+        $this->db->bind('last_name', $data['last_name']);
+        $this->db->bind('sex', $data['sex']);
+        $this->db->bind('email', $data['email']);
+        $this->db->bind('id', $data['id']);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

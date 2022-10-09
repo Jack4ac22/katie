@@ -34,6 +34,7 @@ class Pages extends Controller
 
     public function not_found()
     {
-        $this->view('404');
+        $data = ['title' => 404, 'description' => ''];
+        $this->view('not_found', $data);
     }
 }

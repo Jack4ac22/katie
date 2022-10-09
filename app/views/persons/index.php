@@ -1,5 +1,5 @@
 <?php require_once APPROOT . '/views/includes/header.php'; ?>
-<?php flash('person_add'); ?>
+<?php flash('msg'); ?>
 <div class="input-group mb-3 ">
     <span class="input-group-text" id="basic-addon1">
         <i class="fa-sharp fa-solid fa-magnifying-glass"></i>

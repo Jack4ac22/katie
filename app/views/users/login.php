@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-md-10 col-xl-10 col-xxl-8 mx-auto">
         <div class="car card-body bg-light mt-5 p-2">
-            <?php flash('register_success'); ?>
+            <?php flash('msg'); ?>
             <h2>Login</h2>
             <p>Fill up the folwing inputs to login to the data ... <mark><em><strong>Ready?</strong></em></mark></p>
             <form action="<?php echo URLROOT; ?>/users/login" method="post">

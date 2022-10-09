@@ -28,7 +28,38 @@
 <i class="fa-solid fa-ellipsis-vertical"></i>
 <i class="fa-solid fa-right-long"></i>
 
-<?php foreach ($ps as $p) : ?>
+
+<div class="input-group mb-3">
+    <div class="input-group-text">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+    </div>
+    <input type="text" class="form-control" aria-label="Text input with radio button">
+    <label class="input-group-text" for="inputGroupSelect01">Options</label>
+    <span class="input-group-text">$</span>
+    <span class="input-group-text">0.00</span>
+    <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+    <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+    <span class="input-group-text">$</span>
+    <span class="input-group-text">0.00</span>
+</div>
+<div class="input-group mb-3">
+    <div class="input-group-text">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+    </div>
+    <input type="text" class="form-control" aria-label="Text input with radio button">
+    <label class="input-group-text" for="inputGroupSelect01">Options</label>
+    <span class="input-group-text">$</span>
+    <span class="input-group-text">0.00</span>
+    <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+    <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+    <span class="input-group-text">$</span>
+    <span class="input-group-text">0.00</span>
+</div>
+
+
+
+<?php $ps = [];
+foreach ($ps as $p) : ?>
 <?php endforeach; ?>
 
 <?php if (1 == 1) : ?>

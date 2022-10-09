@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-md-10 col-xl-10 col-xxl-8 mx-auto">
         <div class="car card-body bg-light mt-5 p-2">
-            <?php flash('register_success'); ?>
+            <?php flash('msg'); ?>
             <h2>New person's form</h2>
             <p>Fill up the folwing inputs to add a new person</p>
             <form action="<?php echo URLROOT; ?>/persons/add" method="post">
