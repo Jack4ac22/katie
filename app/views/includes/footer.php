@@ -1,4 +1,5 @@
 </div>
+</div>
 <div class="container">
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
         <p class="col-md-4 mb-0 text-muted"> <img src="https://cdn.pixabay.com/photo/2013/07/12/17/59/association-152746_960_720.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"> © 2022 Jack Kazanjyan</p>

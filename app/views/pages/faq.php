@@ -24,4 +24,15 @@
 <i class="fa-solid fa-house-circle-exclamation"></i>
 <i class="fa-solid fa-person-circle-exclamation"></i>
 
+<i class="fa-solid fa-comments-dollar"></i>
+<i class="fa-solid fa-ellipsis-vertical"></i>
+<i class="fa-solid fa-right-long"></i>
+
+<?php foreach ($ps as $p) : ?>
+<?php endforeach; ?>
+
+<?php if (1 == 1) : ?>
+<?php else : ?>
+<?php endif; ?>
+
 <?php require_once APPROOT . '/views/includes/footer.php'; ?>

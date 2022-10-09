@@ -43,7 +43,7 @@
                             <?php endif; ?>
                             <div class="m-3">
                                 <?php if ($data['person']['person']->sex == 'male') : ?>
-                                    <h2><span class="badge text-bg-primary"><i class="fa-sharp fa-solid fa-person"></i></i> male</span> </h2>
+                                    <h2><span class="badge rounded-pill text-bg-dark"><i class="fa-sharp fa-solid fa-person"></i></i> male</span> </h2>
                                 <?php else : ?>
                                     <h2><span class="badge rounded-pill text-bg-info"><i class="fa-sharp fa-solid fa-person-dress"></i> female</span></h2>
                                 <?php endif; ?>
@@ -108,7 +108,20 @@
             </h2>
             <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
                 <div class="accordion-body">
-                    Dummy
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            <div class="input-group ">
+                                <a href="tel:<?php echo $phone->number ?>" class="input-group-text" id="basic-addon1">
+                                    <i class="fa-solid fa-plane-departure"></i>
+                                </a>
+                                <input type="phone" class="form-control" placeholder="Input group example" aria-label="Input group example" aria-describedby="basic-addon1" value="location A" name="phone" disabled>
+                            </div>
+                        </label>
+                    </div>
+
+
                 </div>
             </div>
         </div>

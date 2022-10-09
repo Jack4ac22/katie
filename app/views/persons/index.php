@@ -22,21 +22,22 @@
                     <img src="https://cdn.pixabay.com/photo/2016/10/18/19/56/cute-1751246_960_720.png" alt="woman" class="rounded mx-auto d-block">
                     <div class="col-md-9">
                         <div class="card-body">
-                            <h5 class="card-title"><?php echo $person->first_name . ' ' . $person->last_name; ?></h5>
+                            <p class="h5"><?php echo $person->first_name . ' ' . $person->last_name; ?></p>
                             <p class="card-text"><?php echo $person->email; ?></p>
                             <a type="button" class="btn btn-primary" href="<?php echo URLROOT . '/persons/show/' . $person->id; ?>">
                                 <i class="fa-sharp fa-solid fa-circle-info"></i></a>
-                            <a type="button" class="btn btn-primary disabled">
-                                <?php if ($person->sex == 'male') : ?>
-                                    <span class="badge text-bg-primary">
+                            <?php if ($person->sex == 'male') : ?>
+                                <a type="button" class="btn btn-dark disabled">
+                                    <span class="badge text-bg-dark">
                                         <i class="fa-sharp fa-solid fa-mars fa-2xl"></i>
                                     </span>
                                 <?php else : ?>
-                                    <span class="badge text-bg-primary"><i class="fa-sharp fa-solid fa-venus fa-2xl"></i>
-                                    </span>
-                                <?php endif; ?>
+                                    <a type="button" class="btn btn-info disabled">
+                                        <span class="badge text-bg-info"><i class="fa-sharp fa-solid fa-venus fa-2xl"></i>
+                                        </span>
+                                    <?php endif; ?>
 
-                            </a>
+                                    </a>
                         </div>
                     </div>
                 </div>
