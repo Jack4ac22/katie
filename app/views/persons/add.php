@@ -51,7 +51,7 @@
                     </div>
                     <div class="col m-3">
                         <div class="form-floating m-3">
-                            <a href="<?php echo URLROOT; ?>/persons/index" class="btn btn-light btn-block">Back to all people <i class="fa-solid fa-circle-caret-left"></i></a>
+                            <a href="<?php echo URLROOT; ?>/persons/index" class="btn btn-light btn-block">Back to all people <i class="fa-sharp fa-solid fa-backward"></i></a>
                         </div>
                     </div>
                 </div>

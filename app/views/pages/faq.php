@@ -11,4 +11,17 @@
 <i class="fa-sharp fa-solid fa-mars"></i>
 <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
 
+
+<i class="fa-solid fa-earth-americas"></i>
+<i class="fa-solid fa-earth-oceania"></i>
+<i class="fa-solid fa-earth-europe"></i>
+<i class="fa-solid fa-earth-asia"></i>
+<i class="fa-solid fa-earth-africa"></i>
+
+<i class="fa-solid fa-plane-departure"></i>
+<i class="fa-solid fa-plane-arrival"></i>
+
+<i class="fa-solid fa-house-circle-exclamation"></i>
+<i class="fa-solid fa-person-circle-exclamation"></i>
+
 <?php require_once APPROOT . '/views/includes/footer.php'; ?>
