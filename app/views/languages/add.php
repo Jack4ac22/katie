@@ -1,5 +1,5 @@
   <?php require APPROOT . '/views/includes/header.php'; ?>
-  <a href="<?php echo URLROOT; ?>/posts" class="btn btn-light"><i class="fa fa-backward"></i> Back</a>
+  <a href="<?php echo URLROOT; ?>/languages" class="btn btn-light"><i class="fa fa-backward"></i> Back</a>
   <div class="card card-body bg-light mt-5">
       <h2>Add Language</h2>
       <p>fill up the data to creat a new language.</p>

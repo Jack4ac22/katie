@@ -1,21 +1,28 @@
 <?php require APPROOT . '/views/includes/header.php'; ?>
 <?php flash('msg'); ?>
-<div class="row mb-3">
-    <div class="col-md-6">
-        <h1>Languages</h1>
+<a type="button" class="btn btn-primary" href="<?php echo URLROOT; ?>/languages/add">
+    <i class="fa-solid fa-language fa-xl"></i> new language
+</a>
+<div class="row">
+    <?php foreach ($data['languages'] as $language) : ?>
+    <div class="col-sm-6 ">
+        <div class="card m-1">
+            <div class="card-body">
+                <div class="card-header">
+                    <i class="fa-solid fa-language fa-2xl"> <?php echo ' ' . $language->title; ?></i>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title"><?php echo $language->description; ?></h5>
+                    <p class="card-text"><?php echo $language->extra; ?></p>
+                    <a href="<?php echo URLROOT; ?>/languages/show/<?php echo $language->id; ?>"
+                        class="btn btn-primary">
+                        <i class="fa-solid fa-exclamation"></i> more actions</a>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-6">
-        <a href="<?php echo URLROOT; ?>/languages/add" class="btn btn-primary pull-right">
-            <i class="fa fa-pencil"></i> Add language
-        </a>
-    </div>
+    <?php endforeach; ?>
 </div>
-<?php foreach ($data['languages'] as $language) : ?>
-<div class="card card-body mb-3">
-    <h4 class="card-title"><?php echo $language->title; ?></h4>
-    <p class="card-text"><?php echo $language->description; ?></p>
-    <p class="card-text"><?php echo $language->extra; ?></p>
-    <a href="<?php echo URLROOT; ?>/languages/show/<?php echo $language->id; ?>" class="btn btn-dark">More</a>
-</div>
-<?php endforeach; ?>
+
+
 <?php require APPROOT . '/views/includes/footer.php'; ?>
