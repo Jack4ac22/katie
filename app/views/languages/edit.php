@@ -23,7 +23,10 @@
                   class="form-control form-control-lg <?php echo (!empty($data['extra_err'])) ? 'is-invalid' : ''; ?>"><?php echo $data['extra']; ?></textarea>
               <span class="invalid-feedback"><?php echo $data['extra_err']; ?></span>
           </div>
-          <input type="submit" class="btn btn-success" value="Submit">
+          <div class="form-floating m-3">
+              <button type="submit" class="btn btn-primary btn-block"><i class="fa-sharp fa-solid fa-pen-to-square"></i>
+                  </i> edit</button>
+          </div>
       </form>
   </div>
   <?php require APPROOT . '/views/includes/footer.php'; ?>

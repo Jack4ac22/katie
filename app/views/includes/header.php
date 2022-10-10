@@ -49,8 +49,7 @@
                             href="<?php echo URLROOT; ?>/timezones/add"">new time zone</a>
                     </li>
                     <li class=" nav-item">
-                            <a class="nav-link" href="" button" class="btn btn-primary"
-                                href="<?php echo URLROOT; ?>/comments/add"">new comment</a>
+                            <a class="nav-link" button" class="btn btn-primary" href="<?php echo URLROOT; ?>/phones/add"">new phone number</a>
                     </li>
                 </ul>
                 </p>

@@ -115,7 +115,6 @@ class Languages extends Controller
       // Get existing language from model
       $language = $this->languageModel->get_language_by_id($id);
 
-      // Check for owner
 
       $data = [
         'id' => $id,
@@ -131,12 +130,17 @@ class Languages extends Controller
   public function show($id)
   {
     $language = $this->languageModel->get_language_by_id($id);
+    if ($language) {
 
     $data = [
       'language' => $language
     ];
 
     $this->view('languages/show', $data);
+    } else {
+      flash('msg', '<p>the page which you requested does not exist, try to use other method</p>');
+      redirect_to('/pages/notFound');
+    }
   }
 
   public function delete($id)

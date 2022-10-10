@@ -43,6 +43,10 @@
                             <input type="phone" class="form-control" placeholder="Input group example"
                                 aria-label="Input group example" aria-describedby="basic-addon1"
                                 value="<?php echo $phone->number; ?>" name="phone" disabled>
+                            <a class="btn btn-outline-secondary"
+                                href="<?php echo URLROOT . '/phones/show/' . $phone->id; ?>"> <i
+                                    class="fa-solid fa-circle-info"></i></a>
+
                         </div>
 
 
