@@ -27,8 +27,11 @@
                   <option selected>Open this select menu</option>
                   <?php endif; ?>
                   <?php foreach ($data['persons'] as $person) : ?>
-                  <option value="<?php echo $person->id; ?>" <?php if ((isset($data['p_id'])) && ($data['p_id'] == $person->id))
-                                                                        echo 'selected';; ?>>
+                  <option value="<?php echo $person->id; ?>"
+                      <?php if ((isset($data['p_id'])) && ($data['p_id'] == $person->id)) echo 'selected';; ?>
+                      <?php if ((isset($_SESSION['p_id'])) && ($_SESSION['p_id'] == $person->id)) echo 'selected';; ?>
+                      <?php if ((isset($id)) && ($id == $person->id)) echo 'selected';; ?>>
+
                       <?php echo $person->first_name . ' ' . $person->last_name; ?></option>
                   <?php endforeach; ?>
               </select>

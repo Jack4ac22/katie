@@ -2,8 +2,6 @@
 <a href="<?php echo URLROOT; ?>/persons/index" class="btn btn-light btn-block">Back to all people <i
         class="fa-sharp fa-solid fa-backward"></i></a>
 
-
-
 <?php if (isset($data['person'])) : ?>
 <div class="accordion" id="accordionPanelsStayOpenExample">
     <div class="accordion-item">
@@ -24,6 +22,7 @@
                         <h5 class="mt-0">Full name:
                             <?php echo $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name; ?>
                         </h5>
+
                         <div class="input-group m-3">
                             <a href="mailto:<?php echo $data['person']['person']->email ?>" class="input-group-text"
                                 id="basic-addon1">
@@ -36,27 +35,79 @@
                         <?php if (count($data['person']['phones']) > 0) : ?>
                         <h5 class="mt-0">Phone number(s)</h5>
                         <?php foreach ($data['person']['phones'] as $phone) : ?>
-                        <div class="input-group m-3">
-                            <a href="tel:<?php echo $phone->number ?>" class="input-group-text" id="basic-addon1">
-                                <i class="fa-sharp fa-solid fa-phone"></i>
-                            </a>
-                            <input type="phone" class="form-control" placeholder="Input group example"
-                                aria-label="Input group example" aria-describedby="basic-addon1"
-                                value="<?php echo $phone->number; ?>" name="phone" disabled>
-                            <a class="btn btn-outline-secondary"
-                                href="<?php echo URLROOT . '/phones/show/' . $phone->id; ?>"> <i
-                                    class="fa-solid fa-circle-info"></i></a>
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="input-group m-3">
+                                    <a href="tel:<?php echo $phone->number ?>" class="input-group-text"
+                                        id="basic-addon1">
+                                        <i class="fa-sharp fa-solid fa-phone"></i>
+                                    </a>
+                                    <input type="phone" class="form-control" placeholder="Input group example"
+                                        aria-label="Input group example" aria-describedby="basic-addon1"
+                                        value="<?php echo $phone->number; ?>" name="phone" disabled>
+                                    <a class="btn btn-outline-secondary"
+                                        href="<?php echo URLROOT . '/phones/show/' . $phone->id; ?>"><i
+                                            class="fa-solid fa-circle-info"></i></a>
+                                    <a class="btn btn-outline-secondary"
+                                        href="<?php echo URLROOT . '/phones/show/' . $phone->id; ?>"><i
+                                            class="fa-sharp fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <!-- Modal  -->
+                                <div class="m-3 d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-danger me-md-2" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal"><i class="fa-solid fa-trash-can"></i>
+                                        delete
+                                    </button>
 
+                                    <!-- Modal Edite -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete a phone
+                                                        number
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Are you sure that you want to delete this phone number</div>
+                                                <div class="modal-footer">
+                                                    <form method="post"
+                                                        action="<?php echo URLROOT; ?>/phones/delete_from_user/<?php echo $phone->id ?>/<?php echo $data['person']['person']->id; ?>">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal"><i
+                                                                class="fa-sharp fa-solid fa-xmark"></i> Close</button>
+                                                        <button type="submit" class="btn btn-danger"><i
+                                                                class="fa-sharp fa-solid fa-pen-to-square"></i>
+                                                            delete</a>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
 
                         <?php endforeach; ?>
+
                         <?php else : ?>
                         <div class="alert alert-warning" role="alert">
                             <h6>No phone numbers were found for this person in the database.</h6>
                         </div>
-
                         <?php endif; ?>
+
+                        <!-- add button to add a new phone number to the current -->
+                        <a class="btn btn-outline-secondary"
+                            href="<?php echo URLROOT . '/phones/add/' . $data['person']['person']->id; ?>"><i
+                                class="fa-solid fa-plus"></i> Add new number</a>
                         <div class="m-3">
                             <?php if ($data['person']['person']->sex == 'male') : ?>
                             <h2><span class="badge rounded-pill text-bg-dark"><i

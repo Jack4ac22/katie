@@ -28,7 +28,7 @@ class Phones extends Controller
      * add a phone number and assign it to someone
      */
 
-    public function add()
+    public function add($name = 0)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
@@ -55,7 +55,7 @@ class Phones extends Controller
             }
             if (empty($data['number_err']) && empty($data['description_err']) && empty($data['p_id_err'])) {
                 if ($this->phoneModel->add_phone($data)) {
-                    flash('msg', 'phone number is added');
+                    flash('msg', '<p>' . $data['number'] . ' is added.</p> <a href="' . URLROOT . '/persons/show/' . $data['p_id'] . '" class="alert-link">check the profile.</a>');
                     redirect_to('phones');
                 } else {
                     flash('msg', 'Something went wrong, please try again later.');
@@ -71,7 +71,8 @@ class Phones extends Controller
         $data = [
             'number' => '',
             'description' => '',
-            'persons' => $persons
+            'persons' => $persons,
+            'p_id' => $name
         ];
         $this->view('phones/add', $data);
     }
@@ -162,8 +163,27 @@ class Phones extends Controller
                 redirect_to('phones');
             }
             if ($this->phoneModel->delete_phone($id)) {
-                flash('msg', 'phone number is Removed.');
+                flash('msg', 'phone number is Removed from your database.');
                 redirect_to('phones');
+            }
+        }
+    }
+
+
+    public function delete_from_user($id, $p_id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $phone = $this->phoneModel->get_phone_by_id($id);
+            if ($phone) {
+                if (!islogged()) {
+                    redirect_to('phones');
+                }
+                if ($this->phoneModel->delete_phone($id)) {
+                    $msg = "phone number is Removed from your data base.. $p_id";
+                    flash('msg',);
+                    redirect_to("persons/show/$p_id");
+                }
             }
         }
     }
