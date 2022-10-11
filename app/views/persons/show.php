@@ -16,8 +16,11 @@
             aria-labelledby="panelsStayOpen-headingOne">
             <div class="accordion-body">
                 <div class="d-flex position-relative">
-                    <img src="https://cdn.pixabay.com/photo/2016/06/01/00/01/sad-1428080__340.png"
-                        class="flex-shrink-0 me-3" alt="...">
+                    <figure class="figure p-3">
+                        <img src="https://cdn.pixabay.com/photo/2016/06/01/00/01/sad-1428080__340.png"
+                            class="figure-img img-fluid rounded" alt="...">
+                    </figure>
+
                     <div>
                         <h5 class="mt-0">Full name:
                             <?php echo $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name; ?>
