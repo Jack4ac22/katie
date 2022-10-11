@@ -7,7 +7,7 @@ class Peplan
     {
         $this->db = new Database;
     }
-
+ 
     /**
      * @return all phone numbers with the related data of the user.
      */
