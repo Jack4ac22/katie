@@ -8,18 +8,18 @@ class Peplans extends Controller
             redirect_to('users/login');
         }
 
-        $this->peplanModel = $this->model('Peplans');
-        $this->phoneModel = $this->model('Phone');
+        $this->peplanModel = $this->model('Peplan');
+        $this->languageModel = $this->model('Language');
         $this->personModel = $this->model('Person');
     }
 
     /**
-     * @return languages that spoken by a certain person in an array redirected to the view
+     * @return languages with the people that they speaks them.
      */
 
-    public function index($p_id)
+    public function index()
     {
-        $languages = $this->phoneModel->get_languages($p_id);
+        $languages = $this->peplanModel->get_all_data();
         $data = [
             'languages' => $languages
         ];
@@ -30,53 +30,62 @@ class Peplans extends Controller
      * add a phone number and assign it to someone
      */
 
-    public function add($name = 0)
+    public function add($name = 0, $lan = 0)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
             $data = [
-                'number' => $_POST['number'],
-                'description' => $_POST['description'],
+                'levle' => $_POST['levle'],
+                'comment' => $_POST['comment'],
+                'lan_id' => $_POST['lan_id'],
                 'p_id' => $_POST['p_id'],
-                'number_err' => '',
-                'description_err' => '',
+                'levle_err' => '',
+                'comment_err' => '',
+                'lan_id_err' => '',
                 'p_id_err' => ''
             ];
 
             // data validation
-            if (empty($_POST['number'])) {
-                $data['number_err'] = 'please insert a phone number.';
-            } elseif (!is_numeric($_POST['number'])) {
-                $data['number_err'] = 'Phone number is a number.';
-            }
-            if (empty($_POST['description'])) {
-                $data['description'] = 'General';
-            }
             if ($_POST['p_id'] == 0) {
                 $data['number_err'] = 'please chose a person.';
+            } elseif (!isset($_POST['p_id'])) {
+                $data['number_err'] = 'please chose a person.';
             }
-            if (empty($data['number_err']) && empty($data['description_err']) && empty($data['p_id_err'])) {
-                if ($this->phoneModel->add_phone($data)) {
-                    flash('msg', '<p>' . $data['number'] . ' is added.</p> <a href="' . URLROOT . '/persons/show/' . $data['p_id'] . '" class="alert-link">check the profile.</a>');
-                    redirect_to('phones');
+            if ($_POST['lan_id'] == 0) {
+                $data['number_err'] = 'please chose a language.';
+            }
+            if ($_POST['levle'] == 0) {
+                $data['number_err'] = 'please chose a language.';
+            }
+
+
+            if ((empty($data['lan_id_err'])) && (empty($data['p_id_err'])) && (empty($data['levle_err']))) {
+                if ($this->peplanModel->add_lan_to_person($data)) {
+                    flash('msg', '<a href="' . URLROOT . '/persons/show/' . $data['p_id'] . '" class="alert-link">check the profile.</a>');
+                    redirect_to('persons/' . $data['p_id']);
                 } else {
                     flash('msg', 'Something went wrong, please try again later.');
-                    redirect_to('phones');
+                    redirect_to('persons');
                 }
             } else {
-                $persons = $this->personModel->getPersons();
+                $persons = $this->personModel->add_lan_to_person();
                 $data['persons'] = $persons;
-                $this->view('phones/add', $data);
+                $languagess = $this->languagesModel->add_lan_to_person();
+                $data['languagess'] = $languagess;
+                $this->view('peplans/add', $data);
             }
         } else
             $persons = $this->personModel->getPersons();
+        $languages = $this->languageModel->getlanguages();
         $data = [
-            'number' => '',
-            'description' => '',
+            'levle' => '',
+            'comment' => '',
+            'lan_id' => $lan,
+            'p_id' => $name,
             'persons' => $persons,
-            'p_id' => $name
+            'languages' => $languages
         ];
-        $this->view('phones/add', $data);
+        $this->view('peplans/add', $data);
     }
 
     /**

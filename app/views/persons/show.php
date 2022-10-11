@@ -38,7 +38,7 @@
                                                 </a>
                                                 <input type="phone" class="form-control" placeholder="Input group example" aria-label="Input group example" aria-describedby="basic-addon1" value="<?php echo $phone->number; ?>" name="phone" disabled>
                                                 <a class="btn btn-outline-secondary" href="<?php echo URLROOT . '/phones/show/' . $phone->id; ?>"><i class="fa-solid fa-circle-info"></i></a>
-                                                <a class="btn btn-outline-secondary" href="<?php echo URLROOT . '/phones/show/' . $phone->id; ?>"><i class="fa-sharp fa-solid fa-pen-to-square"></i>
+                                                <a class="btn btn-outline-secondary" href="<?php echo URLROOT . '/phones/edit/' . $phone->id; ?>"><i class="fa-sharp fa-solid fa-pen-to-square"></i>
                                                 </a>
                                             </div>
                                         </div>
@@ -263,9 +263,11 @@
                             <?php foreach ($data['person']['languages'] as $lan) : ?>
                                 <tr>
                                     <th scope="row"><a href="<?php echo URLROOT . '/languages/show/' . $lan->lan_id; ?>" class="btn btn-light"><?php echo $lan->title; ?></a></th>
-                                    <td><div class="progress">
-  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $lan->levle ?>%"></div>
-</div></td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $lan->levle ?>%"></div>
+                                        </div>
+                                    </td>
                                     <td><?php echo $lan->comment ?></td>
                                 </tr>
 

@@ -7,19 +7,28 @@ class Peplan
     {
         $this->db = new Database;
     }
- 
+
     /**
-     * @return all phone numbers with the related data of the user.
+     * @return all languages with the related data of the user.
      */
-    public function get_all($lan_id)
+    public function get_all_data()
     {
-        $this->db->query("SELECT PL.*, P.first_name, P.last_name, L.title FROM people_languages AS PL 
-        INNER JOIN people AS P ON P.id = PL.p_id
-        INNER JOIN languages AS L ON L.id = PL.lan_id
-        WHERE L.id = :lan_id");
-        $this->db->bind('p_id' , $lan_id);
-        $results = $this->db->resultSet();
-        return $results;
+
+        $this->db->query("SELECT PL.*, PP.first_name, PP.last_name, PP.sex, L.title, L.description, L.extra
+        FROM people_languages AS PL
+        LEFT JOIN people AS PP ON PP.id = PL.p_id
+        LEFT JOIN languages AS L ON L.id = PL.lan_id
+        ORDER BY PL.comment");
+        $languages = $this->db->resultSet();
+
+        $this->db->query("SELECT * FROM languages");
+        $lans = $this->db->resultSet();
+        $res = [
+            'languages' => $lans,
+            'list' => $languages
+        ];
+
+        return $res;
     }
 
     /**
@@ -28,12 +37,13 @@ class Peplan
      * @return bool
      */
 
-    public function add_phone($data)
+    public function add_lan_to_person($data)
     {
-        $this->db->query("INSERT INTO phone_numbers (number, p_id, description) VALUES (:number, :p_id, :description )");
-        $this->db->bind(':number', $data['number']);
+        $this->db->query("INSERT INTO people_languages (id, p_id, lan_id, levle, comment) VALUES (NULL, :p_id, :lan_id, :levle, :comment)");
         $this->db->bind(':p_id', $data['p_id']);
-        $this->db->bind(':description', $data['description']);
+        $this->db->bind(':lan_id', $data['lan_id']);
+        $this->db->bind(':levle', $data['levle']);
+        $this->db->bind(':comment', $data['comment']);
         if ($this->db->execute()) {
             return true;
         } else {
