@@ -37,4 +37,9 @@ class Pages extends Controller
         $data = ['title' => 404, 'description' => ''];
         $this->view('not_found', $data);
     }
+
+    public function patrick()
+    {
+        $this->view('pages/patrick');
+    }
 }
