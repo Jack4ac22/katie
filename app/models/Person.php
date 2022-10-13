@@ -119,7 +119,7 @@ class Person
             'person' => $row,
             'phones' => $phones,
             'languages' => $languages
-            
+
         ];
         return $person;
     }
@@ -142,6 +142,24 @@ class Person
             return true;
         } else {
             return false;
+        }
+    }
+
+    public function add_current_img($data)
+    {
+        $this->db->query("INSERT INTO imgs (p_id, img_path, comment) VALUES (:p_id, :img_path, :comment)");
+        $this->db->bind(':p_id', $data['p_id']);
+        $this->db->bind(':img_path', $data['img_path']);
+        $this->db->bind(':comment', $data['comment']);
+        if ($this->db->execute()) {
+            $this->db->query("UPDATE people SET img=:img WHERE people.id = :p_id");
+            $this->db->bind(':img', $data['img_path']);
+            $this->db->bind(':p_id', $data['p_id']);
+            if ($this->db->execute()) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 }

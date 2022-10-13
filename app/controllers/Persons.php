@@ -104,7 +104,7 @@ class Persons extends Controller
      */
 
     public function show($id = null)
-    {     
+    {
         $person = $this->personModel->get_person_by_id($id);
         if ($person['person']) {
             $data = ['person' => $person];
@@ -201,6 +201,88 @@ class Persons extends Controller
         } else {
             flash('msg', '<p>the page which you requested does not exist, try to use other method</p>');
             redirect_to('/pages/notFound');
+        }
+    }
+
+    /**
+     * upload pic
+     * 
+     */
+    public function upload($p_id = null)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data = [
+                'p_id' => $_POST['p_id'],
+                'img_src' => '',
+                'comment' => $_POST['comment'],
+                'p_id_err' => '',
+                'img_src_err' => '',
+                'comment_err' => ''
+            ];
+            /*
+        The uploaded files are places in a temporary folder on the server.
+        These files must be saved/moved to the desired location/folder.
+    */
+
+            // Is there some errors ? (disconnected, file too big...)
+            if ((isset($_FILES['img']['error'])) && ($_FILES['img']['error']) != UPLOAD_ERR_OK) {
+                flash('msg', '<p>Error during upload, try again later.</p>');
+                redirect_to('persons/upload/' . $p_id);
+            } else {
+
+
+                // Limit the file type
+                $extension = array_search($_FILES['img']['type'], array(
+                    '.jpg' => 'image/jpeg',
+                    '.png' => 'image/png',
+                    '.gif' => 'image/gif'
+                ));
+
+                if ($extension === false) {
+                    flash('msg', '<p>File must be an image.</p>');
+                    redirect_to('persons/upload/' . $_POST['p_id']);
+                } else {
+                    $fileName = time() . '-' . $_POST['p_id'];
+
+                    $filePath = APPROOT .  "/imgs/$fileName$extension";
+
+                    if (move_uploaded_file($_FILES['img']['tmp_name'], $filePath)) {
+                        $data = [
+                            'img_path' => $filePath,
+                            'comment' => $_POST['comment'],
+                            'p_id' => $_POST['p_id']
+                        ];
+                        echo '<pre>' . var_export($data, true) . '</pre>';
+
+                        if ($this->personModel->add_current_img($data)) {
+                            flash('msg', '<p>Image uploaded.</p><p>you can upload another picture or <a href="' . URLROOT . '/persons/show/' . $data['p_id'] . '" class="alert-link">you can use this link to check the profile</a>.</p>');
+                            redirect_to('persons/upload/' . $data['p_id']);
+                        }
+                    } else
+                        echo 'Problem uploading the file!';
+                }
+            }
+        } else {
+            $persons = $this->personModel->getPersons();
+            if ($persons) {
+                if ($p_id) {
+                    $data = [
+                        'persons' => $persons,
+                        'p_id' => $p_id,
+                        'comment' => '',
+                        'img_src' => ''
+                    ];
+                } else {
+                    $data = [
+                        'persons' => $persons,
+                        'comment' => ''
+                    ];
+                }
+                $this->view('persons/upload', $data);
+            }else {
+                flash('msg', '<p>something went wrong, please try again later.</p>');
+                redirect_to('persons/add/');
+            }
         }
     }
 }
