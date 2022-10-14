@@ -216,10 +216,7 @@ class Persons extends Controller
                 'img_src_err' => '',
                 'comment_err' => ''
             ];
-            /*
-        The uploaded files are places in a temporary folder on the server.
-        These files must be saved/moved to the desired location/folder.
-    */
+
 
             // Is there some errors ? (disconnected, file too big...)
             if ((isset($_FILES['img']['error'])) && ($_FILES['img']['error']) != UPLOAD_ERR_OK) {
@@ -280,6 +277,27 @@ class Persons extends Controller
                 flash('msg', '<p>something went wrong, please try again later.</p>');
                 redirect_to('persons/add/');
             }
+        }
+    }
+
+
+    /**
+     * delete a person from the data base. 
+     */
+    public function delete_person($id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //Execute
+            if ($this->personModel->delete_person($id)) {
+                // Redirect to login
+                flash('msg', 'Delete order is acomplished.');
+                redirect_to('persons');
+            } else {
+                flash('msg', 'Delete order aborted.');
+                redirect_to('persons');
+            }
+        } else {
+            redirect_to('persons');
         }
     }
 }

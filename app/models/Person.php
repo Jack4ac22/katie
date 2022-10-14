@@ -161,7 +161,7 @@ class Person
 
 
 
-    
+
     public function add_current_img($data)
     {
         $this->db->query("INSERT INTO imgs (p_id, img_path, comment) VALUES (:p_id, :img_path, :comment)");
@@ -180,5 +180,18 @@ class Person
         }
     }
 
-    
+
+    /**
+     * delete_person($id)
+     */
+    public function delete_person($id)
+    {
+        $this->db->query('DELETE FROM people WHERE id = :id');
+        $this->db->bind(':id', $id);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
