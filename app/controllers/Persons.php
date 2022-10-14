@@ -123,84 +123,81 @@ class Persons extends Controller
 
     public function edit($id = null)
     {
-        $person = $this->personModel->get_person_by_id($id);
-        if ($person['id'] != null) {
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                //sanitize the form informations.
-                $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
-                if (!isset($_POST['sex'])) {
-                    $gender = '';
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
+            $data = [
+                'id' => $id,
+                'first_name' => trim($_POST['first_name']),
+                'last_name' => trim($_POST['last_name']),
+                'sex' =>  trim($_POST['sex']),
+                'email' => trim($_POST['email']),
+                'first_name_error' => '',
+                'last_name_error' => '',
+                'sex_error' => '',
+                'email_error' => ''
+            ];
+
+            //validation
+            #first_name
+            if (empty($data['first_name'])) {
+                $data['first_name_error'] = 'First name is required.';
+            } elseif (strip_tags(trim($_POST['first_name'])) !== $_POST['first_name']) {
+                $data['first_name_error'] = 'Please verify the name, it should not contain special characters.';
+            };
+            #last_name
+            if (empty($data['last_name'])) {
+                $data['last_name_error'] = 'Last name is required.';
+            } elseif (strip_tags(trim($_POST['last_name'])) !== $_POST['last_name']) {
+                $data['last_name_error'] = 'Please verify the name, it should not contain special characters.';
+            };
+            #email
+            if (empty($data['email'])) {
+                $data['email_error'] = 'Email is required.';
+            } elseif (strip_tags(trim($_POST['email'])) !== $_POST['email']) {
+                $data['email_error'] = 'Please verify the name, it should not contain special characters.';
+            }
+            #gender
+            if (!isset($_POST['sex'])) {
+                $data['sex_error'] = 'Gender is required';
+            }
+
+
+            if (empty($data['first_name_error']) && empty($data['last_name_error']) && empty($data['sex_error']) && empty($data['email_error'])) {
+                if ($this->personModel->edit_person($data)) {
+                    flash('msg', '<p>Updated successfuly.');
+                    redirect_to('persons/show/' . $data['id']);
                 } else {
-                    $gender = $_POST['sex'];
-                }
-                $data = [
-                    'id' => $id,
-                    'first_name' => trim($_POST['first_name']),
-                    'last_name' => trim($_POST['last_name']),
-                    'sex' =>  $gender,
-                    'email' => trim($_POST['email']),
-                    'added_by' => $_SESSION['user_id'],
-                    'first_name_error' => '',
-                    'last_name_error' => '',
-                    'sex_error' => '',
-                    'email_error' => ''
-                ];
-                //validation
-                #first_name
-                if (empty($data['first_name'])) {
-                    $data['first_name_error'] = 'First name is required.';
-                } elseif (strip_tags(trim($_POST['first_name'])) !== $_POST['first_name']) {
-                    $data['first_name_error'] = 'Please verify the name, it should not contain special characters.';
-                };
 
-                #last_name
-                if (empty($data['last_name'])) {
-                    $data['last_name_error'] = 'Last name is required.';
-                } elseif (strip_tags(trim($_POST['last_name'])) !== $_POST['last_name']) {
-                    $data['last_name_error'] = 'Please verify the name, it should not contain special characters.';
-                };
-
-                #email
-                if (empty($data['email'])) {
-                    $data['email_error'] = 'Email is required.';
-                } elseif (strip_tags(trim($_POST['email'])) !== $_POST['email']) {
-                    $data['email_error'] = 'Please verify the name, it should not contain special characters.';
-                } elseif ($this->personModel->getPersonByEmail_edit($data['email'])) {
-                    $data['email_error'] = 'This email address is already used';
-                };
-
-                #gender
-                if (!isset($_POST['sex'])) {
-                    $data['sex_error'] = 'Gender is required';
-                }
-
-                if (empty($data['first_name_error']) && empty($data['last_name_error']) && empty($data['sex_error']) && empty($data['email_error'])) {
-
-                    if ($this->personModel->edit_person($data)) {
-                        $new_id = $this->personModel->get_the_last($data['email'])->id;
-
-                        flash('msg', '<p>' . $data['first_name'] . ' profile data is edited.</p> <a href="' . URLROOT . '/persons/show/' . $new_id . '" class="alert-link">you can use this link to complete the profile</a>');
-                        redirect_to('/persons/index');
-                    }
-                } else {
-                    //load the view with errors
-                    $this->view('persons/edit', $data);
+                    flash('msg', 'Something went wrong, plese try again later.');
+                    $this->view('persons/edite/' . $data['id'], $data);
                 }
             } else {
-                //check for the authentication
-                if (islogged()) {
-                    $data = [
-                        'id' => $id, 'first_name' => $person['person']->first_name, 'last_name' => $person['person']->last_name, 'sex' => $person['person']->sex, 'email' => $person['person']->email
-                    ];
-                    $this->view('persons/edit/' . $data['id'], $data);
-                } else {
-                    flash('msg', '<p>you need to sign in first.</p>');
-                    redirect_to('/persons/login');
-                };
+                flash('msg', 'verify your inputs.');
+
+                $data = [
+                    'id' => $id,
+                    'first_name' => $_POST['first_name'],
+                    'last_name' => $_POST['last_name'],
+                    'email' => $_POST['email'],
+                    'sex' => $_POST['sex']
+                ];
+                $this->view('/persons/edit', $data);
             }
         } else {
-            flash('msg', '<p>the page which you requested does not exist, try to use other method</p>');
-            redirect_to('/pages/notFound');
+            $person = $this->personModel->get_person_by_id_edit($id);
+            if ($person) {
+                $data = [
+                    'id' => $person->id,
+                    'first_name' => $person->first_name,
+                    'last_name' => $person->last_name,
+                    'email' => $person->email,
+                    'sex' => $person->sex
+                ];
+                $this->view('persons/edit', $data);
+            } else {
+                flash('msg', '<p>the page which you requested does not exist, try to use other method</p>');
+                redirect_to('/pages/notFound');
+            }
         }
     }
 
@@ -279,7 +276,7 @@ class Persons extends Controller
                     ];
                 }
                 $this->view('persons/upload', $data);
-            }else {
+            } else {
                 flash('msg', '<p>something went wrong, please try again later.</p>');
                 redirect_to('persons/add/');
             }

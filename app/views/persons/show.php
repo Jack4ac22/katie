@@ -1,4 +1,6 @@
 <?php require_once APPROOT . '/views/includes/header.php'; ?>
+<!-- <?php echo '<pre>' . var_export($data, true) . '</pre>'; ?> -->
+
 <a href="<?php echo URLROOT; ?>/persons/index" class="btn btn-light btn-block">Back to all people <i class="fa-sharp fa-solid fa-backward"></i></a>
 <?php if (isset($data['person'])) : ?>
     <div class="accordion" id="accordionPanelsStayOpenExample">
@@ -13,6 +15,7 @@
                 <div class="accordion-body">
                     <div class="d-flex position-relative">
                         <figure class="figure p-3">
+
                             <img src="https://cdn.pixabay.com/photo/2016/06/01/00/01/sad-1428080__340.png" class="figure-img img-fluid rounded" alt="...">
                         </figure>
 
@@ -95,41 +98,14 @@
                                 <?php endif; ?>
                                 </a>
                             </div>
-
-                            <!-- Modal  -->
-                            <div class="m-3 d-grid gap-2 d-md-flex justify-content-md-end">
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary me-md-2" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-sharp fa-solid fa-pen-to-square"></i>
-                                    edit
-                                </button>
-
-                                <!-- Modal Edite -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Edite the personal
-                                                    informations</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Are you sure that you want to edite the information. </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-sharp fa-solid fa-xmark"></i> Close</button>
-                                                <a href="<?php echo URLROOT . '/persons/edit/' . $data['person']['person']->id; ?>" type="button" class="btn btn-primary"><i class="fa-sharp fa-solid fa-pen-to-square"></i> Edit</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                            <a href="<?php echo URLROOT . '/persons/edit/' . $data['person']['person']->id; ?>" type="button" class="btn btn-primary"><i class="fa-sharp fa-solid fa-pen-to-square"></i> Edit</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- groups -->
-        <div class="accordion-item">
+        <!-- <div class="accordion-item">
             <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
                     Groups
@@ -148,9 +124,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- Residency -->
-        <div class="accordion-item">
+        <!-- <div class="accordion-item">
             <h2 class="accordion-header" id="panelsStayOpen-headingThree">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
                     Residency
@@ -186,9 +162,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!--  Job titl(s) -->
-        <div class="accordion-item">
+        <!-- <div class="accordion-item">
             <h2 class="accordion-header" id="panelsStayOpen-headingThree">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
                     Job titl(s)
@@ -199,9 +175,9 @@
                     Dummy
                 </div>
             </div>
-        </div>
+        </div> -->
         <!--  Make appointment -->
-        <div class="accordion-item">
+        <!-- <div class="accordion-item">
             <h2 class="accordion-header" id="panelsStayOpen-headingFive">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
                     Make appointment
@@ -239,7 +215,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- Language(s) -->
         <div class="accordion-item">
             <h2 class="accordion-header" id="panelsStayOpen-headingSix">
@@ -311,7 +287,6 @@
 
 <?php
 
-//echo '<pre>' . var_export($data, true) . '</pre>';
 ?>
 
 <?php require_once APPROOT . '/views/includes/footer.php'; ?>

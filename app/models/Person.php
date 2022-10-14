@@ -123,6 +123,20 @@ class Person
         ];
         return $person;
     }
+    /**
+     * get_person_by_id($id)
+     * @param $id
+     * @return array with two objects - person - 
+     */
+
+    public function get_person_by_id_edit($id)
+    {
+        $this->db->query('SELECT * FROM people WHERE id = :id');
+        $this->db->bind(':id', $id);
+        $row = $this->db->single();
+
+        return $row;
+    }
 
     /**
      * edit_person($data)
@@ -145,6 +159,9 @@ class Person
         }
     }
 
+
+
+    
     public function add_current_img($data)
     {
         $this->db->query("INSERT INTO imgs (p_id, img_path, comment) VALUES (:p_id, :img_path, :comment)");
@@ -162,4 +179,6 @@ class Person
             }
         }
     }
+
+    
 }
