@@ -1,6 +1,6 @@
-<?php require APPROOT . '/views/includes/header.php'; ?>
-<?php flash('msg'); ?>
+<!-- <?php echo '<pre>' . var_export($person->id, true) . '</pre>'; ?> -->
 
+<?php require APPROOT . '/views/includes/header.php'; ?>
 <?php flash('msg'); ?>
 <div class="input-group mb-3 ">
     <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-angles-right"></i>
@@ -33,23 +33,51 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="col-m-6">
                     <div class="row">
                         <?php foreach ($data['languages']['list'] as $person) : ?>
                             <?php if ($language->id == $person->lan_id) : ?>
                                 <div class="col-4">
-
-
-
                                     <h4 class="card-title"><?php echo $person->first_name . ' ' . $person->last_name; ?>
                                         <a href="<?php echo URLROOT . '/persons/show/' . $person->p_id; ?>" class="btn btn-light"><i class="fa-solid fa-user"></i></a>
-                                        
-                                            <?php if ($person->sex == 'male') : ?><a class="btn btn-light"><i class="fa-sharp fa-solid fa-mars "></i></a>
-                                    <?php else : ?>
-                                        <a class="btn btn-light">
-                                            <i class="fa-sharp fa-solid fa-venus "></i></a>
-                                    <?php endif; ?>
+
+                                        <?php if ($person->sex == 'male') : ?><a class="btn btn-light"><i class="fa-sharp fa-solid fa-mars "></i></a>
+                                        <?php else : ?>
+                                            <a class="btn btn-light">
+                                                <i class="fa-sharp fa-solid fa-venus "></i></a>
+                                        <?php endif; ?>
                                     </h4>
+                                    <!-- Modal  -->
+                                    <div class="m-3 d-grid gap-2 d-md-flex justify-content-md-end">
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-danger me-md-2" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-trash-can"></i>
+                                            delete
+                                        </button>
+
+                                        <!-- Modal Edite -->
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete a phone
+                                                            number
+                                                        </h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Are you sure that you want to delete this phone number</div>
+                                                    <div class="modal-footer">
+                                                        <form method="post" action="<?php echo URLROOT; ?>/peplans/delete_peplan/<?php echo $person->id ?>">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-sharp fa-solid fa-xmark"></i> Close</button>
+                                                            <button type="submit" class="btn btn-danger"><i class="fa-sharp fa-solid fa-pen-to-square"></i>
+                                                                delete</a>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
 
                                 </div>
@@ -62,10 +90,7 @@
 
     <?php endforeach; ?>
 </div>
-<?php
 
-//echo '<pre>' . var_export($data['languages']['list'], true) . '</pre>';
-?>
 
 
 <?php require APPROOT . '/views/includes/footer.php'; ?>

@@ -47,12 +47,14 @@ class Peplans extends Controller
 
             // data validation
             if ($_POST['p_id'] == 0) {
-                $data['number_err'] = 'please chose a person.';
+                $data['p_id_err'] = 'please chose a person.';
             } elseif (!isset($_POST['p_id'])) {
-                $data['number_err'] = 'please chose a person.';
+                $data['p_id_err'] = 'please chose a person.';
             }
             if ($_POST['lan_id'] == 0) {
-                $data['number_err'] = 'please chose a language.';
+                $data['lan_id_err'] = 'please chose a language.';
+            } elseif (!isset($_POST['lan_id'])) {
+                $data['lan_id_err'] = 'please chose a language.';
             }
             if ($_POST['levle'] == 0) {
                 $data['number_err'] = 'please chose a language.';
@@ -61,17 +63,17 @@ class Peplans extends Controller
 
             if ((empty($data['lan_id_err'])) && (empty($data['p_id_err'])) && (empty($data['levle_err']))) {
                 if ($this->peplanModel->add_lan_to_person($data)) {
-                    flash('msg', '<a href="' . URLROOT . '/persons/show/' . $data['p_id'] . '" class="alert-link">check the profile.</a>');
+                    flash('msg', '<p>Language is added, check the profile: <a href="' . URLROOT . '/persons/show/' . $data['p_id'] . '" class="alert-link">check the profile.</a>');
                     redirect_to('persons/' . $data['p_id']);
                 } else {
                     flash('msg', 'Something went wrong, please try again later.');
                     redirect_to('persons');
                 }
             } else {
-                $persons = $this->personModel->add_lan_to_person();
+                $persons = $this->personModel->getPersons();
                 $data['persons'] = $persons;
-                $languagess = $this->languagesModel->add_lan_to_person();
-                $data['languagess'] = $languagess;
+                $languages = $this->languageModel->getlanguages();
+                $data['languages'] = $languages;
                 $this->view('peplans/add', $data);
             }
         } else
@@ -88,112 +90,90 @@ class Peplans extends Controller
         $this->view('peplans/add', $data);
     }
 
+
     /**
-     * edite a phone number
+     * edite a peplan number
      * @param $id
      * return ()
      */
 
-    public function edit($id)
+    public function edit($id = 0)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Sanitize language array
-            $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
 
+            $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
             $data = [
-                'number' => $_POST['number'],
-                'description' => $_POST['description'],
                 'p_id' => $_POST['p_id'],
+                'lan_id' => $_POST['lan_id'],
+                'levle' => $_POST['levle'],
                 'id' => $id,
-                'number_err' => '',
-                'description_err' => '',
+                'nlan_id_err' => '',
+                'levle_err' => '',
                 'p_id_err' => ''
             ];
             // data validation
-            if (empty($_POST['number'])) {
-                $data['number_err'] = 'please insert a phone number.';
-            } elseif (!is_numeric($_POST['number'])) {
-                $data['number_err'] = 'Phone number is a number.';
+            if (empty($_POST['lan_id'])) {
+                $data['lan_id_err'] = 'please pick a language.';
             }
-            if (empty($_POST['description'])) {
-                $data['description'] = 'General';
+            if (empty($_POST['levle'])) {
+                $data['levle_err'] = 'please pick a level';
             }
             if ($_POST['p_id'] == 0) {
-                $data['number_err'] = 'please chose a person.';
+                $data['p_id_err'] = 'please chose a person.';
             }
 
             //check for errors
-            if (empty($data['number_err']) && empty($data['description_err']) && empty($data['p_id_err'])) {
-                var_dump($data);
-
-                if ($this->phoneModel->update_phone($data)) {
-                    flash('msg', 'phone number is updated');
-                    redirect_to('phones/show/' . $id);
+            if (empty($data['lan_id_err']) && empty($data['levle_err']) && empty($data['p_id_err'])) {
+                if ($this->peplanModel->update_peplan($data)) {
+                    flash('msg', 'the language/person relation has been updated');
+                    redirect_to('persons/show/' . $data['p_id']);
                 } else {
                     flash('msg', 'Something went wrong, please try again later.');
-                    redirect_to('phones');
+                    $this->view('peplan/edit/' . $id, $data);
                 }
                 //load the view with the errors
             } else {
                 $persons = $this->personModel->getPersons();
                 $data['persons'] = $persons;
+                $languages = $this->languageModel->getlanguages();
+                $data['languages'] = $languages;
                 $this->view('phones/edit/' . $id, $data);
             }
         } else {
-            $phone = $this->phoneModel->get_phone_by_id($id);
             $persons = $this->personModel->getPersons();
-            $data = [
-                'id' => $phone->id,
-                'number' => $phone->number,
-                'description' => $phone->description,
-                'p_id' => $phone->p_id,
-                'persons' => $persons
-            ];
-            $this->view('phones/edit', $data);
-        }
-    }
-
-
-    public function show($id)
-    {
-        $phone = $this->phoneModel->get_phone_by_id($id);
-        if ($phone) {
-            $data = ['phone' => $phone];
-            $this->view('phones/show', $data);
-        } else {
-            flash('msg', '<p>the page which you requested does not exist, try to use other method</p>');
-            redirect_to('/pages/notFound');
+            $languages = $this->languageModel->getlanguages();
+            $pep = $this->peplanModel->get_peplan_by_id($id);
+            if ($pep) {
+                $data = [
+                    'id' => $pep->id,
+                    'levle' => $pep->levle,
+                    'comment' => $pep->comment,
+                    'lan_id' => $pep->lan_id,
+                    'p_id' => $pep->p_id,
+                    'persons' => $persons,
+                    'languages' => $languages
+                ];
+                $this->view('peplans/edit', $data);
+            } else {
+                $msg = "<p>something went wron, please try again later</p>";
+                redirect_to("peplans", $msg);
+            }
         }
     }
 
     public function delete($id)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $phone = $this->phoneModel->get_phone_by_id($id);
-            if (!islogged()) {
-                redirect_to('phones');
-            }
-            if ($this->phoneModel->delete_phone($id)) {
-                flash('msg', 'phone number is Removed from your database.');
-                redirect_to('phones');
-            }
-        }
-    }
-
-
-    public function delete_from_user($id, $p_id)
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            $phone = $this->phoneModel->get_phone_by_id($id);
-            if ($phone) {
+            $peplan = $this->peplanModel->get_peplan_by_id($id);
+            if ($peplan) {
                 if (!islogged()) {
-                    redirect_to('phones');
+                    redirect_to('peplans');
                 }
-                if ($this->phoneModel->delete_phone($id)) {
-                    $msg = "phone number is Removed from your data base.. $p_id";
-                    flash('msg',);
-                    redirect_to("persons/show/$p_id");
+                if ($this->peplanModel->delete_peplan($id)) {
+                    $msg = "<p>$peplan->first_name $peplan->last_name will not shown in relation to $peplan->title language. $id</p>
+                    <p>you can check $peplan->first_name</p>";
+                    redirect_to("languages/show/$peplan->lan_id", $msg);
                 }
             }
         }

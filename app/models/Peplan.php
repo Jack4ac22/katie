@@ -32,7 +32,25 @@ class Peplan
     }
 
     /**
-     * add_phone()
+     * get_peplan_by_id()
+     * @param $id
+     * @return array or false
+     */
+    public function get_peplan_by_id($id)
+    {
+        $this->db->query("SELECT PL.id, PL.levle, PL.comment, PL.lan_id, PL.p_id, P.first_name, P.last_name, P.email, L.title, L.description, L.extra
+        FROM people_languages AS PL
+        INNER JOIN people AS P
+        ON PL.p_id = P.id
+        INNER JOIN languages AS L
+        ON L.id = PL.lan_id
+        WHERE PL.id = :id");
+        $this->db->bind(':id', $id);
+        $row = $this->db->single();
+        return $row;
+    }
+
+    /**
      * @param $data POST
      * @return bool
      */
@@ -51,34 +69,19 @@ class Peplan
         };
     }
 
+
     /**
-     * get_phone_by_id()
-     * @param $id
-     * @return array or false
-     */
-    public function get_phone_by_id($id)
-    {
-        $this->db->query("SELECT PN.*, P.first_name, P.last_name, P.email
-        FROM phone_numbers AS PN
-        INNER JOIN people AS P
-        ON PN.p_id = P.id
-        WHERE PN.id = :id");
-        $this->db->bind(':id', $id);
-        $row = $this->db->single();
-        return $row;
-    }
-    /**
-     * update_phone($$data)
+     * update_peplan($data)
      * @param $id
      * @return bool
      */
-    public function update_phone($data)
+    public function update_peplan($data)
     {
-        $this->db->query('UPDATE phone_numbers SET number = :number, description = :description, p_id = :p_id WHERE id = :id');
+        $this->db->query('UPDATE people_languages SET p_id = :p_id, lan_id = :lan_id, levle = :levle WHERE id = :id');
         // Bind values
-        $this->db->bind(':number', $data['number']);
-        $this->db->bind(':description', $data['description']);
         $this->db->bind(':p_id', $data['p_id']);
+        $this->db->bind(':lan_id', $data['lan_id']);
+        $this->db->bind(':levle', $data['levle']);
         $this->db->bind(':id', $data['id']);
 
         // Execute
@@ -89,9 +92,9 @@ class Peplan
         }
     }
 
-    public function delete_phone($id)
+    public function delete_peplan($id)
     {
-        $this->db->query('DELETE FROM phone_numbers WHERE id=:id');
+        $this->db->query('DELETE FROM people_languages WHERE id=:id');
 
         $this->db->bind(':id', $id);
         if ($this->db->execute()) {
