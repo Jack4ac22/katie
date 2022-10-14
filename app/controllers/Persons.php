@@ -144,18 +144,23 @@ class Persons extends Controller
             } elseif (strip_tags(trim($_POST['first_name'])) !== $_POST['first_name']) {
                 $data['first_name_error'] = 'Please verify the name, it should not contain special characters.';
             };
+
             #last_name
             if (empty($data['last_name'])) {
                 $data['last_name_error'] = 'Last name is required.';
             } elseif (strip_tags(trim($_POST['last_name'])) !== $_POST['last_name']) {
                 $data['last_name_error'] = 'Please verify the name, it should not contain special characters.';
             };
+
             #email
             if (empty($data['email'])) {
                 $data['email_error'] = 'Email is required.';
             } elseif (strip_tags(trim($_POST['email'])) !== $_POST['email']) {
                 $data['email_error'] = 'Please verify the name, it should not contain special characters.';
-            }
+            } elseif ($this->personModel->email_update($data['email'])) {
+                $data['email_error'] = 'This email address is already used';
+            };
+
             #gender
             if (!isset($_POST['sex'])) {
                 $data['sex_error'] = 'Gender is required';
@@ -172,15 +177,6 @@ class Persons extends Controller
                     $this->view('persons/edite/' . $data['id'], $data);
                 }
             } else {
-                flash('msg', 'verify your inputs.');
-
-                $data = [
-                    'id' => $id,
-                    'first_name' => $_POST['first_name'],
-                    'last_name' => $_POST['last_name'],
-                    'email' => $_POST['email'],
-                    'sex' => $_POST['sex']
-                ];
                 $this->view('/persons/edit', $data);
             }
         } else {
@@ -288,12 +284,15 @@ class Persons extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             //Execute
-            if ($this->personModel->delete_person($id)) {
-                // Redirect to login
-                flash('msg', 'Delete order is acomplished.');
-                redirect_to('persons');
+            $person = $this->personModel->get_person_by_id_edit($id);
+            if ($person) {
+                if ($this->personModel->delete_person($id)) {
+                    // Redirect to login
+                    flash('msg', $person->first_name . ' ' . $person->last_name . ' was deleted.');
+                    redirect_to('persons');
+                }
             } else {
-                flash('msg', 'Delete order aborted.');
+                flash('msg', 'Delete oreder was not complished.');
                 redirect_to('persons');
             }
         } else {

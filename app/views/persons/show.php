@@ -1,6 +1,6 @@
 <?php require_once APPROOT . '/views/includes/header.php'; ?>
-<?php echo '<pre>' . var_export($data, true) . '</pre>'; ?>
-
+<!-- <?php echo '<pre>' . var_export($data, true) . '</pre>'; ?> -->
+<?php flash('msg');?>
 <a href="<?php echo URLROOT; ?>/persons/index" class="btn btn-light btn-block">Back to all people <i class="fa-sharp fa-solid fa-backward"></i></a>
 <?php if (isset($data['person'])) : ?>
     <div class="accordion" id="accordionPanelsStayOpenExample">

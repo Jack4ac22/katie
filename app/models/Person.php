@@ -48,7 +48,7 @@ class Person
      * @return bool
      * @param $email
      */
-    public function getPersonByEmail_edit($email)
+    public function email_update($email)
     {
         $this->db->query('SELECT *  FROM people WHERE email = :email');
         $this->db->bind(':email', $email);
