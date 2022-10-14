@@ -2,12 +2,12 @@
 <?php flash('msg'); ?>
 <div class="input-group mb-3 ">
     <span class="input-group-text" id="basic-addon1">
-        <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+        <?= I_SEARCH ?>
     </span>
     <input type="search" class="form-control" placeholder="are you looking for some one?" aria-label="Username" aria-describedby="basic-addon1">
 
     <a type="button" class="btn btn-primary" href="<?php echo URLROOT; ?>/persons/add">
-        <i class="fa-solid fa-user-plus"></i>
+        <?= I_ADD_PERSON ?>
         new person</a>
 
 </div>
@@ -25,15 +25,15 @@
                             <p class="h5"><?php echo $person->first_name . ' ' . $person->last_name; ?></p>
                             <p class="card-text"><?php echo $person->email; ?></p>
                             <a type="button" class="btn btn-primary" href="<?php echo URLROOT . '/persons/show/' . $person->id; ?>">
-                                <i class="fa-sharp fa-solid fa-circle-info"></i></a>
+                                <?= I_INFO ?></a>
                             <?php if ($person->sex == 'male') : ?>
                                 <a type="button" class="btn btn-dark disabled">
                                     <span class="badge text-bg-dark">
-                                        <i class="fa-sharp fa-solid fa-mars fa-2xl"></i>
+                                        <?= I_MAN ?>
                                     </span>
                                 <?php else : ?>
                                     <a type="button" class="btn btn-info disabled">
-                                        <span class="badge text-bg-info"><i class="fa-sharp fa-solid fa-venus fa-2xl"></i>
+                                        <span class="badge text-bg-info"><?= I_WOMAN; ?>
                                         </span>
                                     <?php endif; ?>
 

@@ -1,7 +1,7 @@
 <?php require_once APPROOT . '/views/includes/header.php'; ?>
 <!-- <?php echo '<pre>' . var_export($data, true) . '</pre>'; ?> -->
-<?php flash('msg');?>
-<a href="<?php echo URLROOT; ?>/persons/index" class="btn btn-light btn-block">Back to all people <i class="fa-sharp fa-solid fa-backward"></i></a>
+<?php flash('msg'); ?>
+<a href="<?php echo URLROOT; ?>/persons/index" class="btn btn-light btn-block">Back to all people <?= I_ARROW_L ?></a>
 <?php if (isset($data['person'])) : ?>
     <div class="accordion" id="accordionPanelsStayOpenExample">
         <!-- personal  -->
@@ -26,7 +26,7 @@
 
                             <div class="input-group m-3">
                                 <a href="mailto:<?php echo $data['person']['person']->email ?>" class="input-group-text" id="basic-addon1">
-                                    <i class="fa-sharp fa-solid fa-envelope"></i>
+                                    <?= I_EMAIL ?>
                                 </a>
                                 <input type="email" class="form-control" placeholder="Input group example" aria-label="Input group example" aria-describedby="basic-addon1" value="<?php echo $data['person']['person']->email ?>" name="email" disabled>
                             </div>
@@ -37,7 +37,7 @@
                                         <div class="col-8">
                                             <div class="input-group m-3">
                                                 <a href="tel:<?php echo $phone->number ?>" class="input-group-text" id="basic-addon1">
-                                                    <i class="fa-sharp fa-solid fa-phone"></i>
+                                                    <?= I_PHONE ?>
                                                 </a>
                                                 <input type="phone" class="form-control" placeholder="Input group example" aria-label="Input group example" aria-describedby="basic-addon1" value="<?php echo $phone->number; ?>" name="phone" disabled>
                                             </div>
@@ -65,14 +65,14 @@
                                 </a>
                             </div>
                             <div>
-                                <a href="<?php echo URLROOT . '/persons/edit/' . $data['person']['person']->id; ?>" type="button" class="btn btn-primary"><?=I_EDIT ?> Edit</a>
-                                <a href="<?php echo URLROOT . '/persons/upload/' . $data['person']['person']->id; ?>" type="button" class="btn btn-primary"><?=I_PIC ?> Update the profile picture</a>
+                                <a href="<?php echo URLROOT . '/persons/edit/' . $data['person']['person']->id; ?>" type="button" class="btn btn-primary"><?= I_EDIT ?> Edit</a>
+                                <a href="<?php echo URLROOT . '/persons/upload/' . $data['person']['person']->id; ?>" type="button" class="btn btn-primary"><?= I_PIC ?> Update the profile picture</a>
                                 <div class="col-4">
                                     <!-- Modal  -->
                                     <div class="m-3 d-grid gap-2 d-md-flex justify-content-md-end">
                                         <!-- Button trigger modal -->
                                         <button type="button" class="btn btn-danger me-md-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                            delete
+                                            <?= I_DELETE ?> delete
                                         </button>
                                         <!-- Modal Edite -->
                                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -87,8 +87,8 @@
                                                         Are you sure that you want to delete this person.</div>
                                                     <div class="modal-footer">
                                                         <form method="post" action="<?php echo URLROOT; ?>/persons/delete_person/<?php echo $data['person']['person']->id ?>/<?php echo $data['person']['person']->id; ?>">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa-sharp fa-solid fa-xmark"></i> Close</button>
-                                                            <button type="submit" class="btn btn-danger"><i class="fa-sharp fa-solid fa-pen-to-square"></i>
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-danger"><?= I_DELETE ?>
                                                                 delete</a>
                                                         </form>
                                                     </div>
@@ -141,7 +141,7 @@
                         <label class="form-check-label" for="flexRadioDefault1">
                             <div class="input-group ">
                                 <a href="" class="input-group-text" id="basic-addon1">
-                                    <i class="fa-solid fa-plane-departure"></i>
+                                    <?= I_HOME ?>
                                 </a>
                                 <input type="phone" class="form-control" placeholder="Input group example" aria-label="Input group example" aria-describedby="basic-addon1" value="location A" name="phone" disabled>
                             </div>
@@ -153,7 +153,7 @@
                         <label class="form-check-label" for="flexRadioDefault2">
                             <div class="input-group ">
                                 <a href="" class="input-group-text" id="basic-addon1">
-                                    <i class="fa-solid fa-plane-arrival"></i>
+                                    <?= I_TOOLS ?>
                                 </a>
                                 <input type="phone" class="form-control" placeholder="Input group example" aria-label="Input group example" aria-describedby="basic-addon1" value="location B" name="phone" disabled>
                             </div>

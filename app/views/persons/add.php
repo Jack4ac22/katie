@@ -46,13 +46,13 @@
                 <div class="row ">
                     <div class="col m-3">
                         <div class="form-floating m-3">
-                            <button type="submit" class="btn btn-primary btn-block"><i class="fa-solid fa-user-plus"></i> add</button>
+                            <button type="submit" class="btn btn-primary btn-block"><?= I_ADD_PERSON ?> add</button>
                         </div>
                     </div>
                     <div class="col m-3">
                         <div class="form-floating m-3">
                             <a href="<?php echo URLROOT; ?>/persons/index" class="btn btn-light btn-block">Back to all
-                                people <i class="fa-sharp fa-solid fa-backward"></i></a>
+                                people <?= I_ARROW_L ?></a>
                         </div>
                     </div>
                 </div>
