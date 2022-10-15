@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,24 +28,45 @@
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
+                    <p>indexes
+                    <ul class="nav flex-column">
+                        <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/persons/index">people</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/languages/index">languages</a>
+                        </li class="nav-item">
+                        <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/peplans/index">languages-people</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/phones/index">phone
+                                numbers</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/job_titles/index">job
+                                title</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/timezones/index">time
+                                zone</a></li>
+                    </ul>
+                    </p>
                     <p>
+                        add
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="<?php echo URLROOT . '/persons/add/'; ?>">new
+                            <a class="nav-link" aria-current="page" href="<?php echo URLROOT . '/persons/add/'; ?>"><?= I_ADD_SIGN ?>
                                 person</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="" button" class="btn btn-primary" href="<?php echo URLROOT; ?>/titles/add"">new job title</a>
+                            <a class="nav-link" aria-current="page" href="<?php echo URLROOT . '/persons/upload/'; ?>"><?= I_ADD_SIGN ?>
+                                picture</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="" button" class="btn btn-primary" href="<?php echo URLROOT; ?>/titles/add""><?= I_ADD_SIGN ?> job title</a>
                     </li>
                     <li class=" nav-item">
-                                <a class="nav-link" class="btn btn-primary" href="<?php echo URLROOT; ?>/languages/add">new
+                                <a class="nav-link" class="btn btn-primary" href="<?php echo URLROOT; ?>/languages/add"><?= I_ADD_SIGN ?>
                                     language</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="" button" class="btn btn-primary" href="<?php echo URLROOT; ?>/timezones/add"">new time zone</a>
+                            <a class="nav-link" button" class="btn btn-primary" href="<?php echo URLROOT; ?>/timezones/add""><?= I_ADD_SIGN ?> time zone</a>
                     </li>
                     <li class=" nav-item">
-                                <a class="nav-link" button" class="btn btn-primary" href="<?php echo URLROOT; ?>/phones/add"">new phone number</a>
+                                <a class="nav-link" button" class="btn btn-primary" href="<?php echo URLROOT; ?>/phones/add""><?= I_ADD_SIGN ?> phone number</a>
                     </li>
                 </ul>
                 </p>

@@ -63,9 +63,7 @@ class Language
     WHERE L.id = :id");
     $this->db->bind(':id', $id);
     $people = $this->db->resultSet();
-    if ($people) {
-      $row->people = $people;
-    }
+      $row=['language' => $row, 'people'=>$people];
     return $row;
   }
 

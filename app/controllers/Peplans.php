@@ -64,7 +64,7 @@ class Peplans extends Controller
             if ((empty($data['lan_id_err'])) && (empty($data['p_id_err'])) && (empty($data['levle_err']))) {
                 if ($this->peplanModel->add_lan_to_person($data)) {
                     flash('msg', '<p>Language is added, check the profile: <a href="' . URLROOT . '/persons/show/' . $data['p_id'] . '" class="alert-link">check the profile.</a>');
-                    redirect_to('persons/' . $data['p_id']);
+                    redirect_to('persons/show/' . $data['p_id']);
                 } else {
                     flash('msg', 'Something went wrong, please try again later.');
                     redirect_to('persons');
@@ -162,17 +162,20 @@ class Peplans extends Controller
         }
     }
 
-    public function delete($id)
+    public function delete_peplam($id)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $peplan = $this->peplanModel->get_peplan_by_id($id);
             if ($peplan) {
                 if (!islogged()) {
-                    redirect_to('peplans');
+                    redirect_to('/login');
                 }
                 if ($this->peplanModel->delete_peplan($id)) {
                     $msg = "<p>$peplan->first_name $peplan->last_name will not shown in relation to $peplan->title language. $id</p>
                     <p>you can check $peplan->first_name</p>";
+                    redirect_to("languages/show/$peplan->lan_id", $msg);
+                } else {
+                    $msg = "<p>Failed, please try again later.</p>";
                     redirect_to("languages/show/$peplan->lan_id", $msg);
                 }
             }

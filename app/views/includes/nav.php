@@ -25,24 +25,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">search</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="<?php echo URLROOT; ?>/people/index" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <li class="nav-item">
+                        <a class="nav-link " href="<?php echo URLROOT; ?>/people/index" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             indexes
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item nav-link" href="<?php echo URLROOT; ?>/persons/index">people</a>
-                            </li>
-                            <li><a class="dropdown-item nav-link" href="<?php echo URLROOT; ?>/languages/index">languages</a>
-                            </li>
-                            <li><a class="dropdown-item nav-link" href="<?php echo URLROOT; ?>/peplans/index">languages-people</a>
-                            </li>
-                            <li><a class="dropdown-item nav-link" href="<?php echo URLROOT; ?>/phones/index">phone
-                                    numbers</a></li>
-                            <li><a class="dropdown-item nav-link" href="<?php echo URLROOT; ?>/job_titles/index">job
-                                    title</a></li>
-                            <li><a class="dropdown-item nav-link" href="<?php echo URLROOT; ?>/timezones/index">time
-                                    zone</a></li>
-                        </ul>
                     </li>
             </ul>
         </div>
