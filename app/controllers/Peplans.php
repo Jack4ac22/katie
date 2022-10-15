@@ -100,33 +100,36 @@ class Peplans extends Controller
     public function edit($id = 0)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // Sanitize language array
-
             $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
             $data = [
+                'id' => $id,
                 'p_id' => $_POST['p_id'],
                 'lan_id' => $_POST['lan_id'],
                 'levle' => $_POST['levle'],
-                'id' => $id,
-                'nlan_id_err' => '',
+                'comment' => $_POST['comment'],
+                'lan_id_err' => '',
                 'levle_err' => '',
+                'comment_err' => '',
                 'p_id_err' => ''
             ];
             // data validation
             if (empty($_POST['lan_id'])) {
                 $data['lan_id_err'] = 'please pick a language.';
             }
-            if (empty($_POST['levle'])) {
+            if ((empty($_POST['levle'])) || ($_POST['levle'] == 0)) {
                 $data['levle_err'] = 'please pick a level';
             }
             if ($_POST['p_id'] == 0) {
                 $data['p_id_err'] = 'please chose a person.';
             }
+            if (strip_tags(trim($_POST['comment'])) !== $_POST['comment']) {
+                $data['comment_err'] = 'Please verify the comment, it should not contain special characters.';
+            };
 
             //check for errors
             if (empty($data['lan_id_err']) && empty($data['levle_err']) && empty($data['p_id_err'])) {
                 if ($this->peplanModel->update_peplan($data)) {
-                    flash('msg', 'the language/person relation has been updated');
+                    flash('msg', '<p>' . 'The language/person relation has been updated.</p> <a href="' . URLROOT . '/peplans/show/' . $id . '" class="alert-link">you can use this link to complete the profile</a>');
                     redirect_to('persons/show/' . $data['p_id']);
                 } else {
                     flash('msg', 'Something went wrong, please try again later.');
@@ -141,10 +144,10 @@ class Peplans extends Controller
                 $this->view('phones/edit/' . $id, $data);
             }
         } else {
-            $persons = $this->personModel->getPersons();
-            $languages = $this->languageModel->getlanguages();
             $pep = $this->peplanModel->get_peplan_by_id($id);
             if ($pep) {
+                $persons = $this->personModel->getPersons();
+                $languages = $this->languageModel->getlanguages();
                 $data = [
                     'id' => $pep->id,
                     'levle' => $pep->levle,
@@ -162,7 +165,24 @@ class Peplans extends Controller
         }
     }
 
-    public function delete_peplam($id)
+
+    /**
+     * show($id)
+     * @param #id
+     * @return data
+     */
+    public function show($id = null)
+    {
+        $peplan = $this->peplanModel->get_peplan_by_id($id);
+        if ($peplan) {
+            $this->view('peplans/show', $peplan);
+        } else {
+            flash('msg', '<p>the page which you requested does not exist, try to use other method</p>');
+            redirect_to('/pages/notFound');
+        }
+    }
+
+    public function delete_peplan($id)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $peplan = $this->peplanModel->get_peplan_by_id($id);

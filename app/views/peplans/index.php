@@ -55,7 +55,7 @@
                                             Remove <?php echo $person->first_name; ?>
                                         </button>
 
-                                        <!-- Modal Edite -->
+                                        <!-- Modal Edit -->
                                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
@@ -67,7 +67,7 @@
                                                     <div class="modal-body">
                                                         If you continue, The language will NOT appear at <?php echo $person->first_name . ' ' . $person->last_name; ?>'s personal information page, NOR he will appear on <?php echo $language->title; ?> page.</div>
                                                     <div class="modal-footer">
-                                                        <form method="post" action="<?php echo URLROOT; ?>/peplans/delete/<?php echo $person->id ?>">
+                                                        <form method="post" action="<?php echo URLROOT; ?>/peplans/delete_peplan/<?php echo $person->id ?>">
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                             <button type="submit" class="btn btn-danger"><?= I_DELETE ?>
                                                                 delete</a>
@@ -81,7 +81,7 @@
 
                                 </div>
                             <?php else : ?>
-                               
+
                             <?php endif; ?>
                         <?php endforeach; ?>
                         <a class="btn btn-outline-secondary" href="<?php echo URLROOT . '/peplans/add/0/' . $language->id; ?>">Add <?= I_ADD_PERSON ?></a>

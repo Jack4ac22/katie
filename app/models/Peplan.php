@@ -77,14 +77,12 @@ class Peplan
      */
     public function update_peplan($data)
     {
-        $this->db->query('UPDATE people_languages SET p_id = :p_id, lan_id = :lan_id, levle = :levle WHERE id = :id');
-        // Bind values
-        $this->db->bind(':p_id', $data['p_id']);
-        $this->db->bind(':lan_id', $data['lan_id']);
-        $this->db->bind(':levle', $data['levle']);
-        $this->db->bind(':id', $data['id']);
-
-        // Execute
+        $this->db->query("UPDATE people_languages SET p_id = :p_id, lan_id = :lan_id, levle = :levle, comment = :comment WHERE id = :id");
+        $this->db->bind('p_id', $data['p_id']);
+        $this->db->bind('lan_id', $data['lan_id']);
+        $this->db->bind('levle', $data['levle']);
+        $this->db->bind('comment', $data['comment']);
+        $this->db->bind('id', $data['id']);
         if ($this->db->execute()) {
             return true;
         } else {
@@ -95,7 +93,6 @@ class Peplan
     public function delete_peplan($id)
     {
         $this->db->query('DELETE FROM people_languages WHERE id=:id');
-
         $this->db->bind(':id', $id);
         if ($this->db->execute()) {
             return true;
