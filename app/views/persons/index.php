@@ -19,7 +19,15 @@
                     <div class="col-md-3">
 
                     </div>
-                    <img src="https://cdn.pixabay.com/photo/2016/10/18/19/56/cute-1751246_960_720.png" alt="woman" class="rounded mx-auto d-block">
+                    <?php if ($person->img != null) : ?>
+                                <img src="<?= IMGROOT . '/' . $person->img ?>" class="figure-img img-fluid rounded" alt="<?= $person->first_name . ' ' . $person->last_name . ' image' ?>">
+                            <?php else : ?>
+                                <?php if ($person->sex != 'male') : ?>
+                                    <img src="<?= IMGROOT . '/' . 'male.png' ?>" class="figure-img img-fluid rounded" alt="<?= 'male' ?>">
+                                <?php else : ?>
+                                    <img src="<?= IMGROOT . '/' . 'female.png' ?>" class="figure-img img-fluid rounded" alt="<?= 'female' ?>">
+                                <?php endif; ?>
+                            <?php endif; ?>
                     <div class="col-md-9">
                         <div class="card-body">
                             <p class="h5"><?php echo $person->first_name . ' ' . $person->last_name; ?></p>

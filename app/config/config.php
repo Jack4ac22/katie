@@ -8,8 +8,12 @@ define('DB_NAME', 'katie');
 
 // App Root
 define('APPROOT', dirname(dirname(__FILE__)));
+// public Root
+define('PUBLICROOT', dirname(dirname(dirname(__FILE__))).'/public');
 // URL Root
 define('URLROOT', 'http://localhost:8888/Katie');
+// img Root
+define('IMGROOT', 'http://localhost:8888/Katie/public/imgs');
 // Site Name
 define('SITENAME', 'Katie');
 

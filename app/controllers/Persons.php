@@ -234,10 +234,11 @@ class Persons extends Controller
                 } else {
                     $fileName = time() . '-' . $_POST['p_id'];
 
-                    $filePath = APPROOT .  "/imgs/$fileName$extension";
+                    $filePath = PUBLICROOT .  "/imgs/$fileName$extension";
 
                     if (move_uploaded_file($_FILES['img']['tmp_name'], $filePath)) {
                         $data = [
+                            'img_name'=> $fileName.$extension,
                             'img_path' => $filePath,
                             'comment' => $_POST['comment'],
                             'p_id' => $_POST['p_id']

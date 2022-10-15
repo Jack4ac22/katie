@@ -15,8 +15,16 @@
                 <div class="accordion-body">
                     <div class="d-flex position-relative">
                         <figure class="figure p-3">
+                            <?php if ($data['person']['person']->img != null) : ?>
+                                <img src="<?= IMGROOT . '/' . $data['person']['person']->img ?>" class="figure-img img-fluid rounded" alt="<?= $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name . ' image' ?>">
+                            <?php else : ?>
+                                <?php if ($data['person']['person']->sex != 'male') : ?>
+                                    <img src="<?= IMGROOT . '/' . 'male.png' ?>" class="figure-img img-fluid rounded" alt="<?= 'male' ?>">
+                                <?php else : ?>
+                                    <img src="<?= IMGROOT . '/' . 'female.png' ?>" class="figure-img img-fluid rounded" alt="<?= 'female' ?>">
+                                <?php endif; ?>
+                            <?php endif; ?>
 
-                            <img src="https://cdn.pixabay.com/photo/2016/06/01/00/01/sad-1428080__340.png" class="figure-img img-fluid rounded" alt="...">
                         </figure>
 
                         <div>
