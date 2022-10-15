@@ -19,9 +19,9 @@
                                 <img src="<?= IMGROOT . '/' . $data['person']['person']->img ?>" class="figure-img img-fluid rounded" alt="<?= $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name . ' image' ?>">
                             <?php else : ?>
                                 <?php if ($data['person']['person']->sex != 'male') : ?>
-                                    <img src="<?= IMGROOT . '/' . 'male.png' ?>" class="figure-img img-fluid rounded" alt="<?= 'male' ?>">
+                                    <img src="<?= IMGROOT . '/' . 'female.png' ?>" class="figure-img img-fluid rounded" alt="female">
                                 <?php else : ?>
-                                    <img src="<?= IMGROOT . '/' . 'female.png' ?>" class="figure-img img-fluid rounded" alt="<?= 'female' ?>">
+                                    <img src="<?= IMGROOT . '/' . 'male.png' ?>" class="figure-img img-fluid rounded" alt="male">
                                 <?php endif; ?>
                             <?php endif; ?>
 

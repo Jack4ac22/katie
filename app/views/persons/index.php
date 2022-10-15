@@ -23,9 +23,9 @@
                                 <img src="<?= IMGROOT . '/' . $person->img ?>" class="figure-img img-fluid rounded" alt="<?= $person->first_name . ' ' . $person->last_name . ' image' ?>">
                             <?php else : ?>
                                 <?php if ($person->sex != 'male') : ?>
-                                    <img src="<?= IMGROOT . '/' . 'male.png' ?>" class="figure-img img-fluid rounded" alt="<?= 'male' ?>">
+                                    <img src="<?= IMGROOT . '/' . 'female.png' ?>" class="figure-img img-fluid rounded" alt="femal">
                                 <?php else : ?>
-                                    <img src="<?= IMGROOT . '/' . 'female.png' ?>" class="figure-img img-fluid rounded" alt="<?= 'female' ?>">
+                                    <img src="<?= IMGROOT . '/' . 'male.png' ?>" class="figure-img img-fluid rounded" alt="male">
                                 <?php endif; ?>
                             <?php endif; ?>
                     <div class="col-md-9">

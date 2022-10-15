@@ -65,7 +65,7 @@ class Language
 
     $row = $this->db->single();
 
-    $this->db->query("SELECT PL.*, P.first_name, P.last_name, L.title FROM people_languages AS PL 
+    $this->db->query("SELECT PL.*, P.first_name, P.last_name, P.sex, L.title FROM people_languages AS PL 
     INNER JOIN people AS P ON P.id = PL.p_id
     INNER JOIN languages AS L ON L.id = PL.lan_id
     WHERE L.id = :id");

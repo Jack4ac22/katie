@@ -60,11 +60,47 @@
               <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
                   <div class="accordion-body">
                       <?php if (isset($data['language']['people'])) : ?>
-                          <?php foreach ($data['language']['people'] as $person) : ?>
-                              <h3 class="card-title"><?php echo $person->first_name . ' ' . $person->last_name; ?>
-                                  <a href="<?php echo URLROOT . '/persons/show/' . $person->p_id; ?>" class="btn btn-light"><?= I_INFO ?></a>
-                              </h3>
-                          <?php endforeach; ?>
+
+                          <table class="table">
+                              <thead>
+                                  <tr>
+                                      <th scope="col">person</th>
+                                      <th scope="col">gender</th>
+                                      <th scope="col">levle</th>
+                                      <th scope="col">comment</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <!-- person colum -->
+                                  <?php foreach ($data['language']['people'] as $person) : ?> <tr>
+                                          <th scope="row"><a href="<?php echo URLROOT . '/persons/show/' . $person->p_id; ?>" class="btn btn-light"><?php echo $person->first_name . ' ' . $person->last_name; ?></a></th>
+                                          <!-- GEnder Column -->
+                                          <td>
+                                              <?php if ($person->sex == 'male') : ?>
+                                                  <a type="button" class="btn btn-dark disabled">
+                                                      <span class="badge text-bg-dark">
+                                                          <?= I_MAN ?>
+                                                      </span>
+                                                  <?php else : ?>
+                                                      <a type="button" class="btn btn-info disabled">
+                                                          <span class="badge text-bg-info"><?= I_WOMAN; ?>
+                                                          </span>
+                                                      <?php endif; ?>
+                                          </td>
+                                          <!-- level column -->
+                                          <td>
+                                              <div class="progress">
+                                                  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $person->levle ?>%"></div>
+                                              </div>
+                                          </td>
+                                          <td><?php echo $person->comment ?></td>
+                                      </tr>
+
+                                  <?php endforeach; ?>
+                              </tbody>
+                          </table>
+
+
                           <a class="btn btn-outline-secondary" href="<?php echo URLROOT . '/peplans/add/0/' . $data['language']['language']->id; ?>">Add someone else.</a>
 
                       <?php else : ?>
