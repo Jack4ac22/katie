@@ -170,7 +170,7 @@ class Person
         $this->db->bind(':comment', $data['comment']);
         if ($this->db->execute()) {
             $this->db->query("UPDATE people SET img=:img WHERE people.id = :p_id");
-            $this->db->bind(':img', $data['img_path']);
+            $this->db->bind(':img', $data['img_name']);
             $this->db->bind(':p_id', $data['p_id']);
             if ($this->db->execute()) {
                 return true;

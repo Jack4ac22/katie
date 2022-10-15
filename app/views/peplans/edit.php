@@ -2,11 +2,11 @@
 
 <?php require APPROOT . '/views/includes/header.php'; ?>
 <?php flash('msg'); ?>
-<a href="<?php echo URLROOT; ?>/peplans" class="btn btn-light"><i class="fa fa-backward"></i> Back</a>
+<a href="<?php echo URLROOT; ?>/peplans" class="btn btn-light"><?= I_ARROW_L ?></i> Back</a>
 <div class="card card-body bg-light mt-5">
     <h2>update the language skill.</h2>
     <p>Chose from the menue below to updatethe language skills.</p>
-    <form action="<?php echo URLROOT; ?>/peplans/update_peplan/<?php echo $data['id']; ?>" method="post">
+    <form action="<?php echo URLROOT; ?>/peplans/edit/<?php echo $data['id']; ?>" method="post">
         <!-- //language field -->
         <div class="form-group">
             <label for="lan">Chose the language</label>
@@ -58,14 +58,14 @@
                             echo 'selected';
                         } ?> value="25">beginner</option>
                 <option value="50" <?php if ((!isset($data['levle'])) || ($data['levle'] == 50)) {
-                            echo 'selected';
-                        } ?> >intermediate</option>
+                                        echo 'selected';
+                                    } ?>>intermediate</option>
                 <option value="75" <?php if ((!isset($data['levle'])) || ($data['levle'] == 75)) {
-                            echo 'selected';
-                        } ?> >advanced</option>
+                                        echo 'selected';
+                                    } ?>>advanced</option>
                 <option value="100" <?php if ((!isset($data['levle'])) || ($data['levle'] == 100)) {
-                            echo 'selected';
-                        } ?> >fluent</option>
+                                        echo 'selected';
+                                    } ?>>fluent</option>
             </select>
             <?php if (!empty($data['levle_error'])) {
                 $msg = $data['levle_error'];
@@ -79,7 +79,7 @@
             <span class="invalid-feedback"><?php echo $data['comment_err']; ?></span>
         </div>
         <div class="form-floating m-3">
-            <button type="submit" class="btn btn-primary btn-block"><i class="fa-solid fa-user-plus"></i> relate <i class="fa-solid fa-language"></i></button>
+            <button type="submit" class="btn btn-primary btn-block"><?= I_ADD_PERSON ?> relate <?= I_LANGUAGE ?></button>
         </div>
     </form>
 </div>
