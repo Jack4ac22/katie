@@ -83,10 +83,9 @@ class Phones extends Controller
      * return ()
      */
 
-    public function edit($id)
+    public function edit($id = 0)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // Sanitize language array
             $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
             $data = [
                 'number' => $_POST['number'],
@@ -105,7 +104,9 @@ class Phones extends Controller
             }
             if (empty($_POST['description'])) {
                 $data['description'] = 'General';
-            }
+            } elseif (strip_tags(trim($_POST['description'])) !== $_POST['description']) {
+                $data['description'] = 'Please verify the description, it should not contain special characters.';
+            };
             if ($_POST['p_id'] == 0) {
                 $data['number_err'] = 'please chose a person.';
             }
@@ -113,29 +114,54 @@ class Phones extends Controller
             //check for errors
             if (empty($data['number_err']) && empty($data['description_err']) && empty($data['p_id_err'])) {
                 if ($this->phoneModel->update_phone($data)) {
-                    flash('msg', 'phone number is updated');
-                    redirect_to('phones/show/' . $id);
+                    $phone = $this->phoneModel->get_phone_by_id($id);
+                    $data = [
+                        'id' => $phone->id,
+                        'number' => $phone->number,
+                        'description' => $phone->description,
+                        'p_id' => $phone->p_id,
+                        'first_name' => $phone->first_name,
+                        'last_name' => $phone->last_name,
+                    ];
+                    $msg = "<p>Phone number is updated.</p>
+                    it is now: <a href=" . URLROOT . "/phones/show/$phone->id\"  class=\"alert-link\">$phone->number,</a>  and it belongs to <a href=" . URLROOT . "/persons/show/$phone->p_id\" class=\"alert-link\">$phone->first_name $phone->last_name</a>.";
+                    flash(
+                        'msg',
+                        $msg
+                    );
+                    redirect_to('/' . $id);
                 } else {
                     flash('msg', 'Something went wrong, please try again la.');
+                    $persons = $this->personModel->getPersons();
+                    $phone = $this->phoneModel->get_phone_by_id($data['id']);
+                    $data = ['persons' => $persons, 'first_name' => $phone->first_name, 'last_name' => $phone->last_name];
                     $this->view('phones/edit/' . $id, $data);
                 }
                 //load the view with the errors
             } else {
                 $persons = $this->personModel->getPersons();
                 $data['persons'] = $persons;
-                $this->view('phones/edit/'.$id, $data);
+                $this->view('phone/edit/' . $data['id'], $data);
             }
         } else {
             $phone = $this->phoneModel->get_phone_by_id($id);
-            $persons = $this->personModel->getPersons();
-            $data = [
-                'id' => $phone->id,
-                'number' => $phone->number,
-                'description' => $phone->description,
-                'p_id' => $phone->p_id,
-                'persons' => $persons
-            ];
-            $this->view('phones/edit', $data);
+            if ($phone) {
+                $persons = $this->personModel->getPersons();
+                $data = [
+                    'id' => $phone->id,
+                    'number' => $phone->number,
+                    'description' => $phone->description,
+                    'p_id' => $phone->p_id,
+                    'first_name' => $phone->first_name,
+                    'last_name' => $phone->last_name,
+                    'persons' => $persons
+                ];
+                $this->view('phones/edit', $data);
+            } else {
+                $msg = "you are trying to edit none existing phone number, please check the <a href=" . URLROOT . "/phones\"  class=\"alert-link\">phones</a> page to access the desured number, or find the person from <a href=" . URLROOT . "/persons\" class=\"alert-link\"> people </a> page.";
+                flash('msg', $msg);
+                redirect_to('/pages/notfound');
+            }
         }
     }
 

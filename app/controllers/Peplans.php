@@ -129,7 +129,7 @@ class Peplans extends Controller
             //check for errors
             if (empty($data['lan_id_err']) && empty($data['levle_err']) && empty($data['p_id_err'])) {
                 if ($this->peplanModel->update_peplan($data)) {
-                    flash('msg', '<p>' . 'The language/person relation has been updated.</p> <a href="' . URLROOT . '/peplans/show/' . $id . '" class="alert-link">you can use this link to complete the profile</a>');
+                    flash('msg', '<p>' . 'The language/person relation has been updated.</p> <a href="' . URLROOT . '/peplans/show/' . $id . '" class="alert-link">you can use this link to check</a>.');
                     redirect_to('persons/show/' . $data['p_id']);
                 } else {
                     flash('msg', 'Something went wrong, please try again later.');
@@ -141,7 +141,7 @@ class Peplans extends Controller
                 $data['persons'] = $persons;
                 $languages = $this->languageModel->getlanguages();
                 $data['languages'] = $languages;
-                $this->view('phones/edit/' . $id, $data);
+                $this->view('peplan/edit/' . $id, $data);
             }
         } else {
             $pep = $this->peplanModel->get_peplan_by_id($id);

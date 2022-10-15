@@ -1,31 +1,42 @@
 <?php require APPROOT . '/views/includes/header.php'; ?>
 <?php flash('msg'); ?>
+<!-- <?php echo '<pre>' . var_export($data['languages'][0]->count->number, true) . '</pre>'; ?> -->
+
 <div class="input-group mb-3 ">
-    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-angles-right"></i>
+    <input type="search" class="form-control" placeholder="search..." aria-label="Username" aria-describedby="basic-addon1">
+    <span class="input-group-text" id="basic-addon1"><?= I_ARROW_R ?>
     </span>
-    <button type="submit" class="btn btn-light"><i class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
+    <button type="submit" class="btn btn-primary"><?= I_SEARCH ?> search</button>
     <span class="input-group-text" id="basic-addon1">
-        <i class="fa-solid fa-angles-left"></i>
-    </span>
-    <input type="search" class="form-control" placeholder="search for a phone number" aria-label="Username" aria-describedby="basic-addon1">
-    <a type="button" class="btn btn-primary" href="<?php echo URLROOT; ?>/languages/add">
-        <i class="fa-solid fa-language fa-xl"><i class="fa-solid fa-magnifying-glass"></i></i> new language
+        <?= I_ARROW_L ?>
+    </span><a type="button" class="btn btn-primary" href="<?php echo URLROOT; ?>/languages/add">
+        <?= I_ADD_SIGN ?> new language
     </a>
 </div>
-
 <div class="row">
     <?php foreach ($data['languages'] as $language) : ?>
         <div class="col-sm-6 ">
             <div class="card m-1">
                 <div class="card-body">
                     <div class="card-header">
-                        <i class="fa-solid fa-language fa-2xl"> <?php echo ' ' . $language->title; ?></i>
+                        <h2> <?= I_LANGUAGE ?> <?php echo ' ' . $language->title; ?></h2>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $language->description; ?></h5>
                         <p class="card-text"><?php echo $language->extra; ?></p>
                         <a href="<?php echo URLROOT; ?>/languages/show/<?php echo $language->id; ?>" class="btn btn-primary">
-                            <i class="fa-solid fa-exclamation"></i> more actions</a>
+                            <?= I_EXCLAIM ?> more actions</a>
+                        <?php if ($language->count->number > 0) : ?>
+                            <a href="<?php echo URLROOT . '/peplans/show/' . $language->id ?>" class="btn btn-primary"><span class="badge text-bg-warning"><?= $language->count->number ?></span>
+                                people speaking <?= $language->title ?>
+                            </a>
+                        <?php else : ?>
+                            <a href="<?php echo URLROOT . '/peplans/show/' . $language->id ?>" class="btn btn-warning"><span class="badge text-bg-danger">NO</span>
+                                one speaks <?= $language->title ?>
+                            </a>
+                        <?php endif; ?>
+
+
                     </div>
                 </div>
             </div>

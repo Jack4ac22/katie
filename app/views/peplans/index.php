@@ -38,6 +38,7 @@
                     <div class="row">
                         <?php foreach ($data['languages']['list'] as $person) : ?>
                             <?php if ($language->id == $person->lan_id) : ?>
+                                <!-- can be replaced with toggle https://getbootstrap.com/docs/5.2/components/collapse/ -->
                                 <div class="col-4">
                                     <h4 class="card-title"><?php echo $person->first_name . ' ' . $person->last_name; ?>
                                         <a href="<?php echo URLROOT . '/persons/show/' . $person->p_id; ?>" class="btn btn-light"><?= I_INFO ?></a>
@@ -47,6 +48,7 @@
                                             <a class="btn btn-light">
                                                 <?= I_WOMAN ?></a>
                                         <?php endif; ?>
+
                                     </h4>
                                     <!-- Modal  -->
                                     <div class="m-3 d-grid gap-2 d-md-flex justify-content-md-end">
