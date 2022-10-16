@@ -2,13 +2,25 @@
 
 <?php require APPROOT . '/views/includes/header.php'; ?>
 <?php flash('msg'); ?>
-<a href="<?php echo URLROOT; ?>/peplans" class="btn btn-light"><?= I_ARROW_L ?></i> Back</a>
+
+<?php if (isset($data['p_id']) && ($data['p_id'] > 0)) : ?>
+    <a href="<?= URLROOT ?>persons/show/<?= $data['p_id'] ?>" class="btn btn-light"><?= I_ARROW_L ?> Back to the person's page</a>
+
+<?php elseif (isset($data['lan_id']) && ($data['lan_id'] > 0)) : ?>
+    <a href="<?= URLROOT ?>languages/show/<?= $data['lan_id'] ?>" class="btn btn-light"><?= I_ARROW_L ?> Back to language's page</a>
+
+<?php else : ?>
+    <a href="<?php echo URLROOT; ?>" class="btn btn-light"><?= I_ARROW_L ?> Back to main page</a>
+
+<?php endif; ?>
+
+
 <div class="card card-body bg-light mt-5">
-    <h2>update the language skill.</h2>
-    <p>Chose from the menue below to updatethe language skills.</p>
+    <h2>Update the language .</h2>
+    <p>Chose from the menue below to update the data.</p>
     <form action="<?php echo URLROOT; ?>/peplans/edit/<?php echo $data['id']; ?>" method="post">
         <!-- //language field -->
-        <div class="form-group">
+        <div class="form-group mt-3">
             <label for="lan">Chose the language</label>
             <span class="invalid-feedback"><?php echo $data['lan_err']; ?></span>
             <select class="form-select" aria-label="Default select example" name="lan_id">
@@ -27,7 +39,7 @@
             } ?>
         </div>
         <!-- person's field -->
-        <div class="form-group">
+        <div class="form-group mt-3">
             <label for="p_id">Chose the person:</label>
             <span class="invalid-feedback"><?php echo $data['p_id_err']; ?></span>
             <select class="form-select" aria-label="Default select example" name="p_id">
@@ -46,7 +58,7 @@
             } ?>
         </div>
         <!-- levle field -->
-        <div class="form-group">
+        <div class="form-group mt-3">
             <label for="levle">Chose the person:</label>
             <span class="invalid-feedback"><?php echo $data['levle_err']; ?></span>
             <select class="form-select" aria-label="Default select example" name="levle">
@@ -73,13 +85,13 @@
             } ?>
         </div>
         <!-- comment's field -->
-        <div class="form-group">
+        <div class="form-group mt-3">
             <label for="comment">comment:</label>
             <textarea name="comment" class="form-control form-control-lg <?php echo (!empty($data['comment_err'])) ? 'is-invalid' : ''; ?>"><?php echo $data['comment']; ?></textarea>
             <span class="invalid-feedback"><?php echo $data['comment_err']; ?></span>
         </div>
-        <div class="form-floating m-3">
-            <button type="submit" class="btn btn-primary btn-block"><?= I_ADD_PERSON ?> relate <?= I_LANGUAGE ?></button>
+        <div class="form-floating mt-3">
+            <button type="submit" class="btn btn-primary btn-block"><?= I_ADD_PERSON ?> Update <?= I_LANGUAGE ?></button>
         </div>
     </form>
 </div>
