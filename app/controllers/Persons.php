@@ -7,7 +7,7 @@ class Persons extends Controller
         if (!islogged()) {
             redirect_to('');
         }
-        $this->personModel = $this->model('person');
+        $this->personModel = $this->model('Person');
     }
 
 

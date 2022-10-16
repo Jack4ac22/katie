@@ -1,5 +1,5 @@
   <?php require APPROOT . '/views/includes/header.php'; ?>
-  <a href="<?php echo URLROOT; ?>/languages" class="btn btn-light"><?= I_ARROW_L ?> Back</a>
+  <a href="<?php echo URLROOT; ?>/languages" class="btn btn-light"><?= I_ARROW_L ?> Back to all languages.</a>
   <!-- <?php echo '<pre>' . var_export($data, true) . '</pre>'; ?> -->
   <?php flash('msg'); ?>
   <?php if (islogged()) : ?>

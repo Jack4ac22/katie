@@ -20,16 +20,19 @@
                 } ?>
                 <?php if (isset($_SESSION['user_id'])) : ?>
                     <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href=" <?= URLROOT ?>">Home</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="<?php echo URLROOT; ?>/people/index">People</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="#">search</a>
-                    </li>
-                    <li class="nav-item">
+                    </li> -->
+                    <!-- <li class="nav-item">
                         <a class="nav-link " href="<?php echo URLROOT; ?>/people/index" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             indexes
                         </a>
-                    </li>
+                    </li> -->
             </ul>
         </div>
         <ul class="navbar-nav ml-auto">
