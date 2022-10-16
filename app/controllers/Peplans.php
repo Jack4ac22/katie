@@ -4,7 +4,7 @@ class Peplans extends Controller
     public function __construct()
     {
         if (!islogged()) {
-            flash('msg', 'you do not have permission to see this data, please login.');
+            flash('msg', 'You do not have permission to access this data, please login.');
             redirect_to('users/login');
         }
 
@@ -191,9 +191,9 @@ class Peplans extends Controller
                     redirect_to('/login');
                 }
                 if ($this->peplanModel->delete_peplan($id)) {
-                    $msg = "<p>$peplan->first_name $peplan->last_name will not shown in relation to $peplan->title language. $id</p>
-                    <p>you can check $peplan->first_name</p>";
-                    redirect_to("languages/show/$peplan->lan_id", $msg);
+                    flash('msg', '<p>' . $peplan->first_name . ' ' . $peplan->last_name . ' will not shown in relation to <a href="'.URLROOT.'/languages/show/'.$peplan->lan_id .'">'.$peplan->title.'</a> language.</p>
+                    <p>you can check' . $peplan->first_name . '</p>');
+                    redirect_to("languages/show/$peplan->lan_id");
                 } else {
                     $msg = "<p>Failed, please try again later.</p>";
                     redirect_to("languages/show/$peplan->lan_id", $msg);

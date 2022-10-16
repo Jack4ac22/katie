@@ -12,15 +12,15 @@
               </h2>
               <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
                   <div class="accordion-body">
-                      <h2 class="card-header">Title: <?php echo $data['language']['language']->title; ?></h2>
+                      <h2 class="card-header mt-3">Title: <?php echo $data['language']['language']->title; ?></h2>
                       <?php if ($data['language']['language']->description != null) : ?>
-                          <h5 class="card-title">
+                          <h5 class="card-title mt-3">
                               Description:<?php echo $data['language']['language']->description; ?></h5>
                       <?php endif; ?>
                       <?php if ($data['language']['language']->extra != null) : ?>
-                          <p class="card-text"><?php echo $data['language']['language']->extra; ?></p>
+                          <p class="card-text mt-3"><?php echo $data['language']['language']->extra; ?></p>
                       <?php endif; ?>
-                      <div>
+                      <div class="mt-3">
                           <a class="btn btn-warning" href="<?php echo URLROOT; ?>/languages/edit/<?php echo $data['language']['language']->id; ?>"><?= I_EDIT ?>
                               Edit</a>
                           <!-- Button trigger modal -->
