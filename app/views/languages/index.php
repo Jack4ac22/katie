@@ -24,8 +24,8 @@
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $language->description; ?></h5>
                         <p class="card-text"><?php echo $language->extra; ?></p>
-                        <a href="<?php echo URLROOT; ?>/languages/show/<?php echo $language->id; ?>" class="btn btn-primary">
-                            <?= I_EXCLAIM ?> more actions</a>
+                        <a href="<?php echo URLROOT; ?>/languages/show/<?php echo $language->id; ?>" class="btn btn-info">
+                            More<?= I_INFO .' '.I_EDIT. ' '.I_DELETE ?> </a>
                         <?php if ($language->count->number > 0) : ?>
                             <a href="<?php echo URLROOT . '/peplans/show/' . $language->id ?>" class="btn btn-primary"><span class="badge text-bg-warning"><?= $language->count->number ?></span>
                                 people speaking <?= $language->title ?>

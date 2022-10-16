@@ -23,8 +23,6 @@ class Languages extends Controller
     $this->view('languages/index', $data);
   }
 
-
-
   public function add()
   {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -51,7 +49,7 @@ class Languages extends Controller
           flash('msg', '<p>' . $language->title . ' language is Added, you can use access it <a href="' . URLROOT . '/languages/show/' . $language->id . '" class="alert-link">from here</a> .');
           redirect_to('languages');
         } else {
-          flash('msg', 'Something went wrong, please try again later.');
+          flash('msg', 'Something went wrong, please try again later.', 'alert alert-danger');
           redirect_to('languages');
         }
       } else {
@@ -98,9 +96,9 @@ class Languages extends Controller
         // Validated
         if ($this->languageModel->update_language($data)) {
           flash('msg', $data['title'] . ' language Updated');
-          redirect_to('languages');
+          redirect_to('languages/show/'.$data['id']);
         } else {
-          flash('msg', $data['title'] . 'something went wrong, try again later.');
+          flash('msg', $data['title'] . 'something went wrong, try again later.', 'alert alert-danger');
           redirect_to('languages/index');
         }
       } else {
@@ -110,21 +108,26 @@ class Languages extends Controller
     } else {
       // Get existing language from model
       $language = $this->languageModel->get_language_by_id($id);
-      $data = [
-        'id' => $id,
-        'title' => $language['language']->title,
-        'description' => $language['language']->description,
-        'extra' => $language['language']->extra
-      ];
+      if (isset($language['language']->title)) {
+        $data = [
+          'id' => $id,
+          'title' => $language['language']->title,
+          'description' => $language['language']->description,
+          'extra' => $language['language']->extra
+        ];
 
-      $this->view('languages/edit', $data);
+        $this->view('languages/edit', $data);
+      } else {
+        flash('msg', 'The requested page does not exist, please choose a specific language.', 'alert alert-danger');
+        redirect_to('languages/index');
+      }
     }
   }
 
-  public function show($id)
+  public function show($id = 0)
   {
     $language = $this->languageModel->get_language_by_id($id);
-    if ($language) {
+    if (isset($language['language']->id)) {
 
       $data = [
         'language' => $language
@@ -132,8 +135,8 @@ class Languages extends Controller
 
       $this->view('languages/show', $data);
     } else {
-      flash('msg', '<p>the page which you requested does not exist, try to use other method</p>');
-      redirect_to('/pages/notFound');
+      flash('msg', '<p>the page which you requested does not exist, try to use other method</p>', 'alert alert-danger');
+      redirect_to('pages/notFound');
     }
   }
   public function delete($id)
@@ -142,7 +145,6 @@ class Languages extends Controller
       // Get existing language from model
       $language = $this->languageModel->get_language_by_id($id);
 
-      // Check for owner
       if (!islogged()) {
         redirect_to('languages');
       }
@@ -150,10 +152,11 @@ class Languages extends Controller
         flash('msg', 'Language Removed.');
         redirect_to('languages');
       } else {
-        flash('msg', 'Something went wrong, please try again.');
+        flash('msg', 'Something went wrong, please try again.', 'alert alert-danger');
         redirect_to('languages');
       }
     } else {
+      flash('msg', '<p>You do not have a permission.</p>', 'alert alert-danger');
       redirect_to('languages');
     }
   }
