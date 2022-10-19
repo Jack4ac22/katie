@@ -318,7 +318,7 @@
             </h2>
             <div id="panelsStayOpen-collapseEight" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingEight">
                 <div class="accordion-body">
-                    <div><a href="<?= URLROOT . '/images/upload/' . $data['person']['person']->id ?>" class="btn btn-primary">upload <?= I_PIC ?></a></div>
+                    <div class="mb-3"><a href="<?= URLROOT . '/images/upload/' . $data['person']['person']->id ?>" class="btn btn-primary">upload <?= I_PIC ?></a></div>
                     <div class="row justify-content-center">
                         <div class="card-group">
                             <?php foreach ($data['person']['images'] as $img) : ?>
