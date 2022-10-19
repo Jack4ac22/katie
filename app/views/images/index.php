@@ -20,7 +20,9 @@
                                 <?php if ($img->p_id == $person->id) : ?>
                                     <div class=" col-md-6 col-lg-4">
                                         <div class="card" style="width: 18rem;">
-                                            <img src="<?= IMGROOT . '/' . $img->img_path ?>" class="d-block w-100" alt="<?= $person->first_name . ' ' . $img->comment ?>">
+                                            <a href="<?= URLROOT . '/images/show/' . $img->id ?>">
+                                                <img src="<?= IMGROOT . '/' . $img->img_path ?>" class="d-block w-100" alt="<?= $person->first_name . ' ' . $img->comment ?>">
+                                            </a>
                                             <div class="card-body">
                                                 <h5 class="card-title"><?= $img->img_path ?></h5>
                                                 <p class="card-text"><?= $img->comment ?></p>

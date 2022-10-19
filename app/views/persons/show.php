@@ -3,6 +3,7 @@
 <?php flash('msg'); ?>
 <a href="<?php echo URLROOT; ?>/persons/index" class="btn btn-light btn-block">Back to all people <?= I_ARROW_L ?></a>
 <?php if (isset($data['person'])) : ?>
+    
     <div class="accordion" id="accordionPanelsStayOpenExample">
         <!-- personal  -->
         <div class="accordion-item">
@@ -317,12 +318,14 @@
             </h2>
             <div id="panelsStayOpen-collapseEight" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingEight">
                 <div class="accordion-body">
+                    <div><a href="<?= URLROOT . '/images/upload/' . $data['person']['person']->id ?>" class="btn btn-primary">upload <?= I_PIC ?></a></div>
                     <div class="row justify-content-center">
                         <div class="card-group">
                             <?php foreach ($data['person']['images'] as $img) : ?>
                                 <div class=" col-md-6 col-lg-4">
                                     <div class="card" style="width: 18rem;">
-                                        <img src="<?= IMGROOT . '/' . $img->img_path ?>" class="d-block w-100" alt="<?= $data['person']['person']->first_name  . ' ' . $img->comment ?>">
+                                        <a href="<?= URLROOT . '/images/show/' . $img->id ?>">
+                                            <img src="<?= IMGROOT . '/' . $img->img_path ?>" class="d-block w-100" alt="<?= $data['person']['person']->first_name  . ' ' . $img->comment ?>"></a>
                                         <div class="card-body">
                                             <h5 class="card-title"><?= $img->img_path ?></h5>
                                             <p class="card-text"><?= $img->comment ?></p>

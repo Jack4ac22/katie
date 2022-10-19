@@ -221,4 +221,16 @@ class Images extends Controller
             }
         }
     }
+
+    public function show($id)
+    {
+        $image = $this->imageModel->get_image_by_id($id);
+        if ($image) {
+            $data = ['image' => $image];
+            $this->view('images/show', $data);
+        } else {
+            flash('msg', '<p>the page which you requested does not exist, try to use other method.</p>', 'alert alert-danger');
+            redirect_to('/pages/notFound');
+        }
+    }
 }
