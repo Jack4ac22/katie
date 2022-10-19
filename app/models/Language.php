@@ -58,7 +58,7 @@ class Language
     }
   }
 
-  public function get_language_by_id($id=0)
+  public function get_language_by_id($id = 0)
   {
     $this->db->query('SELECT * FROM languages WHERE id = :id');
     $this->db->bind(':id', $id);

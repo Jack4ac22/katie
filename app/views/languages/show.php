@@ -1,6 +1,6 @@
   <?php require APPROOT . '/views/includes/header.php'; ?>
   <a href="<?php echo URLROOT; ?>/languages" class="btn btn-light"><?= I_ARROW_L ?> Back to all languages.</a>
-  <!-- <?php echo '<pre>' . var_export($data['language']['language'], true) . '</pre>'; ?> -->
+  <?php echo '<pre>' . var_export($data['language'], true) . '</pre>'; ?>
   <?php flash('msg'); ?>
   <?php if (islogged()) : ?>
       <div class="accordion" id="accordionPanelsStayOpenExample">
@@ -24,15 +24,15 @@
                           <a class="btn btn-warning" href="<?php echo URLROOT; ?>/languages/edit/<?php echo $data['language']['language']->id; ?>"><?= I_EDIT ?>
                               Edit</a>
                           <!-- Button trigger modal -->
-                          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#<?= $data['language']['language']->title . $data['language']['language']->id ?>Modal">
                               <?= I_DELETE ?> delete
                           </button>
                           <!-- Modal -->
-                          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal fade" id="<?= $data['language']['language']->title . $data['language']['language']->id ?>Modal" tabindex="-1" aria-labelledby="<?= $data['language']['language']->title . $data['language']['language']->id ?>ModalLabel" aria-hidden="true">
                               <div class="modal-dialog">
                                   <div class="modal-content">
                                       <div class="modal-header">
-                                          <h1 class="modal-title fs-5" id="exampleModalLabel">Delete <?php echo $data['language']['language']->title; ?></h1>
+                                          <h1 class="modal-title fs-5" id="<?= $data['language']['language']->title . $data['language']['language']->id ?>ModalLabel">Delete <? echo $data['language']['language']->title; ?></h1>
                                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                       </div>
                                       <div class="modal-body">
@@ -61,6 +61,7 @@
                   <div class="accordion-body">
                       <?php if (count($data['language']['people']) > 0) : ?>
                           <div class="row">
+
                               <?php foreach ($data['language']['people'] as $person) : ?>
                                   <div class="col-sm-6">
                                       <div class="card mb-2">
@@ -86,23 +87,23 @@
                                                   <a href="<?php echo URLROOT . '/peplans/edit/' . $person->id; ?>" class="btn btn-primary"><?= I_LANGUAGE ?> Level</a>
                                                   <a href="<?php echo URLROOT . '/persons/show/' . $person->p_id; ?>" class="btn btn-light"><?= I_PERSON ?> Check</a>
                                                   <!-- Button trigger modal -->
-                                                  <button type="button" class="btn btn-danger me-md-2" data-bs-toggle="modal" data-bs-target="#peplanModal"><?= I_DELETE ?>
+                                                  <button type="button" class="btn btn-danger me-md-2" data-bs-toggle="modal" data-bs-target="#peplan<?= $person->p_id . $person->id ?>Modal"><?= I_DELETE ?>
                                                       <?= I_PERSON ?> Remove
                                                   </button>
                                               </div>
                                               <!-- Modal Edit -->
-                                              <div class="modal fade" id="peplanModal" tabindex="-1" aria-labelledby="peplanModalLabel" aria-hidden="true">
+                                              <div class="modal fade" id="peplan<?= $person->p_id . $person->id ?>Modal" tabindex="-1" aria-labelledby="peplan<?= $person->p_id . $person->id ?>ModalLabel" aria-hidden="true">
                                                   <div class="modal-dialog">
                                                       <div class="modal-content">
                                                           <div class="modal-header">
-                                                              <h1 class="modal-title fs-5" id="peplanModalLabel">Delete <?php echo $person->title; ?>/<?php echo $person->first_name . ' ' . $person->last_name; ?> relation
+                                                              <h1 class="modal-title fs-5" id="peplan<?= $person->p_id . $person->id ?>ModalLabel">Delete <?= $person->title . ' ' . $person->first_name . ' ' . $person->last_name; ?> relation
                                                               </h1>
                                                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                           </div>
                                                           <div class="modal-body">
-                                                              If you continue, The language will NOT appear at <?php echo $person->first_name . ' ' . $person->last_name; ?>'s personal information page, NOR he will appear on <?php echo $person->title; ?> page.</div>
+                                                              If you continue, The language will NOT appear at <?= $person->first_name . ' ' . $person->last_name; ?>'s personal information page, NOR he will appear on <?= $person->title; ?> page.</div>
                                                           <div class="modal-footer">
-                                                              <form method="post" action="<?php echo URLROOT; ?>/peplans/delete_peplan/<?php echo $person->id ?>">
+                                                              <form method="post" action="<?php echo URLROOT; ?>/peplans/delete_peplan/<?= $person->id ?>">
                                                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                                   <button type="submit" class="btn btn-danger"><?= I_DELETE ?>
                                                                       delete</a>
@@ -116,6 +117,7 @@
                                       </div>
                                   </div>
                               <?php endforeach; ?>
+
                               <div>
                                   <a class="btn btn-outline-secondary" href="<?php echo URLROOT . '/peplans/add/0/' . $data['language']['language']->id; ?>">Add someone else.</a>
                               </div>

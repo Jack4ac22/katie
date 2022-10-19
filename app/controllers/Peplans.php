@@ -4,7 +4,7 @@ class Peplans extends Controller
     public function __construct()
     {
         if (!islogged()) {
-            flash('msg', 'You do not have permission to access this data, please login.');
+            flash('msg', '<p>You do not have permission to access this data, please login.</p>');
             redirect_to('users/login');
         }
 
@@ -57,14 +57,15 @@ class Peplans extends Controller
                 $data['lan_id_err'] = 'please chose a language.';
             }
             if ($_POST['levle'] == 0) {
-                $data['number_err'] = 'please chose a language.';
+                $data['levle_err'] = 'please chose a language.';
             }
 
 
             if ((empty($data['lan_id_err'])) && (empty($data['p_id_err'])) && (empty($data['levle_err']))) {
                 if ($this->peplanModel->add_lan_to_person($data)) {
-                    flash('msg', '<p>Language is added, check the profile: <a href="' . URLROOT . '/persons/show/' . $data['p_id'] . '" class="alert-link">check the profile.</a>');
-                    redirect_to('persons/show/' . $data['p_id']);
+                    $last = $this->peplanModel->get_the_last();
+                    flash('msg', '<p><a href="' . URLROOT . '/languages/show/' . $last->p_id . '" class="alert-link">' . $last->title . '</a> language is added to <a href="' . URLROOT . '/persons/show/' . $last->p_id . '" class="alert-link">' . $last->first_name . $last->last_name . '.</a>');
+                    redirect_to('/persons/show/'.$last->p_id);
                 } else {
                     flash('msg', 'Something went wrong, please try again later.');
                     redirect_to('persons');
@@ -76,18 +77,19 @@ class Peplans extends Controller
                 $data['languages'] = $languages;
                 $this->view('peplans/add', $data);
             }
-        } else
+        } else {
             $persons = $this->personModel->getPersons();
-        $languages = $this->languageModel->getlanguages();
-        $data = [
-            'levle' => '',
-            'comment' => '',
-            'lan_id' => $lan,
-            'p_id' => $name,
-            'persons' => $persons,
-            'languages' => $languages
-        ];
-        $this->view('peplans/add', $data);
+            $languages = $this->languageModel->getlanguages();
+            $data = [
+                'levle' => '',
+                'comment' => '',
+                'lan_id' => $lan,
+                'p_id' => $name,
+                'persons' => $persons,
+                'languages' => $languages
+            ];
+            $this->view('peplans/add', $data);
+        }
     }
 
 
@@ -191,9 +193,11 @@ class Peplans extends Controller
                     redirect_to('/login');
                 }
                 if ($this->peplanModel->delete_peplan($id)) {
-                    flash('msg', '<p>' . $peplan->first_name . ' ' . $peplan->last_name . ' will not shown in relation to <a href="'.URLROOT.'/languages/show/'.$peplan->lan_id .'">'.$peplan->title.'</a> language.</p>
-                    <p>you can check' . $peplan->first_name . '</p>');
-                    redirect_to("languages/show/$peplan->lan_id");
+                    flash('msg', '<p>' . $peplan->first_name . ' ' . $peplan->last_name . ' will not be shown in relation to <a href="' . URLROOT . '/languages/show/' . $peplan->lan_id . '" class="alert-link">' . $peplan->title . '</a> language.</p>
+                    <p>you can check
+                    <a href="' . URLROOT . '/persons/show/' . $peplan->p_id . '" class="alert-link">'
+                        . 'the personal profile. </p>');
+                    redirect_to("persons/show/$peplan->p_id");
                 } else {
                     $msg = "<p>Failed, please try again later.</p>";
                     redirect_to("languages/show/$peplan->lan_id", $msg);

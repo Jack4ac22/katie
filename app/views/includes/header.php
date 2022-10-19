@@ -68,6 +68,9 @@
                     <li class=" nav-item">
                                 <a class="nav-link" button" class="btn btn-primary" href="<?php echo URLROOT; ?>/phones/add""><?= I_ADD_SIGN ?> phone number</a>
                     </li>
+                    <li class=" nav-item">
+                                <a class="nav-link" button" class="btn btn-primary" href="<?php echo URLROOT; ?>/peplans/add""><?= I_ADD_SIGN ?> person/language relation</a>
+                    </li>
                 </ul>
                 </p>
             </div>
