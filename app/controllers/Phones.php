@@ -56,10 +56,10 @@ class Phones extends Controller
             if (empty($data['number_err']) && empty($data['description_err']) && empty($data['p_id_err'])) {
                 if ($this->phoneModel->add_phone($data)) {
                     flash('msg', '<p>' . $data['number'] . ' is added.</p> <a href="' . URLROOT . '/persons/show/' . $data['p_id'] . '" class="alert-link">check the profile.</a>');
-                    redirect_to('phones');
+                    redirect_to('persons/show' . $data['p_id']);
                 } else {
                     flash('msg', 'Something went wrong, please try again later.');
-                    redirect_to('phones');
+                    redirect_to('persons/show/' . $data['p_id']);
                 }
             } else {
                 $persons = $this->personModel->getPersons();

@@ -110,7 +110,7 @@ class Person
         $this->db->bind(':id', $id);
         $phones = $this->db->resultSet();
 
-        $this->db->query("SELECT L.title, L.description, L.extra, PL.levle, PL.comment, PL.lan_id FROM people_languages AS PL 
+        $this->db->query("SELECT L.title, L.description, L.extra, PL.levle, PL.comment, PL.lan_id, PL.id, PL.lan_id FROM people_languages AS PL 
         INNER JOIN languages AS L ON L.id = PL.lan_id
         WHERE PL.p_id = :id");
         $this->db->bind(':id', $id);

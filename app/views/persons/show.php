@@ -1,5 +1,5 @@
 <?php require_once APPROOT . '/views/includes/header.php'; ?>
-<!-- <?php echo '<pre>' . var_export($data, true) . '</pre>'; ?> -->
+<?php echo '<pre>' . var_export($data, true) . '</pre>'; ?>
 <?php flash('msg'); ?>
 <a href="<?php echo URLROOT; ?>/persons/index" class="btn btn-light btn-block">Back to all people <?= I_ARROW_L ?></a>
 <?php if (isset($data['person'])) : ?>
@@ -240,6 +240,7 @@
                                 <th scope="col">Language</th>
                                 <th scope="col">levle</th>
                                 <th scope="col">comment</th>
+                                <th scope="col">more actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -252,6 +253,39 @@
                                         </div>
                                     </td>
                                     <td><?php echo $lan->comment ?></td>
+                                    <td>
+                                        <div class="col">
+                                            <div class="btn-group mb-3" role="group" aria-label="Basic example">
+                                                <a href="<?php echo URLROOT . '/peplans/edit/' . $lan->id; ?>" class="btn btn-primary"><?= I_LANGUAGE ?> Level</a>
+                                                <!-- Button trigger modal -->
+                                                <button type="button" class="btn btn-danger me-md-2" data-bs-toggle="modal" data-bs-target="#peplan<?= $lan->id?>Modal"><?= I_DELETE ?>
+                                                    <?= I_PERSON ?> Remove
+                                                </button>
+                                            </div>
+                                            <!-- Modal Edit -->
+                                            <div class="modal fade" id="peplan<?= $lan->id?>Modal" tabindex="-1" aria-labelledby="peplan<?=  $lan->id?>ModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="peplan<?=  $lan->id ?>ModalLabel">Delete <?= $lan->title . ' / ' . $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name ?> relation
+                                                            </h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            If you continue, The language will NOT appear at <?= $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name ?>'s personal information page, NOR he will appear on <?= $lan->title; ?> page.</div>
+                                                        <div class="modal-footer">
+                                                            <form method="post" action="<?php echo URLROOT; ?>/peplans/delete_peplan/<?= $lan->id ?>">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-danger"><?= I_DELETE ?>
+                                                                    delete</a>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </th>
+                                        </div>
+                                    </td>
                                 </tr>
 
                             <?php endforeach; ?>

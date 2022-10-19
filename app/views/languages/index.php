@@ -24,17 +24,29 @@
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $language->description; ?></h5>
                         <p class="card-text"><?php echo $language->extra; ?></p>
-                        <a href="<?php echo URLROOT; ?>/languages/show/<?php echo $language->id; ?>" class="btn btn-info">
-                            More<?= I_INFO .' '.I_EDIT. ' '.I_DELETE ?> </a>
-                        <?php if ($language->count->number > 0) : ?>
-                            <a href="<?php echo URLROOT . '/peplans/show/' . $language->id ?>" class="btn btn-primary"><span class="badge text-bg-warning"><?= $language->count->number ?></span>
-                                people speaking <?= $language->title ?>
-                            </a>
-                        <?php else : ?>
-                            <a href="<?php echo URLROOT . '/peplans/show/' . $language->id ?>" class="btn btn-warning"><span class="badge text-bg-danger">NO</span>
-                                one speaks <?= $language->title ?>
-                            </a>
-                        <?php endif; ?>
+
+                        <div class="row justify-content-between">
+                            <div class="col-4">
+                                <?php if ($language->count->number > 0) : ?>
+                                    <span class="badge text-bg-warning"><?= $language->count->number ?>
+                                        <?php if ($language->count->number == 1) : ?>
+                                            person speaking <?= $language->title ?></span>
+                                <?php else : ?>
+                                    people speaking <?= $language->title ?></span>
+                                <?php endif; ?>
+                            <?php else : ?>
+                                <span class="badge text-bg-danger">NO
+                                    one speaks <?= $language->title ?></span>
+                            <?php endif; ?>
+                            </div>
+                            <div class="col-4">
+                                <a href="<?php echo URLROOT; ?>/languages/show/<?php echo $language->id; ?>" class="btn btn-info ">
+                                    More <?= I_INFO . ' ' . I_EDIT . ' ' . I_DELETE ?> </a>
+                            </div>
+                        </div>
+
+
+
 
 
                     </div>

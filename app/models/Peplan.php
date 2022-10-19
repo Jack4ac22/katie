@@ -13,7 +13,6 @@ class Peplan
      */
     public function get_all_data()
     {
-
         $this->db->query("SELECT PL.*, PP.first_name, PP.last_name, PP.sex, L.title, L.description, L.extra
         FROM people_languages AS PL
         LEFT JOIN people AS PP ON PP.id = PL.p_id
@@ -69,6 +68,21 @@ class Peplan
         };
     }
 
+    /**
+     * get_the_last()
+     * @return id
+     */
+
+    public function get_the_last()
+    {
+        $this->db->query('SELECT pl.*, P.first_name, P.last_name, L.title FROM people_languages AS PL
+        INNER JOIN people AS P ON P.id = PL.p_id
+        INNER JOIN languages AS L ON L.id = PL.lan_id
+        ORDER BY PL.id DESC
+        LIMIT 1');
+        $row = $this->db->single();
+        return $row;
+    }
 
     /**
      * update_peplan($data)

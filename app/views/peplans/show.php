@@ -1,4 +1,4 @@
-<!-- <?php echo '<pre>' . var_export($data, true) . '</pre>'; ?> -->
+<?php echo '<pre>' . var_export($_SESSION, true) . '</pre>'; ?>
 <?php require APPROOT . '/views/includes/header.php'; ?>
 <?php flash('msg'); ?>
 
