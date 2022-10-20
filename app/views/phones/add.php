@@ -1,6 +1,6 @@
 <?php require APPROOT . '/views/includes/header.php'; ?>
 <?php flash('msg'); ?>
-<!-- <?php echo '<pre>' . var_export($data, true) . '</pre>'; ?> -->
+<?php //echo '<pre>' . var_export($data, true) . '</pre>'; ?>
 <a href="<?php echo URLROOT; ?>/phones" class="btn btn-light"><i class="fa fa-backward"></i> Back to all phones page.</a>
 <div class="card card-body bg-light mt-5">
     <h2>Add Phone number</h2>

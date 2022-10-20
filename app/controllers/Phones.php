@@ -4,7 +4,7 @@ class Phones extends Controller
     public function __construct()
     {
         if (!islogged()) {
-            flash('msg', 'you do not have permission to see this data, please login.');
+            flash('msg', 'you do not have permission to see this data, please login.', 'alert alert-danger');
             redirect_to('users/login');
         }
         $this->phoneModel = $this->model('Phone');
