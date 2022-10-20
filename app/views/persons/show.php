@@ -103,6 +103,7 @@
                                                         <?= I_PHONE ?>
                                                     </a>
                                                     <input type="phone" class="form-control" placeholder="Input group example" aria-label="Input group example" aria-describedby="basic-addon1" value="<?php echo $phone->number; ?>" name="phone" disabled>
+                                                    <input type="text" class="form-control" placeholder="Input group example" aria-label="Input group example" aria-describedby="basic-addon1" value="<?php echo $phone->description ?? ' '; ?>" name="phone" disabled>
                                                 </div>
                                             </div>
                                             <div class="col">
