@@ -1,6 +1,6 @@
   <?php require APPROOT . '/views/includes/header.php'; ?>
   <a href="<?php echo URLROOT; ?>/languages" class="btn btn-light"><?= I_ARROW_L ?> Back to all languages.</a>
-  <?php echo '<pre>' . var_export($data['language'], true) . '</pre>'; ?>
+  <!-- <?php echo '<pre>' . var_export($data['language'], true) . '</pre>'; ?> -->
   <?php flash('msg'); ?>
   <?php if (islogged()) : ?>
       <div class="accordion" id="accordionPanelsStayOpenExample">

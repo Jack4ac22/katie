@@ -55,10 +55,10 @@ class Phones extends Controller
             }
             if (empty($data['number_err']) && empty($data['description_err']) && empty($data['p_id_err'])) {
                 if ($this->phoneModel->add_phone($data)) {
-                    flash('msg', '<p>' . $data['number'] . ' is added.</p> <a href="' . URLROOT . '/persons/show/' . $data['p_id'] . '" class="alert-link">check the profile.</a>');
-                    redirect_to('persons/show' . $data['p_id']);
+                    flash('msg', 'phone number is added to your database.');
+                    redirect_to('persons/show/' . $data['p_id']);
                 } else {
-                    flash('msg', 'Something went wrong, please try again later.');
+                    flash('msg', '<p>Something went wrong, please try again later.</p>', 'alert alert-danger');
                     redirect_to('persons/show/' . $data['p_id']);
                 }
             } else {
@@ -108,7 +108,7 @@ class Phones extends Controller
                 $data['description'] = 'Please verify the description, it should not contain special characters.';
             };
             if ($_POST['p_id'] == 0) {
-                $data['number_err'] = 'please chose a person.';
+                $data['p_id_err'] = 'please chose a person.';
             }
 
             //check for errors
@@ -129,9 +129,9 @@ class Phones extends Controller
                         'msg',
                         $msg
                     );
-                    redirect_to('/' . $id);
+                    redirect_to('/persons/show/' . $phone->p_id);
                 } else {
-                    flash('msg', 'Something went wrong, please try again la.');
+                    flash('msg', 'Something went wrong, please try again later.');
                     $persons = $this->personModel->getPersons();
                     $phone = $this->phoneModel->get_phone_by_id($data['id']);
                     $data = ['persons' => $persons, 'first_name' => $phone->first_name, 'last_name' => $phone->last_name];
@@ -141,7 +141,7 @@ class Phones extends Controller
             } else {
                 $persons = $this->personModel->getPersons();
                 $data['persons'] = $persons;
-                $this->view('phone/edit/' . $data['id'], $data);
+                $this->view('phones/edit/' . $data['id'], $data);
             }
         } else {
             $phone = $this->phoneModel->get_phone_by_id($id);
@@ -187,7 +187,7 @@ class Phones extends Controller
             }
             if ($this->phoneModel->delete_phone($id)) {
                 flash('msg', 'phone number is Removed from your database.');
-                redirect_to('phones');
+                redirect_to('persons/show/' . $phone->p_id);
             }
         }
     }
@@ -203,7 +203,7 @@ class Phones extends Controller
                     redirect_to('phones');
                 }
                 if ($this->phoneModel->delete_phone($id)) {
-                    $msg = "phone number is Removed from your data base.. $p_id";
+                    $msg = "phone number is Removed from your data base.";
                     flash('msg',);
                     redirect_to("persons/show/$p_id");
                 }

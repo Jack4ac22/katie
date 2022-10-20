@@ -32,6 +32,8 @@
                     <ul class="nav flex-column">
                         <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/persons/index">people</a>
                         </li>
+                        <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/images/index">Pictures</a>
+                        </li>
                         <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/languages/index">languages</a>
                         </li class="nav-item">
                         <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/peplans/index">languages-people</a>

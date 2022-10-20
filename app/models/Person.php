@@ -115,10 +115,18 @@ class Person
         WHERE PL.p_id = :id");
         $this->db->bind(':id', $id);
         $languages = $this->db->resultSet();
+        
+        $this->db->query("SELECT I.img_path, I.comment, I.uploaded_at, I.id FROM people AS P 
+INNER JOIN imgs AS I ON P.id = I.p_id
+WHERE P.id = :id ");
+$this->db->bind(':id', $id);
+$images = $this->db->resultSet();
+
         $person = [
             'person' => $row,
             'phones' => $phones,
-            'languages' => $languages
+            'languages' => $languages,
+            'images' =>$images
 
         ];
         return $person;
@@ -194,4 +202,10 @@ class Person
             return false;
         }
     }
+
+
+    /**
+     * with_img()
+     * return how many img they have
+     */
 }
