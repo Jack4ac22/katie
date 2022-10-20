@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Oct 15, 2022 at 06:45 AM
+-- Generation Time: Oct 20, 2022 at 07:07 AM
 -- Server version: 5.7.34
 -- PHP Version: 8.0.8
 
@@ -83,15 +83,21 @@ CREATE TABLE `imgs` (
   `id` int(11) NOT NULL,
   `p_id` int(11) NOT NULL,
   `img_path` varchar(255) NOT NULL,
-  `comment` text NOT NULL
+  `comment` text NOT NULL,
+  `uploaded_at` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `imgs`
 --
 
-INSERT INTO `imgs` (`id`, `p_id`, `img_path`, `comment`) VALUES
-(1, 55, '/Applications/MAMP/htdocs/katie/public/imgs/1665815141-55.jpg', 'fake');
+INSERT INTO `imgs` (`id`, `p_id`, `img_path`, `comment`, `uploaded_at`) VALUES
+(18, 56, '1666201103-56.jpg', '', '2022-10-19 19:38:23'),
+(19, 56, '1666204111-56.jpg', '', '2022-10-19 20:28:31'),
+(21, 45, '1666210831-45.jpg', '', '2022-10-19 22:20:31'),
+(22, 45, '1666210839-45.jpg', '', '2022-10-19 22:20:39'),
+(23, 55, '1666246509-55.jpg', 'with', '2022-10-20 08:15:09'),
+(24, 55, '1666249335-55.jpg', 'Orlando when will be aged', '2022-10-20 09:02:15');
 
 -- --------------------------------------------------------
 
@@ -148,12 +154,11 @@ CREATE TABLE `languages` (
 --
 
 INSERT INTO `languages` (`id`, `title`, `description`, `extra`) VALUES
-(5, 'Arabic', 'Jack\'s language', ''),
+(5, 'Arabic', 'fantastic', 'something about Arabic, it is something.'),
 (9, 'English', 'most common language', 'say something'),
 (10, 'French', 'description', 'extra personal notes'),
 (11, 'Portuguese', 'porto description', 'extra personal data'),
-(12, 'German', 'very attractive language', ''),
-(13, 'Swahili', 'few people still know this', 'some speaks it with an accent');
+(19, 'Pedoa', 'An invented language that does not exist anywhere', 'maybe I will invent its script :)\r\nNot now.... it will happen later!');
 
 -- --------------------------------------------------------
 
@@ -178,21 +183,21 @@ CREATE TABLE `people` (
 --
 
 INSERT INTO `people` (`id`, `first_name`, `last_name`, `sex`, `email`, `img`, `created_at`, `edited_at`, `added_by`) VALUES
-(42, 'Alfonso', 'Martinho', 'male', 'AM@gmail.com', NULL, '2022-10-13 20:23:47', NULL, 16),
-(43, 'Bethany', 'Bernando', 'female', 'Bernando@gmail.com', NULL, '2022-10-13 20:24:10', NULL, 16),
+(42, 'Alfonso', 'Martinho', 'male', 'AM@gmail.com', '', '2022-10-13 20:23:47', '2022-10-19 21:28:49', 16),
+(43, 'Bethany', 'Bernando', 'female', 'Bernando@gmail.com', NULL, '2022-10-13 20:24:10', '2022-10-19 18:36:31', 16),
 (44, 'Captin', 'Boolean', 'male', 'Salty@gmail.com', NULL, '2022-10-13 20:24:46', '2022-10-14 16:09:09', 16),
-(45, 'Ebrahim', 'Salto', 'male', 'e.salto@gmail.com', NULL, '2022-10-13 20:25:30', NULL, 16),
+(45, 'Ebrahim', 'Salto', 'male', 'e.salto@gmail.com', '1666210839-45.jpg', '2022-10-13 20:25:30', '2022-10-19 22:20:39', 16),
 (46, 'Fredrick', 'Labo', 'male', 'labo@gmail.com', NULL, '2022-10-13 20:26:09', NULL, 16),
 (47, 'George', 'Creepo', 'male', 'smily_g@gmail.com', NULL, '2022-10-13 20:26:42', NULL, 16),
-(48, 'Haroot', 'Bebayan', 'male', 'h.b@gmail.com', NULL, '2022-10-13 20:27:09', NULL, 16),
+(48, 'Haroot', 'Bebayan', 'male', 'h.b@gmail.com', NULL, '2022-10-13 20:27:09', '2022-10-19 18:36:43', 16),
 (49, 'Israel', 'beni', 'male', 'I.beni@gmail.com', NULL, '2022-10-13 20:27:42', NULL, 16),
-(50, 'Jessica', 'Lufy', 'female', 'jessica_L@gmail.com', NULL, '2022-10-13 20:28:13', NULL, 16),
+(50, 'Jessica', 'Lufy', 'female', 'jessica_L@gmail.com', NULL, '2022-10-13 20:28:13', '2022-10-19 18:36:41', 16),
 (51, 'Kathren', 'Sorbonne', 'female', 'kasor@gmail.com', NULL, '2022-10-13 20:29:54', NULL, 16),
-(52, 'Linda', 'sweet', 'female', 'lsweet@gmail.com', NULL, '2022-10-13 20:30:13', NULL, 16),
+(52, 'Linda', 'sweet', 'female', 'lsweet@gmail.com', NULL, '2022-10-13 20:30:13', '2022-10-19 18:36:39', 16),
 (53, 'Marcos', 'Pavoto', 'male', 'pavma@gmail.com', NULL, '2022-10-13 20:30:45', NULL, 16),
 (54, 'Nona', 'Pretty', 'female', 'sweet_n@gmail.com', NULL, '2022-10-13 20:31:08', NULL, 16),
-(55, 'Orlando', 'boxer', 'male', 'ob@gmail.com', '1665815141-55.jpg', '2022-10-13 20:31:29', '2022-10-15 08:25:41', 16),
-(56, 'Patricia', 'Mano', 'male', 'mano_p@gmail.com', '1665813341-56.jpg', '2022-10-13 20:32:43', '2022-10-15 07:55:41', 16);
+(55, 'Orlando', 'boxer', 'male', 'ob@gmail.com', '1666249335-55.jpg', '2022-10-13 20:31:29', '2022-10-20 09:02:15', 16),
+(56, 'Patricia', 'Mano', 'female', 'mano_p@gmail.com', '1666201103-56.jpg', '2022-10-13 20:32:43', '2022-10-19 21:32:02', 16);
 
 -- --------------------------------------------------------
 
@@ -224,7 +229,32 @@ CREATE TABLE `people_languages` (
 --
 
 INSERT INTO `people_languages` (`id`, `p_id`, `lan_id`, `levle`, `comment`) VALUES
-(59, 56, 5, '25', NULL);
+(69, 50, 9, '75', ''),
+(70, 46, 9, '25', ''),
+(85, 45, 11, '100', 'lorem a;lskjd apwoj mvn ,xmnvc\r\nlaskdj alksdj pawojd lakjf sd'),
+(86, 46, 10, '75', 'well, speaking has a shy personality, and can be relyed on!'),
+(87, 55, 11, '50', 'nice accent, Brazilian.'),
+(88, 55, 9, '50', 'facing some difficulties to express, but understandable language.'),
+(90, 43, 11, '75', ''),
+(92, 56, 11, '75', ''),
+(93, 53, 10, '75', ''),
+(95, 56, 10, '100', 'asd'),
+(98, 44, 5, '50', ''),
+(99, 44, 11, '75', ''),
+(100, 44, 10, '100', 'aasd'),
+(101, 56, 19, '25', ''),
+(102, 56, 19, '25', ''),
+(103, 56, 19, '25', ''),
+(104, 56, 19, '25', ''),
+(105, 51, 10, '25', ''),
+(106, 51, 10, '25', ''),
+(107, 46, 11, '25', ''),
+(108, 46, 11, '25', ''),
+(109, 46, 10, '25', ''),
+(110, 49, 10, '25', '765'),
+(111, 45, 11, '50', 'ddsadsad'),
+(112, 45, 5, '25', 'ssad'),
+(115, 48, 10, '50', 'nice');
 
 -- --------------------------------------------------------
 
@@ -263,14 +293,20 @@ INSERT INTO `phone_numbers` (`id`, `number`, `p_id`, `description`, `created_at`
 (3, 99009900990099, NULL, 'test test test', '2022-10-08 19:01:51', '2022-10-08 17:01:23'),
 (24, 99009900990099, NULL, 'asdasdada', '2022-10-11 09:16:28', NULL),
 (25, 123111, NULL, '2321312', '2022-10-11 09:46:30', NULL),
-(42, 123456789, 56, 'personal', '2022-10-13 20:33:17', NULL),
-(43, 23456789, 56, 'friend\'s number', '2022-10-13 20:33:37', NULL),
-(44, 3245678891, 56, 'mother', '2022-10-13 20:33:55', NULL),
-(45, 123333221442, 54, 'personal', '2022-10-13 21:31:33', NULL),
-(46, 771223123, 54, 'General', '2022-10-13 21:31:50', NULL),
-(47, 3323212313, 55, 'General', '2022-10-13 21:32:09', NULL),
-(48, 4432512345, 55, 'General', '2022-10-13 21:32:16', NULL),
-(49, 12312341255213, 53, 'private / emergency', '2022-10-13 21:32:40', NULL);
+(42, 123456789, 55, 'personal', '2022-10-13 20:33:17', NULL),
+(44, 32456788913, 56, 'mother', '2022-10-13 20:33:55', NULL),
+(45, 99929991, 56, 'personal 2', '2022-10-13 21:31:33', NULL),
+(46, 771223123, 49, 'General', '2022-10-13 21:31:50', NULL),
+(48, 4432512345, 49, 'General', '2022-10-13 21:32:16', NULL),
+(49, 12312341255213, 53, 'private / emergency', '2022-10-13 21:32:40', NULL),
+(52, 12313323, 43, 'Please verify the description, it should not contain special characters.', '2022-10-15 17:47:43', NULL),
+(53, 33213333, 52, 'ads', '2022-10-18 23:57:21', NULL),
+(54, 998808880, 51, 'privet', '2022-10-18 23:58:14', NULL),
+(55, 21020203, 46, 'test test test', '2022-10-18 23:59:17', NULL),
+(56, 2223332222, 54, 'General', '2022-10-19 00:00:19', NULL),
+(57, 13213123123, 45, 'General', '2022-10-19 21:35:09', NULL),
+(58, 1233333, 45, 'asd', '2022-10-19 21:36:02', NULL),
+(59, 990123, 55, 'net', '2022-10-19 21:37:43', NULL);
 
 -- --------------------------------------------------------
 
@@ -386,6 +422,7 @@ ALTER TABLE `people_groups`
 --
 ALTER TABLE `people_languages`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id index` (`id`),
   ADD KEY `people_languages_ibfk_1` (`lan_id`),
   ADD KEY `people_languages_ibfk_2` (`p_id`);
 
@@ -448,7 +485,7 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT for table `imgs`
 --
 ALTER TABLE `imgs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `job_titles`
@@ -460,25 +497,25 @@ ALTER TABLE `job_titles`
 -- AUTO_INCREMENT for table `languages`
 --
 ALTER TABLE `languages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `people`
 --
 ALTER TABLE `people`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `people_languages`
 --
 ALTER TABLE `people_languages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
 
 --
 -- AUTO_INCREMENT for table `phone_numbers`
 --
 ALTER TABLE `phone_numbers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `timezones`
