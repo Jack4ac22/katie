@@ -17,7 +17,7 @@ class Person
      * getPersons()
      * @return ALL people in DB
      */
-    public function getPersons($search, $order)
+    public function getPersons($search=null, $order=null)
     {
         $this->db->query("SELECT P.*  FROM people AS P
         WHERE P.first_name LIKE '%$search%' 

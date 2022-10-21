@@ -33,8 +33,8 @@ class Languages extends Controller
         'description' => trim($_POST['description']),
         'extra' => trim($_POST['extra']),
         'title_err' => '',
-        'body_err' => '',
-        'body_err' => ''
+        'description_err' => '',
+        'extra_err' => ''
       ];
 
       // Validate data
@@ -95,8 +95,8 @@ class Languages extends Controller
       if (empty($data['title_err']) && empty($data['description_err'])) {
         // Validated
         if ($this->languageModel->update_language($data)) {
-          flash('msg', $data['title'] . ' language Updated');
-          redirect_to('languages/show/'.$data['id']);
+          flash('msg', $data['title'] . ' language is updated');
+          redirect_to('languages/show/' . $data['id']);
         } else {
           flash('msg', $data['title'] . 'something went wrong, try again later.', 'alert alert-danger alert-dismissible fade show');
           redirect_to('languages/index');

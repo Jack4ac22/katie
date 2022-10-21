@@ -24,114 +24,119 @@ class Titles extends Controller
   public function add()
   {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      // Sanitize language array
+      // Sanitize title array
       $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
       $data = [
         'title' => trim($_POST['title']),
         'description' => trim($_POST['description']),
-        'extra' => trim($_POST['extra']),
         'title_err' => '',
-        'body_err' => '',
-        'body_err' => ''
+        'description_err' => '',
       ];
 
       // Validate data
       if (empty($data['title'])) {
         $data['title_err'] = 'Please enter title';
+      } elseif (strip_tags(trim($_POST['title'])) !== $_POST['title']) {
+        $data['title_error'] = 'Please verify the title, it should not contain special characters.';
+      }
+      if (empty($data['description'])) {
+        $data['description_err'] = 'Please enter description';
+      } elseif (strip_tags(trim($_POST['description'])) !== $_POST['description']) {
+        $data['description_err'] = 'Please verify the description, it should not contain special characters.';
       }
       // Make sure no errors
       if (empty($data['title_err'])) {
         // Validated
-        if ($this->languageModel->add_language($data)) {
-          $language = $this->languageModel->get_last_language();
-          flash('msg', '<p>' . $language->title . ' language is Added, you can access it <a href="' . URLROOT . '/languages/show/' . $language->id . '" class="alert-link">from here</a> .');
-          redirect_to('languages');
+        if ($this->titleModel->add_title($data)) {
+          $title = $this->titleModel->get_last_title();
+          flash('msg', '<p>' . $title->title . '  is Added, you can access it <a href="' . URLROOT . '/titles/show/' . $title->id . '" class="alert-link">from here</a> .');
+          redirect_to('titles');
         } else {
           flash('msg', 'Something went wrong, please try again later.', 'alert alert-danger alert-dismissible fade show');
-          redirect_to('languages');
+          redirect_to('titles');
         }
       } else {
         // Load view with errors
-        $this->view('languages/add', $data);
+        $this->view('titles/add', $data);
       }
     } else {
       $data = [
         'title' => '',
-        'description' => '',
-        'extra' => ''
+        'description' => ''
       ];
 
-      $this->view('languages/add', $data);
+      $this->view('titles/add', $data);
     }
   }
+
 
   public function edit($id)
   {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      // Sanitize language array
+      // Sanitize title array
       $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
 
       $data = [
         'id' => $id,
         'title' => trim($_POST['title']),
         'description' => trim($_POST['description']),
-        'extra' => trim($_POST['extra']),
         'title_err' => '',
         'description_err' => '',
-        'extra_err' => ''
       ];
 
-      // Validate data
       if (empty($data['title'])) {
         $data['title_err'] = 'Please enter title';
+      } elseif (strip_tags(trim($_POST['title'])) !== $_POST['title']) {
+        $data['title_err'] = 'Please verify the title, it should not contain special characters.';
       }
       if (empty($data['description'])) {
-        $data['description_err'] = 'Please enter the description text';
+        $data['description_err'] = 'Please enter description';
+      } elseif (strip_tags(trim($_POST['description'])) !== $_POST['description']) {
+        $data['description_err'] = 'Please verify the description, it should not contain special characters.';
       }
 
       // Make sure no errors
       if (empty($data['title_err']) && empty($data['description_err'])) {
         // Validated
-        if ($this->languageModel->update_language($data)) {
-          flash('msg', $data['title'] . ' language Updated');
-          redirect_to('languages/show/' . $data['id']);
+        if ($this->titleModel->update_title($data)) {
+          flash('msg', $data['title'] . ' title is updated');
+          redirect_to('titles/show/' . $data['id']);
         } else {
           flash('msg', $data['title'] . 'something went wrong, try again later.', 'alert alert-danger alert-dismissible fade show');
-          redirect_to('languages/index');
+          redirect_to('titles/index');
         }
       } else {
         // Load view with errors
-        $this->view('languages/edit', $data);
+        $this->view('titles/edit', $data);
       }
     } else {
-      // Get existing language from model
-      $language = $this->languageModel->get_language_by_id($id);
-      if (isset($language['language']->title)) {
+      // Get existing title from model
+      $title = $this->titleModel->get_title_by_id($id);
+      if (isset($title['title']->title)) {
         $data = [
           'id' => $id,
-          'title' => $language['language']->title,
-          'description' => $language['language']->description,
-          'extra' => $language['language']->extra
+          'title' => $title['title']->title,
+          'description' => $title['title']->description,
         ];
 
-        $this->view('languages/edit', $data);
+        $this->view('titles/edit', $data);
       } else {
-        flash('msg', 'The requested page does not exist, please choose a specific language.', 'alert alert-danger alert-dismissible fade show');
-        redirect_to('languages/index');
+        flash('msg', 'The requested page does not exist.', 'alert alert-danger alert-dismissible fade show');
+        redirect_to('titles/index');
       }
     }
   }
 
   public function show($id = 0)
   {
-    $language = $this->languageModel->get_language_by_id($id);
-    if (isset($language['language']->id)) {
+    $title = $this->titleModel->get_title_by_id($id);
+    if (isset($title['title']->id)) {
 
       $data = [
-        'language' => $language
+        'title' => $title
       ];
 
-      $this->view('languages/show', $data);
+      $this->view('titles/show', $data);
     } else {
       flash('msg', '<p>the page which you requested does not exist, try to use other method</p>', 'alert alert-danger alert-dismissible fade show');
       redirect_to('pages/notFound');
@@ -140,22 +145,22 @@ class Titles extends Controller
   public function delete($id)
   {
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      // Get existing language from model
-      $language = $this->languageModel->get_language_by_id($id);
+      // Get existing title from model
+      $title = $this->titleModel->get_title_by_id($id);
 
       if (!islogged()) {
-        redirect_to('languages');
+        redirect_to('titles');
       }
-      if ($this->languageModel->delete_language($id)) {
-        flash('msg', 'Language Removed.');
-        redirect_to('languages');
+      if ($this->titleModel->delete_title($id)) {
+        flash('msg', 'title Removed.');
+        redirect_to('titles');
       } else {
         flash('msg', 'Something went wrong, please try again.', 'alert alert-danger');
-        redirect_to('languages');
+        redirect_to('titles');
       }
     } else {
       flash('msg', '<p>You do not have a permission.</p>', 'alert alert-danger alert-dismissible fade show');
-      redirect_to('languages');
+      redirect_to('titles');
     }
   }
 }

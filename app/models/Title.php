@@ -21,19 +21,16 @@ class Title
       $this->db->bind(':id', $t->id);
       $count = $this->db->single();
       $t->count = $count->number;
-
-      
     }
     return $results;
   }
 
-  public function add_language($data)
+  public function add_title($data)
   {
-    $this->db->query('INSERT INTO languages (title, description, extra) VALUES(:title, :description, :extra)');
+    $this->db->query('INSERT INTO job_titles (title, description) VALUES(:title, :description)');
     // Bind values
     $this->db->bind(':title', $data['title']);
     $this->db->bind(':description', $data['description']);
-    $this->db->bind(':extra', $data['extra']);
 
     // Execute
     if ($this->db->execute()) {
@@ -43,16 +40,15 @@ class Title
     }
   }
 
-  public function update_language($data)
+  public function update_title($data)
   {
-    $this->db->query('UPDATE languages SET title = :title, description = :description, extra = :extra WHERE id = :id');
-    // Bind values
+    $this->db->query('UPDATE job_titles SET title = :title, description = :description WHERE id = :id');
+
     $this->db->bind(':id', $data['id']);
     $this->db->bind(':title', $data['title']);
     $this->db->bind(':description', $data['description']);
-    $this->db->bind(':extra', $data['extra']);
 
-    // Execute
+
     if ($this->db->execute()) {
       return true;
     } else {
@@ -60,26 +56,26 @@ class Title
     }
   }
 
-  public function get_language_by_id($id = 0)
+  public function get_title_by_id($id = 0)
   {
-    $this->db->query('SELECT * FROM languages WHERE id = :id');
+    $this->db->query('SELECT * FROM job_titles WHERE id = :id');
     $this->db->bind(':id', $id);
 
     $row = $this->db->single();
 
-    $this->db->query("SELECT PL.*, P.first_name, P.last_name, P.sex, L.title FROM people_languages AS PL 
-    INNER JOIN people AS P ON P.id = PL.p_id
-    INNER JOIN languages AS L ON L.id = PL.lan_id
-    WHERE L.id = :id");
-    $this->db->bind(':id', $id);
+    $this->db->query("SELECT PT.*, P.first_name, P.last_name, P.sex, JT.title FROM people_titles AS PT 
+    INNER JOIN people AS P ON P.id = PT.p_id
+    INNER JOIN job_titles AS JT ON JT.id = PT.t_id
+    WHERE PT.t_id = :t_id");
+    $this->db->bind(':t_id', $id);
     $people = $this->db->resultSet();
-    $row = ['language' => $row, 'people' => $people];
+    $row = ['title' => $row, 'people' => $people];
     return $row;
   }
 
-  public function delete_language($id)
+  public function delete_title($id)
   {
-    $this->db->query('DELETE FROM languages WHERE id = :id');
+    $this->db->query('DELETE FROM job_titles WHERE id = :id');
     // Bind values
     $this->db->bind(':id', $id);
 
@@ -91,12 +87,12 @@ class Title
     }
   }
 
-  public function get_last_language()
+  public function get_last_title()
   {
-    $this->db->query("SELECT * FROM languages  
-    ORDER BY languages.id  DESC
+    $this->db->query("SELECT * FROM job_titles  
+    ORDER BY job_titles.id  DESC
     LIMIT 1");
-    $language = $this->db->single();
-    return $language;
+    $title = $this->db->single();
+    return $title;
   }
 }

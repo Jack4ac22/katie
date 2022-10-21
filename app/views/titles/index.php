@@ -1,6 +1,7 @@
 <?php require APPROOT . '/views/includes/header.php'; ?>
 <?php flash('msg'); ?>
-<!-- <?php //echo '<pre>' . var_export($data, true) . '</pre>'; ?> -->
+<!-- <?php //echo '<pre>' . var_export($data, true) . '</pre>'; 
+        ?> -->
 
 <div class="input-group mb-3 ">
     </span><a type="button" class="btn btn-primary" href="<?= URLROOT ?>/titles/add">
@@ -16,7 +17,7 @@
                         <h2> <?= $title->title; ?></h2>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title"><?php echo $title->description; ?></h5>
+                        <h5 class="card-title" style="white-space: pre-line"><?php echo $title->description; ?></h5>
                         <div class="row justify-content-between">
                             <div class="col-4">
                                 <?php if ($title->count > 0) : ?>
@@ -28,7 +29,7 @@
                                 <?php endif; ?>
                             <?php else : ?>
                                 <span class="badge text-bg-danger">NO
-                                    one speaks <?= $title->title ?></span>
+                                    one is a <b><?= $title->title ?></b></span>
                             <?php endif; ?>
                             </div>
                             <div class="col-4">
