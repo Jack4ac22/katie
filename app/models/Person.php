@@ -115,18 +115,39 @@ class Person
         WHERE PL.p_id = :id");
         $this->db->bind(':id', $id);
         $languages = $this->db->resultSet();
-        
+
         $this->db->query("SELECT I.img_path, I.comment, I.uploaded_at, I.id FROM people AS P 
-INNER JOIN imgs AS I ON P.id = I.p_id
-WHERE P.id = :id ");
-$this->db->bind(':id', $id);
-$images = $this->db->resultSet();
+        INNER JOIN imgs AS I ON P.id = I.p_id
+        WHERE P.id = :id ");
+        $this->db->bind(':id', $id);
+        $images = $this->db->resultSet();
+
+        $this->db->query("SELECT Count(C.p_id) as c_count FROM people AS P
+        INNER JOIN comments AS C ON P.id = C.p_id
+        WHERE P.id = :id
+        GROUP BY C.p_id");
+        $this->db->bind(':id', $id);
+        $c_count = $this->db->resultSet();
+
+        $this->db->query("SELECT C.id, C.value, C.title, C.text, C.created_at, C.edited_at FROM people AS P
+        INNER JOIN comments AS C ON P.id = C.p_id
+        WHERE P.id = :id
+        ORDER BY C.edited_at DESC, C.created_at DESC");
+        $this->db->bind(':id', $id);
+        $comments = $this->db->resultSet();
+        if (isset($c_count[0])) {
+            $comments_count = $c_count[0]->c_count;
+        } else {
+            $comments_count = 0;
+        }
 
         $person = [
             'person' => $row,
             'phones' => $phones,
             'languages' => $languages,
-            'images' =>$images
+            'comments' => $comments,
+            'c_count' => $comments_count,
+            'images' => $images
 
         ];
         return $person;

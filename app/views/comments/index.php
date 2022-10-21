@@ -1,6 +1,6 @@
 <?php require APPROOT . '/views/includes/header.php'; ?>
 <?php flash('msg'); ?>
-<?php //echo '<pre>' . var_export($data['comments'], true) . '</pre>';
+<?php // echo '<pre>' . var_export($data, true) . '</pre>';
 ?>
 
 <form class="d-flex" role="search" method="get">
@@ -34,11 +34,38 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title"><?= $comment->title ?? 'No Title'; ?></h5>
-                        <p class="card-text"><?= $comment->text ?? 'No text'; ?>.</p>
+                        <h5 class="card-title mt-2"><?= $comment->title ?? 'No Title'; ?></h5>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated
+                            
+                            <?php switch ($comment->value) {
+                                case $comment->value > 80:
+                                    echo 'bg-danger';
+                                    break;
+                                case $comment->value > 60:
+                                    echo 'bg-warning';
+                                    break;
+                                case $comment->value > 40:
+                                    echo 'bg-info';
+                                    break;
+                                case $comment->value > 20:
+                                    echo 'bg-success';
+                                    break;
+                                default:
+                                    echo '';
+                            } ?>
+                            
+                            " role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $comment->value ?>%"></div>
+                        </div>
 
+                        <p class="card-text"><?php if (strlen($comment->text) > 150) {
+                                                    echo substr($comment->text, 0, 150) . ' ...';
+                                                } else {
+                                                    echo $comment->text;
+                                                }; ?>.</p>
 
-                        <a href="<?= URLROOT . '/comments/edit/' . $comment->id ?>" class="btn btn-primary">Edit</a>
+                        <a href="<?= URLROOT . '/comments/show/' . $comment->id ?>" class="btn btn-primary">read</a>
+                        <a href="<?= URLROOT . '/comments/edit/' . $comment->id ?>" class="btn btn-warning">Edit</a>
                         <button type="button" class="btn btn-danger me-md-2" data-bs-toggle="modal" data-bs-target="#delete_comment<?= $comment->id ?>Modal">Remove</button>
                         <!-- Modal delete -->
                         <div class="modal fade" id="delete_comment<?= $comment->id ?>Modal" tabindex="-1" aria-labelledby="delete_comment<?= $comment->id ?>ModalLabel" aria-hidden="true">
@@ -52,7 +79,7 @@
                                     <div class="modal-body">
                                         If you continue, The comment will NOT appear at <?= $comment->first_name . ' ' . $comment->last_name ?>'s personal information page.</div>
                                     <div class="modal-footer">
-                                        <form action="<?= URLROOT ?>/images/delete/<?= $comment->id ?>" method="post">
+                                        <form action="<?= URLROOT ?>/comments/delete/<?= $comment->id ?>" method="post">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                             <button type="submit" class="btn btn-danger"><?= I_DELETE ?>
                                                 Delete</a>

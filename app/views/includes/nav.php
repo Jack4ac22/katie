@@ -29,6 +29,7 @@
                     </li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/phones/index">phone
                             numbers</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/comments/index">comments</a></li>
             </ul>
         </div>
         <ul class="navbar-nav ml-auto">

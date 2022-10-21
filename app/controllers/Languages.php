@@ -46,10 +46,10 @@ class Languages extends Controller
         // Validated
         if ($this->languageModel->add_language($data)) {
           $language = $this->languageModel->get_last_language();
-          flash('msg', '<p>' . $language->title . ' language is Added, you can use access it <a href="' . URLROOT . '/languages/show/' . $language->id . '" class="alert-link">from here</a> .');
+          flash('msg', '<p>' . $language->title . ' language is Added, you can access it <a href="' . URLROOT . '/languages/show/' . $language->id . '" class="alert-link">from here</a> .');
           redirect_to('languages');
         } else {
-          flash('msg', 'Something went wrong, please try again later.', 'alert alert-danger');
+          flash('msg', 'Something went wrong, please try again later.', 'alert alert-danger alert-dismissible fade show');
           redirect_to('languages');
         }
       } else {
@@ -98,7 +98,7 @@ class Languages extends Controller
           flash('msg', $data['title'] . ' language Updated');
           redirect_to('languages/show/'.$data['id']);
         } else {
-          flash('msg', $data['title'] . 'something went wrong, try again later.', 'alert alert-danger');
+          flash('msg', $data['title'] . 'something went wrong, try again later.', 'alert alert-danger alert-dismissible fade show');
           redirect_to('languages/index');
         }
       } else {
@@ -118,7 +118,7 @@ class Languages extends Controller
 
         $this->view('languages/edit', $data);
       } else {
-        flash('msg', 'The requested page does not exist, please choose a specific language.', 'alert alert-danger');
+        flash('msg', 'The requested page does not exist, please choose a specific language.', 'alert alert-danger alert-dismissible fade show');
         redirect_to('languages/index');
       }
     }
@@ -135,7 +135,7 @@ class Languages extends Controller
 
       $this->view('languages/show', $data);
     } else {
-      flash('msg', '<p>the page which you requested does not exist, try to use other method</p>', 'alert alert-danger');
+      flash('msg', '<p>the page which you requested does not exist, try to use other method</p>', 'alert alert-danger alert-dismissible fade show');
       redirect_to('pages/notFound');
     }
   }
@@ -156,7 +156,7 @@ class Languages extends Controller
         redirect_to('languages');
       }
     } else {
-      flash('msg', '<p>You do not have a permission.</p>', 'alert alert-danger');
+      flash('msg', '<p>You do not have a permission.</p>', 'alert alert-danger alert-dismissible fade show');
       redirect_to('languages');
     }
   }

@@ -200,7 +200,7 @@ class Images extends Controller
                 flash('msg', '<p>The image was removed from your database and files system.</p>');
                 redirect_to('persons/show/' . $img->p_id);
             } else {
-                flash('msg', '<p>please try again later, something went wrong.</p>', 'alert alert-danger');
+                flash('msg', '<p>please try again later, something went wrong.</p>', 'alert alert-danger alert-dismissible fade show');
                 redirect_to('persons/show/' . $img->p_id);
             }
         }
@@ -215,7 +215,7 @@ class Images extends Controller
                     flash('msg', '<p>The profile picture was updated for the user.</p>');
                     redirect_to('persons/show/' . $img->p_id);
                 } else {
-                    flash('msg', '<p>something went wron, please try again later.</p>', 'alert alert-danger');
+                    flash('msg', '<p>something went wron, please try again later.</p>', 'alert alert-danger alert-dismissible fade show');
                     redirect_to('persons/show/' . $img->p_id);
                 }
             }
@@ -229,7 +229,7 @@ class Images extends Controller
             $data = ['image' => $image];
             $this->view('images/show', $data);
         } else {
-            flash('msg', '<p>the page which you requested does not exist, try to use other method.</p>', 'alert alert-danger');
+            flash('msg', '<p>the page which you requested does not exist, try to use other method.</p>', 'alert alert-danger alert-dismissible fade show');
             redirect_to('/pages/notFound');
         }
     }

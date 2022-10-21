@@ -3,10 +3,10 @@
   <!-- <?php echo '<pre>' . var_export($data, true) . '</pre>'; ?> -->
 
   <?php if (isset($data['p_id']) && ($data['p_id'] > 0)) : ?>
-      <a href="<?= URLROOT ?>persons/show/<?= $data['p_id'] ?>" class="btn btn-light"><?= I_ARROW_L ?> Back to the person's page</a>
+      <a href="<?= URLROOT ?>/persons/show/<?= $data['p_id'] ?>" class="btn btn-light"><?= I_ARROW_L ?> Back to the person's page</a>
 
   <?php elseif (isset($data['lan_id']) && ($data['lan_id'] > 0)) : ?>
-      <a href="<?= URLROOT ?>languages/show/<?= $data['lan_id'] ?>" class="btn btn-light"><?= I_ARROW_L ?> Back to language's page</a>
+      <a href="<?= URLROOT ?>/languages/show/<?= $data['lan_id'] ?>" class="btn btn-light"><?= I_ARROW_L ?> Back to language's page</a>
 
   <?php else : ?>
       <a href="<?php echo URLROOT; ?>" class="btn btn-light"><?= I_ARROW_L ?> Back to main page</a>

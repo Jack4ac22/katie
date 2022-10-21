@@ -82,6 +82,7 @@
                                               <p class="h5 mt-2"><?php echo $person->comment ?></p>
                                           </div>
                                           <!-- Modal  -->
+                                          
                                           <div class="col">
                                               <div class="btn-group mb-3" role="group" aria-label="Basic example">
                                                   <a href="<?php echo URLROOT . '/peplans/edit/' . $person->id; ?>" class="btn btn-primary"><?= I_LANGUAGE ?> Level</a>

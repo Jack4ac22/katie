@@ -4,7 +4,7 @@ class Phones extends Controller
     public function __construct()
     {
         if (!islogged()) {
-            flash('msg', 'you do not have permission to see this data, please login.', 'alert alert-danger');
+            flash('msg', 'you do not have permission to see this data, please login.', 'alert alert-danger alert-dismissible fade show');
             redirect_to('users/login');
         }
         $this->phoneModel = $this->model('Phone');
@@ -58,7 +58,7 @@ class Phones extends Controller
                     flash('msg', 'phone number is added to your database.');
                     redirect_to('persons/show/' . $data['p_id']);
                 } else {
-                    flash('msg', '<p>Something went wrong, please try again later.</p>', 'alert alert-danger');
+                    flash('msg', '<p>Something went wrong, please try again later.</p>', 'alert alert-danger alert-dismissible fade show');
                     redirect_to('persons/show/' . $data['p_id']);
                 }
             } else {
@@ -92,7 +92,8 @@ class Phones extends Controller
 
     public function edit($id = 0)
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') 
+        {
             $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
             $data = [
                 'number' => $_POST['number'],
@@ -130,8 +131,8 @@ class Phones extends Controller
                         'first_name' => $phone->first_name,
                         'last_name' => $phone->last_name,
                     ];
-                    $msg = "<p>Phone number is updated.</p>
-                    it is now: <a href=" . URLROOT . "/phones/show/$phone->id\"  class=\"alert-link\">$phone->number,</a>  and it belongs to <a href=" . URLROOT . "/persons/show/$phone->p_id\" class=\"alert-link\">$phone->first_name $phone->last_name</a>.";
+                    $msg = '<p>Phone number is updated.</p>
+                    <p>it is now: <a href="' . URLROOT . '/phones/show/' . $phone->id . '" class="alert-link">' . $phone->number . ',</a>  and it belongs to <a href="' . URLROOT . '/persons/show/' . $phone->p_id . '" class="alert-link">' . $phone->first_name . ' ' . $phone->last_name . '</a>.</p>';
                     flash(
                         'msg',
                         $msg
@@ -195,6 +196,9 @@ class Phones extends Controller
             if ($this->phoneModel->delete_phone($id)) {
                 flash('msg', 'phone number is Removed from your database.');
                 redirect_to('persons/show/' . $phone->p_id);
+            } else {
+                flash('msg', 'something went wrong, please try again or contact support.', 'alert alert-danger alert-dismissible fade show');
+                redirect_to('phones/show/' . $phone->p_id);
             }
         }
     }

@@ -1,4 +1,5 @@
   <?php require APPROOT . '/views/includes/header.php'; ?>
+  <?php require APPROOT . '/views/includes/nav.php'; ?>
   <?php flash('msg'); ?>
   <a href="<?php echo URLROOT; ?>/phones" class="btn btn-light"><i class="fa fa-backward"></i> Back</a>
 
