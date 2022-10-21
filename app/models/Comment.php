@@ -14,10 +14,10 @@ class Comment
     public function get_all_comments($search)
     {
         $this->db->query("SELECT C.*, P.first_name, P.last_name, P.sex, P.img FROM comments AS C 
-    INNER JOIN people AS P on P.id = C.p_id
-    WHERE C.title LIKE '%$search%'
-    OR C.text LIKE '%$search%'
-    ORDER BY C.created_at, C.edited_at");
+        INNER JOIN people AS P on P.id = C.p_id
+        WHERE C.title LIKE '%$search%'
+        OR C.text LIKE '%$search%'
+        ORDER BY C.created_at, C.edited_at");
         $comments = $this->db->resultSet();
         return $comments;
     }

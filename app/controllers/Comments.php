@@ -105,7 +105,7 @@ class Comments extends Controller
                 'p_id' => $_POST['p_id'],
                 'value' => $_POST['value'],
                 'title' => $_POST['title'],
-                'text' => $_POST['text'],
+                'text' => htmlspecialchars($_POST['text']),
                 'id' => $id,
                 'p_id_err' => '',
                 'value_err' => '',
@@ -164,6 +164,7 @@ class Comments extends Controller
                 $persons = $this->personModel->getPersons();
                 $data = [
                     'id' => $comment->id,
+                    'p_id'=>$comment->p_id,
                     'title' => $comment->title,
                     'text' => $comment->text,
                     'value' => $comment->value,

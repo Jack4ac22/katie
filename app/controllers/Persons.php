@@ -15,9 +15,10 @@ class Persons extends Controller
      * call getpersons() function
      * return index view WITH all the people.
      */
-    public function index()
+    public function index($search = null, $order = null)
     {
-        $persons = $this->personModel->getPersons();
+        $search = $_GET['search'] ?? null;
+        $persons = $this->personModel->getPersons($search, $order);
 
         $data = ['persons' => $persons];
         $this->view('persons/index', $data);
@@ -238,7 +239,7 @@ class Persons extends Controller
 
                     if (move_uploaded_file($_FILES['img']['tmp_name'], $filePath)) {
                         $data = [
-                            'img_name'=> $fileName.$extension,
+                            'img_name' => $fileName . $extension,
                             'img_path' => $filePath,
                             'comment' => $_POST['comment'],
                             'p_id' => $_POST['p_id']

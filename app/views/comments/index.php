@@ -58,11 +58,11 @@
                             " role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $comment->value ?>%"></div>
                         </div>
 
-                        <p class="card-text"><?php if (strlen($comment->text) > 150) {
-                                                    echo substr($comment->text, 0, 150) . ' ...';
-                                                } else {
-                                                    echo $comment->text;
-                                                }; ?>.</p>
+                        <p class="card-text" style="white-space: pre-line"><?php if (strlen($comment->text) > 150) {
+                                                                                echo substr($comment->text, 0, 150) . ' ...';
+                                                                            } else {
+                                                                                echo $comment->text;
+                                                                            }; ?>.</p>
 
                         <a href="<?= URLROOT . '/comments/show/' . $comment->id ?>" class="btn btn-primary">read</a>
                         <a href="<?= URLROOT . '/comments/edit/' . $comment->id ?>" class="btn btn-warning">Edit</a>
@@ -98,7 +98,7 @@
         <div class="row ">
             <div class="col-md-6 offset-md-3">
                 <div class="alert alert-warning" role="alert">
-                    <p><b>No </b> were found in your database.</p>
+                    <p><b>No </b> matches were found in your database.</p>
                 </div>
             </div>
         </div>

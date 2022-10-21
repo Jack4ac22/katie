@@ -1,5 +1,5 @@
 <?php require APPROOT . '/views/includes/header.php'; ?>
-<?php require APPROOT . '/views/includes/nav.php'; ?>
+
 <?php flash('msg'); ?>
 <?php //echo '<pre>' . var_export($data, true) . '</pre>';
 ?>

@@ -49,7 +49,7 @@
 
 
 
-                <p class="card-text"><?= $data['comment']->text ?? 'No text'; ?>.</p>
+                <p class="card-text" style="white-space: pre-line"><?= $data['comment']->text ?? 'No text'; ?>.</p>
 
                 <a href="<?= URLROOT . '/comments/edit/' . $data['comment']->id ?>" class="btn btn-primary">Edit</a>
                 <button type="button" class="btn btn-danger me-md-2" data-bs-toggle="modal" data-bs-target="#delete_comment<?= $data['comment']->id ?>Modal">Remove</button>

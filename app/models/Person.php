@@ -17,9 +17,13 @@ class Person
      * getPersons()
      * @return ALL people in DB
      */
-    public function getPersons()
+    public function getPersons($search, $order)
     {
-        $this->db->query('SELECT *  FROM people ORDER BY people.created_at DESC');
+        $this->db->query("SELECT P.*  FROM people AS P
+        WHERE P.first_name LIKE '%$search%' 
+        OR P.last_name LIKE '%$search%'
+        OR P.email LIKE '%$search%'
+        ORDER BY P.created_at DESC");
 
         $results = $this->db->resultSet();
 
