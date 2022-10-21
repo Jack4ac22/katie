@@ -10,9 +10,10 @@ class Titles extends Controller
     $this->titleModel = $this->model('Title');
   }
 
-  public function index()
+  public function index($search = null, $order = null)
   {
-    $titles = $this->titleModel->get_titles();
+    $search = $_GET['search'] ?? null;
+    $titles = $this->titleModel->get_titles($search, $order);
 
     $data = [
       'titles' => $titles
@@ -41,7 +42,7 @@ class Titles extends Controller
       }
       if (empty($data['description'])) {
         $data['description_err'] = 'Please enter description';
-      } elseif (strip_tags(trim($_POST['description'])) !== $_POST['description']) {
+      } elseif (strip_tags($_POST['description']) !== $_POST['description']) {
         $data['description_err'] = 'Please verify the description, it should not contain special characters.';
       }
       // Make sure no errors

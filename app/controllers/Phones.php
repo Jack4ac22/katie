@@ -62,7 +62,7 @@ class Phones extends Controller
                     redirect_to('persons/show/' . $data['p_id']);
                 }
             } else {
-                $persons = $this->personModel->getPersons();
+                $persons = $this->personModel->getPersons(null, null);
                 $data['persons'] = $persons;
                 $this->view('phones/add', $data);
             }
@@ -73,7 +73,7 @@ class Phones extends Controller
             } else {
                 $p_id = 0;
             }
-            $persons = $this->personModel->getPersons();
+            $persons = $this->personModel->getPersons(null, null);
             $data = [
                 'number' => '',
                 'description' => '',
@@ -140,21 +140,21 @@ class Phones extends Controller
                     redirect_to('/persons/show/' . $phone->p_id);
                 } else {
                     flash('msg', 'Something went wrong, please try again later.');
-                    $persons = $this->personModel->getPersons();
+                    $persons = $this->personModel->getPersons(null, null);
                     $phone = $this->phoneModel->get_phone_by_id($data['id']);
                     $data = ['persons' => $persons, 'first_name' => $phone->first_name, 'last_name' => $phone->last_name];
                     $this->view('phones/edit/' . $id, $data);
                 }
                 //load the view with the errors
             } else {
-                $persons = $this->personModel->getPersons();
+                $persons = $this->personModel->getPersons(null, null);
                 $data['persons'] = $persons;
                 $this->view('phones/edit/' . $data['id'], $data);
             }
         } else {
             $phone = $this->phoneModel->get_phone_by_id($id);
             if ($phone) {
-                $persons = $this->personModel->getPersons();
+                $persons = $this->personModel->getPersons(null, null);
                 $data = [
                     'id' => $phone->id,
                     'number' => $phone->number,

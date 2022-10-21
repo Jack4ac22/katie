@@ -17,13 +17,18 @@ class Person
      * getPersons()
      * @return ALL people in DB
      */
-    public function getPersons($search=null, $order=null)
+    public function getPersons($search, $order)
     {
         $this->db->query("SELECT P.*  FROM people AS P
-        WHERE P.first_name LIKE '%$search%' 
-        OR P.last_name LIKE '%$search%'
-        OR P.email LIKE '%$search%'
-        ORDER BY P.created_at DESC");
+        WHERE P.first_name LIKE :search_f 
+        OR P.last_name LIKE :search_l
+        OR P.email LIKE :search_e
+        ;");
+
+        $this->db->bind(':search_f', '%' . $search . '%');
+        $this->db->bind(':search_l', '%' . $search . '%');
+        $this->db->bind(':search_e', '%' . $search . '%');
+        //$this->db->bind(':order',  "P.$order ASC");
 
         $results = $this->db->resultSet();
 

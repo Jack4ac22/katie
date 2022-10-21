@@ -1,8 +1,12 @@
 <?php require_once APPROOT . '/views/includes/header.php'; ?>
 <?php flash('msg'); ?>
-<!-- <?php echo '<pre>' . var_export($data, true) . '</pre>'; ?> -->
+<?php //echo '<pre>' . var_export($data, true) . '</pre>'; ?>
 
-
+<div class="input-group mb-3 ">
+    </span><a type="button" class="btn btn-primary" href="<?php echo URLROOT; ?>/images/upload">
+        <?= I_PIC ?> new image
+    </a>
+</div>
 <div class="accordion accordion-flush" id="accordionFlushpictures">
 
     <?php foreach ($data['persons'] as $person) : ?>

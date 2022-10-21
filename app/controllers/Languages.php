@@ -11,10 +11,10 @@ class Languages extends Controller
     $this->userModel = $this->model('User');
   }
 
-  public function index()
+  public function index($search = null, $order = null)
   {
-    // Get languages
-    $languages = $this->languageModel->getlanguages();
+    $search = $_GET['search'] ?? null;
+    $languages = $this->languageModel->getlanguages($search, $order);
 
     $data = [
       'languages' => $languages

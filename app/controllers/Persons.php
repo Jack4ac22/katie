@@ -12,12 +12,13 @@ class Persons extends Controller
 
 
     /**
-     * call getpersons() function
+     * call getPersons(null, null) function
      * return index view WITH all the people.
      */
     public function index($search = null, $order = null)
     {
         $search = $_GET['search'] ?? null;
+        $order = $_GET['order_by'] ?? null;
         $persons = $this->personModel->getPersons($search, $order);
 
         $data = ['persons' => $persons];
@@ -255,7 +256,7 @@ class Persons extends Controller
                 }
             }
         } else {
-            $persons = $this->personModel->getPersons();
+            $persons = $this->personModel->getPersons(null, null);
             if ($persons) {
                 if ($p_id) {
                     $data = [

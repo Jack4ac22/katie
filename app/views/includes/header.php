@@ -30,20 +30,16 @@
                 <div class="offcanvas-body">
                     <p>indexes
                     <ul class="nav flex-column">
-                        <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/persons/index">people</a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/images/index">Pictures</a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/languages/index">languages</a>
-                        </li class="nav-item">
-                        <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/peplans/index">languages-people</a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/phones/index">phone
-                                numbers</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/job_titles/index">job
-                                title</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/timezones/index">time
-                                zone</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/persons/index">people</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/images/index">Pictures</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/languages/index">languages</a></li class="nav-item">
+                        <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/peplans/index">languages-people</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/phones/index">phone numbers</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/job_titles/index">job title</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/timezones/index">timr zone</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/comments/index">comments</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/titles/index">titles</a></li>
+
                     </ul>
                     </p>
                     <p>
@@ -71,7 +67,13 @@
                                 <a class="nav-link" button" class="btn btn-primary" href="<?php echo URLROOT; ?>/phones/add""><?= I_ADD_SIGN ?> phone number</a>
                     </li>
                     <li class=" nav-item">
-                                <a class="nav-link" button" class="btn btn-primary" href="<?php echo URLROOT; ?>/peplans/add""><?= I_ADD_SIGN ?> person/language relation</a>
+                                    <a class="nav-link" button" class="btn btn-primary" href="<?php echo URLROOT; ?>/peplans/add""><?= I_ADD_SIGN ?> person/language relation</a>
+                    </li>
+                    <li class=" nav-item">
+                                    <a class="nav-link" button" class="btn btn-primary" href="<?php echo URLROOT; ?>/comments/add""><?= I_ADD_SIGN ?> comment</a>
+                    </li>
+                    <li class=" nav-item">
+                                    <a class="nav-link" button" class="btn btn-primary" href="<?php echo URLROOT; ?>/titles/add""><?= I_ADD_SIGN ?> Job title</a>
                     </li>
                 </ul>
                 </p>
@@ -81,10 +83,10 @@
 
         <?php else : ?>
         <div class=" container text-center">
-                                    <div class="col align-self-end">
-                                        <div class="container"><a href="<?php echo URLROOT . '/users/login'; ?>" class="btn btn-primary btn-lg"><i class="fa-solid fa-lock"></i> login</a>
+                                        <div class="col align-self-end">
+                                            <div class="container"><a href="<?php echo URLROOT . '/users/login'; ?>" class="btn btn-primary btn-lg"><i class="fa-solid fa-lock"></i> login</a>
+                                            </div>
                                         </div>
-                                    </div>
 
                 </div>
             <?php endif; ?>

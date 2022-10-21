@@ -8,9 +8,13 @@ class Title
     $this->db = new Database;
   }
 
-  public function get_titles()
+  public function get_titles($search = null, $order = null)
   {
-    $this->db->query('SELECT * FROM job_titles');
+    $this->db->query("SELECT * FROM job_titles AS JT
+    WHERE JT.title LIKE :search_title
+    OR JT.description LIKE :search_description ;");
+    $this->db->bind(':search_title', '%' . $search . '%');
+    $this->db->bind(':search_description', '%' . $search . '%');
 
     $results = $this->db->resultSet();
     foreach ($results as $t) {

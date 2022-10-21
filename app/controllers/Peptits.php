@@ -1,5 +1,5 @@
 <?php
-class Peplans extends Controller
+class Peptits extends Controller
 {
     public function __construct()
     {
@@ -8,8 +8,8 @@ class Peplans extends Controller
             redirect_to('users/login');
         }
 
-        $this->peplanModel = $this->model('Peplan');
-        $this->languageModel = $this->model('Language');
+        $this->peptitModel = $this->model('Peptit');
+        $this->titleModel = $this->model('Title');
         $this->personModel = $this->model('Person');
     }
 
@@ -19,11 +19,11 @@ class Peplans extends Controller
 
     public function index()
     {
-        $languages = $this->peplanModel->get_all_data();
+        $titles = $this->peptitModel->get_all_data();
         $data = [
-            'languages' => $languages
+            'titles' => $titles
         ];
-        $this->view('peplans/index', $data);
+        $this->view('peptits/index', $data);
     }
 
     /**
@@ -35,13 +35,11 @@ class Peplans extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
             $data = [
-                'levle' => $_POST['levle'],
-                'comment' => $_POST['comment'],
-                'lan_id' => $_POST['lan_id'],
+                'description' => $_POST['description'],
+                't_id' => $_POST['t_id'],
                 'p_id' => $_POST['p_id'],
-                'levle_err' => '',
-                'comment_err' => '',
-                'lan_id_err' => '',
+                'description_err' => '',
+                't_id_err' => '',
                 'p_id_err' => ''
             ];
 
@@ -51,50 +49,53 @@ class Peplans extends Controller
             } elseif (!isset($_POST['p_id'])) {
                 $data['p_id_err'] = 'please chose a person.';
             }
-            if ($_POST['lan_id'] == 0) {
-                $data['lan_id_err'] = 'please chose a language.';
-            } elseif (!isset($_POST['lan_id'])) {
-                $data['lan_id_err'] = 'please chose a language.';
+            if ($_POST['t_id'] == 0) {
+                $data['t_id_err'] = 'please chose a language.';
+            } elseif (!isset($_POST['t_id'])) {
+                $data['t_id_err'] = 'please chose a language.';
             }
-            if ($_POST['levle'] == 0) {
-                $data['levle_err'] = 'please chose a language.';
+
+            if (empty($data['description'])) {
+                $data['description_err'] = 'Please enter description';
+            } elseif (strip_tags($_POST['description']) !== $_POST['description']) {
+                $data['description_err'] = 'Please verify the description, it should not contain special characters.';
             }
 
 
-            if ((empty($data['lan_id_err'])) && (empty($data['p_id_err'])) && (empty($data['levle_err']))) {
-                if ($this->peplanModel->add_lan_to_person($data)) {
-                    $last = $this->peplanModel->get_the_last();
-                    flash('msg', '<p><a href="' . URLROOT . '/languages/show/' . $last->p_id . '" class="alert-link">' . $last->title . '</a> language is added to <a href="' . URLROOT . '/persons/show/' . $last->p_id . '" class="alert-link">' . $last->first_name . $last->last_name . '.</a>');
-                    redirect_to('/persons/show/'.$last->p_id);
+            if ((empty($data['t_id_err'])) && (empty($data['p_id_err'])) && (empty($data['description_err']))) {
+                if ($this->peptitModel->add_title_to_person($data)) {
+                    $last = $this->peptitModel->get_the_last();
+                    flash('msg', '<p><a href="' . URLROOT . '/titles/show/' . $last->t_id . '" class="alert-link">' . $last->title . '</a> title is added to <a href="' . URLROOT . '/persons/show/' . $last->p_id . '" class="alert-link">' . $last->first_name . $last->last_name . '.</a>');
+                    redirect_to('/persons/show/' . $last->p_id);
                 } else {
-                    flash('msg', 'Something went wrong, please try again later.');
+                    flash('msg', 'Something went wrong, please try again later.', 'alert alert-danger alert-dismissible fade show');
                     redirect_to('persons');
                 }
             } else {
                 $persons = $this->personModel->getPersons(null, null);
                 $data['persons'] = $persons;
-                $languages = $this->languageModel->getlanguages();
-                $data['languages'] = $languages;
-                $this->view('peplans/add', $data);
+                $titles = $this->titleModel->get_titles();
+                $data['titles'] = $titles;
+                $this->view('peptits/add', $data);
             }
         } else {
             $persons = $this->personModel->getPersons(null, null);
-            $languages = $this->languageModel->getlanguages();
+            $titles = $this->titleModel->get_titles();
             $data = [
-                'levle' => '',
-                'comment' => '',
-                'lan_id' => $lan,
+                'description' => '',
+                't_id' => $lan,
                 'p_id' => $name,
                 'persons' => $persons,
-                'languages' => $languages
+                'titles' => $titles
             ];
-            $this->view('peplans/add', $data);
+            $this->view('peptits/add', $data);
         }
     }
 
 
+
     /**
-     * edite a peplan number
+     * edite a peptit number
      * @param $id
      * return ()
      */
@@ -130,12 +131,12 @@ class Peplans extends Controller
 
             //check for errors
             if (empty($data['lan_id_err']) && empty($data['levle_err']) && empty($data['p_id_err'])) {
-                if ($this->peplanModel->update_peplan($data)) {
-                    flash('msg', '<p>' . 'The language/person relation has been updated.</p> <a href="' . URLROOT . '/peplans/show/' . $id . '" class="alert-link">you can use this link to check</a>.');
+                if ($this->peptitModel->update_peptit($data)) {
+                    flash('msg', '<p>' . 'The language/person relation has been updated.</p> <a href="' . URLROOT . '/peptits/show/' . $id . '" class="alert-link">you can use this link to check</a>.');
                     redirect_to('persons/show/' . $data['p_id']);
                 } else {
                     flash('msg', 'Something went wrong, please try again later.');
-                    $this->view('peplan/edit/' . $id, $data);
+                    $this->view('peptit/edit/' . $id, $data);
                 }
                 //load the view with the errors
             } else {
@@ -143,10 +144,10 @@ class Peplans extends Controller
                 $data['persons'] = $persons;
                 $languages = $this->languageModel->getlanguages();
                 $data['languages'] = $languages;
-                $this->view('peplan/edit/' . $id, $data);
+                $this->view('peptit/edit/' . $id, $data);
             }
         } else {
-            $pep = $this->peplanModel->get_peplan_by_id($id);
+            $pep = $this->peptitModel->get_peptit_by_id($id);
             if ($pep) {
                 $persons = $this->personModel->getPersons(null, null);
                 $languages = $this->languageModel->getlanguages();
@@ -159,10 +160,10 @@ class Peplans extends Controller
                     'persons' => $persons,
                     'languages' => $languages
                 ];
-                $this->view('peplans/edit', $data);
+                $this->view('peptits/edit', $data);
             } else {
                 $msg = "<p>something went wron, please try again later</p>";
-                redirect_to("peplans", $msg);
+                redirect_to("peptits", $msg);
             }
         }
     }
@@ -175,32 +176,32 @@ class Peplans extends Controller
      */
     public function show($id = null)
     {
-        $peplan = $this->peplanModel->get_peplan_by_id($id);
-        if ($peplan) {
-            $this->view('peplans/show', $peplan);
+        $peptit = $this->peptitModel->get_peptit_by_id($id);
+        if ($peptit) {
+            $this->view('peptits/show', $peptit);
         } else {
             flash('msg', '<p>the page which you requested does not exist, try to use other method</p>');
             redirect_to('/pages/notFound');
         }
     }
 
-    public function delete_peplan($id)
+    public function delete_peptit($id)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $peplan = $this->peplanModel->get_peplan_by_id($id);
-            if ($peplan) {
+            $peptit = $this->peptitModel->get_peptit_by_id($id);
+            if ($peptit) {
                 if (!islogged()) {
                     redirect_to('/login');
                 }
-                if ($this->peplanModel->delete_peplan($id)) {
-                    flash('msg', '<p>' . $peplan->first_name . ' ' . $peplan->last_name . ' will not be shown in relation to <a href="' . URLROOT . '/languages/show/' . $peplan->lan_id . '" class="alert-link">' . $peplan->title . '</a> language.</p>
+                if ($this->peptitModel->delete_peptit($id)) {
+                    flash('msg', '<p>' . $peptit->first_name . ' ' . $peptit->last_name . ' will not be shown in relation to <a href="' . URLROOT . '/languages/show/' . $peptit->lan_id . '" class="alert-link">' . $peptit->title . '</a> language.</p>
                     <p>you can check
-                    <a href="' . URLROOT . '/persons/show/' . $peplan->p_id . '" class="alert-link">'
+                    <a href="' . URLROOT . '/persons/show/' . $peptit->p_id . '" class="alert-link">'
                         . 'the personal profile. </p>');
-                    redirect_to("persons/show/$peplan->p_id");
+                    redirect_to("persons/show/$peptit->p_id");
                 } else {
                     $msg = "<p>Failed, please try again later.</p>";
-                    redirect_to("languages/show/$peplan->lan_id", $msg);
+                    redirect_to("languages/show/$peptit->lan_id", $msg);
                 }
             }
         }

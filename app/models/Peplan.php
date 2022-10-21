@@ -75,7 +75,7 @@ class Peplan
 
     public function get_the_last()
     {
-        $this->db->query('SELECT pl.*, P.first_name, P.last_name, L.title FROM people_languages AS PL
+        $this->db->query('SELECT PL.*, P.first_name, P.last_name, L.title FROM people_languages AS PL
         INNER JOIN people AS P ON P.id = PL.p_id
         INNER JOIN languages AS L ON L.id = PL.lan_id
         ORDER BY PL.id DESC

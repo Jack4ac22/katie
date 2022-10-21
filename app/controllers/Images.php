@@ -18,7 +18,7 @@ class Images extends Controller
     public function index()
     {
         $images = $this->imageModel->get_all();
-        $people = $this->personModel->getPersons();
+        $people = $this->personModel->getPersons(null, null);
         $data = [
             'images' => $images,
             'persons' => $people
@@ -88,7 +88,7 @@ class Images extends Controller
                 }
             }
         } else {
-            $persons = $this->personModel->getPersons();
+            $persons = $this->personModel->getPersons(null, null);
             if ($persons) {
                 if ($p_id) {
                     $data = [
@@ -158,20 +158,20 @@ class Images extends Controller
                     redirect_to('persons/show' . $id);
                 } else {
                     flash('msg', 'Something went wrong, please try again later.');
-                    $persons = $this->personModel->getPersons();
+                    $persons = $this->personModel->getPersons(null, null);
                     $data = ['persons' => $persons];
                     $this->view('persons/edit/' . $id, $data);
                 }
                 //load the view with the errors
             } else {
-                $persons = $this->personModel->getPersons();
+                $persons = $this->personModel->getPersons(null, null);
                 $data['persons'] = $persons;
                 $this->view('persons/edit/' . $data['id'], $data);
             }
         } else {
             $image = $this->imageModel->get_image_by_id($id);
             if ($image) {
-                $persons = $this->personModel->getPersons();
+                $persons = $this->personModel->getPersons(null, null);
                 $data = [
                     'id' => $image->id,
                     'img_path' => $image->img_path,

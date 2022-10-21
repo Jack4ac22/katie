@@ -1,22 +1,25 @@
 <?php require_once APPROOT . '/views/includes/header.php'; ?>
 <?php flash('msg'); ?>
-<?php //echo '<pre>' . var_export($data, true) . '</pre>'; 
-?>
+<?php //echo '<pre>' . var_export($_GET, true) . '</pre>'; ?>
 
 <form class="d-flex" role="search" method="get">
     <div class="col">
         <div class="input-group mb-3">
-            <input class="form-control me-2" type="search" placeholder="Search for a comment" aria-label="Search" name="search">
+            <input class="form-control me-2" type="search" placeholder="Search for a person" aria-label="Search" name="search">
             <button class="btn btn-outline-primary me-2" type="submit"><?= I_SEARCH ?> search</button>
         </div>
     </div>
     <!-- <div class="col-4">
-        <select class="form-select me-2" aria-label="Default select example" name="order_by">
-            <option selected value=''>Open this select menu</option>
-            <option value="sex">Gender</option>
-            <option value="first_name">First Name</option>
-            <option value="last_name">Family name</option>
-        </select>
+        <div class="input-group mb-3">
+            <select class="form-select me-2" aria-label="Default select example" name="order_by">
+                <option selected value=''>Open this select menu</option>
+                <option value="sex">Gender</option>
+                <option value="first_name">First Name</option>
+                <option value="last_name">Family name</option>
+            </select>
+            <button class="btn btn-outline-primary me-2" type="submit"><?= I_SEARCH ?> order</button>
+
+        </div>
     </div> -->
 
 </form>

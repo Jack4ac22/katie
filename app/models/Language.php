@@ -8,9 +8,15 @@ class Language
     $this->db = new Database;
   }
 
-  public function getlanguages()
+  public function getlanguages($search = null, $order = null)
   {
-    $this->db->query('SELECT * FROM languages');
+    $this->db->query("SELECT * FROM languages AS L
+    WHERE L.title LIKE :search_t
+    OR L.description LIKE :search_d
+    OR L.extra LIKE :search_e ; ");
+    $this->db->bind(':search_t', '%' . $search . '%');
+    $this->db->bind(':search_d', '%' . $search . '%');
+    $this->db->bind(':search_e', '%' . $search . '%');
 
     $results = $this->db->resultSet();
     foreach ($results as $l) {

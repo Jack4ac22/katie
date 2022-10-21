@@ -24,19 +24,19 @@
                           <a class="btn btn-warning" href="<?php echo URLROOT; ?>/languages/edit/<?php echo $data['language']['language']->id; ?>"><?= I_EDIT ?>
                               Edit</a>
                           <!-- Button trigger modal -->
-                          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#<?= $data['language']['language']->title . $data['language']['language']->id ?>Modal">
+                          <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_language_modal">
                               <?= I_DELETE ?> delete
                           </button>
                           <!-- Modal -->
-                          <div class="modal fade" id="<?= $data['language']['language']->title . $data['language']['language']->id ?>Modal" tabindex="-1" aria-labelledby="<?= $data['language']['language']->title . $data['language']['language']->id ?>ModalLabel" aria-hidden="true">
+                          <div class="modal fade" id="delete_language_modal" tabindex="-1" aria-labelledby="delete_language_modalLabel" aria-hidden="true">
                               <div class="modal-dialog">
                                   <div class="modal-content">
                                       <div class="modal-header">
-                                          <h1 class="modal-title fs-5" id="<?= $data['language']['language']->title . $data['language']['language']->id ?>ModalLabel">Delete <? echo $data['language']['language']->title; ?></h1>
+                                          <h1 class="modal-title fs-5" id="delete_language_modalLabel">Delete <b><?=$data['language']['language']->title; ?></b></h1>
                                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                       </div>
                                       <div class="modal-body">
-                                          Are you sure you want to delete <?php echo $data['language']['language']->title; ?>?
+                                          Are you sure you want to delete<b> <?php echo $data['language']['language']->title; ?></b>?
                                       </div>
                                       <div class="modal-footer">
                                           <form action="<?php echo URLROOT; ?>/languages/delete/<?php echo $data['language']['language']->id; ?>" method="post">

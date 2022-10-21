@@ -55,8 +55,11 @@ class Comments extends Controller
                 $data['title_err'] = 'please enter a title for your comment.';
             }
 
-            if (empty($_POST['text'])) {
-                $data['text_err'] = 'please enter some text for your comment.';
+
+            if (empty($data['text'])) {
+                $data['text_err'] = 'Please enter text';
+            } elseif (strip_tags($_POST['text']) !== $_POST['text']) {
+                $data['text_err'] = 'Please verify the text, it should not contain special characters.';
             }
 
 
@@ -67,7 +70,7 @@ class Comments extends Controller
                     redirect_to('persons/show/' . $data['p_id']);
                 }
             } else {
-                $persons = $this->personModel->getPersons();
+                $persons = $this->personModel->getPersons(null, null);
                 $data['persons'] = $persons;
                 $this->view('comments/add', $data);
             }
@@ -79,7 +82,7 @@ class Comments extends Controller
                 $p_id = 0;
             }
 
-            $persons = $this->personModel->getPersons();
+            $persons = $this->personModel->getPersons(null, null);
             $data = [
                 'value' => '',
                 'title' => '',
@@ -144,7 +147,7 @@ class Comments extends Controller
                     redirect_to('persons/show/' . $data['p_id']);
                 } else {
                     flash('msg', 'Something went wrong, please try again later.');
-                    $persons = $this->personModel->getPersons();
+                    $persons = $this->personModel->getPersons(null, null);
                     $comment = $this->commentModel->get_comment_by_id($data['id']);
                     $data = [
                         'persons' => $persons,
@@ -154,17 +157,17 @@ class Comments extends Controller
                     $this->view('comments/edit/' . $id, $data);
                 }
             } else {
-                $persons = $this->personModel->getPersons();
+                $persons = $this->personModel->getPersons(null, null);
                 $data['persons'] = $persons;
                 $this->view('comments/edit', $data);
             }
         } else {
             $comment = $this->commentModel->get_comment_by_id($id);
             if ($comment) {
-                $persons = $this->personModel->getPersons();
+                $persons = $this->personModel->getPersons(null, null);
                 $data = [
                     'id' => $comment->id,
-                    'p_id'=>$comment->p_id,
+                    'p_id' => $comment->p_id,
                     'title' => $comment->title,
                     'text' => $comment->text,
                     'value' => $comment->value,
@@ -201,7 +204,7 @@ class Comments extends Controller
                 redirect_to('comments');
             }
             if ($this->commentModel->delete_comment($id)) {
-             
+
 
 
 

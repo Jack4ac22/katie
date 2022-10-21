@@ -1,4 +1,5 @@
-<!-- <?php echo '<pre>' . var_export($data, true) . '</pre>'; ?> -->
+<?php //echo '<pre>' . var_export($data, true) . '</pre>'; 
+?>
 
 <?php require APPROOT . '/views/includes/header.php'; ?>
 <?php flash('msg'); ?>
@@ -22,12 +23,12 @@
                 <div class="col-m-6">
                     <div class="card-body">
                         <div class="card-header">
-                            <h3> <?= I_LANGUAGE ?> <?php echo ' ' . $language->title; ?>
+                            <h3 style="white-space: pre-line"> <?= I_LANGUAGE ?> <?php echo ' ' . $language->title; ?>
                             </h3>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title"><?php echo $language->description; ?></h5>
-                            <p class="card-text"><?php echo $language->extra; ?></p>
+                            <h5 class="card-title" style="white-space: pre-line"><?php echo $language->description; ?></h5>
+                            <p class="card-text" style="white-space: pre-line"><?php echo $language->extra; ?></p>
                             <a href="<?php echo URLROOT; ?>/languages/show/<?php echo $language->id; ?>" class="btn btn-primary">
                                 <?= I_EXCLAIM ?> more actions</a>
                         </div>
