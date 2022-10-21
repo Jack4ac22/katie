@@ -51,7 +51,7 @@ class Phones extends Controller
                 $data['description'] = 'General';
             }
             if ($_POST['p_id'] == 0) {
-                $data['number_err'] = 'please chose a person.';
+                $data['p_id_err'] = 'please chose a person.';
             }
             if (empty($data['number_err']) && empty($data['description_err']) && empty($data['p_id_err'])) {
                 if ($this->phoneModel->add_phone($data)) {
@@ -66,15 +66,22 @@ class Phones extends Controller
                 $data['persons'] = $persons;
                 $this->view('phones/add', $data);
             }
-        } else
+        } else {
+            $person = $this->personModel->get_person_by_id_edit($name);
+            if ($person) {
+                $p_id = $name;
+            } else {
+                $p_id = 0;
+            }
             $persons = $this->personModel->getPersons();
-        $data = [
-            'number' => '',
-            'description' => '',
-            'persons' => $persons,
-            'p_id' => $name
-        ];
-        $this->view('phones/add', $data);
+            $data = [
+                'number' => '',
+                'description' => '',
+                'persons' => $persons,
+                'p_id' => $p_id
+            ];
+            $this->view('phones/add', $data);
+        }
     }
 
     /**

@@ -44,36 +44,48 @@ class Comments extends Controller
             ];
 
             if ($_POST['p_id'] == 0) {
-                $data['number_err'] = 'please chose a person.';
+                $data['p_id_err'] = 'please chose a person.';
+            }
 
-                if (empty($_POST['title'])) {
-                    $data['title_err'] = 'please enter a title for your comment.';
-                }
+            if ($_POST['value'] == 0) {
+                $data['value_err'] = 'please chose a person.';
+            }
 
-                if (empty($_POST['text'])) {
-                    $data['text_err'] = 'please enter some text for your comment.';
-                }
+            if (empty($_POST['title'])) {
+                $data['title_err'] = 'please enter a title for your comment.';
+            }
 
-                if ((empty($data['p_id_err'])) && (empty($data['value_err'])) && (empty($data['title_err'])) && (empty($data['text_err']))) {
-                    if ($this->commentModel->add_comment($data)) {
-                        $person = $this->personModel->get_person_by_id_edit($data['p_id']);
-                        flash('msg', '<p>New comment added to ' . $person->first_name . ' ' . $person->last_name . '.</p>');
-                        redirect_to('persons/show/' . $data['p_id']);
-                    }
-                } else {
-                    $persons = $this->personModel->getPersons();
-                    $data['persons'] = $persons;
-                    $this->view('comments/add', $data);
+            if (empty($_POST['text'])) {
+                $data['text_err'] = 'please enter some text for your comment.';
+            }
+
+
+            if ((empty($data['p_id_err'])) && (empty($data['value_err'])) && (empty($data['title_err'])) && (empty($data['text_err']))) {
+                if ($this->commentModel->add_comment($data)) {
+                    $person = $this->personModel->get_person_by_id_edit($data['p_id']);
+                    flash('msg', '<p>New comment added to ' . $person->first_name . ' ' . $person->last_name . '.</p>');
+                    redirect_to('persons/show/' . $data['p_id']);
                 }
+            } else {
+                $persons = $this->personModel->getPersons();
+                $data['persons'] = $persons;
+                $this->view('comments/add', $data);
             }
         } else {
+            $person = $this->personModel->get_person_by_id_edit($name);
+            if ($person) {
+                $p_id = $name;
+            } else {
+                $p_id = 0;
+            }
+
             $persons = $this->personModel->getPersons();
             $data = [
-                'p_id' => $name,
                 'value' => '',
                 'title' => '',
                 'text' => '',
-                'persons' => $persons
+                'persons' => $persons,
+                'p_id' => $p_id
             ];
             $this->view('comments/add', $data);
         }
