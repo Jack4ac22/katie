@@ -1,5 +1,4 @@
 <?php require APPROOT . '/views/includes/header.php'; ?>
-<?php require APPROOT . '/views/includes/nav.php'; ?>
 <?php flash('msg'); ?>
 <?php //echo '<pre>' . var_export($data, true) . '</pre>';
 ?>
@@ -9,13 +8,13 @@
     <form action="<?= URLROOT ?>/comments/edit/<?= $data['id'] ?>" method="post">
         <div class="form-group mt-3">
             <label for="title">Title:</label>
-            <input type="text" name="title" class="form-control form-control-lg <?php echo (!empty($data['title_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['title']; ?>">
+            <input type="text" name="title" class="form-control form-control-lg <?php echo (!empty($data['title_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['title']; ?>" style="white-space: pre-line">
             <span class="invalid-feedback"><?php echo $data['title_err']; ?></span>
         </div>
         <div class="form-group mt-3">
             <label for="text">comment:</label>
-            <textarea name="text" class="form-control form-control-lg <?php echo (!empty($data['text_err'])) ? 'is-invalid' : ''; ?>"><?php echo $data['text']; ?></textarea>
-            <span class="invalid-feedback"><?php echo $data['text_err']; ?></span>
+            <textarea name="text" class="form-control form-control-lg <?php echo (!empty($data['text_err'])) ? 'is-invalid' : ''; ?>" style="white-space: pre-line"><?php echo $data['text']; ?></textarea>
+            <span class="invalid-feedback" ><?php echo $data['text_err']; ?></span>
         </div>
 
         <div class="form-group mt-3">

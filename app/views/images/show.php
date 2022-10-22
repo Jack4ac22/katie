@@ -7,7 +7,7 @@
     <div class="card-body">
         <h4 class="card-title"><?= $img->first_name . ' ' . $img->last_name ?></h4>
         <h5 class="card-title">File name: <?= $img->img_path ?></h5>
-        <p class="card-text"><?= $img->comment ?></p>
+        <p class="card-text" style="white-space: pre-line"><?= $img->comment ?></p>
         <p class="card-text"><small class="text-muted">Uploaded on: <?= $img->uploaded_at ?></small></p>
     </div>
     <div class="col m-3">

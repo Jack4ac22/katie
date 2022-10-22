@@ -4,7 +4,7 @@
 <?php flash('msg'); ?>
 <!-- <?php echo '<pre>' . var_export($data, true) . '</pre>'; ?> -->
 
-<a href="<?php echo URLROOT; ?>/phones" class="btn btn-light"><i class="fa fa-backward"></i> Back</a>
+<a href="<?php echo URLROOT; ?>/phones" class="btn btn-light"><?= I_ARROW_L ?> Back</a>
 <div class="card card-body bg-light mt-5">
     <h2>Edit Phone number</h2>
     <p>fill up the data to Edite the phone number.</p>
@@ -37,8 +37,7 @@
 
         </div class="orm-group">
         <div class="form-floating m-3">
-            <button type="submit" class="btn btn-primary btn-block"><i class="fa-sharp fa-solid fa-pen-to-square"></i>
-                </i> edit</button>
+            <button type="submit" class="btn btn-primary btn-block"><?= I_EDIT ?> edit</button>
         </div>
     </form>
 </div>

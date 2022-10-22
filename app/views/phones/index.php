@@ -2,14 +2,8 @@
 <?php flash('msg'); ?>
 
 <div class="input-group mb-3 ">
-    <span class="input-group-text" id="basic-addon1">
-        <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
-    </span>
-    <input type="search" class="form-control" placeholder="search for a name or a phone number." aria-label="Username"
-        aria-describedby="basic-addon1">
-
     <a type="button" class="btn btn-primary" href="<?php echo URLROOT; ?>/phones/add">
-        <i class="fa-solid fa-plus"></i> new phone
+        <?= I_ADD_SIGN ?> new phone
     </a>
 
 </div>
@@ -24,7 +18,7 @@
                 <p class="card-text">Assigned to: <?php echo $phone->first_name . ' ' . $phone->last_name; ?></p>
             </div>
             <a href="<?php echo URLROOT; ?>/phones/show/<?php echo $phone->id; ?>" class="btn btn-primary m-2">
-                <i class="fa-solid fa-exclamation"></i> more actions</a>
+                <?= I_EDIT ?> more actions</a>
         </div>
     </div>
     <?php endforeach; ?>

@@ -10,8 +10,8 @@
         <div class="card">
             <h5 class="card-header"><?= $data->first_name . ' ' . $data->last_name . ' speaks ' . $data->title ?></h5>
             <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <h5 class="card-title" style="white-space: pre-line">Special title treatment</h5>
+                <p class="card-text" style="white-space: pre-line">With supporting text below as a natural lead-in to additional content.</p>
             </div>
             <div class="card-body">
 
@@ -32,7 +32,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <p>You will not be able to restor the folowing information:</p>
+                                <p style="white-space: pre-line">You will not be able to restor the folowing information:</p>
                                 <p><strong><?= $data->first_name . ' ' . $data->last_name . ' speaks ' . $data->title ?></strong></p>
                             </div>
                             <div class="modal-footer">

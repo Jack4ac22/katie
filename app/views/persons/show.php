@@ -294,7 +294,7 @@
                                         </div>
 
                                     </td>
-                                    <td><?php echo $lan->comment ?></td>
+                                    <td style="white-space: pre-line"><?php echo $lan->comment ?></td>
                                     <td>
                                         <div class="col">
                                             <div class="btn-group mb-3" role="group" aria-label="Basic example">
@@ -356,7 +356,7 @@
                                             <img src="<?= IMGROOT . '/' . $img->img_path ?>" class="d-block w-100" alt="<?= $data['person']['person']->first_name  . ' ' . $img->comment ?>"></a>
                                         <div class="card-body">
                                             <h5 class="card-title"><?= $img->img_path ?></h5>
-                                            <p class="card-text"><?= $img->comment ?></p>
+                                            <p class="card-text" style="white-space: pre-line"><?= $img->comment ?></p>
                                             <p class="card-text"><small class="text-muted">Uploaded on: <?= $img->uploaded_at ?></small></p>
                                         </div>
                                         <div class="col m-3">
@@ -482,7 +482,7 @@
                             " role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $comment->value ?>%"></div>
                                                 </div>
 
-                                                <p class="card-text"><?php if (strlen($comment->text) > 150) {
+                                                <p class="card-text" style="white-space: pre-line"><?php if (strlen($comment->text) > 150) {
                                                                             echo substr($comment->text, 0, 150) . ' ...';
                                                                         } else {
                                                                             echo $comment->text;

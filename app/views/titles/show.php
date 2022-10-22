@@ -15,7 +15,7 @@
                   <div class="accordion-body">
                       <h2 class="card-header mt-3">job title' name: <?= $data['title']['title']->title ?></h2>
                       <?php if ($data['title']['title']->description != null) : ?>
-                          <h5 class="card-title mt-3">
+                          <h5 class="card-title mt-3 style="white-space: pre-line"">
                               Description: <?php echo $data['title']['title']->description; ?></h5>
                       <?php endif; ?>
 
@@ -77,7 +77,7 @@
                                                       <?php endif; ?></a>
                                               </h3>
 
-                                              <p class="h5 mt-2"><?php echo $person->description ?></p>
+                                              <p class="h5 mt-2" style="white-space: pre-line"><?php echo $person->description ?></p>
                                           </div>
                                           <!-- Modal  -->
                                           <div class="col">

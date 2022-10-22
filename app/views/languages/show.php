@@ -14,11 +14,11 @@
                   <div class="accordion-body">
                       <h2 class="card-header mt-3">Title: <?php echo $data['language']['language']->title; ?></h2>
                       <?php if ($data['language']['language']->description != null) : ?>
-                          <h5 class="card-title mt-3">
+                          <h5 class="card-title mt-3" style="white-space: pre-line">
                               Description:<?php echo $data['language']['language']->description; ?></h5>
                       <?php endif; ?>
                       <?php if ($data['language']['language']->extra != null) : ?>
-                          <p class="card-text mt-3"><?php echo $data['language']['language']->extra; ?></p>
+                          <p class="card-text mt-3" style="white-space: pre-line"><?php echo $data['language']['language']->extra; ?></p>
                       <?php endif; ?>
                       <div class="mt-3">
                           <a class="btn btn-warning" href="<?php echo URLROOT; ?>/languages/edit/<?php echo $data['language']['language']->id; ?>"><?= I_EDIT ?>
@@ -79,7 +79,7 @@
 
                                                   </div>
                                               </div>
-                                              <p class="h5 mt-2"><?php echo $person->comment ?></p>
+                                              <p class="h5 mt-2" style="white-space: pre-line"><?php echo $person->comment ?></p>
                                           </div>
                                           <!-- Modal  -->
                                           

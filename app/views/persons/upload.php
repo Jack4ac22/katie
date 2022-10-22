@@ -25,7 +25,7 @@
     </div>
     <div class="form-group">
         <label for="comment">comment:</label>
-        <textarea name="comment" class="form-control form-control-lg <?php echo (!empty($data['comment_err'])) ? 'is-invalid' : ''; ?>"><?php echo $data['comment']; ?></textarea>
+        <textarea name="comment" class="form-control form-control-lg <?php echo (!empty($data['comment_err'])) ? 'is-invalid' : ''; ?>" style="white-space: pre-line"><?php echo $data['comment']; ?></textarea>
         <span class="invalid-feedback"><?php echo $data['comment_err']; ?></span>
     </div>
 </form>

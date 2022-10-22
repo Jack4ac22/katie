@@ -26,8 +26,8 @@
                             <h2> <?= I_LANGUAGE ?> <?php echo ' ' . $language->title; ?></h2>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title"><?php echo $language->description; ?></h5>
-                            <p class="card-text"><?php echo $language->extra; ?></p>
+                            <h5 class="card-title" style="white-space: pre-line"><?php echo $language->description; ?></h5>
+                            <p class="card-text" style="white-space: pre-line"><?php echo $language->extra; ?></p>
 
                             <div class="row justify-content-between">
                                 <div class="col-4">

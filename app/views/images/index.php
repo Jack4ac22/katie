@@ -29,7 +29,7 @@
                                             </a>
                                             <div class="card-body">
                                                 <h5 class="card-title"><?= $img->img_path ?></h5>
-                                                <p class="card-text"><?= $img->comment ?></p>
+                                                <p class="card-text" style="white-space: pre-line"><?= $img->comment ?></p>
                                                 <p class="card-text"><small class="text-muted">Uploaded on: <?= $img->uploaded_at ?></small></p>
                                             </div>
                                             <div class="col m-3">

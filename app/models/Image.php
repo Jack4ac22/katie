@@ -85,7 +85,7 @@ class Image
                     }
                 }
                 return true;
-            }
+            } else return true;
         } else {
             return false;
         }
@@ -102,6 +102,4 @@ class Image
             return false;
         }
     }
-
-
 }

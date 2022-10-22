@@ -2,7 +2,7 @@
 <?php flash('msg'); ?>
 <?php //echo '<pre>' . var_export($data, true) . '</pre>'; 
 ?>
-<a href="<?php echo URLROOT; ?>/phones" class="btn btn-light"><i class="fa fa-backward"></i> Back to all phones page.</a>
+<a href="<?php echo URLROOT; ?>/phones" class="btn btn-light"><?= I_ARROW_L ?> Back to all phones page.</a>
 <div class="card card-body bg-light mt-5">
     <h2>Add Phone number</h2>
     <p>fill up the data to add a new phone number.</p>
@@ -38,7 +38,7 @@
             <?php endif; ?>
         </div>
         <div class="form-floating m-3">
-            <button type="submit" class="btn btn-primary btn-block"><i class="fa-solid fa-user-plus"></i> add</button>
+            <button type="submit" class="btn btn-primary btn-block"><?= I_ADD_SIGN ?> add</button>
         </div>
     </form>
 </div>
