@@ -31,6 +31,9 @@
                             numbers</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/comments/index">comments</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/titles/index">titles</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/peptits/index">people-titles</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/groups/index">groups</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/pepgroups/index">people-groups</a></li>
             </ul>
         </div>
         <ul class="navbar-nav ml-auto">

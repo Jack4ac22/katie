@@ -1,7 +1,6 @@
   <?php require APPROOT . '/views/includes/header.php'; ?>
-  <a href="<?php echo URLROOT; ?>/titles" class="btn btn-light"><?= I_ARROW_L ?> Back to all job titles.</a>
-  <?php //echo '<pre>' . var_export($data, true) . '</pre>'; 
-    ?>
+  <a href="<?php echo URLROOT; ?>/titles" class="btn btn-light"><?= I_ARROW_L ?> Back to groups index.</a>
+  <?php //echo '<pre>' . var_export($data, true) . '</pre>'; ?>
   <?php flash('msg'); ?>
   <?php if (islogged()) : ?>
       <div class="accordion" id="accordionPanelsStayOpenExample">
@@ -13,14 +12,14 @@
               </h2>
               <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
                   <div class="accordion-body">
-                      <h2 class="card-header mt-3">Job title' name: <?= $data['title']['title']->title ?></h2>
+                      <h2 class="card-header mt-3">Group' name: <?= $data['title']['title']->title ?></h2>
                       <?php if ($data['title']['title']->description != null) : ?>
                           <h5 class="card-title mt-3 style="white-space: pre-line"">
                               Description: <?php echo $data['title']['title']->description; ?></h5>
                       <?php endif; ?>
 
                       <div class="mt-3">
-                          <a class="btn btn-warning" href="<?php echo URLROOT; ?>/titles/edit/<?php echo $data['title']['title']->id; ?>"><?= I_EDIT ?>
+                          <a class="btn btn-warning" href="<?php echo URLROOT; ?>/groups/edit/<?php echo $data['title']['title']->id; ?>"><?= I_EDIT ?>
                               Edit</a>
                           <!-- Button trigger modal -->
                           <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_title_modal">
@@ -39,7 +38,7 @@
                                           Are you sure you want to delete <b> <?php echo $data['title']['title']->title; ?></b>?
                                       </div>
                                       <div class="modal-footer">
-                                          <form action="<?php echo URLROOT; ?>/titles/delete/<?php echo $data['title']['title']->id; ?>" method="post">
+                                          <form action="<?php echo URLROOT; ?>/groups/delete/<?php echo $data['title']['title']->id; ?>" method="post">
                                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                               <button type="submit" class="btn btn-danger"><?= I_DELETE ?> DELETE</button>
                                           </form>
@@ -51,13 +50,10 @@
                   </div>
               </div>
           </div>
-
-
-
           <div class="accordion-item">
               <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                      <h2 class="card-header"> People related to this job title </h2>
+                      <h2 class="card-header"> People in this group:</h2>
                   </button>
               </h2>
               <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
@@ -77,12 +73,12 @@
                                                       <?php endif; ?></a>
                                               </h3>
 
-                                              <p class="h5 mt-2" style="white-space: pre-line"><?php echo $person->description ?></p>
+                                              <p class="h5 mt-2" style="white-space: pre-line"><?php echo $person->comment ?></p>
                                           </div>
                                           <!-- Modal  -->
                                           <div class="col">
                                               <div class="btn-group mb-3" role="group" aria-label="Basic example">
-                                                  <a href="<?php echo URLROOT . '/peptits/edit/' . $person->id; ?>" class="btn btn-primary"><?= I_EDIT ?> Edit</a>
+                                                  <a href="<?php echo URLROOT . '/pepgroups/edit/' . $person->id; ?>" class="btn btn-primary"><?= I_EDIT ?> Edit</a>
                                                   <a href="<?php echo URLROOT . '/persons/show/' . $person->p_id; ?>" class="btn btn-light"><?= I_PERSON ?> Check</a>
                                                   <!-- Button trigger modal -->
                                                   <button type="button" class="btn btn-danger me-md-2" data-bs-toggle="modal" data-bs-target="#peplan<?= $person->p_id . $person->id ?>Modal"><?= I_DELETE ?>
@@ -99,9 +95,9 @@
                                                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                           </div>
                                                           <div class="modal-body">
-                                                              If you continue, The title will NOT appear at <?= $person->first_name . ' ' . $person->last_name; ?>'s personal information page, NOR it will appear on <?= $person->title; ?> page.</div>
+                                                              If you continue, The group will NOT appear at <?= $person->first_name . ' ' . $person->last_name; ?>'s personal information page, NOR it will appear on <?= $person->title; ?> page.</div>
                                                           <div class="modal-footer">
-                                                              <form method="post" action="<?php echo URLROOT; ?>/peptits/delete_peptit/<?= $person->id ?>">
+                                                              <form method="post" action="<?php echo URLROOT; ?>/pepgroups/delete_peptit/<?= $person->id ?>">
                                                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                                   <button type="submit" class="btn btn-danger"><?= I_DELETE ?>
                                                                       delete</a>
@@ -144,7 +140,10 @@
               </div>
           </div> -->
       </div>
-  <?php endif; ?>
+
+  <?php else: redirect_to('');  ?>
+  <?php endif;  ?>
+
 
   <?php
 

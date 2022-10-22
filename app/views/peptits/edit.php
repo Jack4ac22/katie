@@ -60,7 +60,7 @@
         <!-- description's field -->
         <div class="form-group mt-3">
             <label for="comment">description:</label>
-            <textarea name="description" class="form-control form-control-lg <?php echo (!empty($data['description_err'])) ? 'is-invalid' : ''; ?>" style="white-space: pre-line"><?php echo $data['description']; ?></textarea>
+            <textarea  name="description" class="form-control form-control-lg <?php echo (!empty($data['description_err'])) ? 'is-invalid' : ''; ?>" style="white-space: pre-line"><?php echo $data['description']; ?></textarea>
             <span class="invalid-feedback"><?php echo $data['description_err']; ?></span>
         </div>
         <div class="form-floating mt-3">

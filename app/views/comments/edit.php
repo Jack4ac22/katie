@@ -13,7 +13,7 @@
         </div>
         <div class="form-group mt-3">
             <label for="text">comment:</label>
-            <textarea name="text" class="form-control form-control-lg <?php echo (!empty($data['text_err'])) ? 'is-invalid' : ''; ?>" style="white-space: pre-line"><?php echo $data['text']; ?></textarea>
+            <textarea  name="text" class="form-control form-control-lg <?php echo (!empty($data['text_err'])) ? 'is-invalid' : ''; ?>" style="white-space: pre-line"><?php echo $data['text']; ?></textarea>
             <span class="invalid-feedback" ><?php echo $data['text_err']; ?></span>
         </div>
 

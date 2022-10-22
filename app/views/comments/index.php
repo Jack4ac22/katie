@@ -4,7 +4,7 @@
 ?>
 
 <form class="d-flex" role="search" method="get">
-    <input class="form-control me-2" type="search" placeholder="Search for a comment" aria-label="Search" name="search">
+    <input class="form-control me-2" type="search" placeholder="Search for a comment" aria-label="Search" name="search" value="<?php if((isset($_GET['search'])) && (strlen($_GET['search'])>0)){echo $_GET['search'];} ?>">
     <button class="btn btn-outline-primary" type="submit"><?= I_SEARCH ?> search</button>
 </form>
 <div class="mt-3">

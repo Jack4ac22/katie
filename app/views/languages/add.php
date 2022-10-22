@@ -13,12 +13,12 @@
           </div>
           <div class="form-group mt-3">
               <label for="description">Description:</label>
-              <textarea name="description" class="form-control form-control-lg <?php echo (!empty($data['description_err'])) ? 'is-invalid' : ''; ?>" style="white-space: pre-line"><?php echo $data['description']; ?></textarea>
+              <textarea  name="description" class="form-control form-control-lg <?php echo (!empty($data['description_err'])) ? 'is-invalid' : ''; ?>" style="white-space: pre-line"><?php echo $data['description']; ?></textarea>
               <span class="invalid-feedback"><?php echo $data['description_err']; ?></span>
           </div>
           <div class="form-group mt-3">
               <label for="extra">extra:</label>
-              <textarea name="extra" class="form-control form-control-lg <?php echo (!empty($data['extra_err'])) ? 'is-invalid' : ''; ?>" style="white-space: pre-line"><?php echo $data['extra']; ?></textarea>
+              <textarea  name="extra" class="form-control form-control-lg <?php echo (!empty($data['extra_err'])) ? 'is-invalid' : ''; ?>" style="white-space: pre-line"><?php echo $data['extra']; ?></textarea>
               <span class="invalid-feedback"><?php echo $data['extra_err']; ?></span>
           </div>
           <div class="form-group m-t-3">
