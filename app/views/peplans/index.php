@@ -1,16 +1,9 @@
-<?php //echo '<pre>' . var_export($data, true) . '</pre>'; 
-?>
-
 <?php require APPROOT . '/views/includes/header.php'; ?>
 <?php flash('msg'); ?>
+
+<?php //echo '<pre>' . var_export($data, true) . '</pre>';
+?>
 <div class="input-group mb-3 ">
-    <span class="input-group-text" id="basic-addon1"><?= I_ARROW_R ?>
-    </span>
-    <button type="submit" class="btn btn-light"><?= I_SEARCH ?></button>
-    <span class="input-group-text" id="basic-addon1">
-        <?= I_ARROW_L ?>
-    </span>
-    <input type="search" class="form-control" placeholder="search for a language" aria-label="Username" aria-describedby="basic-addon1">
     <a type="button" class="btn btn-primary" href="<?php echo URLROOT; ?>/languages/add">
         <?= I_ADD_SIGN ?> new language
     </a>
@@ -35,60 +28,73 @@
                     </div>
                 </div>
 
-                <div class="col-m-6">
-                    <div class="row">
-                        <?php foreach ($data['languages']['list'] as $person) : ?>
-                            <?php if ($language->id == $person->lan_id) : ?>
-                                <!-- can be replaced with toggle https://getbootstrap.com/docs/5.2/components/collapse/ -->
-                                <div class="col-4">
-                                    <h4 class="card-title"><?php echo $person->first_name . ' ' . $person->last_name; ?>
-                                        <a href="<?php echo URLROOT . '/persons/show/' . $person->p_id; ?>" class="btn btn-light"><?= I_INFO ?></a>
 
-                                        <?php if ($person->sex == 'male') : ?><a class="btn btn-light"><?= I_MAN ?></a>
-                                        <?php else : ?>
-                                            <a class="btn btn-light">
-                                                <?= I_WOMAN ?></a>
-                                        <?php endif; ?>
+                <div class="row">
+                    <?php foreach ($data['languages']['list'] as $person) : ?>
+                        <?php if ($language->id == $person->lan_id) : ?>
 
-                                    </h4>
-                                    <!-- Modal  -->
-                                    <div class="m-3 d-grid gap-2 d-md-flex justify-content-md-end">
-                                        <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-danger me-md-2" data-bs-toggle="modal" data-bs-target="#exampleModal"><?= I_DELETE ?>
-                                            Remove <?php echo $person->first_name; ?>
-                                        </button>
+                            <div class="col-md-4">
+                                <div class="card mb-3 
+                                    <?php if ($person->sex == 'male') {
+                                        echo 'card border-info';
+                                    } else {
+                                        echo                                         'border-warning';
+                                    }; ?>">
 
-                                        <!-- Modal Edit -->
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete <?php echo $language->title; ?>/<?php echo $person->first_name . ' ' . $person->last_name; ?> relation
-                                                        </h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        If you continue, The language will NOT appear at <?php echo $person->first_name . ' ' . $person->last_name; ?>'s personal information page, NOR he will appear on <?php echo $language->title; ?> page.</div>
-                                                    <div class="modal-footer">
-                                                        <form method="post" action="<?php echo URLROOT; ?>/peplans/delete_peplan/<?php echo $person->id ?>">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="submit" class="btn btn-danger"><?= I_DELETE ?>
-                                                                delete</a>
-                                                        </form>
+                                    <div class="card-header">
+                                        <div class="progress mt-2">
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $person->levle ?>%"></div>
+                                            <div class="progress">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?= $person->first_name . ' ' . $person->last_name ?></h5>
+                                        <p class="card-text" style="white-space: pre-line"><?= $person->comment ?></p>
+
+                                        <div class="row justify-content-center">
+
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <a href="<?php echo URLROOT . '/peplans/edit/' . $person->id; ?>" class="btn btn-warning" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"><?= I_EDIT ?></a>
+                                                <a href="<?php echo URLROOT . '/peplans/show/' . $person->id; ?>" class="btn btn-info" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"><?= I_INFO ?></a>
+                                                <a href="<?php echo URLROOT . '/persons/show/' . $person->p_id; ?>" class="btn btn-light" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"><?= I_PERSON  ?></a>
+                                                <button type="button" class="btn btn-danger me-md-2" data-bs-toggle="modal" data-bs-target="#delete_peplan_<?= $person->id . '_' . $person->p_id ?>" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"><?= I_DELETE ?></button>
+                                            </div>
+
+
+                                            <!-- Button trigger modal -->
+
+
+                                            <!-- Modal Edit -->
+                                            <div class="modal fade" id="delete_peplan_<?= $person->id . '_' . $person->p_id ?>" tabindex="-1" aria-labelledby="delete_peplan_<?= $person->id . '_' . $person->p_id ?>Label" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="delete_peplan_<?= $person->id . '_' . $person->p_id ?>Label">Delete <?php echo $person->title; ?>/<?php echo $person->first_name . ' ' . $person->last_name; ?> relation
+                                                            </h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            If you continue, The language will NOT appear at <?php echo $person->first_name . ' ' . $person->last_name; ?>'s personal information page, NOR he will appear on <?php echo $language->title; ?> page.</div>
+                                                        <div class="modal-footer">
+                                                            <form method="post" action="<?php echo URLROOT; ?>/peplans/delete_peplan/<?php echo $person->id ?>">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-danger"><?= I_DELETE ?>
+                                                                    delete</a>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-
                                 </div>
-                            <?php else : ?>
-
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                        <a class="btn btn-outline-secondary" href="<?php echo URLROOT . '/peplans/add/0/' . $language->id; ?>">Add <?= I_ADD_PERSON ?></a>
-                    </div>
+                            </div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+                <div class="col mb-3">
+                    <a class="btn btn-outline-secondary" href="<?php echo URLROOT . '/peplans/add/0/' . $language->id; ?>">Add <?= I_ADD_PERSON ?></a>
                 </div>
             </div>
         </div>

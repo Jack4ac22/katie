@@ -17,7 +17,6 @@
 </div>
 <div class="row">
     <?php if (count($data['languages']) > 0) : ?>
-
         <?php foreach ($data['languages'] as $language) : ?>
             <div class="col-sm-6 ">
                 <div class="card m-1">
@@ -57,7 +56,8 @@
                     </div>
                 </div>
             </div>
-        <?php endforeach; ?> <?php else : ?>
+        <?php endforeach; ?>
+    <?php else : ?>
         <div class="row ">
             <div class="col-md-6 offset-md-3">
                 <div class="alert alert-warning" role="alert">

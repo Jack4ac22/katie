@@ -1,23 +1,23 @@
-<?php echo '<pre>' . var_export($_SESSION, true) . '</pre>'; ?>
 <?php require APPROOT . '/views/includes/header.php'; ?>
 <?php flash('msg'); ?>
 
-<a href="<?php echo URLROOT; ?>/peplans" class="btn btn-light"><?= I_ARROW_L ?> Back</a>
+<?php  echo '<pre>' . var_export($data, true) . '</pre>'; ?>
+<a href="<?php echo URLROOT; ?>/peplans" class="btn btn-light"><?= I_ARROW_L ?> Back to all languages-people relations</a>
 
 <?php if (islogged()) : ?>
     <?php if (isset($data->id)) : ?>
 
-        <div class="card">
+        <div class="card mt-3">
             <h5 class="card-header"><?= $data->first_name . ' ' . $data->last_name . ' speaks ' . $data->title ?></h5>
             <div class="card-body">
                 <h5 class="card-title" style="white-space: pre-line">Special title treatment</h5>
-                <p class="card-text" style="white-space: pre-line">With supporting text below as a natural lead-in to additional content.</p>
+                <p class="card-text" style="white-space: pre-line"><?= $data->comment?></p>
             </div>
             <div class="card-body">
 
 
 
-                <button class="btn btn-warning" type="button"><?= I_EDIT ?> Edit</button>
+                <a class="btn btn-warning" href="<?= URLROOT . '/peplans/edit/'. $data->id ?>"><?= I_EDIT ?> Edit</a>
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <?= I_DELETE ?> Delete

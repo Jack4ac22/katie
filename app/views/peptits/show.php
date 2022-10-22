@@ -38,12 +38,12 @@
                             </div>
                             <div class="modal-body">
                                 <p>You will not be able to restor the folowing information:</p>
-                                <p><strong><?= $data->first_name . ' ' . $data->last_name . ' speaks ' . $data->title ?></strong></p>
+                                <p><strong><?= $data->first_name . ' ' . $data->last_name . ' holds ' . $data->title ?> title</strong></p>
                             </div>
                             <div class="modal-footer">
-                                <form action="<?php echo URLROOT; ?>/peplans/delete_peplan/<?php echo $data->id ?>" method="post">
+                                <form action="<?php echo URLROOT; ?>/peptits/delete_peptit/<?php echo $data->id ?>" method="post">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <form action="<?php echo URLROOT; ?>/peplans/delete_peplan/<?php echo $data->id ?>" method="post">
+                                    <form action="<?php echo URLROOT; ?>/peptits/delete_peptit/<?php echo $data->id ?>" method="post">
                                         <button type="submit" class="btn btn-danger"><?= I_EXCLAIM ?> Delete</button>
                                     </form>
                             </div>

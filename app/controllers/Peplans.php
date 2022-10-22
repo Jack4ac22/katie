@@ -181,7 +181,7 @@ class Peplans extends Controller
             $this->view('peplans/show', $peplan);
         } else {
             flash('msg', '<p>the page which you requested does not exist, try to use other method</p>');
-            redirect_to('/pages/notFound');
+            redirect_to('pages/notFound');
         }
     }
 

@@ -62,7 +62,7 @@ class Pages extends Controller
     public function not_found()
     {
         $data = ['title' => 404, 'description' => ''];
-        $this->view('/pages/not_found', $data);
+        $this->view('pages/not_found', $data);
     }
 
     public function patrick()

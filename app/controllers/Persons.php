@@ -113,7 +113,7 @@ class Persons extends Controller
             $this->view('persons/show', $data);
         } else {
             flash('msg', '<p>the page which you requested does not exist, try to use other method</p>');
-            redirect_to('/pages/notFound');
+            redirect_to('pages/notFound');
         }
     }
 
@@ -194,7 +194,7 @@ class Persons extends Controller
                 $this->view('persons/edit', $data);
             } else {
                 flash('msg', '<p>the page which you requested does not exist, try to use other method</p>');
-                redirect_to('/pages/notFound');
+                redirect_to('pages/notFound');
             }
         }
     }

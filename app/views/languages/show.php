@@ -1,9 +1,9 @@
   <?php require APPROOT . '/views/includes/header.php'; ?>
   <a href="<?php echo URLROOT; ?>/languages" class="btn btn-light"><?= I_ARROW_L ?> Back to all languages.</a>
-  <!-- <?php echo '<pre>' . var_export($data['language'], true) . '</pre>'; ?> -->
+  <?php //echo '<pre>' . var_export($data['language'], true) . '</pre>'; ?>
   <?php flash('msg'); ?>
   <?php if (islogged()) : ?>
-      <div class="accordion" id="accordionPanelsStayOpenExample">
+      <div class="accordion mt-3" id="accordionPanelsStayOpenExample">
           <div class="accordion-item">
               <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                   <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
@@ -32,7 +32,7 @@
                               <div class="modal-dialog">
                                   <div class="modal-content">
                                       <div class="modal-header">
-                                          <h1 class="modal-title fs-5" id="delete_language_modalLabel">Delete <b><?=$data['language']['language']->title; ?></b></h1>
+                                          <h1 class="modal-title fs-5" id="delete_language_modalLabel">Delete <b><?= $data['language']['language']->title; ?></b></h1>
                                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                       </div>
                                       <div class="modal-body">
@@ -54,14 +54,14 @@
           <div class="accordion-item">
               <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                      <h2 class="card-header"> peopl related to this language </h2>
+                      <h2 class="card-header"> Peopl related to this language <span class="badge bg-secondary"><?php echo count($data['language']['people']); ?></span></h2>
                   </button>
+
               </h2>
               <div id="panelsStayOpen-collapseTwo" class="accordion-collapse show" aria-labelledby="panelsStayOpen-headingTwo">
                   <div class="accordion-body">
                       <?php if (count($data['language']['people']) > 0) : ?>
                           <div class="row">
-
                               <?php foreach ($data['language']['people'] as $person) : ?>
                                   <div class="col-sm-6">
                                       <div class="card mb-2">
@@ -82,7 +82,7 @@
                                               <p class="h5 mt-2" style="white-space: pre-line"><?php echo $person->comment ?></p>
                                           </div>
                                           <!-- Modal  -->
-                                          
+
                                           <div class="col">
                                               <div class="btn-group mb-3" role="group" aria-label="Basic example">
                                                   <a href="<?php echo URLROOT . '/peplans/edit/' . $person->id; ?>" class="btn btn-primary"><?= I_LANGUAGE ?> Level</a>

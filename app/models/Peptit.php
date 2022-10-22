@@ -50,7 +50,9 @@ class Peptit
         WHERE PT.id = :id");
         $this->db->bind(':id', $id);
         $positions = $this->db->resultSet();
-        $row->positions = $positions;
+        if ($positions) {
+            $row->positions = $positions;
+        }
         return $row;
     }
 

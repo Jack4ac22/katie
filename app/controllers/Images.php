@@ -184,7 +184,7 @@ class Images extends Controller
             } else {
                 $msg = "you are trying to edit none existing phone number, please check the <a href=" . URLROOT . "/phones\"  class=\"alert-link\">phones</a> page to access the desured number, or find the person from <a href=" . URLROOT . "/persons\" class=\"alert-link\"> people </a> page.";
                 flash('msg', $msg);
-                redirect_to('/pages/notfound');
+                redirect_to('pages/notfound');
             }
         }
     }
@@ -230,7 +230,7 @@ class Images extends Controller
             $this->view('images/show', $data);
         } else {
             flash('msg', '<p>the page which you requested does not exist, try to use other method.</p>', 'alert alert-danger alert-dismissible fade show');
-            redirect_to('/pages/notFound');
+            redirect_to('pages/notFound');
         }
     }
 }

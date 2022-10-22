@@ -126,7 +126,7 @@ class Peptits extends Controller
 
             //check for errors
             if (empty($data['t_id_err']) && empty($data['comment_err']) && empty($data['p_id_err'])) {
-                
+
                 if ($this->peptitModel->update_peptit($data)) {
                     flash('msg', '<p>The title/person relation has been updated.</p> <a href="' . URLROOT . '/peptits/show/' . $id . '" class="alert-link">you can use this link to check</a>.');
                     redirect_to('persons/show/' . $data['p_id']);
@@ -177,7 +177,7 @@ class Peptits extends Controller
             $this->view('peptits/show', $peptit);
         } else {
             flash('msg', '<p>the page which you requested does not exist, try to use other method</p>');
-            redirect_to('/pages/notFound');
+            redirect_to('pages/notFound');
         }
     }
 
@@ -190,14 +190,14 @@ class Peptits extends Controller
                     redirect_to('/login');
                 }
                 if ($this->peptitModel->delete_peptit($id)) {
-                    flash('msg', '<p>' . $peptit->first_name . ' ' . $peptit->last_name . ' will not be shown in relation to <a href="' . URLROOT . '/languages/show/' . $peptit->lan_id . '" class="alert-link">' . $peptit->title . '</a> language.</p>
+                    flash('msg', '<p>' . $peptit->first_name . ' ' . $peptit->last_name . ' will not be shown in relation to <a href="' . URLROOT . '/titles/show/' . $peptit->t_id . '" class="alert-link">' . $peptit->title . '</a> title.</p>
                     <p>you can check
                     <a href="' . URLROOT . '/persons/show/' . $peptit->p_id . '" class="alert-link">'
                         . 'the personal profile. </p>');
                     redirect_to("persons/show/$peptit->p_id");
                 } else {
                     $msg = "<p>Failed, please try again later.</p>";
-                    redirect_to("languages/show/$peptit->lan_id", $msg);
+                    redirect_to("peptits/show/$peptit->lan_id", $msg);
                 }
             }
         }

@@ -101,7 +101,7 @@
                                                           <div class="modal-body">
                                                               If you continue, The title will NOT appear at <?= $person->first_name . ' ' . $person->last_name; ?>'s personal information page, NOR it will appear on <?= $person->title; ?> page.</div>
                                                           <div class="modal-footer">
-                                                              <form method="post" action="<?php echo URLROOT; ?>/peptits/delete_peplan/<?= $person->id ?>">
+                                                              <form method="post" action="<?php echo URLROOT; ?>/peptits/delete_peptit/<?= $person->id ?>">
                                                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                                   <button type="submit" class="btn btn-danger"><?= I_DELETE ?>
                                                                       delete</a>
