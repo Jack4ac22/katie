@@ -185,11 +185,11 @@ class Person
     public function edit_person($data)
     {
         $this->db->query("UPDATE people SET first_name = :first_name, last_name = :last_name, email= :email, sex= :sex WHERE people.id = :id");
-        $this->db->bind('first_name', $data['first_name']);
-        $this->db->bind('last_name', $data['last_name']);
-        $this->db->bind('sex', $data['sex']);
-        $this->db->bind('email', $data['email']);
-        $this->db->bind('id', $data['id']);
+        $this->db->bind(':first_name', $data['first_name']);
+        $this->db->bind(':last_name', $data['last_name']);
+        $this->db->bind(':sex', $data['sex']);
+        $this->db->bind(':email', $data['email']);
+        $this->db->bind(':id', $data['id']);
         if ($this->db->execute()) {
             return true;
         } else {

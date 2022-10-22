@@ -36,18 +36,21 @@ class Peptit
      */
     public function get_peptit_by_id($id)
     {
-        $this->db->query("SELECT PT.*, P.first_name, P.last_name, P.sex, P.email, P.img, JT.title, JT.description AS t_description
+        $this->db->query("SELECT PT.*, P.first_name, P.last_name, P.sex, P.email, P.img, P.birthday, JT.title, JT.description AS t_description
         FROM people_titles AS PT
         INNER JOIN people AS P ON P.id = PT.p_id
         INNER JOIN job_titles AS JT ON JT.id = PT.t_id
         WHERE PT.id = :id");
         $this->db->bind(':id', $id);
         $row = $this->db->single();
-        
-        $this->db->query("");
+
+        $this->db->query("SELECT PT2.*, T.title AS t_title, T.description AS t_description FROM people_titles AS PT
+        INNER JOIN people_titles AS PT2 ON PT.p_id = PT2.p_id
+        INNER JOIN job_titles AS T ON T.id = PT2.t_id
+        WHERE PT.id = :id");
         $this->db->bind(':id', $id);
         $positions = $this->db->resultSet();
-
+        $row->positions = $positions;
         return $row;
     }
 
