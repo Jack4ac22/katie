@@ -7,7 +7,7 @@
       <a href="<?= URLROOT ?>/persons/show/<?= $data['p_id'] ?>" class="btn btn-light"><?= I_ARROW_L ?> Back to the person's page</a>
 
   <?php elseif (isset($data['t_id']) && ($data['t_id'] > 0)) : ?>
-      <a href="<?= URLROOT ?>/peptits/show/<?= $data['t_id'] ?>" class="btn btn-light"><?= I_ARROW_L ?> Back to job-title's page</a>
+      <a href="<?= URLROOT ?>/pepgroups/show/<?= $data['t_id'] ?>" class="btn btn-light"><?= I_ARROW_L ?> Back to groups's page</a>
 
   <?php else : ?>
       <a href="<?php echo URLROOT; ?>" class="btn btn-light"><?= I_ARROW_L ?> Back to main page</a>
@@ -16,25 +16,25 @@
 
 
   <div class="card card-body bg-light mt-5">
-      <h2>Add a title to a person.</h2>
+      <h2>Add a person to a group.</h2>
       <p>Chose from the menue below.</p>
-      <form action="<?php echo URLROOT; ?>/peptits/add" method="post">
-          <!-- //language field -->
+      <form action="<?php echo URLROOT; ?>/pepgroups/add" method="post">
+          <!-- //group field -->
           <div class="form-group mt-3">
-              <label for="lan ">Chose the title</label>
-              <span class="invalid-feedback"><?php echo $data['t_err']; ?></span>
-              <select class="form-select mt-1" aria-label="Default select example" name="t_id">
+              <label for="group ">Chose the group</label>
+              <span class="invalid-feedback"><?php echo $data['group_err']; ?></span>
+              <select class="form-select mt-1" aria-label="Default select example" name="group_id">
                   ?>
-                  <?php if ((!isset($data['t_id'])) || ($data['t_id'] == 0)) : ?>
-                      <option selected value=0>chose language from the list</option>
+                  <?php if ((!isset($data['group_id'])) || ($data['group_id'] == 0)) : ?>
+                      <option selected value=0>chose group from the list</option>
                   <?php endif; ?>
-                  <?php foreach ($data['titles'] as $title) : ?>
-                      <option value="<?php echo $title->id; ?>" <?php if ((isset($data['t_id'])) && ($data['t_id'] == $title->id)) echo 'selected'; ?>>
-                          <?php echo $title->title; ?></option>
+                  <?php foreach ($data['groups'] as $group) : ?>
+                      <option value="<?php echo $group->id; ?>" <?php if ((isset($data['group_id'])) && ($data['group_id'] == $group->id)) echo 'selected'; ?>>
+                          <?php echo $group->title; ?></option>
                   <?php endforeach; ?>
               </select>
-              <?php if (!empty($data['t_id_err'])) {
-                    $msg = $data['t_id_err'];
+              <?php if (!empty($data['group_id_err'])) {
+                    $msg = $data['group_id_err'];
                     echo "<label class=\"alert alert-danger\">$msg</label>";
                 } ?>
           </div>
@@ -58,14 +58,14 @@
                 } ?>
           </div>
 
-          <!-- description's field -->
+          <!-- comment's field -->
           <div class="form-group mt-3">
-              <label for="description">Description:</label>
-              <textarea  name="description" class="form-control form-control-lg <?php echo (!empty($data['description_err'])) ? 'is-invalid' : ''; ?>" style="white-space: pre-line"><?php echo $data['description']; ?></textarea>
-              <span class="invalid-feedback"><?php echo $data['description_err']; ?></span>
+              <label for="comment">comment:</label>
+              <textarea name="comment" class="form-control form-control-lg <?php echo (!empty($data['comment_err'])) ? 'is-invalid' : ''; ?>" style="white-space: pre-line"><?php echo $data['comment']; ?></textarea>
+              <span class="invalid-feedback"><?php echo $data['comment_err']; ?></span>
           </div>
           <div class="form-floating mt-3">
-              <button type="submit" class="btn btn-primary btn-block"> relate</button>
+              <button type="submit" class="btn btn-primary btn-block"> add</button>
           </div>
       </form>
   </div>
