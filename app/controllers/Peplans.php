@@ -65,7 +65,7 @@ class Peplans extends Controller
                 if ($this->peplanModel->add_lan_to_person($data)) {
                     $last = $this->peplanModel->get_the_last();
                     flash('msg', '<p><a href="' . URLROOT . '/languages/show/' . $last->p_id . '" class="alert-link">' . $last->title . '</a> language is added to <a href="' . URLROOT . '/persons/show/' . $last->p_id . '" class="alert-link">' . $last->first_name . $last->last_name . '.</a>');
-                    redirect_to('/persons/show/'.$last->p_id);
+                    redirect_to('/persons/show/' . $last->p_id);
                 } else {
                     flash('msg', 'Something went wrong, please try again later.');
                     redirect_to('persons');
@@ -162,7 +162,8 @@ class Peplans extends Controller
                 $this->view('peplans/edit', $data);
             } else {
                 $msg = "<p>something went wron, please try again later</p>";
-                redirect_to("peplans", $msg);
+                flash('msg', $msg, 'alert alert-danger alert-dismissible fade show');
+                redirect_to("peplans");
             }
         }
     }

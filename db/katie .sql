@@ -53,7 +53,7 @@ INSERT INTO `comments` (`id`, `p_id`, `value`, `title`, `text`, `created_at`, `e
 --
 
 CREATE TABLE `countries` (
-  `num_code` int(3) NOT NULL DEFAULT '0',
+  `num_code` int(3) NOT NULL DEFAULT 0,
   `alpha_2_code` varchar(2) DEFAULT NULL,
   `alpha_3_code` varchar(3) DEFAULT NULL,
   `en_short_name` varchar(52) DEFAULT NULL,

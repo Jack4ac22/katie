@@ -40,9 +40,14 @@ class Peptit
         FROM people_titles AS PT
         INNER JOIN people AS P ON P.id = PT.p_id
         INNER JOIN job_titles AS JT ON JT.id = PT.t_id
-        WHERE JT.id = :id");
+        WHERE PT.id = :id");
         $this->db->bind(':id', $id);
         $row = $this->db->single();
+        
+        $this->db->query("");
+        $this->db->bind(':id', $id);
+        $positions = $this->db->resultSet();
+
         return $row;
     }
 

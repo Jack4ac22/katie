@@ -1,17 +1,17 @@
-<?php echo '<pre>' . var_export($_SESSION, true) . '</pre>'; ?>
+<?php echo '<pre>' . var_export($data, true) . '</pre>'; ?>
 <?php require APPROOT . '/views/includes/header.php'; ?>
 <?php flash('msg'); ?>
 
-<a href="<?php echo URLROOT; ?>/peplans" class="btn btn-light"><?= I_ARROW_L ?> Back</a>
+<a href="<?php echo URLROOT; ?>/peptits" class="btn btn-light"><?= I_ARROW_L ?> Back to all titles/people page</a>
 
 <?php if (islogged()) : ?>
     <?php if (isset($data->id)) : ?>
 
         <div class="card">
-            <h5 class="card-header"><?= $data->first_name . ' ' . $data->last_name . ' speaks ' . $data->title ?></h5>
+            <h5 class="card-header"><b><?= $data->first_name . ' ' . $data->last_name . '</b> is a <b>' . $data->title ?></b></h5>
             <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <h5 class="card-title"><?= $data->first_name . ' ' . $data->last_name ?> is a <?= $data->sex ?></h5>
+                <p class="card-text"></p>
             </div>
             <div class="card-body">
 

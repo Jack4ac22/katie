@@ -30,7 +30,7 @@ class Peptits extends Controller
      * add a phone number and assign it to someone
      */
 
-    public function add($name = 0, $lan = 0)
+    public function add($name = 0, $title = 0)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
@@ -83,7 +83,7 @@ class Peptits extends Controller
             $titles = $this->titleModel->get_titles();
             $data = [
                 'description' => '',
-                't_id' => $lan,
+                't_id' => $title,
                 'p_id' => $name,
                 'persons' => $persons,
                 'titles' => $titles
@@ -107,63 +107,59 @@ class Peptits extends Controller
             $data = [
                 'id' => $id,
                 'p_id' => $_POST['p_id'],
-                'lan_id' => $_POST['lan_id'],
-                'levle' => $_POST['levle'],
-                'comment' => $_POST['comment'],
-                'lan_id_err' => '',
-                'levle_err' => '',
-                'comment_err' => '',
+                't_id' => $_POST['t_id'],
+                'description' => $_POST['description'],
+                't_id_err' => '',
+                'description_err' => '',
                 'p_id_err' => ''
             ];
             // data validation
-            if (empty($_POST['lan_id'])) {
-                $data['lan_id_err'] = 'please pick a language.';
-            }
-            if ((empty($_POST['levle'])) || ($_POST['levle'] == 0)) {
-                $data['levle_err'] = 'please pick a level';
+            if (empty($_POST['t_id'])) {
+                $data['t_id_err'] = 'please pick a title.';
             }
             if ($_POST['p_id'] == 0) {
                 $data['p_id_err'] = 'please chose a person.';
             }
-            if (strip_tags(trim($_POST['comment'])) !== $_POST['comment']) {
-                $data['comment_err'] = 'Please verify the comment, it should not contain special characters.';
+            if (strip_tags($_POST['description']) !== $_POST['description']) {
+                $data['description_err'] = 'Please verify the description, it should not contain special characters.';
             };
 
             //check for errors
-            if (empty($data['lan_id_err']) && empty($data['levle_err']) && empty($data['p_id_err'])) {
+            if (empty($data['t_id_err']) && empty($data['comment_err']) && empty($data['p_id_err'])) {
+                
                 if ($this->peptitModel->update_peptit($data)) {
-                    flash('msg', '<p>' . 'The language/person relation has been updated.</p> <a href="' . URLROOT . '/peptits/show/' . $id . '" class="alert-link">you can use this link to check</a>.');
+                    flash('msg', '<p>The title/person relation has been updated.</p> <a href="' . URLROOT . '/peptits/show/' . $id . '" class="alert-link">you can use this link to check</a>.');
                     redirect_to('persons/show/' . $data['p_id']);
                 } else {
                     flash('msg', 'Something went wrong, please try again later.');
-                    $this->view('peptit/edit/' . $id, $data);
+                    $this->view('peptit/edit', $data);
                 }
                 //load the view with the errors
             } else {
                 $persons = $this->personModel->getPersons(null, null);
                 $data['persons'] = $persons;
-                $languages = $this->languageModel->getlanguages();
-                $data['languages'] = $languages;
-                $this->view('peptit/edit/' . $id, $data);
+                $titles = $this->titleModel->get_titles();
+                $data['titles'] = $titles;
+                $this->view('peptits/edit', $data);
             }
         } else {
             $pep = $this->peptitModel->get_peptit_by_id($id);
             if ($pep) {
                 $persons = $this->personModel->getPersons(null, null);
-                $languages = $this->languageModel->getlanguages();
+                $titles = $this->titleModel->get_titles();
                 $data = [
                     'id' => $pep->id,
-                    'levle' => $pep->levle,
-                    'comment' => $pep->comment,
-                    'lan_id' => $pep->lan_id,
+                    'description' => $pep->description,
+                    't_id' => $pep->t_id,
                     'p_id' => $pep->p_id,
                     'persons' => $persons,
-                    'languages' => $languages
+                    'titles' => $titles
                 ];
                 $this->view('peptits/edit', $data);
             } else {
                 $msg = "<p>something went wron, please try again later</p>";
-                redirect_to("peptits", $msg);
+                flash('msg', $msg, 'alert alert-danger alert-dismissible fade show');
+                redirect_to("peptits");
             }
         }
     }

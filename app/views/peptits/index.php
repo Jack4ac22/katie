@@ -1,6 +1,6 @@
 <?php require APPROOT . '/views/includes/header.php'; ?>
 <?php flash('msg'); ?>
-<?php //echo '<pre>' . var_export($data, true) . '</pre>'; ?>
+<?php // echo '<pre>' . var_export($data, true) . '</pre>'; ?>
 <div class="input-group mb-3 ">
     <a type="button" class="btn btn-primary" href="<?php echo URLROOT; ?>/peptits/add">
         <?= I_ADD_SIGN ?> peson / title
@@ -36,8 +36,8 @@
                                                     </h5>
                                                     <p class="card-text" style="white-space: pre-line"><?= $person->description ?></p>
                                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                                        <a type="button" class="btn btn-warning">Edit <?= I_EDIT ?></a>
-                                                        <a type="button" class="btn btn-light">Check <?= I_PERSON ?></a>
+                                                        <a  class="btn btn-warning" href="<?= URLROOT . '/peptits/edit/' . $person->id ?>">Edit <?= I_EDIT ?></a>
+                                                        <a  class="btn btn-light" href="<?= URLROOT.'/persons/show/'.$person->p_id ?>">Check <?= I_PERSON ?></a>
                                                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_personal_title_<?= $person->id . $person->t_id ?>">Delete <?= I_DELETE ?></button>
                                                     </div>
                                                     <div class="modal fade" id="delete_personal_title_<?= $person->id . $person->t_id ?>" tabindex="-1" aria-labelledby="delete_personal_title_<?= $person->id . $person->t_id ?>Label" aria-hidden="true">
@@ -73,9 +73,8 @@
             </div>
         </div>
     <?php endforeach; ?>
-    <
-</div>
+    < </div>
 
 
 
-<?php require APPROOT . '/views/includes/footer.php'; ?>
+        <?php require APPROOT . '/views/includes/footer.php'; ?>
