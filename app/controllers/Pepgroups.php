@@ -127,39 +127,39 @@ class Pepgroups extends Controller
             //check for errors
             if (empty($data['group_id_err']) && empty($data['comment_err']) && empty($data['p_id_err'])) {
 
-                if ($this->pepgroupModel->update_peptit($data)) {
-                    flash('msg', '<p>The title/person relation has been updated.</p> <a href="' . URLROOT . '/peptits/show/' . $id . '" class="alert-link">you can use this link to check</a>.');
+                if ($this->pepgroupModel->update_pepgroup($data)) {
+                    flash('msg', '<p>The group/person relation has been updated.</p> <a href="' . URLROOT . '/pepgroups/show/' . $id . '" class="alert-link">you can use this link to check</a>.');
                     redirect_to('persons/show/' . $data['p_id']);
                 } else {
                     flash('msg', 'Something went wrong, please try again later.');
-                    $this->view('peptit/edit', $data);
+                    $this->view('pepgroups/edit', $data);
                 }
                 //load the view with the errors
             } else {
                 $persons = $this->personModel->getPersons(null, null);
                 $data['persons'] = $persons;
-                $titles = $this->titleModel->get_titles();
-                $data['titles'] = $titles;
-                $this->view('peptits/edit', $data);
+                $groups = $this->groupsModel->get_groups();
+                $data['groups'] = $groups;
+                $this->view('pepgroups/edit', $data);
             }
         } else {
-            $pep = $this->pepgroupModel->get_peptit_by_id($id);
+            $pep = $this->pepgroupModel->get_pepgroup_by_id($id);
             if ($pep) {
                 $persons = $this->personModel->getPersons(null, null);
-                $titles = $this->titleModel->get_titles();
+                $groups = $this->groupModel->get_groups();
                 $data = [
                     'id' => $pep->id,
                     'comment' => $pep->comment,
                     'group_id' => $pep->group_id,
                     'p_id' => $pep->p_id,
                     'persons' => $persons,
-                    'titles' => $titles
+                    'groups' => $groups
                 ];
-                $this->view('peptits/edit', $data);
+                $this->view('pepgroups/edit', $data);
             } else {
                 $msg = "<p>something went wron, please try again later</p>";
                 flash('msg', $msg, 'alert alert-danger alert-dismissible fade show');
-                redirect_to("peptits");
+                redirect_to("pepgroups");
             }
         }
     }
@@ -172,9 +172,9 @@ class Pepgroups extends Controller
      */
     public function show($id = null)
     {
-        $peptit = $this->pepgroupModel->get_peptit_by_id($id);
-        if ($peptit) {
-            $this->view('peptits/show', $peptit);
+        $pepgroup = $this->pepgroupModel->get_pepgroup_by_id($id);
+        if ($pepgroup) {
+            $this->view('pepgroups/show', $pepgroup);
         } else {
             flash('msg', '<p>the page which you requested does not exist, try to use other method</p>');
             redirect_to('pages/notFound');
@@ -184,20 +184,20 @@ class Pepgroups extends Controller
     public function delete_peptit($id)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $peptit = $this->pepgroupModel->get_peptit_by_id($id);
-            if ($peptit) {
+            $pepgroup = $this->pepgroupModel->get_pepgroup_by_id($id);
+            if ($pepgroup) {
                 if (!islogged()) {
                     redirect_to('/login');
                 }
-                if ($this->pepgroupModel->delete_peptit($id)) {
-                    flash('msg', '<p>' . $peptit->first_name . ' ' . $peptit->last_name . ' will not be shown in relation to <a href="' . URLROOT . '/titles/show/' . $peptit->group_id . '" class="alert-link">' . $peptit->title . '</a> title.</p>
+                if ($this->pepgroupModel->delete_pepgroup($id)) {
+                    flash('msg', '<p>' . $pepgroup->first_name . ' ' . $pepgroup->last_name . ' will not be shown in relation to <a href="' . URLROOT . '/groups/show/' . $pepgroup->group_id . '" class="alert-link">' . $pepgroup->title . '</a> group.</p>
                     <p>you can check
-                    <a href="' . URLROOT . '/persons/show/' . $peptit->p_id . '" class="alert-link">'
+                    <a href="' . URLROOT . '/persons/show/' . $pepgroup->p_id . '" class="alert-link">'
                         . 'the personal profile. </p>');
-                    redirect_to("persons/show/$peptit->p_id");
+                    redirect_to("persons/show/$pepgroup->p_id");
                 } else {
                     $msg = "<p>Failed, please try again later.</p>";
-                    redirect_to("peptits/show/$peptit->lan_id", $msg);
+                    redirect_to("pepgroups/show/$pepgroup->lan_id", $msg);
                 }
             }
         }

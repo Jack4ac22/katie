@@ -15,6 +15,8 @@
                 <p class="card-text">
                     <?php if (count($data->positions) > 1) :  ?>
                         holds <?= count($data->positions) ?> positions:
+                    <?php elseif (count($data->positions) == 1) :  ?>
+                        holds <?= count($data->positions) ?> position:
                     <?php else : ?>
                         does not hold any other position.
                     <?php endif; ?>
@@ -38,7 +40,7 @@
                             </div>
                             <div class="modal-body">
                                 <p>You will not be able to restor the folowing information:</p>
-                                <p><strong><?= $data->first_name . ' ' . $data->last_name . ' holds ' . $data->title ?> title</strong></p>
+                                <p><strong><?= $data->first_name . ' ' . $data->last_name . ' holds ' . $data->title ?> title</strong>.</p>
                             </div>
                             <div class="modal-footer">
                                 <form action="<?php echo URLROOT; ?>/peptits/delete_peptit/<?php echo $data->id ?>" method="post">
@@ -60,7 +62,7 @@
                                     <p class="card-text"><b>Position's description: </b>
                                         <?= $position->t_description ?>
                                     </p>
-                                    <p class="card-text">
+                                    <p class="card-text" style="white-space: pre-line">
                                         <b><?= $data->first_name ?> description: </b><?php if (strlen($position->description) > 0) {
                                                                                             echo $position->description;
                                                                                         } else {
