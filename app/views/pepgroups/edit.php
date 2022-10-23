@@ -6,8 +6,8 @@
 <?php if (isset($data['p_id']) && ($data['p_id'] > 0)) : ?>
     <a href="<?= URLROOT ?>persons/show/<?= $data['p_id'] ?>" class="btn btn-light"><?= I_ARROW_L ?> Back to the person's page</a>
 
-<?php elseif (isset($data['t_id']) && ($data['t_id'] > 0)) : ?>
-    <a href="<?= URLROOT ?>titles/show/<?= $data['t_id'] ?>" class="btn btn-light"><?= I_ARROW_L ?> Back to title's page</a>
+<?php elseif (isset($data['group_id']) && ($data['group_id'] > 0)) : ?>
+    <a href="<?= URLROOT ?>titles/show/<?= $data['group_id'] ?>" class="btn btn-light"><?= I_ARROW_L ?> Back to title's page</a>
 
 <?php else : ?>
     <a href="<?php echo URLROOT; ?>" class="btn btn-light"><?= I_ARROW_L ?> Back to main page</a>
@@ -16,25 +16,25 @@
 
 
 <div class="card card-body bg-light mt-5">
-    <h2>Update the title .</h2>
+    <h2>Update the group / person.</h2>
     <p>Chose from the menue below to update the data.</p>
-    <form action="<?= URLROOT ?>/peptits/edit/<?= $data['id'] ?>" method="post">
+    <form action="<?= URLROOT ?>/pepgroups/edit/<?= $data['id'] ?>" method="post">
         <!-- title field -->
         <div class="form-group mt-3">
-            <label for="lan">Chose the title</label>
-            <span class="invalid-feedback"><?php echo $data['t_id_err']; ?></span>
-            <select class="form-select" aria-label="Default select example" name="t_id">
+            <label for="lan">Chose the group</label>
+            <span class="invalid-feedback"><?php echo $data['group_id_err']; ?></span>
+            <select class="form-select" aria-label="Default select example" name="group_id">
                 ?>
-                <?php if ((!isset($data['t_id_id'])) || ($data['t_id_id'] == 0)) : ?>
-                    <option value=0 selected>chose language from the list</option>
+                <?php if ((!isset($data['group_id_id'])) || ($data['group_id_id'] == 0)) : ?>
+                    <option value=0 selected>chose group from the list</option>
                 <?php endif; ?>
-                <?php foreach ($data['titles'] as $title) : ?>
-                    <option value="<?php echo $title->id; ?>" <?php if ((isset($data['t_id'])) && ($data['t_id'] == $title->id)) echo 'selected'; ?>>
-                        <?php echo $title->title; ?></option>
+                <?php foreach ($data['groups'] as $group) : ?>
+                    <option value="<?php echo $group->id; ?>" <?php if ((isset($data['group_id'])) && ($data['group_id'] == $group->id)) echo 'selected'; ?>>
+                        <?php echo $group->title; ?></option>
                 <?php endforeach; ?>
             </select>
-            <?php if (!empty($data['t_id_err'])) {
-                $msg = $data['t_id_err'];
+            <?php if (!empty($data['group_id_err'])) {
+                $msg = $data['group_id_err'];
                 echo "<label class=\"alert alert-danger\">$msg</label>";
             } ?>
         </div>
@@ -57,11 +57,11 @@
                 echo "<label class=\"alert alert-danger\">$msg</label>";
             } ?>
         </div>
-        <!-- description's field -->
+        <!-- comment's field -->
         <div class="form-group mt-3">
-            <label for="comment">description:</label>
-            <textarea  name="description" class="form-control form-control-lg <?php echo (!empty($data['description_err'])) ? 'is-invalid' : ''; ?>" style="white-space: pre-line"><?php echo $data['description']; ?></textarea>
-            <span class="invalid-feedback"><?php echo $data['description_err']; ?></span>
+            <label for="comment">comment:</label>
+            <textarea  name="comment" class="form-control form-control-lg <?php echo (!empty($data['comment_err'])) ? 'is-invalid' : ''; ?>" style="white-space: pre-line"><?php echo $data['comment']; ?></textarea>
+            <span class="invalid-feedback"><?php echo $data['comment_err']; ?></span>
         </div>
         <div class="form-floating mt-3">
             <button type="submit" class="btn btn-primary btn-block">Update</button>
