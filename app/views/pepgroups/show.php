@@ -1,5 +1,4 @@
-<?php //echo '<pre>' . var_export($data, true) . '</pre>'; 
-?>
+<?php //echo '<pre>' . var_export($data, true) . '</pre>'; ?>
 <?php require APPROOT . '/views/includes/header.php'; ?>
 <?php flash('msg'); ?>
 
@@ -13,16 +12,18 @@
             <div class="card-body">
                 <h5 class="card-title"><?= $data->first_name . ' ' . $data->last_name ?> is a <?= $data->sex ?> born in <?php echo date('Y', strtotime('$data->birthday')); ?>.</h5>
                 <p class="card-text">
-                    <?php if (count($data->positions) > 1) :  ?>
-                        holds <?= count($data->positions) ?> positions:
+                    <?php if (count($data->groups) > 1) :  ?>
+                        belongs to <?= count($data->groups) ?> groups:
+                    <?php elseif (count($data->groups) == 1) :  ?>
+                        belongs to <?= count($data->groups) ?> group:
                     <?php else : ?>
-                        does not hold any other position.
+                        does not belong to any other group.
                     <?php endif; ?>
                 </p>
             </div>
             <div class="card-body">
                 <div class="btn-group mb-3" role="group" aria-label="Basic example">
-                    <a class="btn btn-warning" href="<?= URLROOT ?>/peptits/edit/<?= $data->id ?>"><?= I_EDIT ?> Edit</a>
+                    <a class="btn btn-warning" href="<?= URLROOT ?>/pepgroups/edit/<?= $data->id ?>"><?= I_EDIT ?> Edit</a>
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         <?= I_DELETE ?> Delete
@@ -38,10 +39,10 @@
                             </div>
                             <div class="modal-body">
                                 <p>You will not be able to restor the folowing information:</p>
-                                <p><strong><?= $data->first_name . ' ' . $data->last_name . ' holds ' . $data->title ?> title</strong></p>
+                                <p><strong><?= $data->first_name . ' ' . $data->last_name . ' belongs to ' . $data->title ?> group</strong>.</p>
                             </div>
                             <div class="modal-footer">
-                                <form action="<?php echo URLROOT; ?>/peptits/delete_peptit/<?php echo $data->id ?>" method="post">
+                                <form action="<?php echo URLROOT; ?>/pepgroups/delete_pepgroup/<?php echo $data->id ?>" method="post">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                     <form action="<?php echo URLROOT; ?>/peptits/delete_peptit/<?php echo $data->id ?>" method="post">
                                         <button type="submit" class="btn btn-danger"><?= I_EXCLAIM ?> Delete</button>
@@ -52,27 +53,27 @@
                 </div>
                 </form>
                 <div class="row row-cols-1 row-cols-md-2 g-4">
-                    <?php foreach ($data->positions as $position) : ?>
+                    <?php foreach ($data->groups as $group) : ?>
                         <div class="col">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title"><?= $position->t_title ?></h5>
-                                    <p class="card-text"><b>Position's description: </b>
-                                        <?= $position->t_description ?>
+                                    <h5 class="card-title"><?= $group->g_title ?></h5>
+                                    <p class="card-text" style="white-space: pre-line"><b>group's description: </b>
+                                        <?= $group->t_description ?>
                                     </p>
-                                    <p class="card-text">
-                                        <b><?= $data->first_name ?> description: </b><?php if (strlen($position->description) > 0) {
-                                                                                            echo $position->description;
-                                                                                        } else {
-                                                                                            echo ' no description found';
-                                                                                        } ?>
+                                    <p class="card-text" style="white-space: pre-line">
+                                        <b><?= $data->first_name ?> comment: </b><?php if (strlen($group->comment) > 0) {
+                                                                                        echo $group->comment;
+                                                                                    } else {
+                                                                                        echo ' no description found';
+                                                                                    } ?>
                                     </p>
                                 </div>
                             </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
-                <a href="<?= URLROOT ?>/peptits/add/<?= $data->p_id ?>" class="btn btn-primary mt-3"><?= I_ADD_SIGN ?> add position</a>
+                <a href="<?= URLROOT ?>/pepgroups/add/<?= $data->p_id ?>" class="btn btn-primary mt-3"><?= I_ADD_SIGN ?> add position</a>
 
             </div>
         </div>
