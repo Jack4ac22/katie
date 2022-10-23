@@ -44,11 +44,13 @@ class Phones extends Controller
             // data validation
             if (empty($_POST['number'])) {
                 $data['number_err'] = 'please insert a phone number.';
-            } elseif (!is_numeric($_POST['number'])) {
-                $data['number_err'] = 'Phone number is a number.';
+            } elseif (strip_tags(trim($_POST['number'])) !== $_POST['number']) {
+                $data['number_err'] = 'Please verify the number, it should not contain special characters.';
             }
             if (empty($_POST['description'])) {
                 $data['description'] = 'General';
+            } elseif (strip_tags(trim($_POST['description'])) !== $_POST['description']) {
+                $data['description_err'] = 'Please verify the description, it should not contain special characters.';
             }
             if ($_POST['p_id'] == 0) {
                 $data['p_id_err'] = 'please chose a person.';
@@ -92,8 +94,7 @@ class Phones extends Controller
 
     public function edit($id = 0)
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') 
-        {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
             $data = [
                 'number' => $_POST['number'],
@@ -107,14 +108,14 @@ class Phones extends Controller
             // data validation
             if (empty($_POST['number'])) {
                 $data['number_err'] = 'please insert a phone number.';
-            } elseif (!is_numeric($_POST['number'])) {
-                $data['number_err'] = 'Phone number is a number.';
+            } elseif (strip_tags(trim($_POST['number'])) !== $_POST['number']) {
+                $data['number_err'] = 'Please verify the number, it should not contain special characters.';
             }
             if (empty($_POST['description'])) {
                 $data['description'] = 'General';
             } elseif (strip_tags(trim($_POST['description'])) !== $_POST['description']) {
-                $data['description'] = 'Please verify the description, it should not contain special characters.';
-            };
+                $data['description_err'] = 'Please verify the description, it should not contain special characters.';
+            }
             if ($_POST['p_id'] == 0) {
                 $data['p_id_err'] = 'please chose a person.';
             }
@@ -211,7 +212,7 @@ class Phones extends Controller
             $phone = $this->phoneModel->get_phone_by_id($id);
             if ($phone) {
                 if (!islogged()) {
-                    redirect_to('phones');
+                    redirect_to('persons/show/' . $phone->p_id);
                 }
                 if ($this->phoneModel->delete_phone($id)) {
                     $msg = "phone number is Removed from your data base.";

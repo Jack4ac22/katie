@@ -81,10 +81,10 @@ class Pepgroup
 
     public function get_the_last()
     {
-        $this->db->query("SELECT PT.*, P.first_name, P.last_name, T.title FROM people_titles AS PT
-        INNER JOIN people AS P ON P.id = PT.p_id
-        INNER JOIN job_titles AS T ON T.id = PT.t_id
-        ORDER BY PT.id DESC
+        $this->db->query("SELECT PG.*, P.first_name, P.last_name, G.title FROM people_groups AS PG
+        INNER JOIN people AS P ON P.id = PG.p_id
+        INNER JOIN groups AS G ON G.id = PG.group_id
+        ORDER BY PG.id DESC
         LIMIT 1");
         $row = $this->db->single();
         return $row;

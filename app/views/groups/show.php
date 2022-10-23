@@ -1,12 +1,13 @@
   <?php require APPROOT . '/views/includes/header.php'; ?>
-  <a href="<?php echo URLROOT; ?>/titles" class="btn btn-light"><?= I_ARROW_L ?> Back to groups index.</a>
-  <?php //echo '<pre>' . var_export($data, true) . '</pre>'; ?>
+  <a href="<?php echo URLROOT; ?>/titles" class="btn btn-light mb-3"><?= I_ARROW_L ?> Back to groups index.</a>
+  <?php //echo '<pre>' . var_export($data, true) . '</pre>'; 
+    ?>
   <?php flash('msg'); ?>
   <?php if (islogged()) : ?>
       <div class="accordion" id="accordionPanelsStayOpenExample">
           <div class="accordion-item">
               <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                  <button class="accordion-button show" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
                       <h2 class="card-header">Info</h2>
                   </button>
               </h2>
@@ -14,7 +15,7 @@
                   <div class="accordion-body">
                       <h2 class="card-header mt-3">Group' name: <?= $data['title']['title']->title ?></h2>
                       <?php if ($data['title']['title']->description != null) : ?>
-                          <h5 class="card-title mt-3 style="white-space: pre-line"">
+                          <h5 class="card-title mt-3 style=" white-space: pre-line"">
                               Description: <?php echo $data['title']['title']->description; ?></h5>
                       <?php endif; ?>
 
@@ -52,7 +53,7 @@
           </div>
           <div class="accordion-item">
               <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                  <button class="accordion-button show" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
                       <h2 class="card-header"> People in this group:</h2>
                   </button>
               </h2>
@@ -76,7 +77,7 @@
                                               <p class="h5 mt-2" style="white-space: pre-line"><?php echo $person->comment ?></p>
                                           </div>
                                           <!-- Modal  -->
-                                          <div class="col">
+                                          <div class="col mx-2">
                                               <div class="btn-group mb-3" role="group" aria-label="Basic example">
                                                   <a href="<?php echo URLROOT . '/pepgroups/edit/' . $person->id; ?>" class="btn btn-primary"><?= I_EDIT ?> Edit</a>
                                                   <a href="<?php echo URLROOT . '/persons/show/' . $person->p_id; ?>" class="btn btn-light"><?= I_PERSON ?> Check</a>
@@ -97,7 +98,7 @@
                                                           <div class="modal-body">
                                                               If you continue, The group will NOT appear at <?= $person->first_name . ' ' . $person->last_name; ?>'s personal information page, NOR it will appear on <?= $person->title; ?> page.</div>
                                                           <div class="modal-footer">
-                                                              <form method="post" action="<?php echo URLROOT; ?>/pepgroups/delete_peptit/<?= $person->id ?>">
+                                                              <form method="post" action="<?php echo URLROOT; ?>/pepgroups/delete_pepgroup/<?= $person->id ?>">
                                                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                                   <button type="submit" class="btn btn-danger"><?= I_DELETE ?>
                                                                       delete</a>
@@ -113,14 +114,14 @@
                               <?php endforeach; ?>
 
                               <div>
-                                  <a class="btn btn-outline-secondary" href="<?php echo URLROOT . '/peptits/add/0/' . $data['title']['title']->id; ?>">Add someone else.</a>
+                                  <a class="btn btn-outline-secondary" href="<?php echo URLROOT . '/pepgroups/add/0/' . $data['title']['title']->id; ?>">Add someone else.</a>
                               </div>
 
                           <?php else : ?>
                               <div class="alert alert-warning" role="alert">
                                   <h6>No one in the database holds <?php echo $data['title']['title']->title; ?>.</h6>
                               </div>
-                              <div><a class="btn btn-outline-secondary" href="<?php echo URLROOT . '/peptits/add/0/' . $data['title']['title']->id; ?>">Add someone.</a></div>
+                              <div><a class="btn btn-outline-secondary" href="<?php echo URLROOT . '/pepgroups/add/0/' . $data['title']['title']->id; ?>">Add someone.</a></div>
 
                           <?php endif; ?>
                           </div>
@@ -141,13 +142,11 @@
           </div> -->
       </div>
 
-  <?php else: redirect_to('');  ?>
+  <?php else : redirect_to('');  ?>
   <?php endif;  ?>
 
 
-  <?php
-
-    //  echo '<pre>' . var_export($data, true) . '</pre>';
+  <?php //  echo '<pre>' . var_export($data, true) . '</pre>';    
     ?>
 
 

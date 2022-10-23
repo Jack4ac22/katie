@@ -1,6 +1,7 @@
 <?php require APPROOT . '/views/includes/header.php'; ?>
 <?php flash('msg'); ?>
-<?php //echo '<pre>' . var_export($data, true) . '</pre>'; ?>
+<?php //echo '<pre>' . var_export($data, true) . '</pre>'; 
+?>
 <div class="input-group mb-3 ">
     <a type="button" class="btn btn-primary" href="<?php echo URLROOT; ?>/pepgroups/add">
         <?= I_ADD_SIGN ?> peson / group
@@ -73,8 +74,8 @@
             </div>
         </div>
     <?php endforeach; ?>
-    < </div>
+</div>
 
 
 
-        <?php require APPROOT . '/views/includes/footer.php'; ?>
+<?php require APPROOT . '/views/includes/footer.php'; ?>

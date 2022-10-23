@@ -56,7 +56,7 @@
 
           <div class="accordion-item">
               <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
                       <h2 class="card-header"> People related to this job title </h2>
                   </button>
               </h2>

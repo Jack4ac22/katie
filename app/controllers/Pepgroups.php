@@ -128,8 +128,11 @@ class Pepgroups extends Controller
             if (empty($data['group_id_err']) && empty($data['comment_err']) && empty($data['p_id_err'])) {
 
                 if ($this->pepgroupModel->update_pepgroup($data)) {
-                    flash('msg', '<p>The group/person relation has been updated.</p> <a href="' . URLROOT . '/pepgroups/show/' . $id . '" class="alert-link">you can use this link to check</a>.');
-                    redirect_to('persons/show/' . $data['p_id']);
+                    $pepgroup = $this->pepgroupModel->get_pepgroup_by_id($id);
+                    if ($pepgroup) {
+                        flash('msg', '<p><a href="' . URLROOT . '/persons/show/' . $data['p_id'] . '" class="alert-link">' . $pepgroup->first_name . ' ' . $pepgroup->last_name . '</a> is included in <a href="' . URLROOT . '/groups/show/' . $data['group_id'] . '" class="alert-link">' . $pepgroup->title . '</a> group.</p> <p>the details of the <a href="' . URLROOT . '/pepgroups/show/' . $id . '" class="alert-link">updated version</a>.</p>');
+                        redirect_to('persons/show/' . $data['p_id']);
+                    }
                 } else {
                     flash('msg', 'Something went wrong, please try again later.');
                     $this->view('pepgroups/edit', $data);
@@ -181,7 +184,7 @@ class Pepgroups extends Controller
         }
     }
 
-    public function delete_peptit($id)
+    public function delete_pepgroup($id)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $pepgroup = $this->pepgroupModel->get_pepgroup_by_id($id);
@@ -197,7 +200,7 @@ class Pepgroups extends Controller
                     redirect_to("persons/show/$pepgroup->p_id");
                 } else {
                     $msg = "<p>Failed, please try again later.</p>";
-                    redirect_to("pepgroups/show/$pepgroup->lan_id", $msg);
+                    redirect_to("pepgroups/show/$pepgroup->group_id", $msg);
                 }
             }
         }

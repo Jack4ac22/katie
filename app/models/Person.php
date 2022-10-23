@@ -111,13 +111,26 @@ class Person
 
     public function get_person_by_id($id)
     {
+        // personal info
         $this->db->query('SELECT * FROM people WHERE id = :id');
         $this->db->bind(':id', $id);
         $row = $this->db->single();
 
+        //phones
         $this->db->query("SELECT * FROM phone_numbers WHERE p_id = :id");
         $this->db->bind(':id', $id);
         $phones = $this->db->resultSet();
+
+        //languages
+        $this->db->query("SELECT Count(PL.p_id) as l_count FROM people_languages AS PL
+        WHERE PL.p_id = :id");
+        $this->db->bind(':id', $id);
+        $l_count = $this->db->resultSet();
+        if (isset($l_count[0])) {
+            $lan_count = $l_count[0]->l_count;
+        } else {
+            $lan_count = 0;
+        }
 
         $this->db->query("SELECT L.title, L.description, L.extra, PL.levle, PL.comment, PL.lan_id, PL.id, PL.lan_id FROM people_languages AS PL 
         INNER JOIN languages AS L ON L.id = PL.lan_id
@@ -125,12 +138,24 @@ class Person
         $this->db->bind(':id', $id);
         $languages = $this->db->resultSet();
 
+        //images
+        $this->db->query("SELECT Count(I.id) as pic_count FROM imgs AS I
+        WHERE I.p_id = :id");
+        $this->db->bind(':id', $id);
+        $pic_count = $this->db->resultSet();
+        if (isset($pic_count[0])) {
+            $pictures_count = $pic_count[0]->pic_count;
+        } else {
+            $pictures_count = 0;
+        }
+
         $this->db->query("SELECT I.img_path, I.comment, I.uploaded_at, I.id FROM people AS P 
         INNER JOIN imgs AS I ON P.id = I.p_id
         WHERE P.id = :id ");
         $this->db->bind(':id', $id);
         $images = $this->db->resultSet();
 
+        //comments
         $this->db->query("SELECT Count(C.p_id) as c_count FROM people AS P
         INNER JOIN comments AS C ON P.id = C.p_id
         WHERE P.id = :id
@@ -150,13 +175,55 @@ class Person
             $comments_count = 0;
         }
 
+        //titles
+        $this->db->query("SELECT COUNT(*) AS t_count from people_titles
+        WHERE p_id = :id");
+        $this->db->bind(':id', $id);
+        $t_count = $this->db->resultSet();
+
+        $this->db->query("SELECT PT.*, T.title, T.description AS t_description FROM people_titles AS PT
+        INNER JOIN people AS P ON P.id = PT.p_id
+        INNER JOIN job_titles AS T ON T.id = PT.t_id
+        WHERE PT.p_id = :id");
+        $this->db->bind(':id', $id);
+        $titles = $this->db->resultSet();
+        if (isset($t_count[0])) {
+            $titles_count = $t_count[0]->t_count;
+        } else {
+            $titles_count = 0;
+        }
+
+        //groups
+        $this->db->query("SELECT COUNT(*) AS g_count from people_groups
+        WHERE p_id = :id");
+        $this->db->bind(':id', $id);
+        $g_count = $this->db->resultSet();
+
+        $this->db->query("SELECT PG.*, G.title, G.description AS g_description FROM people_groups AS PG
+        INNER JOIN people AS P ON P.id = PG.p_id
+        INNER JOIN groups AS G ON G.id = PG.group_id
+        WHERE PG.p_id = :id");
+        $this->db->bind(':id', $id);
+        $groups = $this->db->resultSet();
+        if (isset($g_count[0])) {
+            $groups_count = $g_count[0]->g_count;
+        } else {
+            $groups_count = 0;
+        }
+
         $person = [
             'person' => $row,
             'phones' => $phones,
             'languages' => $languages,
+            'l_count' => $lan_count,
             'comments' => $comments,
             'c_count' => $comments_count,
-            'images' => $images
+            'images' => $images,
+            'p_count' => $pictures_count,
+            'titles' => $titles,
+            't_count' =>$titles_count,
+            'groups' => $groups,
+            'g_count' =>$groups_count
 
         ];
         return $person;

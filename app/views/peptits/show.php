@@ -3,7 +3,17 @@
 <?php require APPROOT . '/views/includes/header.php'; ?>
 <?php flash('msg'); ?>
 
-<a href="<?php echo URLROOT; ?>/peptits" class="btn btn-light"><?= I_ARROW_L ?> Back to all titles/people page</a>
+<div class="container text-center">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="btn-group btn-group-lg" role="group" aria-label="Large button group">
+                <a class="btn btn-outline-primary" href="<?= URLROOT . '/persons/show/' . $data->p_id ?>"><?= $data->first_name ?>'s profil</a>
+                <a class="btn btn-outline-primary" href="<?= URLROOT . '/titles/show/' . $data->t_id ?>"><?= $data->title ?> title</a>
+                <a class="btn btn-outline-primary" href="<?= URLROOT . '/titles' ?>">All titles</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php if (islogged()) : ?>
     <?php if (isset($data->id)) : ?>
