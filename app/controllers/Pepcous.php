@@ -18,7 +18,12 @@ class Pepcous extends Controller
 
     public function index()
     {
-        $countries = $this->pepcouModel->get_all_data();
+        if ((isset($_GET['search'])) && (strlen($_GET['search'])) > 0) {
+            $search = $_GET['search'];
+        } else {
+            $search = '';
+        }
+        $countries = $this->pepcouModel->get_all_data($search);
         $data = [
             'countries' => $countries
         ];
@@ -174,6 +179,17 @@ class Pepcous extends Controller
         $pepcou = $this->pepcouModel->get_pepcou_by_id($id);
         if ($pepcou) {
             $this->view('pepcous/show', $pepcou);
+        } else {
+            flash('msg', '<p>the page which you requested does not exist, try to use other method</p>');
+            redirect_to('pages/notFound');
+        }
+    }
+
+    public function show_c($id = null)
+    {
+        $pepcou = $this->pepcouModel->get_pepcou_by_c($id);
+        if ($pepcou) {
+            $this->view('pepcous/show_c', $pepcou);
         } else {
             flash('msg', '<p>the page which you requested does not exist, try to use other method</p>');
             redirect_to('pages/notFound');
