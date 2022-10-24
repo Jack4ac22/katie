@@ -8,6 +8,20 @@ class Image
         $this->db = new Database;
     }
 
+
+    public function add_img($data)
+    {
+        $this->db->query("INSERT INTO imgs (p_id, img_path, comment) VALUES (:p_id, :img_path, :comment)");
+        $this->db->bind(':p_id', $data['p_id']);
+        $this->db->bind(':img_path', $data['img_name']);
+        $this->db->bind(':comment', $data['comment']);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function add_current_img($data)
     {
         $this->db->query("INSERT INTO imgs (p_id, img_path, comment) VALUES (:p_id, :img_path, :comment)");

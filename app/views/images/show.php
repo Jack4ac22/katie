@@ -1,5 +1,5 @@
 <?php require_once APPROOT . '/views/includes/header.php'; ?>
-<!-- <?php echo '<pre>' . var_export($data, true) . '</pre>'; ?> -->
+<?php //echo '<pre>' . var_export($data, true) . '</pre>'; ?>
 <?php flash('msg'); ?>
 <?php $img = $data['image']; ?>
 <div class="card">
