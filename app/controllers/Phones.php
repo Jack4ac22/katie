@@ -44,12 +44,12 @@ class Phones extends Controller
             // data validation
             if (empty($_POST['number'])) {
                 $data['number_err'] = 'please insert a phone number.';
-            } elseif (strip_tags(trim($_POST['number'])) !== $_POST['number']) {
+            } elseif (strip_tags($_POST['number']) !== $_POST['number']) {
                 $data['number_err'] = 'Please verify the number, it should not contain special characters.';
             }
             if (empty($_POST['description'])) {
                 $data['description'] = 'General';
-            } elseif (strip_tags(trim($_POST['description'])) !== $_POST['description']) {
+            } elseif (strip_tags($_POST['description']) !== $_POST['description']) {
                 $data['description_err'] = 'Please verify the description, it should not contain special characters.';
             }
             if ($_POST['p_id'] == 0) {

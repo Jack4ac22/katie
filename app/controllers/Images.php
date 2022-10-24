@@ -40,6 +40,7 @@ class Images extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = [
                 'p_id' => $_POST['p_id'],
+                'profile' => $_POST['profile'] ?? '',
                 'img_src' => '',
                 'comment' => $_POST['comment'],
                 'p_id_err' => '',
@@ -48,12 +49,11 @@ class Images extends Controller
             ];
 
 
-            // Is there some errors ? (disconnected, file too big...)
+            // validate the file
             if ((isset($_FILES['img']['error'])) && ($_FILES['img']['error']) != UPLOAD_ERR_OK) {
                 flash('msg', '<p>Error during upload, try again later.</p>');
                 redirect_to('images/upload/' . $p_id);
             } else {
-
 
                 // Limit the file type
                 $extension = array_search($_FILES['img']['type'], array(
@@ -62,12 +62,24 @@ class Images extends Controller
                     '.gif' => 'image/gif'
                 ));
 
-                if ($extension === false) {
+                if (($extension === false) || (!empty($data['p_id_error'])) || (!empty($data['comment_err']))) {
                     flash('msg', '<p>File must be an image.</p>');
-                    redirect_to('images/upload/' . $_POST['p_id']);
+                    redirect_to('images/upload/' . $_POST['p_id'], $data);
                 } else {
-                    $fileName = time() . '-' . $_POST['p_id'];
 
+                    //validate the data
+                    if (empty($_POST['comment'])) {
+                        $data['comment'] = 'General';
+                    } elseif (strip_tags($_POST['description']) !== $_POST['comment']) {
+                        $data['comment_err'] = 'Please verify the comment, it should not contain special characters.';
+                    }
+                    if ($_POST['p_id'] == 0) {
+                        $data['p_id_err'] = 'please chose a person.';
+                    } elseif (!isset($_POST['p_id'])) {
+                        $data['p_id_err'] = 'please chose a person.';
+                    }
+
+                    $fileName = time() . '-' . $_POST['p_id'];
                     $filePath = PUBLICROOT .  "/imgs/$fileName$extension";
 
                     if (move_uploaded_file($_FILES['img']['tmp_name'], $filePath)) {
@@ -77,14 +89,30 @@ class Images extends Controller
                             'comment' => $_POST['comment'],
                             'p_id' => $_POST['p_id']
                         ];
-                        // echo '<pre>' . var_export($data, true) . '</pre>';
 
-                        if ($this->imageModel->add_current_img($data)) {
-                            flash('msg', '<p>Image uploaded.</p><p>you can upload another picture or <a href="' . URLROOT . '/persons/show/' . $data['p_id'] . '" class="alert-link">you can use this link to check the profile</a>.</p>');
-                            redirect_to('images/upload/' . $data['p_id']);
+
+                        // echo '<pre>' . var_export($data, true) . '</pre>';
+                        if ((isset($_POST['profile'])) && ($_POST['profile'] == 'profile')) {
+                            if ($this->imageModel->add_current_img($data)) {
+                                flash('msg', '<p>Image uploaded and been asigned as a profile picture.</p><p>you can upload another picture or <a href="' . URLROOT . '/persons/show/' . $data['p_id'] . '" class="alert-link">you can use this link to check the profile</a>.</p>');
+                                redirect_to('images/upload/' . $data['p_id']);
+                            } else {
+                                flash('msg', '<p>Something went wrong, please try again later.</p>', 'alert alert-danger alert-dismissible fade show');
+                                redirect_to('images/upload/' . $data['p_id']);
+                            }
+                        } else {
+                            if ($this->imageModel->add_img($data)) {
+                                flash('msg', '<p>Image uploaded.</p><p>you can upload another picture or <a href="' . URLROOT . '/persons/show/' . $data['p_id'] . '" class="alert-link">you can use this link to check the profile</a>.</p>');
+                                redirect_to('images/upload/' . $data['p_id']);
+                            } else {
+                                flash('msg', '<p>Something went wrong, please try again later.</p>', 'alert alert-danger alert-dismissible fade show');
+                                redirect_to('images/upload/' . $data['p_id']);
+                            }
                         }
-                    } else
-                        echo 'Problem uploading the file!';
+                    } else {
+                        flash('msg', '<p>something went wron</p>');
+                        redirect_to('images/upload/' . $data['p_id']);
+                    }
                 }
             }
         } else {
