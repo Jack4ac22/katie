@@ -6,8 +6,7 @@
     <div class="col-4">
         <div class="input-group mb-3">
             <!-- <label for="exampleDataList" class="form-label">Datalist example</label> -->
-            <input type="search" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." value="            
-            <?php if ((isset($_GET['search'])) && (strlen($_GET['search']) > 0)) {
+            <input type="search" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." value="<?php if ((isset($_GET['search'])) && (strlen($_GET['search']) > 0)) {
                 echo $_GET['search'];
             } ?>" name="search">
             <datalist id="datalistOptions">
@@ -33,12 +32,7 @@
             <div class="accordion-item">
                 <h2 class="accordion-header" id="panelsStayOpen-heading-<?= $country->num_code ?>">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse-<?= $country->num_code ?>" aria-expanded="true" aria-controls="panelsStayOpen-collapse-<?= $country->num_code ?>">
-                        <div class="row">
-                            <div class="col-auto me-auto">
-                                <h3 style="white-space: pre-line"><?= $country->alpha_2_code ?> - <?= $country->alpha_3_code ?> - <?= $country->en_short_name ?></h3>
-                            </div>
-                            <div class="col-auto"><a href="<?= URLROOT . '/pepcous/show_c/' . $country->num_code ?>" class="btn btn-light"> check this country</a></div>
-                        </div>
+                        <h3 style="white-space: pre-line"><?= $country->alpha_2_code ?> - <?= $country->alpha_3_code ?> - <?= $country->en_short_name ?></h3>
                     </button>
                 </h2>
                 <div id="panelsStayOpen-collapse-<?= $country->num_code ?>" class="accordion-collapse collapse collapsed" aria-labelledby="panelsStayOpen-heading-<?= $country->num_code ?>">
@@ -89,6 +83,11 @@
                                     </div>
                                 <?php endif; ?>
                             <?php endforeach; ?>
+                        </div>
+                        <div class="input-country mb-3 ">
+                            <a type="button" class="btn btn-primary" href="<?php echo URLROOT; ?>/pepcous/add/0/<?= $country->num_code ?>">
+                                <?= I_ADD_SIGN ?> someone
+                            </a>
                         </div>
                     </div>
                 </div>

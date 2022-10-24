@@ -77,11 +77,12 @@ class Person
 
     public function add_person($data)
     {
-        $this->db->query("INSERT INTO people (first_name, last_name, sex, email, added_by) VALUES (:first_name, :last_name, :sex, :email, :added_by)");
+        $this->db->query("INSERT INTO people (first_name, last_name, sex, email, birthday, added_by) VALUES (:first_name, :last_name, :sex, :email, :birthday, :added_by)");
         $this->db->bind('first_name', $data['first_name']);
         $this->db->bind('last_name', $data['last_name']);
         $this->db->bind('sex', $data['sex']);
         $this->db->bind('email', $data['email']);
+        $this->db->bind('birthday', $data['birthday']);
         $this->db->bind('added_by', $data['added_by']);
         if ($this->db->execute()) {
             return true;
@@ -211,6 +212,24 @@ class Person
             $groups_count = 0;
         }
 
+        //passports
+        $this->db->query("SELECT COUNT(*) AS t_count from people_countries
+        WHERE p_id = :id");
+        $this->db->bind(':id', $id);
+        $t_count = $this->db->resultSet();
+
+        $this->db->query("SELECT PC.*, C.* FROM people_countries AS PC
+        INNER JOIN people AS P ON P.id = PC.p_id
+        INNER JOIN countries AS C ON C.num_code = PC.c_id
+        WHERE PC.p_id = :id");
+        $this->db->bind(':id', $id);
+        $nationalities = $this->db->resultSet();
+        if (isset($t_count[0])) {
+            $nationalities_count = $t_count[0]->t_count;
+        } else {
+            $nationalities_count = 0;
+        }
+
         $person = [
             'person' => $row,
             'phones' => $phones,
@@ -221,9 +240,11 @@ class Person
             'images' => $images,
             'p_count' => $pictures_count,
             'titles' => $titles,
-            't_count' =>$titles_count,
+            't_count' => $titles_count,
             'groups' => $groups,
-            'g_count' =>$groups_count
+            'g_count' => $groups_count,
+            'passports' => $nationalities,
+            'n_count' => $nationalities_count
 
         ];
         return $person;
@@ -251,11 +272,12 @@ class Person
 
     public function edit_person($data)
     {
-        $this->db->query("UPDATE people SET first_name = :first_name, last_name = :last_name, email= :email, sex= :sex WHERE people.id = :id");
+        $this->db->query("UPDATE people SET first_name = :first_name, last_name = :last_name, email= :email, sex= :sex, birthday= :birthday WHERE people.id = :id");
         $this->db->bind(':first_name', $data['first_name']);
         $this->db->bind(':last_name', $data['last_name']);
         $this->db->bind(':sex', $data['sex']);
         $this->db->bind(':email', $data['email']);
+        $this->db->bind(':birthday', $data['birthday']);
         $this->db->bind(':id', $data['id']);
         if ($this->db->execute()) {
             return true;

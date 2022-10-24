@@ -1,4 +1,7 @@
 <?php require_once APPROOT . '/views/includes/header.php'; ?>
+<?php //echo '<pre>' . var_export($data, true) . '</pre>'; 
+?>
+
 <div class="row">
     <div class="col-md-10 col-xl-10 col-xxl-8 mx-auto">
         <div class="car card-body bg-light mt-5 p-2">
@@ -19,7 +22,6 @@
                     <input type="text" class="form-control <?php echo (!empty($data['email_error'])) ? "is-invalid" : ''; ?>" id="email" placeholder="first name." value="<?php echo $data['email']; ?>" name="email">
                     <label for="email"><?php echo (!empty($data['email_error'])) ? $data['email_error'] : 'Email address'; ?></label>
                 </div>
-
                 <div class="form-floating m-3">
                     <fieldset class="row mb-3" name="sex">
                         <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
@@ -42,6 +44,10 @@
                             </div>
                         </div>
                     </fieldset>
+                </div>
+                <div class="form-floating m-3">
+                    <input type="date" class="form-control <?php echo (!empty($data['birthday_error'])) ? "is-invalid" : ''; ?>" id="birthday" placeholder="first name." value="<?php echo $data['birthday']; ?>" name="birthday">
+                    <label for="birthday"><?php echo (!empty($data['birthday_error'])) ? $data['birthday_error'] : 'Birthday'; ?></label>
                 </div>
                 <div class="row ">
                     <div class="col m-3">

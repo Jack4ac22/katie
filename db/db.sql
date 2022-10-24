@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Oct 21, 2022 at 11:31 PM
+-- Generation Time: Oct 24, 2022 at 02:49 PM
 -- Server version: 5.7.34
 -- PHP Version: 8.0.8
 
@@ -44,7 +44,11 @@ CREATE TABLE `comments` (
 INSERT INTO `comments` (`id`, `p_id`, `value`, `title`, `text`, `created_at`, `edited_at`) VALUES
 (1, 56, 70, 'I am a comment, very important', 'What is Lorem Ipsum?\r\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\r\n\r\nWhy do we use it?\r\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\r\n\r\n\r\nWhere does it come from?\r\nContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of &quot;de Finibus Bonorum et Malorum&quot; (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, &quot;Lorem ipsum dolor sit amet..&quot;, comes from a line in section 1.10.32.\r\n\r\nThe standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from &quot;de Finibus Bonorum et Malorum&quot; by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.', '2022-10-21 15:34:11', '2022-10-21 15:35:00'),
 (2, 56, 60, 'I am another comment', 'not so important. \r\nWhat is Lorem Ipsum?\r\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\r\n\r\nWhy do we use it?\r\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\r\n\r\n\r\nWhere does it come from?\r\nContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.\r\n\r\nThe standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.', '2022-10-21 15:34:31', '2022-10-21 15:34:31'),
-(3, 56, 100, 'Hi, read me please', 'What is Lorem Ipsum?\r\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\r\n\r\nWhy do we use it?\r\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\r\n\r\n\r\nWhere does it come from?\r\nContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.\r\n\r\nThe standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.', '2022-10-21 15:34:47', '2022-10-21 15:34:47');
+(3, 56, 100, 'Hi, read me please', 'What is Lorem Ipsum?\r\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\r\n\r\nWhy do we use it?\r\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\r\n\r\n\r\nWhere does it come from?\r\nContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.\r\n\r\nThe standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.', '2022-10-21 15:34:47', '2022-10-21 15:34:47'),
+(5, 53, 70, 'something', 'something\r\nsomething... thing and other', '2022-10-23 16:40:47', '2022-10-23 16:40:47'),
+(7, 55, 10, 'test  asd', 'some comments to test\r\ntest', '2022-10-23 19:31:32', '2022-10-23 19:32:05'),
+(8, 46, 70, 'uuu', 'mkjhkjh\r\n;k;lk\r\n', '2022-10-23 21:37:42', '2022-10-23 21:37:42'),
+(9, 42, 50, 'nice meeting', 'it was nice to meet with this person, I believe we can work together.\r\n', '2022-10-24 09:16:37', '2022-10-24 09:16:37');
 
 -- --------------------------------------------------------
 
@@ -53,7 +57,7 @@ INSERT INTO `comments` (`id`, `p_id`, `value`, `title`, `text`, `created_at`, `e
 --
 
 CREATE TABLE `countries` (
-  `num_code` int(3) NOT NULL DEFAULT 0,
+  `num_code` int(3) NOT NULL DEFAULT '0',
   `alpha_2_code` varchar(2) DEFAULT NULL,
   `alpha_3_code` varchar(3) DEFAULT NULL,
   `en_short_name` varchar(52) DEFAULT NULL,
@@ -335,9 +339,10 @@ CREATE TABLE `groups` (
 --
 
 INSERT INTO `groups` (`id`, `title`, `description`, `count`, `created_at`, `edited_at`) VALUES
-(1, 'brave', 'some fighters', NULL, '2022-10-08 22:33:36', '2022-10-08 20:33:21'),
+(1, 'Brave', 'some fighters\r\nthey fight every night.', NULL, '2022-10-08 22:33:36', '2022-10-22 22:09:50'),
 (3, 'gladiators', 'Arena heros', NULL, '2022-10-08 22:33:36', '2022-10-08 20:33:21'),
-(4, 'sleeper', 'bed lovers who stay up late and sleep till noon.', NULL, '2022-10-08 22:34:51', '2022-10-08 20:34:17');
+(4, 'sleeper', 'bed lovers who stay up late and sleep till noon.', NULL, '2022-10-08 22:34:51', '2022-10-08 20:34:17'),
+(10, 'test', 'test', NULL, '2022-10-23 16:16:57', NULL);
 
 -- --------------------------------------------------------
 
@@ -359,10 +364,7 @@ CREATE TABLE `imgs` (
 
 INSERT INTO `imgs` (`id`, `p_id`, `img_path`, `comment`, `uploaded_at`) VALUES
 (18, 56, '1666201103-56.jpg', '', '2022-10-19 19:38:23'),
-(21, 45, '1666210831-45.jpg', '', '2022-10-19 22:20:31'),
-(22, 45, '1666210839-45.jpg', '', '2022-10-19 22:20:39'),
-(24, 55, '1666249335-55.jpg', 'Orlando when will be aged', '2022-10-20 09:02:15'),
-(29, 52, '1666351162-52.jpg', 'no comments\r\n', '2022-10-21 13:19:22');
+(24, 55, '1666249335-55.jpg', 'Orlando when will be aged', '2022-10-20 09:02:15');
 
 -- --------------------------------------------------------
 
@@ -381,7 +383,6 @@ CREATE TABLE `job_titles` (
 --
 
 INSERT INTO `job_titles` (`id`, `title`, `description`) VALUES
-(1, 'something', 'something'),
 (2, 'My best work', 'not that important'),
 (8, 'presedent', 'this title belong to me alone'),
 (10, 'jack title', 'this is a work that only jack can do'),
@@ -438,21 +439,51 @@ CREATE TABLE `people` (
 --
 
 INSERT INTO `people` (`id`, `first_name`, `last_name`, `sex`, `email`, `img`, `birthday`, `created_at`, `edited_at`, `added_by`) VALUES
-(42, 'Alfonso', 'Martinho', 'male', 'AM@gmail.com', '', NULL, '2022-10-13 20:23:47', '2022-10-19 21:28:49', 16),
+(42, 'Alfonso', 'Martinho', 'male', 'AM@gmail.com', NULL, '1980-10-22', '2022-10-13 20:23:47', '2022-10-24 11:02:26', 16),
 (43, 'Bethany', 'Bernando', 'female', 'Bernando@gmail.com', NULL, NULL, '2022-10-13 20:24:10', '2022-10-19 18:36:31', 16),
 (44, 'Captin', 'Boolean', 'male', 'Salty@gmail.com', NULL, NULL, '2022-10-13 20:24:46', '2022-10-14 16:09:09', 16),
-(45, 'Ebrahim', 'Salto', 'male', 'e.salto@gmail.com', '1666210839-45.jpg', NULL, '2022-10-13 20:25:30', '2022-10-19 22:20:39', 16),
+(45, 'Ebrahim', 'Salto', 'male', 'e.salto@gmail.com', NULL, '1990-01-23', '2022-10-13 20:25:30', '2022-10-24 11:02:38', 16),
 (46, 'Fredrick', 'Labo', 'male', 'labo@gmail.com', NULL, NULL, '2022-10-13 20:26:09', NULL, 16),
-(47, 'George', 'Creepo', 'male', 'smily_g@gmail.com', NULL, NULL, '2022-10-13 20:26:42', NULL, 16),
+(47, 'George', 'Creepo', 'male', 'smily_g@gmail.com', NULL, '1970-02-03', '2022-10-13 20:26:42', '2022-10-24 11:02:54', 16),
 (48, 'Haroot', 'Bebayan', 'male', 'h.b@gmail.com', NULL, NULL, '2022-10-13 20:27:09', '2022-10-19 18:36:43', 16),
 (49, 'Israel', 'beni', 'male', 'I.beni@gmail.com', NULL, NULL, '2022-10-13 20:27:42', NULL, 16),
-(50, 'Jessica', 'Lufy', 'female', 'jessica_L@gmail.com', NULL, NULL, '2022-10-13 20:28:13', '2022-10-19 18:36:41', 16),
 (51, 'Kathren', 'Sorbonne', 'female', 'kasor@gmail.com', NULL, NULL, '2022-10-13 20:29:54', NULL, 16),
-(52, 'Linda', 'sweet', 'female', 'lsweet@gmail.com', '1666351162-52.jpg', NULL, '2022-10-13 20:30:13', '2022-10-21 13:19:22', 16),
-(53, 'Marcos', 'Pavoto', 'male', 'pavma@gmail.com', NULL, NULL, '2022-10-13 20:30:45', NULL, 16),
-(54, 'Nona', 'Pretty', 'female', 'sweet_n@gmail.com', NULL, NULL, '2022-10-13 20:31:08', '2022-10-21 11:52:15', 16),
-(55, 'Orlando', 'boxer', 'male', 'ob@gmail.com', '1666249335-55.jpg', NULL, '2022-10-13 20:31:29', '2022-10-20 09:02:15', 16),
-(56, 'Patrick', 'Mano', 'male', 'mano_p@gmail.com', '1666201103-56.jpg', NULL, '2022-10-13 20:32:43', '2022-10-20 10:39:31', 16);
+(52, 'Linda', 'sweet', 'female', 'lsweet@gmail.com', NULL, NULL, '2022-10-13 20:30:13', '2022-10-24 09:19:48', 16),
+(53, 'Marcos', 'Pavoto', 'male', 'pavma@gmail.com', NULL, NULL, '2022-10-13 20:30:45', '2022-10-24 09:20:33', 16),
+(54, 'Nona', 'Pretty', 'female', 'sweet_n@gmail.com', NULL, '1973-10-05', '2022-10-13 20:31:08', '2022-10-22 10:20:23', 16),
+(55, 'Orlando', 'boxer', 'male', 'ob@gmail.com', NULL, NULL, '2022-10-13 20:31:29', '2022-10-24 09:21:03', 16),
+(56, 'Patrick', 'Mano', 'male', 'mano_p@gmail.com', NULL, NULL, '2022-10-13 20:32:43', '2022-10-24 09:21:06', 16),
+(69, 'test', 'testing', 'female', 'test@test.com', NULL, '3214-02-02', '2022-10-24 12:42:35', NULL, 16),
+(70, 'asdasd', 'asdasd', 'female', 'asd@asdasd', NULL, '1982-09-22', '2022-10-24 12:52:09', '2022-10-24 12:56:52', 16);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `people_countries`
+--
+
+CREATE TABLE `people_countries` (
+  `id` int(11) NOT NULL,
+  `p_id` int(11) NOT NULL,
+  `c_id` int(11) NOT NULL,
+  `comment` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `people_countries`
+--
+
+INSERT INTO `people_countries` (`id`, `p_id`, `c_id`, `comment`) VALUES
+(2, 43, 4, 'aaa\r\naaa\r\naaaasdadaad\r\n'),
+(3, 44, 4, 'asdqqweqweasdad'),
+(4, 45, 4, 'dddddd'),
+(5, 43, 28, 'aaaaadsasds'),
+(6, 42, 36, 'dddsad\r\nasd'),
+(8, 54, 4, 'adasdads'),
+(9, 46, 8, 'test'),
+(10, 54, 8, 'aa'),
+(11, 55, 4, '\'\'\''),
+(12, 43, 470, 'jhg');
 
 -- --------------------------------------------------------
 
@@ -461,9 +492,35 @@ INSERT INTO `people` (`id`, `first_name`, `last_name`, `sex`, `email`, `img`, `b
 --
 
 CREATE TABLE `people_groups` (
+  `id` int(11) NOT NULL,
   `group_id` int(11) NOT NULL,
-  `p_id` int(11) NOT NULL
+  `p_id` int(11) NOT NULL,
+  `comment` text,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `people_groups`
+--
+
+INSERT INTO `people_groups` (`id`, `group_id`, `p_id`, `comment`, `created_at`) VALUES
+(1, 1, 54, 'dd', '2022-10-22 20:05:04'),
+(2, 4, 46, 'kkkjjjkjkjkjkjkjkj', '2022-10-22 20:05:04'),
+(3, 1, 51, 'aassaassasasas', '2022-10-22 20:05:04'),
+(4, 1, 53, 'ssdsdsdsdddsdsd', '2022-10-22 20:05:04'),
+(6, 4, 54, 'xxxcxcxccxxc', '2022-10-22 20:05:04'),
+(8, 1, 56, 'zdddzddzd', '2022-10-22 20:05:04'),
+(9, 3, 48, 'gtgtggtg', '2022-10-22 20:05:04'),
+(10, 3, 47, 'hghgh', '2022-10-22 20:05:04'),
+(11, 3, 46, 'kkjhs df', '2022-10-22 20:05:04'),
+(12, 4, 44, 'jack /n ;slkf;lksf', '2022-10-22 20:05:04'),
+(13, 4, 45, 'sdfsferrbrbtb', '2022-10-22 20:05:04'),
+(14, 4, 43, 'bgbgbgbtbtgb', '2022-10-22 20:05:04'),
+(15, 4, 42, 'hnhnhnynynnh', '2022-10-22 20:05:04'),
+(18, 1, 42, 'aadd\r\nddadad', '2022-10-23 16:13:25'),
+(19, 1, 52, 'ddssaa', '2022-10-23 16:14:12'),
+(23, 10, 42, 'aaa', '2022-10-23 16:19:42'),
+(24, 10, 51, 'aaa\r\nbbb', '2022-10-23 16:20:07');
 
 -- --------------------------------------------------------
 
@@ -484,10 +541,9 @@ CREATE TABLE `people_languages` (
 --
 
 INSERT INTO `people_languages` (`id`, `p_id`, `lan_id`, `levle`, `comment`) VALUES
-(69, 50, 9, '75', ''),
 (70, 46, 9, '25', ''),
 (85, 45, 11, '100', 'lorem a;lskjd apwoj mvn ,xmnvc\r\nlaskdj alksdj pawojd lakjf sd'),
-(86, 46, 10, '75', 'well, speaking has a shy personality, and can be relyed on!'),
+(86, 46, 10, '75', 'well, speaking has a shy personality\r\nand can be relyed on!'),
 (87, 55, 11, '50', 'nice accent, Brazilian.'),
 (88, 55, 9, '50', 'facing some difficulties to express, but understandable language.'),
 (90, 43, 11, '75', ''),
@@ -507,7 +563,10 @@ INSERT INTO `people_languages` (`id`, `p_id`, `lan_id`, `levle`, `comment`) VALU
 (112, 45, 5, '25', 'ssad'),
 (115, 48, 10, '50', 'nice'),
 (118, 56, 9, '100', 'mother tongue'),
-(119, 52, 9, '75', 'no comment, has an accent?');
+(119, 52, 9, '75', 'no comment, has an accent?'),
+(125, 42, 5, '25', ''),
+(126, 42, 9, '75', '\'\''),
+(127, 42, 11, '50', 'like');
 
 -- --------------------------------------------------------
 
@@ -527,19 +586,17 @@ CREATE TABLE `people_titles` (
 --
 
 INSERT INTO `people_titles` (`id`, `t_id`, `p_id`, `description`) VALUES
-(1, 12, 43, 'asdasdad a'),
-(2, 20, 50, ''),
-(3, 15, 54, 'ddassd'),
-(4, 1, 51, 'ddsdasd'),
-(5, 21, 50, 'Lorem Ipsum is simply dummy text of the printing and \r\n'),
-(6, 1, 54, 'to electronic typesetting, remaining essentially unchanged. \r\n\r\n'),
-(7, 10, 50, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make \r\n\r\n'),
-(10, 1, 44, 'Lorem Ipsum is simply d\r\nt to make a type specimen book.\\\r\nning essentially unchanged. \r\n\r\n\r\n'),
-(11, 2, 45, 'Lorem Ipsum is \r\n\r\n\r\n\r\n'),
-(12, 2, 47, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has  alley electronic typesetting, remaining essentially unchanged. \r\n\r\n\r\n'),
+(11, 2, 45, 'a'),
 (13, 21, 43, 'best'),
 (14, 10, 52, 'bestysasd'),
-(15, 2, 43, ' asdasdasd');
+(15, 2, 43, ' asdasdasd'),
+(16, 18, 54, 'test * \r\n* test\r\nshe might be a queen, but she is just a local queen in a small community.\r\nthere are other people who hold this position.'),
+(21, 8, 42, 'aa\r\n ss dd'),
+(22, 8, 44, 'something about something'),
+(25, 21, 55, 'asd\r\nasd\r\n\r\na'),
+(26, 2, 55, 'a'),
+(27, 8, 46, 'kjhkjh'),
+(28, 21, 46, 'jkhkjhkjh');
 
 -- --------------------------------------------------------
 
@@ -549,7 +606,7 @@ INSERT INTO `people_titles` (`id`, `t_id`, `p_id`, `description`) VALUES
 
 CREATE TABLE `phone_numbers` (
   `id` int(11) NOT NULL,
-  `number` bigint(20) NOT NULL,
+  `number` varchar(256) NOT NULL,
   `p_id` int(11) DEFAULT NULL,
   `description` varchar(255) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -561,25 +618,25 @@ CREATE TABLE `phone_numbers` (
 --
 
 INSERT INTO `phone_numbers` (`id`, `number`, `p_id`, `description`, `created_at`, `edited_at`) VALUES
-(1, 888718827131, NULL, 'removed', '2022-10-08 19:01:51', '2022-10-08 17:01:23'),
-(2, 332332332, NULL, 'brother', '2022-10-08 19:01:51', '2022-10-08 17:01:23'),
-(3, 99009900990099, NULL, 'test test test', '2022-10-08 19:01:51', '2022-10-08 17:01:23'),
-(24, 99009900990099, NULL, 'asdasdada', '2022-10-11 09:16:28', NULL),
-(25, 123111, NULL, '2321312', '2022-10-11 09:46:30', NULL),
-(42, 123456789, 55, 'personal', '2022-10-13 20:33:17', NULL),
-(44, 32456788913, 56, 'mother', '2022-10-13 20:33:55', NULL),
-(46, 771223123, 49, 'General', '2022-10-13 21:31:50', NULL),
-(48, 4432512345, 49, 'General', '2022-10-13 21:32:16', NULL),
-(49, 12312341255213, 53, 'private / emergency', '2022-10-13 21:32:40', NULL),
-(52, 12313323, 43, 'Please verify the description, it should not contain special characters.', '2022-10-15 17:47:43', NULL),
-(53, 33213333, 52, 'ads', '2022-10-18 23:57:21', NULL),
-(54, 998808880, 51, 'privet', '2022-10-18 23:58:14', NULL),
-(55, 21020203, 46, 'test test test', '2022-10-18 23:59:17', NULL),
-(56, 2223332222, 54, 'General', '2022-10-19 00:00:19', NULL),
-(57, 13213123123, 45, 'General', '2022-10-19 21:35:09', NULL),
-(58, 1233333, 45, 'asd', '2022-10-19 21:36:02', NULL),
-(59, 990123, 55, 'net', '2022-10-19 21:37:43', NULL),
-(66, 9988776655, 56, 'personal privte.', '2022-10-20 10:40:03', NULL);
+(1, '888718827131', NULL, 'removed', '2022-10-08 19:01:51', '2022-10-08 17:01:23'),
+(2, '332332332', NULL, 'brother', '2022-10-08 19:01:51', '2022-10-08 17:01:23'),
+(3, '99009900990099', NULL, 'test test test', '2022-10-08 19:01:51', '2022-10-08 17:01:23'),
+(24, '99009900990099', NULL, 'asdasdada', '2022-10-11 09:16:28', NULL),
+(25, '123111', NULL, '2321312', '2022-10-11 09:46:30', NULL),
+(42, '123456789', 55, 'personal', '2022-10-13 20:33:17', NULL),
+(44, '32456788913', 56, 'mother', '2022-10-13 20:33:55', NULL),
+(46, '771223123', 49, 'General', '2022-10-13 21:31:50', NULL),
+(48, '4432512345', 49, 'General', '2022-10-13 21:32:16', NULL),
+(49, '12312341255213', 53, 'private / emergency', '2022-10-13 21:32:40', NULL),
+(52, '12313323', 43, 'Please verify the description, it should not contain special characters.', '2022-10-15 17:47:43', NULL),
+(53, '33213333', 52, 'ads', '2022-10-18 23:57:21', NULL),
+(54, '998808880', 51, 'privet', '2022-10-18 23:58:14', NULL),
+(55, '21020203', 46, 'test test test', '2022-10-18 23:59:17', NULL),
+(56, '2223332222', 54, 'General', '2022-10-19 00:00:19', NULL),
+(57, '13213123123', 45, 'General', '2022-10-19 21:35:09', NULL),
+(58, '1233333', 45, 'asd', '2022-10-19 21:36:02', NULL),
+(59, '990123', 55, 'net', '2022-10-19 21:37:43', NULL),
+(66, '9988776655', 56, 'personal privte.', '2022-10-20 10:40:03', NULL);
 
 -- --------------------------------------------------------
 
@@ -658,7 +715,8 @@ ALTER TABLE `countries`
 -- Indexes for table `groups`
 --
 ALTER TABLE `groups`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `search` (`title`(50),`description`(50));
 
 --
 -- Indexes for table `imgs`
@@ -688,9 +746,18 @@ ALTER TABLE `people`
   ADD KEY `people_ibfk_1` (`added_by`);
 
 --
+-- Indexes for table `people_countries`
+--
+ALTER TABLE `people_countries`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `person` (`p_id`),
+  ADD KEY `country` (`c_id`);
+
+--
 -- Indexes for table `people_groups`
 --
 ALTER TABLE `people_groups`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `p_id` (`p_id`),
   ADD KEY `people_groups_ibfk_1` (`group_id`);
 
@@ -745,19 +812,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `imgs`
 --
 ALTER TABLE `imgs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `job_titles`
@@ -775,25 +842,37 @@ ALTER TABLE `languages`
 -- AUTO_INCREMENT for table `people`
 --
 ALTER TABLE `people`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+
+--
+-- AUTO_INCREMENT for table `people_countries`
+--
+ALTER TABLE `people_countries`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `people_groups`
+--
+ALTER TABLE `people_groups`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `people_languages`
 --
 ALTER TABLE `people_languages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
 
 --
 -- AUTO_INCREMENT for table `people_titles`
 --
 ALTER TABLE `people_titles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `phone_numbers`
 --
 ALTER TABLE `phone_numbers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `timezones`
@@ -828,6 +907,13 @@ ALTER TABLE `imgs`
 --
 ALTER TABLE `people`
   ADD CONSTRAINT `people_ibfk_1` FOREIGN KEY (`added_by`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
+
+--
+-- Constraints for table `people_countries`
+--
+ALTER TABLE `people_countries`
+  ADD CONSTRAINT `country` FOREIGN KEY (`c_id`) REFERENCES `countries` (`num_code`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `person` FOREIGN KEY (`p_id`) REFERENCES `people` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `people_groups`

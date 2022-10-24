@@ -69,7 +69,7 @@ class Pepcous extends Controller
             if ((empty($data['c_id_err'])) && (empty($data['p_id_err'])) && (empty($data['comment_err']))) {
                 if ($this->pepcouModel->add_nationality_to_person($data)) {
                     $last = $this->pepcouModel->get_the_last();
-                    flash('msg', '<p><a href="' . URLROOT . '/persons/show/' . $last->p_id . '" class="alert-link">' . $last->first_name . $last->last_name . '</a> is <a href="' . URLROOT . '/pepcous/show_c/' . $last->c_id . '" class="alert-link">' . $last->nationality . '</a>.</p>');
+                    flash('msg', '<p><a href="' . URLROOT . '/persons/show/' . $last->p_id . '" class="alert-link">' . $last->first_name .' '. $last->last_name . '</a> is <a href="' . URLROOT . '/pepcous/show_c/' . $last->c_id . '" class="alert-link">' . $last->nationality . '</a>.</p>');
                     redirect_to('/persons/show/' . $last->p_id);
                 } else {
                     flash('msg', 'Something went wrong, please try again later.', 'alert alert-danger alert-dismissible fade show');

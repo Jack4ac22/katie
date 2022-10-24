@@ -41,22 +41,29 @@ class Persons extends Controller
             } else {
                 $gender = $_POST['sex'];
             }
+            $d = strtotime($_POST['birthday']);
+            $birthday = date("Y-m-d", $d);
             $data = [
-                'first_name' => trim($_POST['first_name']),
-                'last_name' => trim($_POST['last_name']),
+                'first_name' => $_POST['first_name'],
+                'last_name' => $_POST['last_name'],
                 'sex' =>  $gender,
-                'email' => trim($_POST['email']),
+                'email' => $_POST['email'],
+                'birthday' => $birthday,
                 'added_by' => $_SESSION['user_id'],
                 'first_name_error' => '',
                 'last_name_error' => '',
                 'sex_error' => '',
-                'email_error' => ''
+                'email_error' => '',
+                'birthday_error' => ''
             ];
+
+
+
             //validation
             #first_name
             if (empty($data['first_name'])) {
                 $data['first_name_error'] = 'First name is required.';
-            } elseif (strip_tags(trim($_POST['first_name'])) !== $_POST['first_name']) {
+            } elseif (strip_tags($_POST['first_name']) !== $_POST['first_name']) {
                 $data['first_name_error'] = 'Please verify the name, it should not contain special characters.';
             };
 
@@ -94,7 +101,7 @@ class Persons extends Controller
                 $this->view('persons/add', $data);
             }
         } else {
-            $data = ['first_name' => '', 'last_name' => '', 'sex' => '', 'email' => ''];
+            $data = ['first_name' => '', 'last_name' => '', 'sex' => '', 'email' => '', 'birthday' => ''];
             $this->view('persons/add', $data);
         }
     }
@@ -127,15 +134,19 @@ class Persons extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
+            $d = strtotime($_POST['birthday']);
+            $birthday = date("Y-m-d", $d);
             $data = [
                 'id' => $id,
                 'first_name' => trim($_POST['first_name']),
                 'last_name' => trim($_POST['last_name']),
                 'sex' =>  trim($_POST['sex']),
                 'email' => trim($_POST['email']),
+                'birthday' => $birthday,
                 'first_name_error' => '',
                 'last_name_error' => '',
                 'sex_error' => '',
+                'birthday_error' => '',
                 'email_error' => ''
             ];
 
@@ -189,7 +200,8 @@ class Persons extends Controller
                     'first_name' => $person->first_name,
                     'last_name' => $person->last_name,
                     'email' => $person->email,
-                    'sex' => $person->sex
+                    'sex' => $person->sex,
+                    'birthday' => $person->birthday
                 ];
                 $this->view('persons/edit', $data);
             } else {
