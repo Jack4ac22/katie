@@ -1,6 +1,6 @@
   <?php require APPROOT . '/views/includes/header.php'; ?>
   <?php flash('msg'); ?>
-  <?php echo '<pre>' . var_export($data, true) . '</pre>'; ?>
+  <?php //echo '<pre>' . var_export($data['timezones'], true) . '</pre>'; ?>
 
   <?php if (isset($data['p_id']) && ($data['p_id'] > 0)) : ?>
       <a href="<?= URLROOT ?>/persons/show/<?= $data['p_id'] ?>" class="btn btn-light"><?= I_ARROW_L ?> Back to the person's page</a>
@@ -20,7 +20,7 @@
       <form action="<?php echo URLROOT; ?>/timezones/add" method="post">
           <!-- //group field -->
           <div class="form-group mt-3">
-              <label for="group ">Chose the timezone.</label>
+              <label for="group ">Select the timezone.</label>
               <span class="invalid-feedback"><?php echo $data['c_id_err']; ?></span>
               <select class="form-select mt-1" aria-label="Default select example" name="t_id">
                   ?>
@@ -55,6 +55,16 @@
                     $msg = $data['p_id_err'];
                     echo "<label class=\"alert alert-danger\">$msg</label>";
                 } ?>
+          </div>
+          <div class="form-group mt-3">
+              <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="status" id="flexCheckIndeterminate" name="status" <?php if ((isset($_POST['status'])) && ($_POST['status'] == 'status')) {
+                                                                                                                                    echo 'checked';
+                                                                                                                                } ?>>
+                  <label class="form-check-label" for="flexCheckIndeterminate">
+                      set as the current timezone
+                  </label>
+              </div>
           </div>
           <div class="form-floating mt-3">
               <button type="submit" class="btn btn-primary btn-block"> add</button>

@@ -84,6 +84,8 @@ class Timezones extends Controller
             $data = [
                 't_id' => $_POST['t_id'],
                 'p_id' => $_POST['p_id'],
+                'status' => $_POST['status'] ?? null,
+                'status_err' => '',
                 't_id_err' => '',
                 'p_id_err' => ''
             ];
@@ -100,22 +102,32 @@ class Timezones extends Controller
             }
 
             if ((empty($data['t_id_err'])) && (empty($data['p_id_err']))) {
-                die('stiop');
-                if ($this->timezoneModel->add_timezone_to_person($data)) {
-                    $last = $this->timezoneModel->get_the_last();
-                    flash('msg', '<p><a href="' . URLROOT . '/persons/show/' . $last->p_id . '" class="alert-link">' . $last->first_name . ' ' . $last->last_name . '</a> is <a href="' . URLROOT . '/timezones/show_t/' . $last->t_id . '" class="alert-link">' . $last->timezone . '</a>.</p>');
-                    redirect_to('/persons/show/' . $last->p_id);
+
+                if ((isset($_POST['status'])) && ($_POST['status'] == 'status')) {
+                    if ($this->timezoneModel->add_current_timezone_to_person($data)) {
+                        $last = $this->timezoneModel->get_the_last();
+                        flash('msg', '<p><a href="' . URLROOT . '/timezones/show_t/' . $last->t_id . '" class="alert-link">' . $last->timezone . '</a> is assigned to ' . '<a href="' . URLROOT . '/persons/show/' . $last->p_id . '" class="alert-link">' . $last->first_name . ' ' . $last->last_name . '</a> and it is the current living time zone.</p>');
+                        redirect_to('/persons/show/' . $last->p_id);
+                    } else {
+                        flash('msg', 'Something went wrong, please try again later.', 'alert alert-danger alert-dismissible fade show');
+                        redirect_to('persons');
+                    }
                 } else {
-                    flash('msg', 'Something went wrong, please try again later.', 'alert alert-danger alert-dismissible fade show');
-                    redirect_to('persons');
+                    if ($this->timezoneModel->add_timezone_to_person($data)) {
+                        $last = $this->timezoneModel->get_the_last();
+                        flash('msg', '<p><a href="' . URLROOT . '/timezones/show_t/' . $last->t_id . '" class="alert-link">' . $last->timezone . '</a> is assigned to ' . '<a href="' . URLROOT . '/persons/show/' . $last->p_id . '" class="alert-link">' . $last->first_name . ' ' . $last->last_name . '</a>.</p>');
+                        redirect_to('/persons/show/' . $last->p_id);
+                    } else {
+                        flash('msg', 'Something went wrong, please try again later.', 'alert alert-danger alert-dismissible fade show');
+                        redirect_to('persons');
+                    }
                 }
             } else {
                 $persons = $this->personModel->getPersons(null, null);
                 $timezones = $this->timezoneModel->get_timezones();
-                $data = [
-                    'persons' => $persons,
-                    'timezones' => $timezones
-                ];
+                $data['persons'] =  $persons;
+                $data['timezones'] =  $timezones;
+
                 $this->view('timezones/add', $data);
             }
         } else {
@@ -128,6 +140,154 @@ class Timezones extends Controller
                 'timezones' => $timezones
             ];
             $this->view('timezones/add', $data);
+        }
+    }
+
+    /**
+     * edite a pepou number
+     * @param $id
+     * return ()
+     */
+    public function edit($id = 0)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $data = [
+                't_id' => $_POST['t_id'],
+                'p_id' => $_POST['p_id'],
+                'status' => $_POST['status'] ?? null,
+                'id' => $id,
+                'status_err' => '',
+                't_id_err' => '',
+                'p_id_err' => ''
+            ];
+            // data validation
+            if ($_POST['p_id'] == 0) {
+                $data['p_id_err'] = 'please chose a person.';
+            } elseif (!isset($_POST['p_id'])) {
+                $data['p_id_err'] = 'please chose a person.';
+            }
+            if ($_POST['t_id'] == 0) {
+                $data['t_id_err'] = 'please chose a country.';
+            } elseif (!isset($_POST['t_id'])) {
+                $data['t_id_err'] = 'please chose a country.';
+            }
+
+            if ((empty($data['t_id_err'])) && (empty($data['p_id_err']))) {
+
+                if ((isset($_POST['status'])) && ($_POST['status'] == 'status')) {
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                        $data = [
+                            't_id' => $_POST['t_id'],
+                            'p_id' => $_POST['p_id'],
+                            'status' => $_POST['status'] ?? null,
+                            'id' => $id,
+                            'status_err' => '',
+                            't_id_err' => '',
+                            'p_id_err' => ''
+                        ];
+                        // data validation
+                        if ($_POST['p_id'] == 0) {
+                            $data['p_id_err'] = 'please chose a person.';
+                        } elseif (!isset($_POST['p_id'])) {
+                            $data['p_id_err'] = 'please chose a person.';
+                        }
+                        if ($_POST['t_id'] == 0) {
+                            $data['t_id_err'] = 'please chose a country.';
+                        } elseif (!isset($_POST['t_id'])) {
+                            $data['t_id_err'] = 'please chose a country.';
+                        }
+
+                        if ((empty($data['t_id_err'])) && (empty($data['p_id_err']))) {
+                            if ((isset($_POST['status'])) && ($_POST['status'] == 'status')) {
+                                if ($this->timezoneModel->update_current_timezone_to_person($data)) {
+                                    flash('msg', '<p><a href="' . URLROOT . '/timezones/show_t/' . $_POST['t_id'] . '" class="alert-link"> timezone </a> was updated.</p>');
+                                    redirect_to('persons/show/' . $_POST['p_id']);
+                                } else {
+                                    flash('msg', 'Could not add the data to the database.', 'alert alert-danger alert-dismissible fade show');
+                                    redirect_to('persons');
+                                }
+                            } else {
+                                if ($this->timezoneModel->update_timezone_to_person($data)) {
+                                    $last = $this->timezoneModel->get_the_last();
+                                    flash('msg', '<p><a href="' . URLROOT . '/timezones/show_t/' . $last->t_id . '" class="alert-link">' . $last->timezone . '</a> is assigned to ' . '<a href="' . URLROOT . '/persons/show/' . $last->p_id . '" class="alert-link">' . $last->first_name . ' ' . $last->last_name . '</a>.</p>');
+                                    redirect_to('/persons/show/' . $last->p_id);
+                                } else {
+                                    flash('msg', 'Something went wrong with the data storing, please try again later.', 'alert alert-danger alert-dismissible fade show');
+                                    redirect_to('/');
+                                }
+                            }
+                        } else {
+                            $persons = $this->personModel->getPersons(null, null);
+                            $timezones = $this->timezoneModel->get_timezones();
+                            $data['persons'] =  $persons;
+                            $data['timezones'] =  $timezones;
+
+                            $this->view('timezones/edit', $data);
+                        }
+                    } else {
+                        $timezone = $this->timezoneModel->get_single_timezone_by_id($id);
+                        if ($timezone) {
+                            $persons = $this->personModel->getPersons(null, null);
+                            $timezones = $this->timezoneModel->get_timezones();
+                            $data = [
+                                't_id' => $timezone->t_id,
+                                'id' => $id,
+                                'p_id' => $timezone->p_id,
+                                'status' => $timezone->status,
+                                'persons' => $persons,
+                                'timezones' => $timezones
+                            ];
+                            $this->view('timezones/edit', $data);
+                        } else {
+                            $msg = "<p>We could not find the data, please try again later</p>";
+                            flash('msg', $msg, 'alert alert-danger alert-dismissible fade show');
+                            redirect_to("home");
+                        }
+                    }
+                    if ($this->timezoneModel->update_current_timezone_to_person($data)) {
+                        flash('msg', '<p><a href="' . URLROOT . '/timezones/show_t/' . $_POST['t_id'] . '" class="alert-link"> timezone </a> was updated.</p>');
+                        redirect_to('persons/show/' . $_POST['p_id']);
+                    } else {
+                        flash('msg', 'Could not add the data to the database.', 'alert alert-danger alert-dismissible fade show');
+                        redirect_to('persons');
+                    }
+                } else {
+                    if ($this->timezoneModel->update_timezone_to_person($data)) {
+                        $last = $this->timezoneModel->get_the_last();
+                        flash('msg', '<p><a href="' . URLROOT . '/timezones/show_t/' . $last->t_id . '" class="alert-link">' . $last->timezone . '</a> is assigned to ' . '<a href="' . URLROOT . '/persons/show/' . $last->p_id . '" class="alert-link">' . $last->first_name . ' ' . $last->last_name . '</a>.</p>');
+                        redirect_to('/persons/show/' . $last->p_id);
+                    } else {
+                        flash('msg', 'Something went wrong with the data storing, please try again later.', 'alert alert-danger alert-dismissible fade show');
+                        redirect_to('/');
+                    }
+                }
+            } else {
+                $persons = $this->personModel->getPersons(null, null);
+                $timezones = $this->timezoneModel->get_timezones();
+                $data['persons'] =  $persons;
+                $data['timezones'] =  $timezones;
+
+                $this->view('timezones/edit', $data);
+            }
+        } else {
+            $timezone = $this->timezoneModel->get_single_timezone_by_id($id);
+            if ($timezone) {
+                $persons = $this->personModel->getPersons(null, null);
+                $timezones = $this->timezoneModel->get_timezones();
+                $data = [
+                    't_id' => $timezone->t_id,
+                    'id' => $id,
+                    'p_id' => $timezone->p_id,
+                    'status' => $timezone->status,
+                    'persons' => $persons,
+                    'timezones' => $timezones
+                ];
+                $this->view('timezones/edit', $data);
+            } else {
+                $msg = "<p>We could not find the data, please try again later</p>";
+                flash('msg', $msg, 'alert alert-danger alert-dismissible fade show');
+                redirect_to("home");
+            }
         }
     }
 }
