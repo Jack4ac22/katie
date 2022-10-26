@@ -23,7 +23,7 @@ class Language
       $this->db->query('SELECT COUNT(*) AS number FROM languages AS L
       INNER JOIN people_languages AS PL ON L.id = PL.lan_id
       INNER JOIN people AS P ON P.id = PL.p_id
-      WHERE l.id = :id');
+      WHERE L.id = :id');
       $this->db->bind(':id', $l->id);
       $count = $this->db->single();
       $l->count = $count;

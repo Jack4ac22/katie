@@ -13,7 +13,7 @@ class Pepcous extends Controller
     }
 
     /**
-     * @return countries with the people that they speaks them.
+     * @return countries with the people that they.
      */
 
     public function index()
