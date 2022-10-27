@@ -91,14 +91,14 @@ class Timezones extends Controller
             ];
             // data validation
             if ($_POST['p_id'] == 0) {
-                $data['p_id_err'] = 'please chose a person.';
+                $data['p_id_err'] = 'please select a person.';
             } elseif (!isset($_POST['p_id'])) {
-                $data['p_id_err'] = 'please chose a person.';
+                $data['p_id_err'] = 'please select a person.';
             }
             if ($_POST['t_id'] == 0) {
-                $data['t_id_err'] = 'please chose a country.';
+                $data['t_id_err'] = 'please select a country.';
             } elseif (!isset($_POST['t_id'])) {
-                $data['t_id_err'] = 'please chose a country.';
+                $data['t_id_err'] = 'please select a country.';
             }
 
             if ((empty($data['t_id_err'])) && (empty($data['p_id_err']))) {
@@ -162,14 +162,14 @@ class Timezones extends Controller
             ];
             // data validation
             if ($_POST['p_id'] == 0) {
-                $data['p_id_err'] = 'please chose a person.';
+                $data['p_id_err'] = 'please select a person.';
             } elseif (!isset($_POST['p_id'])) {
-                $data['p_id_err'] = 'please chose a person.';
+                $data['p_id_err'] = 'please select a person.';
             }
             if ($_POST['t_id'] == 0) {
-                $data['t_id_err'] = 'please chose a country.';
+                $data['t_id_err'] = 'please select a country.';
             } elseif (!isset($_POST['t_id'])) {
-                $data['t_id_err'] = 'please chose a country.';
+                $data['t_id_err'] = 'please select a country.';
             }
 
             if ((empty($data['t_id_err'])) && (empty($data['p_id_err']))) {
@@ -187,14 +187,14 @@ class Timezones extends Controller
                         ];
                         // data validation
                         if ($_POST['p_id'] == 0) {
-                            $data['p_id_err'] = 'please chose a person.';
+                            $data['p_id_err'] = 'please select a person.';
                         } elseif (!isset($_POST['p_id'])) {
-                            $data['p_id_err'] = 'please chose a person.';
+                            $data['p_id_err'] = 'please select a person.';
                         }
                         if ($_POST['t_id'] == 0) {
-                            $data['t_id_err'] = 'please chose a country.';
+                            $data['t_id_err'] = 'please select a country.';
                         } elseif (!isset($_POST['t_id'])) {
-                            $data['t_id_err'] = 'please chose a country.';
+                            $data['t_id_err'] = 'please select a country.';
                         }
 
                         if ((empty($data['t_id_err'])) && (empty($data['p_id_err']))) {
@@ -287,6 +287,34 @@ class Timezones extends Controller
                 $msg = "<p>We could not find the data, please try again later</p>";
                 flash('msg', $msg, 'alert alert-danger alert-dismissible fade show');
                 redirect_to("home");
+            }
+        }
+    }
+
+
+    /**
+     * delete
+     */
+
+    public function delete_peptim($id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $timezone = $this->timezoneModel->get_single_timezone_by_id($id);
+            if ($timezone) {
+                if (!islogged()) {
+                    redirect_to('/login');
+                }
+                if ($this->timezoneModel->delete_peptim($id)) {
+                    flash('msg', '<p><a href="' . URLROOT . '/persons/show/' . $timezone->p_id . '" class="alert-link">'
+                        . $timezone->first_name . ' ' . $timezone->last_name . '</a> will not be shown in relation to <a href="' . URLROOT . '/timezones/show_t/' . $timezone->t_id . '" class="alert-link">' . $timezone->timezone . '</a> timezone.</p>');
+                    redirect_to("persons/show/$timezone->p_id");
+                } else {
+                    $msg = "<p>Failed to delete the timezone, please try again later.</p>";
+                    redirect_to("persons/show/$timezone->p_id", $msg, 'alert alert-danger alert-dismissible fade show');
+                }
+            } else {
+                $msg = "<p>Failed to find the timezone, please try again later.</p>";
+                redirect_to("persons/show/$timezone->p_id", $msg, 'alert alert-danger alert-dismissible fade show');
             }
         }
     }

@@ -44,11 +44,11 @@ class Comments extends Controller
             ];
 
             if ($_POST['p_id'] == 0) {
-                $data['p_id_err'] = 'please chose a person.';
+                $data['p_id_err'] = 'please select a person.';
             }
 
             if ($_POST['value'] == 0) {
-                $data['value_err'] = 'please chose a person.';
+                $data['value_err'] = 'please select a person.';
             }
 
             if (empty($_POST['title'])) {
@@ -117,11 +117,11 @@ class Comments extends Controller
             ];
 
             if ($_POST['p_id'] == 0) {
-                $data['p_id_err'] = 'please chose a person.';
+                $data['p_id_err'] = 'please select a person.';
             }
 
             if ($_POST['value'] == 0) {
-                $data['value_err'] = 'please chose a value.';
+                $data['value_err'] = 'please select a value.';
             }
 
             if (empty($_POST['title'])) {

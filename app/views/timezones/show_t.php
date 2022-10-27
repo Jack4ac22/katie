@@ -23,7 +23,7 @@
                             - Date: <?php
                                     $source = $data->w_dts;
                                     $date = new DateTime($source);
-                                    echo $date->format('d/M'); ?> <?php endif;  ?></p>
+                                    echo $date->format('d/M'); ?><?php endif;  ?></p>
                     <p class="card-text">Currency: <b><?= $data->currency_name . ' / ' . $data->currency_code ?></b></p>
                     <p class="card-text">Phone key: <b><?= $data->phone ?></b> / Postal Code format: <b><?= $data->postal_code_format ?></b></p>
                     <a href="<?= URLROOT . '/timezones/edit_timezone/' . $data->id; ?>" class="btn btn-primary">edit <?= I_TIME ?></a>
@@ -53,7 +53,31 @@
                                             <?php if ($person->birthday != null) : ?>
                                                 <p class="card-text">Birthday: <?= $person->birthday ?></p>
                                             <?php endif; ?>
-                                            <a href="<?= URLROOT . '/persons/show/' . $person->p_id ?>" class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"> <?= I_INFO ?> info</a>
+                                            <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+                                                <a class="btn btn-warning" href="<?= URLROOT . '/timezones/edit/' . $person->id ?>">Edit <?= I_EDIT ?></a>
+                                                <a class="btn btn-light" href="<?= URLROOT . '/persons/show/' . $person->p_id ?>">Check <?= I_PERSON ?></a>
+                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_persona_timezone<?= $person->id . $person->t_id ?>">Delete <?= I_DELETE ?></button>
+                                            </div>
+                                            <div class="modal fade" id="delete_persona_timezone<?= $person->id . $person->t_id ?>" tabindex="-1" aria-labelledby="delete_persona_timezone<?= $person->id . $person->t_id ?>Label" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="delete_persona_timezone<?= $person->id . $person->t_id ?>Label">Delete Timezone (<?= $data->timezone . ') retaltion to ' . $person->first_name . ' ' . $person->last_name ?>.</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            If you continue <?php echo $data->timezone; ?> will NOT appear at <?= $person->first_name . ' ' . $person->last_name; ?>'s personal page.
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <form method="post" action="<?php echo URLROOT; ?>/timezones/delete_peptim/<?= $person->id ?>">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-danger"><?= I_DELETE ?>
+                                                                    delete</a>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             </div>
                                         </div>
                                     <?php else : ?>
@@ -68,9 +92,32 @@
                                                     <?php if ($person->birthday != null) : ?>
                                                         <p class="card-text">Birthday: <?= $person->birthday ?></p>
                                                     <?php endif; ?>
-                                                    <a href="<?= URLROOT . '/persons/show/' . $person->p_id ?>" class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"> <?= I_INFO ?> info</a>
+                                                    <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+                                                        <a class="btn btn-warning" href="<?= URLROOT . '/timezones/edit/' . $person->id ?>">Edit <?= I_EDIT ?></a>
+                                                        <a class="btn btn-light" href="<?= URLROOT . '/persons/show/' . $person->p_id ?>">Check <?= I_PERSON ?></a>
+                                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_persona_timezone<?= $person->id . $person->t_id ?>">Delete <?= I_DELETE ?></button>
                                                     </div>
-
+                                                    <div class="modal fade" id="delete_persona_timezone<?= $person->id . $person->t_id ?>" tabindex="-1" aria-labelledby="delete_persona_timezone<?= $person->id . $person->t_id ?>Label" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h1 class="modal-title fs-5" id="delete_persona_timezone<?= $person->id . $person->t_id ?>Label">Delete Timezone (<?= $data->timezone . ') retaltion to ' . $person->first_name . ' ' . $person->last_name ?>.</h1>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    If you continue <?php echo $data->timezone; ?> will NOT appear at <?= $person->first_name . ' ' . $person->last_name; ?>'s personal page.
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <form method="post" action="<?php echo URLROOT; ?>/timezones/delete_peptim/<?= $person->id ?>">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                        <button type="submit" class="btn btn-danger"><?= I_DELETE ?>
+                                                                            delete</a>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </div>
                                                 </div>
                                             <?php endif; ?>
                                         <?php endforeach; ?>

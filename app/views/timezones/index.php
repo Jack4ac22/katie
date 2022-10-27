@@ -57,22 +57,22 @@
                                                         <?php endif; ?>
                                                     </h5>
                                                     <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
-                                                        <a class="btn btn-warning" href="<?= URLROOT . '/pepcous/edit/' . $person->id ?>">Edit <?= I_EDIT ?></a>
+                                                        <a class="btn btn-warning" href="<?= URLROOT . '/timezones/edit/' . $person->id ?>">Edit <?= I_EDIT ?></a>
                                                         <a class="btn btn-light" href="<?= URLROOT . '/persons/show/' . $person->p_id ?>">Check <?= I_PERSON ?></a>
-                                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_personal_nationality_<?= $person->id . $person->t_id ?>">Delete <?= I_DELETE ?></button>
+                                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_persona_timezone<?= $person->id . $person->t_id ?>">Delete <?= I_DELETE ?></button>
                                                     </div>
-                                                    <div class="modal fade" id="delete_personal_nationality_<?= $person->id . $person->t_id ?>" tabindex="-1" aria-labelledby="delete_personal_nationality_<?= $person->id . $person->t_id ?>Label" aria-hidden="true">
+                                                    <div class="modal fade" id="delete_persona_timezone<?= $person->id . $person->t_id ?>" tabindex="-1" aria-labelledby="delete_persona_timezone<?= $person->id . $person->t_id ?>Label" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h1 class="modal-title fs-5" id="delete_personal_nationality_<?= $person->id . $person->t_id ?>Label">Delete nationality (<?= $country->nationality . ') from ' . $person->first_name . ' ' . $person->last_name ?>.</h1>
+                                                                    <h1 class="modal-title fs-5" id="delete_persona_timezone<?= $person->id . $person->t_id ?>Label">Delete Timezone (<?= $country->timezone . ') retaltion to ' . $person->first_name . ' ' . $person->last_name ?>.</h1>
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    If you continue <?php echo $country->en_short_name; ?> will NOT appear at <?= $person->first_name . ' ' . $person->last_name; ?>'s personal.
+                                                                    If you continue <?php echo $country->timezone; ?> will NOT appear at <?= $person->first_name . ' ' . $person->last_name; ?>'s personal page.
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <form method="post" action="<?php echo URLROOT; ?>/pepcous/delete_pepcou/<?= $person->id ?>">
+                                                                    <form method="post" action="<?php echo URLROOT; ?>/timezones/delete_peptim/<?= $person->id ?>">
                                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                                         <button type="submit" class="btn btn-danger"><?= I_DELETE ?>
                                                                             delete</a>

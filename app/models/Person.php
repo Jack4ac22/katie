@@ -230,6 +230,25 @@ class Person
             $nationalities_count = 0;
         }
 
+        //timezones
+        $this->db->query("SELECT COUNT(*) AS tz_count from people_timezones
+        WHERE p_id = :id");
+        $this->db->bind(':id', $id);
+        $tz_count = $this->db->resultSet();
+
+        $this->db->query("SELECT TZ.*, T.timezone, C.en_short_name, T.gmt_offset, T.dst_offset, T.raw_offset, T.w_dts, T.s_dts
+        FROM people_timezones AS TZ
+                INNER JOIN timezones AS T ON T.id = TZ.t_id
+                INNER JOIN countries AS C ON c.alpha_2_code = T.country_code
+                WHERE TZ.p_id = :id");
+        $this->db->bind(':id', $id);
+        $timezones = $this->db->resultSet();
+        if (isset($tz_count[0])) {
+            $timezones_count = $tz_count[0]->tz_count;
+        } else {
+            $timezones_count = 0;
+        }
+
         $person = [
             'person' => $row,
             'phones' => $phones,
@@ -244,7 +263,9 @@ class Person
             'groups' => $groups,
             'g_count' => $groups_count,
             'passports' => $nationalities,
-            'n_count' => $nationalities_count
+            'n_count' => $nationalities_count,
+            'tz_count' => $timezones_count,
+            'timezones' => $timezones
 
         ];
         return $person;

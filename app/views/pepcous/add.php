@@ -26,7 +26,7 @@
               <select class="form-select mt-1" aria-label="Default select example" name="c_id">
                   ?>
                   <?php if ((!isset($data['c_id'])) || ($data['c_id'] == 0)) : ?>
-                      <option selected value=0>chose country from the list</option>
+                      <option selected value=0>select country from the list</option>
                   <?php endif; ?>
                   <?php foreach ($data['countries'] as $country) : ?>
                       <option value="<?php echo $country->num_code; ?>" <?php if ((isset($data['c_id'])) && ($data['c_id'] == $country->num_code)) echo 'selected'; ?>>

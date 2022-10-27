@@ -186,7 +186,10 @@ class Timezone
 
     public function  get_single_timezone_by_id($id)
     {
-        $this->db->query("SELECT * FROM people_timezones AS PZ WHERE PZ.id = :id");
+        $this->db->query("SELECT PZ.*, P.first_name, P.last_name, T.timezone FROM people_timezones AS PZ
+        INNER JOIN people AS P ON p.id = PZ.p_id
+        INNER JOIN timezones AS T ON T.id = PZ.t_id
+        WHERE PZ.id = :id");
         $this->db->bind(':id', $id);
         $row = $this->db->single();
         return $row;
@@ -218,6 +221,17 @@ class Timezone
         $this->db->bind('t_id', $data['t_id']);
         $this->db->bind('status', NULL);
         $this->db->bind('id', $data['id']);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function delete_peptim($id)
+    {
+        $this->db->query('DELETE FROM people_timezones WHERE people_timezones.id= :id');
+        $this->db->bind(':id', $id);
         if ($this->db->execute()) {
             return true;
         } else {

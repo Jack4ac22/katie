@@ -26,7 +26,7 @@
               <select class="form-select mt-1" aria-label="Default select example" name="t_id">
                   ?>
                   <?php if ((!isset($data['t_id'])) || ($data['t_id'] == 0)) : ?>
-                      <option selected value=0>chose language from the list</option>
+                      <option selected value=0>select language from the list</option>
                   <?php endif; ?>
                   <?php foreach ($data['titles'] as $title) : ?>
                       <option value="<?php echo $title->id; ?>" <?php if ((isset($data['t_id'])) && ($data['t_id'] == $title->id)) echo 'selected'; ?>>

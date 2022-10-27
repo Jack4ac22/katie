@@ -28,7 +28,7 @@
                     <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/peptits/index">people-titles</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/languages/index">languages</a></li class="nav-item">
                     <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/peplans/index">languages-people</a></li>
-                    <!-- <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/timezones/index">time zone // coming soon//</a></li> -->
+                    <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/timezones/index">timezones</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/comments/index">comments</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/images/index">Pictures</a></li>
             </ul>
