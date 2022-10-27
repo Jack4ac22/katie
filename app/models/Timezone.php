@@ -187,7 +187,7 @@ class Timezone
     public function  get_single_timezone_by_id($id)
     {
         $this->db->query("SELECT PZ.*, P.first_name, P.last_name, T.timezone FROM people_timezones AS PZ
-        INNER JOIN people AS P ON p.id = PZ.p_id
+        INNER JOIN people AS P ON P.id = PZ.p_id
         INNER JOIN timezones AS T ON T.id = PZ.t_id
         WHERE PZ.id = :id");
         $this->db->bind(':id', $id);

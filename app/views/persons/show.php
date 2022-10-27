@@ -126,7 +126,7 @@
             <div id="collapsePhones" class="accordion-collapse collapse" aria-labelledby="headingPhones" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <div class="col-12 mt-3">
-                        <?php if (count($data['person']['phones']) > 0) : ?>
+                        <?php if ((isset($data['person']['phones'])) && (count($data['person']['phones']) > 0)) : ?>
                             <h5 class=" mb-3">Phone number(s)</h5>
                             <?php foreach ($data['person']['phones'] as $phone) : ?>
                                 <div class="row justify-content-between mb-3">
@@ -175,6 +175,8 @@
                                 </div>
                             <?php endforeach; ?>
                         <?php else : ?>
+                            <a class="btn btn-primary mb-3" href="<?php echo URLROOT . '/phones/add/' . $data['person']['person']->id; ?>">Add phone number</a>
+
                             <div class="alert alert-warning" role="alert">
                                 <h6>No phone numbers were found for this person in the database.</h6>
                             </div>
@@ -182,11 +184,7 @@
 
                         <!-- add button to add a new phone number to the current -->
                         <div class="container">
-                            <div class="row justify-content-end">
-                                <div class="col-6 mt-5">
-                                    <a class="btn btn-primary" href="<?php echo URLROOT . '/phones/add/' . $data['person']['person']->id; ?>">Add new number</a>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -206,7 +204,7 @@
                                 </span>
                             </div>
                         <?php else : ?>
-                            <div class="col">No job titles</div>
+                            <div class="col">No Passports</div>
                         <?php endif; ?>
                     </div>
                 </button>
@@ -261,13 +259,13 @@
                             <?php endforeach; ?>
                         </div>
                     <?php else : ?>
+                        <a class="btn btn-primary mb-3" href="<?php echo URLROOT . '/pepcous/add/' . $data['person']['person']->id; ?>">Add passport</a>
                         <div class="alert alert-warning" role="alert">
                             <h4 class="alert-heading">No passport was cound for <?php echo $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name; ?></h4>
                             <p>You can check the <a href="<?= URLROOT ?>/pepcous" class="alert-link">countries page</a> and use the search. </p>
                             <hr>
                             <p class="mb-0">Otherwise, you can add a passport by clicking on the add button, or by using <a href="<?= URLROOT ?>/pepcous/add/<?= $data['person']['person']->id ?>" class="alert-link">this link</a>.</p>
                         </div>
-                        <a class="btn btn-primary mt-3" href="<?php echo URLROOT . '/peptits/add/' . $data['person']['person']->id; ?>">Add a title</a>
 
                     <?php endif; ?>
                 </div>
@@ -295,9 +293,7 @@
                 <div class="accordion-body">
 
                     <?php if (isset(($data['person']['g_count'])) && ($data['person']['g_count'] > 0)) : ?>
-
                         <a class="btn btn-primary" href="<?php echo URLROOT . '/pepgroups/add/' . $data['person']['person']->id; ?>">Add another group</a>
-
                         <div class="row justify-content-between">
                             <?php foreach ($data['person']['groups'] as $group) : ?>
                                 <div class="col-md-6 g-3">
@@ -357,13 +353,15 @@
                                 </div>
                             <?php endforeach; ?>
                         </div>
-                        <a class="btn btn-primary mt-3" href="<?php echo URLROOT . '/comments/add/' . $data['person']['person']->id; ?>">Add another title</a>
+                        <a class="btn btn-primary mt-3" href="<?php echo URLROOT . '/pepgroups/add/' . $data['person']['person']->id; ?>">Add another Group</a>
                     <?php else : ?>
+                        <a class="btn btn-primary mb-3" href="<?php echo URLROOT . '/pepgroups/add/' . $data['person']['person']->id; ?>">Add Group</a>
+
                         <div class="alert alert-warning" role="alert">
-                            <h4 class="alert-heading">No job titles were cound for <?php echo $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name; ?></h4>
-                            <p>You can check the <a href="<?= URLROOT ?>/titles" class="alert-link">job titles page</a> and use the search. </p>
+                            <h4 class="alert-heading">No groups were found for <?php echo $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name; ?></h4>
+                            <p>You can check the <a href="<?= URLROOT ?>/groups" class="alert-link">groups page</a> and use the search. </p>
                             <hr>
-                            <p class="mb-0">Otherwise, you can add some titles by clicking on the add button, or by using <a href="<?= URLROOT ?>/titles/add/<?= $data['person']['person']->id ?>" class="alert-link">this link</a>.</p>
+                            <p class="mb-0">Otherwise, you can add some titles by clicking on the add button, or by using <a href="<?= URLROOT ?>/pepgroups/add/<?= $data['person']['person']->id ?>" class="alert-link">this link</a>.</p>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -371,7 +369,7 @@
 
             </div>
         </div>
-        <!-- Residency -->
+        <!-- timezones -->
         <div class="accordion-item">
             <h2 class="accordion-header" id="person_pannel_open-headingThree">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#person_pannel_open-collapseThree" aria-expanded="false" aria-controls="person_pannel_open-collapseThree">
@@ -389,9 +387,10 @@
                     </div>
                 </button>
             </h2>
-            <div id="person_pannel_open-collapseThree" class="accordion-collapse show" aria-labelledby="person_pannel_open-headingThree">
+            <div id="person_pannel_open-collapseThree" class="accordion-collapse collapse" aria-labelledby="person_pannel_open-headingThree">
                 <div class="accordion-body">
-                    <?php if (isset($data['person']['timezones'])) : ?>
+                    <?php if ((isset($data['person']['timezones'])) && (count($data['person']['timezones']) > 0)) : ?>
+                        <a class="btn btn-primary mb-3" href="<?php echo URLROOT . '/timezones/add/' . $data['person']['person']->id; ?>">Add another timezone</a>
                         <div class="row justify-content-between">
                             <?php foreach ($data['person']['timezones'] as $timezone) : ?>
                                 <div class="col-sm-6 col-md-4 mb-3">
@@ -415,7 +414,7 @@
                                                     - Date: <?php
                                                             $source = $datimezonettimezonea->w_dts;
                                                             $date = new DateTime($source);
-                                                            echo $date->format('d/M'); ?><?php else:  ?><?php endif;  ?></p>
+                                                            echo $date->format('d/M'); ?><?php else :  ?><?php endif;  ?></p>
                                             <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
                                                 <a class="btn btn-warning" href="<?= URLROOT . '/timezones/edit/' . $timezone->id ?>">Edit <?= I_EDIT ?></a>
                                                 <a class="btn btn-light" href="<?= URLROOT . '/timezones/show_t/' . $timezone->t_id ?>">Check <?= I_TIME ?></a>
@@ -445,16 +444,19 @@
                                     </div>
                                 </div>
                             <?php endforeach; ?>
+
                         </div>
+                        <a class="btn btn-primary mb-3" href="<?php echo URLROOT . '/timezones/add/' . $data['person']['person']->id; ?>">Add another timezone</a>
                     <?php else : ?>
+                        <a class="btn btn-primary mb-3" href="<?php echo URLROOT . '/timezones/add/' . $data['person']['person']->id; ?>">Add timezone</a>
+
                         <div class="alert alert-warning" role="alert">
-                            <h4 class="alert-heading">No timezones were cound for <?php echo $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name; ?></h4>
+                            <h4 class="alert-heading">No timezones were found for <?php echo $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name; ?></h4>
                             <p>You can check the <a href="<?= URLROOT ?>/timezones" class="alert-link">timezones page</a> and use the search. </p>
                             <hr>
                             <p class="mb-0">Otherwise, you can add some timezones by clicking on the add button, or by using <a href="<?= URLROOT ?>/timezones/add/<?= $data['person']['person']->id ?>" class="alert-link">this link</a>.</p>
 
                         </div>
-                        <a class="btn btn-primary " href="<?php echo URLROOT . '/timezones/add/' . $data['person']['person']->id; ?>">Add a comment</a>
                     <?php endif; ?>
 
                 </div>
@@ -545,7 +547,7 @@
                         <a class="btn btn-primary mt-3" href="<?php echo URLROOT . '/peptits/add/' . $data['person']['person']->id; ?>">Add another title</a>
                     <?php else : ?>
                         <div class="alert alert-warning" role="alert">
-                            <h4 class="alert-heading">No job titles were cound for <?php echo $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name; ?></h4>
+                            <h4 class="alert-heading">No job titles were found for <?php echo $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name; ?></h4>
                             <p>You can check the <a href="<?= URLROOT ?>/titles" class="alert-link">job titles page</a> and use the search. </p>
                             <hr>
                             <p class="mb-0">Otherwise, you can add some titles by clicking on the add button, or by using <a href="<?= URLROOT ?>/peptits/add/<?= $data['person']['person']->id ?>" class="alert-link">this link</a>.</p>
@@ -897,7 +899,7 @@
 
                     <?php else : ?>
                         <div class="alert alert-warning" role="alert">
-                            <h4 class="alert-heading">No comments were cound for <?php echo $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name; ?></h4>
+                            <h4 class="alert-heading">No comments were found for <?php echo $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name; ?></h4>
                             <p>You can check the <a href="<?= URLROOT ?>/comments" class="alert-link">comments page</a> and use the search. </p>
                             <hr>
                             <p class="mb-0">Otherwise, you can add some comments by clicking on the add button, or by using <a href="<?= URLROOT ?>/comments/add/<?= $data['person']['person']->id ?>" class="alert-link">this link</a>.</p>

@@ -239,7 +239,7 @@ class Person
         $this->db->query("SELECT TZ.*, T.timezone, C.en_short_name, T.gmt_offset, T.dst_offset, T.raw_offset, T.w_dts, T.s_dts
         FROM people_timezones AS TZ
                 INNER JOIN timezones AS T ON T.id = TZ.t_id
-                INNER JOIN countries AS C ON c.alpha_2_code = T.country_code
+                INNER JOIN countries AS C ON C.alpha_2_code = T.country_code
                 WHERE TZ.p_id = :id");
         $this->db->bind(':id', $id);
         $timezones = $this->db->resultSet();

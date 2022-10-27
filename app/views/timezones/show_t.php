@@ -2,7 +2,7 @@
 <?php flash('msg'); ?>
 <?php //echo '<pre>' . var_export($data, true) . '</pre>';
 ?>
-
+<?php //echo date_default_timezone_get(); ?>
 <div class="row">
 
     <div class="row justify-content-center">
