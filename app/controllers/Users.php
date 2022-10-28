@@ -4,6 +4,7 @@ class Users extends Controller
     public function __construct()
     {
         $this->userModel = $this->model('User');
+        $this->timezoneModel = $this->model('Timezone');
     }
 
     public function index()
@@ -171,6 +172,13 @@ class Users extends Controller
 
     public function creat_user_session($user)
     {
+        $timezone = $this->userModel->get_time_zone($user->id);
+        $_SESSION['timezone'] = $timezone->timezone;
+        $_SESSION['gmt_offset'] = $timezone->gmt_offset;
+        $_SESSION['dst_offset'] = $timezone->dst_offset;
+        $_SESSION['raw_offset'] = $timezone->raw_offset;
+        $_SESSION['w_dts'] = $timezone->w_dts;
+        $_SESSION['s_dts'] = $timezone->s_dts;
         $_SESSION['user_id'] = $user->id;
         $_SESSION['user_user_name'] = $user->user_name;
         redirect_to('persons/index');
@@ -189,4 +197,51 @@ class Users extends Controller
         redirect_to('users/login');
     }
 
+    public function change_t($id=0)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
+            $data = [
+                'user_id' => $id,
+                't_id' => $_POST['t_id'],
+                't_id_err' => ''
+            ];
+            // data validation
+            if ((empty($_POST['t_id'])) || ($_POST['t_id'] == 0) || ($_POST['t_id']) == NULL) {
+                $data['t_id_err'] = 'please pick a title.';
+            }
+
+            //check for errors
+            if (empty($data['t_id_err'])) {
+
+                if ($this->userModel->change_current_timezone($data)) {
+                    flash('msg', '<p>The current time zone was updated.</p>');
+                    redirect_to('');
+                } else {
+                    flash('msg', 'Something went wrong, please try again later.');
+                    $this->view('users/change_t', $data);
+                }
+                //load the view with the errors
+            } else {
+                redirect_to('/users/change_t/' . $id);
+            }
+        } else {
+            $user = $this->userModel->get_user_data($id);
+            if ($user) {
+                $timezones = $this->timezoneModel->get_timezones();
+                $data = [
+                    't_id' => $user->current_t,
+                    'user_id' => $user->id,
+                    't_id_err' => '',
+                    'user_id_err' => '',
+                    'timezones' => $timezones
+                ];
+                $this->view('users/change_t', $data);
+            } else {
+                $msg = "<p>We could not retrive certain data, it might be because of connection error, please try again later.</p>";
+                flash('msg', $msg, 'alert alert-danger alert-dismissible fade show');
+                redirect_to("");
+            }
+        }
+    }
 }

@@ -63,4 +63,44 @@ class User
             return false;
         }
     }
+
+    public function get_user_data($id)
+    {
+        $this->db->query("SELECT U.id, U.current_t from users as U WHERE U.id = :id");
+        $this->db->bind(':id', $id);
+        $row = $this->db->single();
+        if ($row) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
+
+    public function change_current_timezone($data)
+    {
+        // var_dump($data);
+        // die('stop');
+        $this->db->query("UPDATE users SET current_t = :current_t WHERE users.id = :id");
+        $this->db->bind(':current_t', $data['t_id']);
+        $this->db->bind(':id', $data['user_id']);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function get_time_zone($id)
+    {
+        $this->db->query("SELECT U.id, U.current_t, T.* from users as U 
+        INNER JOIN timezones AS T ON T.id = U.current_t
+        WHERE U.id = :id");
+        $this->db->bind(':id', $id);
+        $row = $this->db->single();
+        if ($row) {
+            return $row;
+        } else {
+            return false;
+        }
+    }
 }

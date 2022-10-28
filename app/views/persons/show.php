@@ -559,29 +559,20 @@
             </div>
         </div>
         <!--  Make appointment -->
-        <!-- <div class="accordion-item">
+        <div class="accordion-item">
             <h2 class="accordion-header" id="person_pannel_open-headingFive">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#person_pannel_open-collapseFive" aria-expanded="false" aria-controls="person_pannel_open-collapseFive">
-                    Make appointment
+                    <?php if (isset(($data['person']['tz_count'])) && ($data['person']['tz_count'] > 0)) : ?>
+                        Make appointment
+                    <?php else : ?>
+                        No data to present the time differences
+                    <?php endif; ?>
                 </button>
             </h2>
             <div id="person_pannel_open-collapseFive" class="accordion-collapse collapse" aria-labelledby="person_pannel_open-headingFive">
                 <div class="accordion-body">
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-label="Segment one" style="width: 4%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">1</div>
-                        <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-label="Segment two" style="width: 4%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">2</div>
-                        <div class="progress-bar" role="progressbar" aria-label="Segment one" style="width: 4%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">3</div>
-                        <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-label="Segment two" style="width: 4%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">4</div>
-                        <div class="progress-bar" role="progressbar" aria-label="Segment one" style="width: 4%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">5</div>
-                        <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-label="Segment two" style="width: 4%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">6</div>
-                        <div class="progress-bar" role="progressbar" aria-label="Segment one" style="width: 4%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">7</div>
-                        <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-label="Segment two" style="width: 4%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">8</div>
-                        <div class="progress-bar" role="progressbar" aria-label="Segment one" style="width: 4%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">9</div>
-                        <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-label="Segment two" style="width: 4%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">10</div>
-                        <div class="progress-bar" role="progressbar" aria-label="Segment one" style="width: 4%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">11</div>
-                        <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-label="Segment two" style="width: 4%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">12</div>
-                    </div>
-                    <div class="progress">
+                    <?php if (isset(($data['person']['tz_count'])) && ($data['person']['tz_count'] > 0)) : ?>
+                        <div class="progress">
                         <div class="progress-bar" role="progressbar" aria-label="Segment one" style="width: 4%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">3</div>
                         <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-label="Segment two" style="width: 4%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">4</div>
                         <div class="progress-bar" role="progressbar" aria-label="Segment one" style="width: 4%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">5</div>
@@ -595,9 +586,21 @@
                         <div class="progress-bar" role="progressbar" aria-label="Segment one" style="width: 4%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">1</div>
                         <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-label="Segment two" style="width: 4%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">2</div>
                     </div>
+                    <?php else : ?>
+                        <div class="alert alert-warning" role="alert">
+                            <h4 class="alert-heading">No timezones were found for <?php echo $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name; ?></h4>
+                            <p>You can check the <a href="<?= URLROOT ?>/timezones" class="alert-link">timezones page</a> and use the search. </p>
+                            <hr>
+                            <p class="mb-0">Otherwise, you can add timezones by clicking on the add button, or by using <a href="<?= URLROOT ?>/timezones/add/<?= $data['person']['person']->id ?>" class="alert-link">this link</a>.</p>
+
+                        </div>
+                        <a class="btn btn-primary " href="<?php echo URLROOT . '/comments/add/' . $data['person']['person']->id; ?>">Add a comment</a>
+                    <?php endif; ?>
+
+
                 </div>
             </div>
-        </div> -->
+        </div>
         <!-- Language(s) -->
         <div class="accordion-item">
             <h2 class="accordion-header" id="person_pannel_open-headingSix">
