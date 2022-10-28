@@ -31,8 +31,8 @@ class Timezones extends Controller
             }
             $data = [
                 'id' => $id,
-                'w_dts' => $w_dts,
-                's_dts' => $s_dts,
+                'w_dts' => $w_dts ?? NULL,
+                's_dts' => $s_dts ?? NULL,
                 'w_dts_err' => '',
                 's_dts_err' => ''
             ];
@@ -46,12 +46,13 @@ class Timezones extends Controller
             if (empty($data['w_dts_err']) && empty($data['s_dts_err'])) {
                 if ($this->timezoneModel->update_timezone_dates($data)) {
                     flash('msg', '<p>The daylight saving date is updated.</p><a href="' . URLROOT . '/timezones/show_t/' . $id . '" class="alert-link">you can use this link to check</a>.');
-                    redirect_to('' . $data['p_id']);
+                    redirect_to('timezones/show_t' . $data['id']);
                 } else {
                     flash('msg', 'Something went wrong, please try again later.');
                     $this->view('timezones/edit', $data);
                 }
             } else {
+
                 $this->view('timezones/edit_timezone', $data);
             }
         } else {
@@ -208,9 +209,8 @@ class Timezones extends Controller
                                 }
                             } else {
                                 if ($this->timezoneModel->update_timezone_to_person($data)) {
-                                    $last = $this->timezoneModel->get_the_last();
-                                    flash('msg', '<p><a href="' . URLROOT . '/timezones/show_t/' . $last->t_id . '" class="alert-link">' . $last->timezone . '</a> is assigned to ' . '<a href="' . URLROOT . '/persons/show/' . $last->p_id . '" class="alert-link">' . $last->first_name . ' ' . $last->last_name . '</a>.</p>');
-                                    redirect_to('/persons/show/' . $last->p_id);
+                                    flash('msg', '<p><a href="' . URLROOT . '/timezones/show_t/' . $_POST['t_id'] . '" class="alert-link"> timezone </a> was updated.</p>');
+                                    redirect_to('persons/show/' . $_POST['p_id']);
                                 } else {
                                     flash('msg', 'Something went wrong with the data storing, please try again later.', 'alert alert-danger alert-dismissible fade show');
                                     redirect_to('/');

@@ -20,17 +20,12 @@
                 } ?>
                 <?php if (isset($_SESSION['user_id'])) : ?>
                     <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/persons/index">people</a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/phones/index">phone numbers</a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/pepcous/index">passports</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/groups/index">Groups</a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/pepgroups/index">people-Groups</a></li>
+                    <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/pepcous/index">nationalities</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/titles/index">titles</a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/peptits/index">people-titles</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/languages/index">languages</a></li class="nav-item">
-                    <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/peplans/index">languages-people</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/timezones/index">timezones</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/comments/index">comments</a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?php echo URLROOT; ?>/images/index">Pictures</a></li>
             </ul>
         </div>
         <ul class="navbar-nav ml-auto">

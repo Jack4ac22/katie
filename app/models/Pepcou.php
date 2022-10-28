@@ -52,7 +52,7 @@ class Pepcou
         FROM people_countries AS PN
         INNER JOIN people AS P ON P.id = PN.p_id
         INNER JOIN countries AS C ON C.num_code = PN.c_id
-        WHERE Pn.id = :id");
+        WHERE PN.id = :id");
         $this->db->bind(':id', $id);
         $row = $this->db->single();
 

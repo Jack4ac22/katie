@@ -49,7 +49,7 @@ class Timezone
 
     public function get_timezone_dates($id)
     {
-        $this->db->query("SELECT TZ.id, TZ.w_dts, TZ.s_dts FROM timezones AS TZ
+        $this->db->query("SELECT TZ.* FROM timezones AS TZ
         WHERE TZ.id = :id");
         $this->db->bind(':id', $id);
         $row = $this->db->single();

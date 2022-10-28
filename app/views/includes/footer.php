@@ -65,12 +65,7 @@
 
 
             <?php else : ?>
-                <div class=" container text-center">
-                    <div class="col align-self-end">
-                        <div class="container"><a href="<?php echo URLROOT . '/users/login'; ?>" class="btn btn-primary btn-lg"><i class="fa-solid fa-lock"></i> login</a>
-                        </div>
-                    </div>
-                </div>
+
             <?php endif; ?>
         </ul>
     </footer>
