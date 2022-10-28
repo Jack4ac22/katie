@@ -74,9 +74,9 @@ class Images extends Controller
                         $data['comment_err'] = 'Please verify the comment, it should not contain special characters.';
                     }
                     if ($_POST['p_id'] == 0) {
-                        $data['p_id_err'] = 'please chose a person.';
+                        $data['p_id_err'] = 'please select a person.';
                     } elseif (!isset($_POST['p_id'])) {
-                        $data['p_id_err'] = 'please chose a person.';
+                        $data['p_id_err'] = 'please select a person.';
                     }
 
                     $fileName = time() . '-' . $_POST['p_id'];
@@ -164,7 +164,7 @@ class Images extends Controller
 
 
             if ($_POST['p_id'] == 0) {
-                $data['number_err'] = 'please chose a person.';
+                $data['number_err'] = 'please select a person.';
             }
 
             //check for errors

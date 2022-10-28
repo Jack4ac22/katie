@@ -7,8 +7,8 @@
         <div class="input-group mb-3">
             <!-- <label for="exampleDataList" class="form-label">Datalist example</label> -->
             <input type="search" class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." value="<?php if ((isset($_GET['search'])) && (strlen($_GET['search']) > 0)) {
-                echo $_GET['search'];
-            } ?>" name="search">
+                                                                                                                                                echo $_GET['search'];
+                                                                                                                                            } ?>" name="search">
             <datalist id="datalistOptions">
                 <?php foreach ($data['countries']['countries'] as $country) : ?>
                     <option value="<?= $country->en_short_name ?>">

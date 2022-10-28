@@ -13,7 +13,7 @@ class Pepcous extends Controller
     }
 
     /**
-     * @return countries with the people that they speaks them.
+     * @return countries with the people that they.
      */
 
     public function index()
@@ -49,14 +49,14 @@ class Pepcous extends Controller
 
             // data validation
             if ($_POST['p_id'] == 0) {
-                $data['p_id_err'] = 'please chose a person.';
+                $data['p_id_err'] = 'please select a person.';
             } elseif (!isset($_POST['p_id'])) {
-                $data['p_id_err'] = 'please chose a person.';
+                $data['p_id_err'] = 'please select a person.';
             }
             if ($_POST['c_id'] == 0) {
-                $data['c_id_err'] = 'please chose a country.';
+                $data['c_id_err'] = 'please select a country.';
             } elseif (!isset($_POST['c_id'])) {
-                $data['c_id_err'] = 'please chose a country.';
+                $data['c_id_err'] = 'please select a country.';
             }
 
             if (empty($data['comment'])) {
@@ -69,7 +69,7 @@ class Pepcous extends Controller
             if ((empty($data['c_id_err'])) && (empty($data['p_id_err'])) && (empty($data['comment_err']))) {
                 if ($this->pepcouModel->add_nationality_to_person($data)) {
                     $last = $this->pepcouModel->get_the_last();
-                    flash('msg', '<p><a href="' . URLROOT . '/persons/show/' . $last->p_id . '" class="alert-link">' . $last->first_name .' '. $last->last_name . '</a> is <a href="' . URLROOT . '/pepcous/show_c/' . $last->c_id . '" class="alert-link">' . $last->nationality . '</a>.</p>');
+                    flash('msg', '<p><a href="' . URLROOT . '/persons/show/' . $last->p_id . '" class="alert-link">' . $last->first_name . ' ' . $last->last_name . '</a> is <a href="' . URLROOT . '/pepcous/show_c/' . $last->c_id . '" class="alert-link">' . $last->nationality . '</a>.</p>');
                     redirect_to('/persons/show/' . $last->p_id);
                 } else {
                     flash('msg', 'Something went wrong, please try again later.', 'alert alert-danger alert-dismissible fade show');
@@ -122,7 +122,7 @@ class Pepcous extends Controller
                 $data['c_id_err'] = 'please pick a country.';
             }
             if ($_POST['p_id'] == 0) {
-                $data['p_id_err'] = 'please chose a person.';
+                $data['p_id_err'] = 'please select a person.';
             }
             if (strip_tags($_POST['comment']) !== $_POST['comment']) {
                 $data['comment_err'] = 'Please verify the comment, it should not contain special characters.';
@@ -180,7 +180,7 @@ class Pepcous extends Controller
         if ($pepcou) {
             $this->view('pepcous/show', $pepcou);
         } else {
-            flash('msg', '<p>the page which you requested does not exist, try to use other method</p>');
+            flash('msg', '<p>the page which you requested does not exist, try to use other method</p>', 'alert alert-danger alert-dismissible fade show');
             redirect_to('pages/notFound');
         }
     }
@@ -191,7 +191,7 @@ class Pepcous extends Controller
         if ($pepcou) {
             $this->view('pepcous/show_c', $pepcou);
         } else {
-            flash('msg', '<p>the page which you requested does not exist, try to use other method</p>');
+            flash('msg', '<p>the page which you requested does not exist, try to use other method</p>', 'alert alert-danger alert-dismissible fade show');
             redirect_to('pages/notFound');
         }
     }
@@ -212,8 +212,11 @@ class Pepcous extends Controller
                     redirect_to("persons/show/$pep->p_id");
                 } else {
                     $msg = "<p>Failed, please try again later.</p>";
-                    redirect_to("persons/show/$pep->p_id", $msg);
+                    redirect_to("persons/show/$pep->p_id", $msg, 'alert alert-danger alert-dismissible fade show');
                 }
+            } else {
+                $msg = "<p>Failed, please try again later.</p>";
+                redirect_to("persons/show/$pep->p_id", $msg, 'alert alert-danger alert-dismissible fade show');
             }
         }
     }

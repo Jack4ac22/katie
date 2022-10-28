@@ -12,7 +12,7 @@
             <span class="invalid-feedback"><?php echo $data['p_id_err']; ?></span>
             <select class="form-select" aria-label="Default select example" name="p_id">
                 <?php if ((!isset($data['p_id'])) || ($data['p_id'] == 0)) : ?>
-                    <option selected value=0>chose group from the list</option>
+                    <option selected value=0>select group from the list</option>
                 <?php endif; ?>
                 <?php foreach ($data['persons'] as $person) : ?>
                     <option value="<?php echo $person->id; ?>" <?php if ((isset($data['p_id'])) && ($data['p_id'] == $person->id)) echo 'selected'; ?>>

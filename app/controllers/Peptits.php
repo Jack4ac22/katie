@@ -45,14 +45,14 @@ class Peptits extends Controller
 
             // data validation
             if ($_POST['p_id'] == 0) {
-                $data['p_id_err'] = 'please chose a person.';
+                $data['p_id_err'] = 'please select a person.';
             } elseif (!isset($_POST['p_id'])) {
-                $data['p_id_err'] = 'please chose a person.';
+                $data['p_id_err'] = 'please select a person.';
             }
             if ($_POST['t_id'] == 0) {
-                $data['t_id_err'] = 'please chose a language.';
+                $data['t_id_err'] = 'please select a language.';
             } elseif (!isset($_POST['t_id'])) {
-                $data['t_id_err'] = 'please chose a language.';
+                $data['t_id_err'] = 'please select a language.';
             }
 
             if (empty($data['description'])) {
@@ -118,7 +118,7 @@ class Peptits extends Controller
                 $data['t_id_err'] = 'please pick a title.';
             }
             if ($_POST['p_id'] == 0) {
-                $data['p_id_err'] = 'please chose a person.';
+                $data['p_id_err'] = 'please select a person.';
             }
             if (strip_tags($_POST['description']) !== $_POST['description']) {
                 $data['description_err'] = 'Please verify the description, it should not contain special characters.';

@@ -47,17 +47,17 @@ class Peplans extends Controller
 
             // data validation
             if ($_POST['p_id'] == 0) {
-                $data['p_id_err'] = 'please chose a person.';
+                $data['p_id_err'] = 'please select a person.';
             } elseif (!isset($_POST['p_id'])) {
-                $data['p_id_err'] = 'please chose a person.';
+                $data['p_id_err'] = 'please select a person.';
             }
             if ($_POST['lan_id'] == 0) {
-                $data['lan_id_err'] = 'please chose a language.';
+                $data['lan_id_err'] = 'please select a language.';
             } elseif (!isset($_POST['lan_id'])) {
-                $data['lan_id_err'] = 'please chose a language.';
+                $data['lan_id_err'] = 'please select a language.';
             }
             if ($_POST['levle'] == 0) {
-                $data['levle_err'] = 'please chose a language.';
+                $data['levle_err'] = 'please select a language.';
             }
 
 
@@ -122,7 +122,7 @@ class Peplans extends Controller
                 $data['levle_err'] = 'please pick a level';
             }
             if ($_POST['p_id'] == 0) {
-                $data['p_id_err'] = 'please chose a person.';
+                $data['p_id_err'] = 'please select a person.';
             }
             if (strip_tags(trim($_POST['comment'])) !== $_POST['comment']) {
                 $data['comment_err'] = 'Please verify the comment, it should not contain special characters.';

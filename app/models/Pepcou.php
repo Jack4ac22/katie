@@ -9,7 +9,7 @@ class Pepcou
     }
 
     /**
-     * @return all languages with the related data of the user.
+     * @return all countires with the related data of the user.
      */
     public function get_all_data($search)
     {
@@ -52,7 +52,7 @@ class Pepcou
         FROM people_countries AS PN
         INNER JOIN people AS P ON P.id = PN.p_id
         INNER JOIN countries AS C ON C.num_code = PN.c_id
-        WHERE Pn.id = :id");
+        WHERE PN.id = :id");
         $this->db->bind(':id', $id);
         $row = $this->db->single();
 
@@ -84,7 +84,7 @@ class Pepcou
         $this->db->query("SELECT PN.*, P.first_name, P.last_name, P.sex, P.email, P.img, P.birthday
         FROM people_countries AS PN
         INNER JOIN people AS P ON P.id = PN.p_id
-        WHERE Pn.c_id = :id");
+        WHERE PN.c_id = :id");
         $this->db->bind(':id', $id);
         $people = $this->db->resultSet();
         if ($people) {

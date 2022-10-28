@@ -14,9 +14,7 @@
     </div>
 </form>
 <div class="input-group my-3 ">
-    <a type="button" class="btn btn-primary" href="<?php echo URLROOT; ?>/persons/add">
-        <?= I_ADD_PERSON ?>
-        new person</a>
+    <a type="button" class="btn btn-primary" href="<?php echo URLROOT; ?>/persons/add"><?= I_ADD_PERSON ?> new person</a>
 </div>
 
 <div class="row">
@@ -27,7 +25,7 @@
                     <div class="row g-0">
                         <div class="col-md-3">
 
-                        </div><a  href="<?php echo URLROOT . '/persons/show/' . $person->id; ?>">
+                        </div><a href="<?php echo URLROOT . '/persons/show/' . $person->id; ?>">
                             <?php if ($person->img != null) : ?>
                                 <img src="<?= IMGROOT . '/' . $person->img ?>" class="figure-img img-fluid rounded" alt="<?= $person->first_name . ' ' . $person->last_name . ' image' ?>">
                             <?php else : ?>
@@ -46,15 +44,11 @@
                                 <?php if ($person->sex == 'male') : ?>
                                     <a type="button" class="btn btn-dark disabled">
                                         <span class="badge text-bg-dark">
-                                            <?= I_MAN ?>
-                                        </span>
-                                    <?php else : ?>
-                                        <a type="button" class="btn btn-info disabled">
-                                            <span class="badge text-bg-info"><?= I_WOMAN; ?>
-                                            </span>
-                                        <?php endif; ?>
-
-                                        </a>
+                                            <?= I_MAN ?> </a>
+                                    </span>
+                                <?php else : ?>
+                                    <a type="button" class="btn btn-info disabled">
+                                        <span class="badge text-bg-info"><?= I_WOMAN; ?></span><?php endif; ?> </a>
                             </div>
                         </div>
                     </div>

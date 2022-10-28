@@ -26,7 +26,7 @@
             <select class="form-select" aria-label="Default select example" name="group_id">
                 ?>
                 <?php if ((!isset($data['group_id_id'])) || ($data['group_id_id'] == 0)) : ?>
-                    <option value=0 selected>chose group from the list</option>
+                    <option value=0 selected>select group from the list</option>
                 <?php endif; ?>
                 <?php foreach ($data['groups'] as $group) : ?>
                     <option value="<?php echo $group->id; ?>" <?php if ((isset($data['group_id'])) && ($data['group_id'] == $group->id)) echo 'selected'; ?>>

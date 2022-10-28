@@ -53,7 +53,7 @@ class Phones extends Controller
                 $data['description_err'] = 'Please verify the description, it should not contain special characters.';
             }
             if ($_POST['p_id'] == 0) {
-                $data['p_id_err'] = 'please chose a person.';
+                $data['p_id_err'] = 'please select a person.';
             }
             if (empty($data['number_err']) && empty($data['description_err']) && empty($data['p_id_err'])) {
                 if ($this->phoneModel->add_phone($data)) {
@@ -117,7 +117,7 @@ class Phones extends Controller
                 $data['description_err'] = 'Please verify the description, it should not contain special characters.';
             }
             if ($_POST['p_id'] == 0) {
-                $data['p_id_err'] = 'please chose a person.';
+                $data['p_id_err'] = 'please select a person.';
             }
 
             //check for errors

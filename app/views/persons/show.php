@@ -1,5 +1,5 @@
 <?php require_once APPROOT . '/views/includes/header.php'; ?>
-<?php //echo '<pre>' . var_export($data['person']['passports'], true) . '</pre>';
+<?php //echo '<pre>' . var_export($data['person']['timezones'], true) . '</pre>';
 ?>
 <?php flash('msg'); ?>
 <a href="<?php echo URLROOT; ?>/persons/index" class="btn btn-light btn-block">Back to all people <?= I_ARROW_L ?></a>
@@ -126,7 +126,7 @@
             <div id="collapsePhones" class="accordion-collapse collapse" aria-labelledby="headingPhones" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
                     <div class="col-12 mt-3">
-                        <?php if (count($data['person']['phones']) > 0) : ?>
+                        <?php if ((isset($data['person']['phones'])) && (count($data['person']['phones']) > 0)) : ?>
                             <h5 class=" mb-3">Phone number(s)</h5>
                             <?php foreach ($data['person']['phones'] as $phone) : ?>
                                 <div class="row justify-content-between mb-3">
@@ -175,6 +175,8 @@
                                 </div>
                             <?php endforeach; ?>
                         <?php else : ?>
+                            <a class="btn btn-primary mb-3" href="<?php echo URLROOT . '/phones/add/' . $data['person']['person']->id; ?>">Add phone number</a>
+
                             <div class="alert alert-warning" role="alert">
                                 <h6>No phone numbers were found for this person in the database.</h6>
                             </div>
@@ -182,11 +184,7 @@
 
                         <!-- add button to add a new phone number to the current -->
                         <div class="container">
-                            <div class="row justify-content-end">
-                                <div class="col-6 mt-5">
-                                    <a class="btn btn-primary" href="<?php echo URLROOT . '/phones/add/' . $data['person']['person']->id; ?>">Add new number</a>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -206,7 +204,7 @@
                                 </span>
                             </div>
                         <?php else : ?>
-                            <div class="col">No job titles</div>
+                            <div class="col">No Passports</div>
                         <?php endif; ?>
                     </div>
                 </button>
@@ -261,13 +259,13 @@
                             <?php endforeach; ?>
                         </div>
                     <?php else : ?>
+                        <a class="btn btn-primary mb-3" href="<?php echo URLROOT . '/pepcous/add/' . $data['person']['person']->id; ?>">Add passport</a>
                         <div class="alert alert-warning" role="alert">
                             <h4 class="alert-heading">No passport was cound for <?php echo $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name; ?></h4>
                             <p>You can check the <a href="<?= URLROOT ?>/pepcous" class="alert-link">countries page</a> and use the search. </p>
                             <hr>
                             <p class="mb-0">Otherwise, you can add a passport by clicking on the add button, or by using <a href="<?= URLROOT ?>/pepcous/add/<?= $data['person']['person']->id ?>" class="alert-link">this link</a>.</p>
                         </div>
-                        <a class="btn btn-primary mt-3" href="<?php echo URLROOT . '/peptits/add/' . $data['person']['person']->id; ?>">Add a title</a>
 
                     <?php endif; ?>
                 </div>
@@ -295,9 +293,7 @@
                 <div class="accordion-body">
 
                     <?php if (isset(($data['person']['g_count'])) && ($data['person']['g_count'] > 0)) : ?>
-
                         <a class="btn btn-primary" href="<?php echo URLROOT . '/pepgroups/add/' . $data['person']['person']->id; ?>">Add another group</a>
-
                         <div class="row justify-content-between">
                             <?php foreach ($data['person']['groups'] as $group) : ?>
                                 <div class="col-md-6 g-3">
@@ -357,13 +353,15 @@
                                 </div>
                             <?php endforeach; ?>
                         </div>
-                        <a class="btn btn-primary mt-3" href="<?php echo URLROOT . '/comments/add/' . $data['person']['person']->id; ?>">Add another title</a>
+                        <a class="btn btn-primary mt-3" href="<?php echo URLROOT . '/pepgroups/add/' . $data['person']['person']->id; ?>">Add another Group</a>
                     <?php else : ?>
+                        <a class="btn btn-primary mb-3" href="<?php echo URLROOT . '/pepgroups/add/' . $data['person']['person']->id; ?>">Add Group</a>
+
                         <div class="alert alert-warning" role="alert">
-                            <h4 class="alert-heading">No job titles were cound for <?php echo $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name; ?></h4>
-                            <p>You can check the <a href="<?= URLROOT ?>/titles" class="alert-link">job titles page</a> and use the search. </p>
+                            <h4 class="alert-heading">No groups were found for <?php echo $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name; ?></h4>
+                            <p>You can check the <a href="<?= URLROOT ?>/groups" class="alert-link">groups page</a> and use the search. </p>
                             <hr>
-                            <p class="mb-0">Otherwise, you can add some titles by clicking on the add button, or by using <a href="<?= URLROOT ?>/titles/add/<?= $data['person']['person']->id ?>" class="alert-link">this link</a>.</p>
+                            <p class="mb-0">Otherwise, you can add some titles by clicking on the add button, or by using <a href="<?= URLROOT ?>/pepgroups/add/<?= $data['person']['person']->id ?>" class="alert-link">this link</a>.</p>
                         </div>
                     <?php endif; ?>
                 </div>
@@ -371,44 +369,99 @@
 
             </div>
         </div>
-        <!-- Residency -->
-        <!-- <div class="accordion-item">
+        <!-- timezones -->
+        <div class="accordion-item">
             <h2 class="accordion-header" id="person_pannel_open-headingThree">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#person_pannel_open-collapseThree" aria-expanded="false" aria-controls="person_pannel_open-collapseThree">
-                    Residency
+                    <div class="row justify-content-between">
+                        <?php if (isset(($data['person']['tz_count'])) && ($data['person']['tz_count'] > 0)) : ?>
+                            <div class="col">Timezones</div>
+                            <div class='position-relative col'><span class="badge bg-secondary position-relative"> total timezones</span>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    <?= $data['person']['tz_count'] ?>
+                                </span>
+                            </div>
+                        <?php else : ?>
+                            <div class="col">No timezones</div>
+                        <?php endif; ?>
+                    </div>
                 </button>
             </h2>
             <div id="person_pannel_open-collapseThree" class="accordion-collapse collapse" aria-labelledby="person_pannel_open-headingThree">
                 <div class="accordion-body">
+                    <?php if ((isset($data['person']['timezones'])) && (count($data['person']['timezones']) > 0)) : ?>
+                        <a class="btn btn-primary mb-3" href="<?php echo URLROOT . '/timezones/add/' . $data['person']['person']->id; ?>">Add another timezone</a>
+                        <div class="row justify-content-between">
+                            <?php foreach ($data['person']['timezones'] as $timezone) : ?>
+                                <div class="col-sm-6 col-md-4 mb-3">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><?= $timezone->en_short_name . ' ' . $timezone->timezone ?>
+                                                <?php if ($timezone->status == 'status') : ?>
+                                                    <span class="badge bg-primary"><?= I_PIN ?> Active residency</span>
+                                                <?php else : ?>
+                                                    <span class="badge bg-warning"><?= I_TOOLS ?> Not active</span>
+                                                <?php endif; ?>
+                                            </h5>
+                                            <p class="card-text">GMT OFFSET: <b><?= $timezone->gmt_offset ?></b>
+                                                <?php if ($timezone->s_dts != null) :  ?> - Date:
+                                                    <?php
+                                                    $source = $timezone->s_dts;
+                                                    $date = new DateTime($source);
+                                                    echo $date->format('d/M'); ?><?php endif; ?></p>
+                                            <p class="card-text">DST OFFSET: <b><?= $timezone->dst_offset ?></b>
+                                                <?php if ($timezone->s_dts != null) :  ?>
+                                                    - Date: <?php
+                                                            $source = $datimezonettimezonea->w_dts;
+                                                            $date = new DateTime($source);
+                                                            echo $date->format('d/M'); ?><?php else :  ?><?php endif;  ?></p>
+                                            <div class="btn-group btn-group-sm" role="group" aria-label="Small button group">
+                                                <a class="btn btn-warning" href="<?= URLROOT . '/timezones/edit/' . $timezone->id ?>">Edit <?= I_EDIT ?></a>
+                                                <a class="btn btn-light" href="<?= URLROOT . '/timezones/show_t/' . $timezone->t_id ?>">Check <?= I_TIME ?></a>
+                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_persona_timezone<?= $timezone->id . $timezone->t_id ?>">Delete <?= I_DELETE ?></button>
+                                            </div>
+                                            <div class="modal fade" id="delete_persona_timezone<?= $timezone->id . $timezone->t_id ?>" tabindex="-1" aria-labelledby="delete_persona_timezone<?= $timezone->id . $timezone->t_id ?>Label" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="delete_persona_timezone<?= $timezone->id . $timezone->t_id ?>Label">Delete Timezone (<?= $timezone->timezone . ') retaltion to ' . $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name ?>.</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            If you continue <?php echo $timezone->timezone; ?> will NOT appear at <?= $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name ?>'s personal page.
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <form method="post" action="<?php echo URLROOT; ?>/timezones/delete_peptim/<?= $timezone->id ?>">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-danger"><?= I_DELETE ?>
+                                                                    delete</a>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
 
+                        </div>
+                        <a class="btn btn-primary mb-3" href="<?php echo URLROOT . '/timezones/add/' . $data['person']['person']->id; ?>">Add another timezone</a>
+                    <?php else : ?>
+                        <a class="btn btn-primary mb-3" href="<?php echo URLROOT . '/timezones/add/' . $data['person']['person']->id; ?>">Add timezone</a>
 
+                        <div class="alert alert-warning" role="alert">
+                            <h4 class="alert-heading">No timezones were found for <?php echo $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name; ?></h4>
+                            <p>You can check the <a href="<?= URLROOT ?>/timezones" class="alert-link">timezones page</a> and use the search. </p>
+                            <hr>
+                            <p class="mb-0">Otherwise, you can add some timezones by clicking on the add button, or by using <a href="<?= URLROOT ?>/timezones/add/<?= $data['person']['person']->id ?>" class="alert-link">this link</a>.</p>
 
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                        <label class="form-check-label" for="flexRadioDefault1">
-                            <div class="input-group ">
-                                <a href="" class="input-group-text" id="basic-addon1">
-                                    <?= I_HOME ?>
-                                </a>
-                                <input type="phone" class="form-control" placeholder="Input group example" aria-label="Input group example" aria-describedby="basic-addon1" value="location A" name="phone" disabled>
-                            </div>
-                        </label>
-                    </div>
+                        </div>
+                    <?php endif; ?>
 
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                        <label class="form-check-label" for="flexRadioDefault2">
-                            <div class="input-group ">
-                                <a href="" class="input-group-text" id="basic-addon1">
-                                    <?= I_TOOLS ?>
-                                </a>
-                                <input type="phone" class="form-control" placeholder="Input group example" aria-label="Input group example" aria-describedby="basic-addon1" value="location B" name="phone" disabled>
-                            </div>
-                        </label>
-                    </div>
                 </div>
             </div>
-        </div> -->
+        </div>
         <!--  Job titl(s) -->
         <div class="accordion-item">
             <h2 class="accordion-header" id="person_pannel_open-headingThree">
@@ -494,7 +547,7 @@
                         <a class="btn btn-primary mt-3" href="<?php echo URLROOT . '/peptits/add/' . $data['person']['person']->id; ?>">Add another title</a>
                     <?php else : ?>
                         <div class="alert alert-warning" role="alert">
-                            <h4 class="alert-heading">No job titles were cound for <?php echo $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name; ?></h4>
+                            <h4 class="alert-heading">No job titles were found for <?php echo $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name; ?></h4>
                             <p>You can check the <a href="<?= URLROOT ?>/titles" class="alert-link">job titles page</a> and use the search. </p>
                             <hr>
                             <p class="mb-0">Otherwise, you can add some titles by clicking on the add button, or by using <a href="<?= URLROOT ?>/peptits/add/<?= $data['person']['person']->id ?>" class="alert-link">this link</a>.</p>
@@ -846,7 +899,7 @@
 
                     <?php else : ?>
                         <div class="alert alert-warning" role="alert">
-                            <h4 class="alert-heading">No comments were cound for <?php echo $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name; ?></h4>
+                            <h4 class="alert-heading">No comments were found for <?php echo $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name; ?></h4>
                             <p>You can check the <a href="<?= URLROOT ?>/comments" class="alert-link">comments page</a> and use the search. </p>
                             <hr>
                             <p class="mb-0">Otherwise, you can add some comments by clicking on the add button, or by using <a href="<?= URLROOT ?>/comments/add/<?= $data['person']['person']->id ?>" class="alert-link">this link</a>.</p>
