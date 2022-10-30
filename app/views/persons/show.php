@@ -630,14 +630,14 @@ echo '<pre>' . var_export($_SESSION, true) . '</pre>';
                                 <div class="progress">
                                     <?php for ($i = 0; $i < 25; $i++) : ?>
                                         <div class="progress-bar <?php if($i%2 == 0) {echo "progress-bar-striped bg-danger";} ?> " role="progressbar" aria-label="Segment one" style="width: 4%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
-                                        <?php if (($_SESSION['gmt_offset'] + $i)>24){echo $_SESSION['gmt_offset'] + $i - 24;}elseif (($_SESSION['gmt_offset'] + $i)<0){echo $_SESSION['gmt_offset'] + $i +24; }else{echo $_SESSION['gmt_offset'] + $i;} ?>
+                                        <?php if (($_SESSION['gmt_offset'] + $i)>24){echo $_SESSION['gmt_offset'] + $i - 24;}elseif (($_SESSION['gmt_offset'] + $i)<= 0){echo $_SESSION['gmt_offset'] + $i +24; }else{echo $_SESSION['gmt_offset'] + $i;} ?>
                                     </div>
                                     <?php endfor; ?>
                                 </div>
                                 <?=$tz->timezone ?>: 
                                 <div class="progress">
                                     <?php for ($i = 0; $i < 25; $i++) : ?>
-                                        <div class="progress-bar <?php if($i%2 == 0) {echo "progress-bar-striped bg-danger";} ?>" role="progressbar" aria-label="Segment one" style="width: 4%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">                                        <?php if (($tz->gmt_offset + $i)>24){echo $tz->gmt_offset + $i - 24;}elseif (($tz->gmt_offset + $i)<0){echo $tz->gmt_offset + $i +24; }else{echo $tz->gmt_offset + $i;} ?>
+                                        <div class="progress-bar <?php if($i%2 == 0) {echo "progress-bar-striped bg-danger";} ?>" role="progressbar" aria-label="Segment one" style="width: 4%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">                                        <?php if (($tz->gmt_offset + $i)>24){echo $tz->gmt_offset + $i - 24;}elseif (($tz->gmt_offset + $i)<=0){echo $tz->gmt_offset + $i +24; }else{echo $tz->gmt_offset + $i;} ?>
 </div>
                                     <?php endfor; ?>
                                 </div>
