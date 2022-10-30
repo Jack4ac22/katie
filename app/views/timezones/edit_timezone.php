@@ -1,6 +1,6 @@
 <?php require APPROOT . '/views/includes/header.php'; ?>
 <?php flash('msg'); ?>
-<?php echo '<pre>' . var_export($data, true) . '</pre>';
+<?php //echo '<pre>' . var_export($data, true) . '</pre>';
 ?>
 
 <?php if (isset($data['p_id']) && ($data['p_id'] > 0)) : ?>

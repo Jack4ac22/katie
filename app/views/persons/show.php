@@ -1,6 +1,6 @@
 <?php require_once APPROOT . '/views/includes/header.php'; ?>
 <?php //echo '<pre>' . var_export($data['person']['timezones'], true) . '</pre>';
-echo '<pre>' . var_export($_SESSION, true) . '</pre>';
+//echo '<pre>' . var_export($_SESSION, true) . '</pre>';
 ?>
 <?php flash('msg'); ?>
 <a href="<?php echo URLROOT; ?>/persons/index" class="btn btn-light btn-block">Back to all people <?= I_ARROW_L ?></a>
@@ -626,18 +626,33 @@ echo '<pre>' . var_export($_SESSION, true) . '</pre>';
                                     11 => 11,
                                     12 => 12,
                                 ]; ?>
-                                    <?=$_SESSION['timezone'] ?>
+                                    <?=$_SESSION['timezone'] ?> GMT: <?= $_SESSION['s_dts']??' '  ?> <a href="<?= URLROOT.'/timezones/edit_timezone/'.$_SESSION['timezone_id'] ?>" class="btn btn-light m-3">change the date</a>
                                 <div class="progress">
                                     <?php for ($i = 0; $i < 25; $i++) : ?>
-                                        <div class="progress-bar <?php if($i%2 == 0) {echo "progress-bar-striped bg-danger";} ?> " role="progressbar" aria-label="Segment one" style="width: 4%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
+                                        <div class="progress-bar progress-bar-animated <?php if($i%2 == 0) {echo "progress-bar-striped bg-danger";} ?> " role="progressbar" aria-label="Segment one" style="width: 4%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
                                         <?php if (($_SESSION['gmt_offset'] + $i)>24){echo $_SESSION['gmt_offset'] + $i - 24;}elseif (($_SESSION['gmt_offset'] + $i)<= 0){echo $_SESSION['gmt_offset'] + $i +24; }else{echo $_SESSION['gmt_offset'] + $i;} ?>
                                     </div>
                                     <?php endfor; ?>
                                 </div>
-                                <?=$tz->timezone ?>: 
+                                <?=$tz->timezone ?> GMT: <?= $tz->w_dts??' '  ?> <a href="<?= URLROOT.'/timezones/edit_timezone/'.$tz->id ?>" class="btn btn-light m-3">change the date</a>
                                 <div class="progress">
                                     <?php for ($i = 0; $i < 25; $i++) : ?>
-                                        <div class="progress-bar <?php if($i%2 == 0) {echo "progress-bar-striped bg-danger";} ?>" role="progressbar" aria-label="Segment one" style="width: 4%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">                                        <?php if (($tz->gmt_offset + $i)>24){echo $tz->gmt_offset + $i - 24;}elseif (($tz->gmt_offset + $i)<=0){echo $tz->gmt_offset + $i +24; }else{echo $tz->gmt_offset + $i;} ?>
+                                        <div class="progress-bar progress-bar-animated <?php if($i%2 == 0) {echo "progress-bar-striped bg-danger";} ?>" role="progressbar" aria-label="Segment one" style="width: 4%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">                                        <?php if (($tz->gmt_offset + $i)>24){echo $tz->gmt_offset + $i - 24;}elseif (($tz->gmt_offset + $i)<=0){echo $tz->gmt_offset + $i +24; }else{echo $tz->gmt_offset + $i;} ?>
+</div>
+                                    <?php endfor; ?>
+                                </div>
+                                    <?=$_SESSION['timezone'] ?> DST: <?= $_SESSION['w_dts']??' '  ?> <a href="<?= URLROOT.'/timezones/edit_timezone/'.$_SESSION['timezone_id'] ?>" class="btn btn-light m-3">change the date</a>
+                                <div class="progress">
+                                    <?php for ($i = 0; $i < 25; $i++) : ?>
+                                        <div class="progress-bar progress-bar-animated <?php if($i%2 == 0) {echo "progress-bar-striped bg-warning";}else{echo "progress-bar-striped bg-info";} ?> " role="progressbar" aria-label="Segment one" style="width: 4%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
+                                        <?php if (($_SESSION['dst_offset'] + $i)>24){echo $_SESSION['dst_offset'] + $i - 24;}elseif (($_SESSION['dst_offset'] + $i)<= 0){echo $_SESSION['dst_offset'] + $i +24; }else{echo $_SESSION['dst_offset'] + $i;} ?>
+                                    </div>
+                                    <?php endfor; ?>
+                                </div>
+                                <?=$tz->timezone ?> DST: <?= $tz->s_dts??' '  ?> <a href="<?= URLROOT.'/timezones/edit_timezone/'.$tz->id ?>" class="btn btn-light m-3">change the date</a>
+                                <div class="progress">
+                                    <?php for ($i = 0; $i < 25; $i++) : ?>
+                                        <div class="progress-bar progress-bar-animated <?php if($i%2 == 0) {echo "progress-bar-striped bg-warning";}else{echo "progress-bar-striped bg-info";} ?>" role="progressbar" aria-label="Segment one" style="width: 4%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">                                        <?php if (($tz->dst_offset + $i)>24){echo $tz->dst_offset + $i - 24;}elseif (($tz->dst_offset + $i)<=0){echo $tz->dst_offset + $i +24; }else{echo $tz->dst_offset + $i;} ?>
 </div>
                                     <?php endfor; ?>
                                 </div>

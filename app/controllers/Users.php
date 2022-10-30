@@ -174,6 +174,7 @@ class Users extends Controller
     {
         $timezone = $this->userModel->get_time_zone($user->id);
         $_SESSION['timezone'] = $timezone->timezone;
+        $_SESSION['timezone_id'] = $timezone->id;
         $_SESSION['gmt_offset'] = $timezone->gmt_offset;
         $_SESSION['dst_offset'] = $timezone->dst_offset;
         $_SESSION['raw_offset'] = $timezone->raw_offset;
@@ -197,7 +198,7 @@ class Users extends Controller
         redirect_to('users/login');
     }
 
-    public function change_t($id=0)
+    public function change_t($id = 0)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
@@ -215,6 +216,14 @@ class Users extends Controller
             if (empty($data['t_id_err'])) {
 
                 if ($this->userModel->change_current_timezone($data)) {
+                    $timezone = $this->userModel->get_time_zone($data['user_id']);
+                    $_SESSION['timezone'] = $timezone->timezone;
+                    $_SESSION['timezone_id'] = $timezone->id;
+                    $_SESSION['gmt_offset'] = $timezone->gmt_offset;
+                    $_SESSION['dst_offset'] = $timezone->dst_offset;
+                    $_SESSION['raw_offset'] = $timezone->raw_offset;
+                    $_SESSION['w_dts'] = $timezone->w_dts;
+                    $_SESSION['s_dts'] = $timezone->s_dts;
                     // add current timezone data to the $_SESION
                     flash('msg', '<p>The current time zone was updated.</p>');
                     redirect_to('');

@@ -41,7 +41,7 @@ class Timezones extends Controller
                 $data['w_dts_err'] = 'pick the winter daylight saving';
             }
             if (empty($_POST['s_dts'])) {
-                $data['s_dts_err'] = 'pick the winter daylight saving';
+                $data['s_dts_err'] = 'pick the Summer daylight saving';
             }
             if (empty($data['w_dts_err']) && empty($data['s_dts_err'])) {
                 if ($this->timezoneModel->update_timezone_dates($data)) {
