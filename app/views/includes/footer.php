@@ -7,8 +7,12 @@
             <li class="nav-item"><a href="<?php echo URLROOT; ?>/pages/index" class="nav-link px-2 text-muted">Home</a></li>
             <li class="nav-item"><a href="<?php echo URLROOT; ?>/pages/faq" class="nav-link px-2 text-muted">FAQs</a></li>
             <li class="nav-item"><a href="<?php echo URLROOT; ?>/pages/about" class="nav-link px-2 text-muted">About</a></li>
+            <?php if (isset($_SESSION['timezone'])) : ?>
+                <li class="nav-item active">
+                    <a class="nav-link" href="<?php echo URLROOT; ?>/users/change_t/<?= $_SESSION['user_id'] ?>"><?= $_SESSION['timezone'] ?></a>
+                </li>
+            <?php endif; ?>
             <?php if (isset($_SESSION['user_id'])) : ?>
-
                 <button class="btn btn-link" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">indexes</button>
                 <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
                     <div class="offcanvas-header">

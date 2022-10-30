@@ -215,6 +215,7 @@ class Users extends Controller
             if (empty($data['t_id_err'])) {
 
                 if ($this->userModel->change_current_timezone($data)) {
+                    // add current timezone data to the $_SESION
                     flash('msg', '<p>The current time zone was updated.</p>');
                     redirect_to('');
                 } else {
