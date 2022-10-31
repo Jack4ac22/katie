@@ -249,6 +249,16 @@ class Person
             $timezones_count = 0;
         }
 
+        // relationship
+        $this->db->query("SELECT R.id AS r_id, R.description, P.* FROM relations AS R INNER JOIN people AS P ON P.id = R.p_id2 WHERE p_id1 = :id");
+        $this->db->bind(':id', $id);
+        $relations1 = $this->db->resultSet();
+        $this->db->query("SELECT R.id AS r_id, R.description, P.* FROM relations AS R INNER JOIN people AS P ON P.id = R.p_id1 WHERE p_id2 = :id");
+        $this->db->bind(':id', $id);
+        $relations2 = $this->db->resultSet();
+        $relations = array_merge($relations1, $relations2);
+
+
         $person = [
             'person' => $row,
             'phones' => $phones,
@@ -265,7 +275,8 @@ class Person
             'passports' => $nationalities,
             'n_count' => $nationalities_count,
             'tz_count' => $timezones_count,
-            'timezones' => $timezones
+            'timezones' => $timezones,
+            'relations' => $relations
 
         ];
         return $person;
@@ -345,7 +356,83 @@ class Person
 
 
     /**
-     * with_img()
-     * return how many img they have
+     * add_relation()
+     * @return bool
      */
+    public function add_relation($data)
+    {
+        $this->db->query("SELECT * FROM relations
+        WHERE p_id1 = :p_id1 AND p_id2 = :p_id2 ");
+        $this->db->bind(':p_id1', $data['p_id1']);
+        $this->db->bind(':p_id2', $data['p_id2']);
+        $relation1 = $this->db->single();
+        if ($relation1 == null) {
+            $this->db->query("SELECT * FROM relations
+            WHERE p_id1 = :p_id2 AND p_id2 = :p_id1 ");
+            $this->db->bind(':p_id2', $data['p_id2']);
+            $this->db->bind(':p_id1', $data['p_id1']);
+            $relation2 = $this->db->single();
+            if ($relation2 == null) {
+                $this->db->query("INSERT INTO relations (p_id1, p_id2, description) VALUES (:p_id1, :p_id2, :description);");
+                $this->db->bind(':p_id1', $data['p_id1']);
+                $this->db->bind(':p_id2', $data['p_id2']);
+                $this->db->bind(':description', $data['description']);
+                if ($this->db->execute()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+
+    /**
+     * get_relation_by_id($id)
+     * return riw or false
+     */
+    public function get_relation_by_id($id)
+    {
+        $this->db->query("SELECT * FROM relations WHERE relations.id = :id");
+        $this->db->bind(':id', $id);
+        $row = $this->db->single();
+        return $row;
+    }
+
+    public function edit_relation($data)
+    {
+        // var_dump($data);
+        // die('stop');
+        $this->db->query('UPDATE relations SET p_id1 = :p_id1, p_id2 = :p_id2 , description = :description WHERE relations.id = :id');
+        // Bind values
+        $this->db->bind(':p_id1', $data['p_id1']);
+        $this->db->bind(':p_id2', $data['p_id2']);
+        $this->db->bind(':description', $data['description']);
+        $this->db->bind(':id', $data['id']);
+
+        // Execute
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * delete_relatioh($id)
+     */
+    public function delete_relation($id)
+    {
+        $this->db->query("DELETE FROM relations WHERE relations.id = :id");
+        $this->db->bind(':id', $id);
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

@@ -314,4 +314,151 @@ class Persons extends Controller
             redirect_to('persons');
         }
     }
+
+    /**
+     * add_relation()
+     * @param $id of user
+     * 
+     */
+    public function add_relation($id = 0)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
+            $data = [
+                'description' => $_POST['description'],
+                'description_err' => '',
+                'p_id1' => $_POST['p_id1'],
+                'p_id1_err' => '',
+                'p_id2' => $_POST['p_id2'],
+                'p_id2_err' => ''
+            ];
+
+
+            if (empty($_POST['description'])) {
+                $data['description_err'] = 'please define the relationship.';
+            } elseif (strip_tags($_POST['description']) !== $_POST['description']) {
+                $data['description_err'] = 'Please verify the description, it should not contain special characters.';
+            }
+            if ($_POST['p_id1'] == 0) {
+                $data['p_id1_err'] = 'please select a person.';
+            }
+            if ($_POST['p_id2'] == 0) {
+                $data['p_id2_err'] = 'please select a person.';
+            }
+
+            if (empty($data['description_err']) && empty($data['p_id1_err']) && empty($data['p_id2_err'])) {
+                if ($this->personModel->add_relation($data)) {
+                    flash('msg', 'relationship is added to your database.');
+                    redirect_to('persons/show/' . $data['p_id1']);
+                } else {
+                    flash('msg', '<p>We Could not store the relationship, please try again later, and verify that you are not trying to add an already existing relationship.</p>', 'alert alert-danger alert-dismissible fade show');
+                    redirect_to('persons/show/' . $data['p_id1']);
+                }
+            } else {
+                $persons = $this->personModel->getPersons(null, null);
+                $data['persons'] = $persons;
+                $this->view('persons/add_relation', $data);
+            }
+        } else {
+            $person = $this->personModel->get_person_by_id_edit($id);
+            if ($person) {
+                $p_id1 = $id;
+            } else {
+                $p_id1 = 0;
+            }
+            $persons = $this->personModel->getPersons(null, null);
+            $data = [
+                'description' => '',
+                'persons' => $persons,
+                'p_id1' => $p_id1,
+            ];
+            $this->view('persons/add_relation', $data);
+        }
+    }
+
+
+    public function edit_relation($id = 0)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
+            $data = [
+                'description' => $_POST['description'],
+                'description_err' => '',
+                'p_id1' => $_POST['p_id1'],
+                'p_id1_err' => '',
+                'p_id2' => $_POST['p_id2'],
+                'p_id2_err' => '',
+                'id' => $id
+            ];
+
+
+            if (empty($_POST['description'])) {
+                $data['description_err'] = 'please define the relationship.';
+            } elseif (strip_tags($_POST['description']) !== $_POST['description']) {
+                $data['description_err'] = 'Please verify the description, it should not contain special characters.';
+            }
+            if ($_POST['p_id1'] == 0) {
+                $data['p_id1_err'] = 'please select a person.';
+            }
+            if ($_POST['p_id2'] == 0) {
+                $data['p_id2_err'] = 'please select a person.';
+            }
+
+            if (empty($data['description_err']) && empty($data['p_id1_err']) && empty($data['p_id2_err'])) {
+                if ($this->personModel->edit_relation($data)) {
+                    flash('msg', 'relationship is updated.');
+                    redirect_to('persons/show/' . $data['p_id1']);
+                } else {
+                    flash('msg', '<p>We Could not store the relationship, please try again later, and verify that you are not trying to add an already existing relationship.</p>', 'alert alert-danger alert-dismissible fade show');
+                    redirect_to('persons/show/' . $data['p_id1']);
+                }
+            } else {
+                $persons = $this->personModel->getPersons(null, null);
+                $data['persons'] = $persons;
+                $this->view('persons/edit_relation', $data);
+            }
+        } else {
+            $relation = $this->personModel->get_relation_by_id($id);
+            $persons = $this->personModel->getPersons(null, null);
+            if (($persons) && ($relation)) {
+                $persons = $this->personModel->getPersons(null, null);
+                $data = [
+                    'persons' => $persons,
+                    'p_id1' => $relation->p_id1,
+                    'p_id2' => $relation->p_id2,
+                    'description' => $relation->description,
+                    'id'=> $relation->id
+                ];
+                $this->view('persons/edit_relation', $data);
+            } else {
+                flash('msg', '<p>We could not find the targeted relation in the database, try later or contact support.</p>', 'alert alert-danger alert-dismissible fade show');
+                redirect_to('/persons');
+            }
+        }
+    }
+
+    public function delete_relation($id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $relation = $this->personModel->get_relation_by_id($id);
+            if ($relation) {
+                $person1 = $this->personModel->get_person_by_id_edit($relation->p_id1);
+                $person2 = $this->personModel->get_person_by_id_edit($relation->p_id2);
+                if (!islogged()) {
+                    redirect_to('persons');
+                }
+                if ($this->personModel->delete_relation($id)) {
+                    $msg = '<p>' . $person1->first_name . ' relation to ' . $person2->first_name . ' is successfully removed.</p>
+                    you can check 
+                    <a href="' . URLROOT . '/persons/show/' . $person1->id . '" class="alert-link">' . $person1->first_name . '</a> profile, or ' . '<a href="' . URLROOT . '/persons/show/' . $person2->id . '" class="alert-link">' . $person2->first_name . '</a>\'s profile';
+
+                    flash('msg', $msg);
+                    redirect_to('persons/show/' . $relation->p_id1);
+                } else {
+                    flash('msg', 'something went wrong, please try again or contact support.', 'alert alert-danger alert-dismissible fade show');
+                    redirect_to('phones/show/' . $relation->p_id);
+                }
+            }
+        }
+    }
 }

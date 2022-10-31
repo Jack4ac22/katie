@@ -1,5 +1,5 @@
 <?php require_once APPROOT . '/views/includes/header.php'; ?>
-<?php //echo '<pre>' . var_export($data['person']['timezones'], true) . '</pre>';
+<?php //echo '<pre>' . var_export($data['person']['relations'], true) . '</pre>';
 //echo '<pre>' . var_export($_SESSION, true) . '</pre>';
 ?>
 <?php flash('msg'); ?>
@@ -105,6 +105,103 @@
                 </div>
             </div>
         </div>
+        <!-- relations -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingrelations">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapserelations" aria-expanded="false" aria-controls="collapserelations">
+                    <div class="row justify-content-between">
+                        <?php if (count($data['person']['relations']) > 0) : ?>
+                            <div class="col">Relations</div>
+
+                            <div class='position-relative col'><span class="badge bg-secondary position-relative"> total realtions:</span>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    <?= count($data['person']['relations']) ?>
+                                </span>
+                            </div>
+                        <?php else : ?>
+                            <div class="col">No people related to <?= $data['person']['person']->first_name ?></div>
+                        <?php endif; ?>
+                    </div>
+                </button>
+            </h2>
+            <div id="collapserelations" class="accordion-collapse collapse" aria-labelledby="headingrelations" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <div class="col-12 mt-3">
+                        <?php if ((isset($data['person']['relations'])) && (count($data['person']['relations']) > 0)) : ?>
+                            <h5 class=" mb-3">relationships</h5>
+                            <a href="<?php echo URLROOT . '/persons/add_relation/' . $data['person']['person']->id; ?>" class="btn btn-primary mb-3"><?= I_ADD_SIGN ?> add another relationship</a>
+
+                            <div class="row  mb-3">
+                                <?php foreach ($data['person']['relations'] as $relation) : ?>
+                                    <div class="col-m-4 col-lg-3">
+                                        <div class="card mb-3">
+                                            <div class=" row g-0">
+                                                <div class="col-md-4">
+                                                    <?php if ($relation->img != null) : ?>
+                                                        <img src="<?= IMGROOT . '/' . $relation->img ?>" class="img-thumbnail rounded" alt="<?= $relation->first_name . ' ' . $relation->last_name . ' image' ?>">
+                                                    <?php else : ?>
+                                                        <?php if ($relation->sex != 'male') : ?>
+                                                            <img src="<?= IMGROOT . '/' . 'female.png' ?>" class="img-thumbnail rounded" alt="female">
+                                                        <?php else : ?>
+                                                            <img src="<?= IMGROOT . '/' . 'male.png' ?>" class="img-thumbnail rounded" alt="male">
+                                                        <?php endif; ?>
+                                                    <?php endif; ?>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title"><?= $relation->description ?></h5>
+                                                        <p class="card-text"><?= $relation->first_name . ' ' . $relation->last_name ?></p>
+                                                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                                            <a href="<?php echo URLROOT . '/persons/edit_relation/' . $relation->r_id; ?>" class="btn btn-warning"><?= I_EDIT ?></a>
+
+
+                                                            <!-- Button trigger modal -> delete phone -->
+                                                            <button type="button" class="btn btn-danger me-md-2" data-bs-toggle="modal" data-bs-target="#delete_relation<?= $relation->r_id ?>">
+                                                                <?= I_DELETE ?></button>
+                                                            <!-- Modal Edite -->
+                                                            <div class="modal fade" id="delete_relation<?= $relation->r_id ?>" tabindex="-1" aria-labelledby="delete_relation<?= $relation->r_id ?>lLabel" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h1 class="modal-title fs-5" id="delete_relation<?= $relation->r_id ?>Label">Deleting relationship</h1>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <p>Are you sure that you want to delete the Relationship between <mark><?= $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name ?></mark> and <mark><?= $relation->first_name . ' ' . $relation->last_name ?></mark>.</p>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <form method="post" action="<?php echo URLROOT; ?>/persons/delete_relation/<?php echo $relation->r_id ?>">
+                                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                                <button type="submit" class="btn btn-danger"><?= I_DELETE ?>
+                                                                                    delete</a>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php else : ?>
+                            <a href="<?php echo URLROOT . '/persons/add_relation/' . $data['person']['person']->id; ?>" class="btn btn-primary mb-3"><?= I_ADD_SIGN ?> add relationship</a>
+
+                            <div class="alert alert-warning" role="alert">
+                                <h6>No relationships were found for this person in the database.</h6>
+                            </div>
+                        <?php endif; ?>
+                        <div class="container">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Phone numbers -->
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingPhones">
@@ -179,11 +276,9 @@
                             <a class="btn btn-primary mb-3" href="<?php echo URLROOT . '/phones/add/' . $data['person']['person']->id; ?>">Add phone number</a>
 
                             <div class="alert alert-warning" role="alert">
-                                <h6>No phone numbers were found for this person in the database.</h6>
+                                <h6>No phone numbers were found for <?=$data['person']['person']->first_name . ' '. $data['person']['person']->last_name ?> in the database.</h6>
                             </div>
                         <?php endif; ?>
-
-                        <!-- add button to add a new phone number to the current -->
                         <div class="container">
 
                         </div>
@@ -626,34 +721,68 @@
                                     11 => 11,
                                     12 => 12,
                                 ]; ?>
-                                    <?=$_SESSION['timezone'] ?> GMT: <?= $_SESSION['s_dts']??' '  ?> <a href="<?= URLROOT.'/timezones/edit_timezone/'.$_SESSION['timezone_id'] ?>" class="btn btn-light m-3">change the date</a>
+                                <?= $_SESSION['timezone'] ?> GMT: <?= $_SESSION['s_dts'] ?? ' '  ?> <a href="<?= URLROOT . '/timezones/edit_timezone/' . $_SESSION['timezone_id'] ?>" class="btn btn-light m-3">change the date</a>
                                 <div class="progress">
-                                    <?php for ($i = 0; $i < 25; $i++) : ?>
-                                        <div class="progress-bar progress-bar-animated <?php if($i%2 == 0) {echo "progress-bar-striped bg-danger";} ?> " role="progressbar" aria-label="Segment one" style="width: 4%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
-                                        <?php if (($_SESSION['gmt_offset'] + $i)>24){echo $_SESSION['gmt_offset'] + $i - 24;}elseif (($_SESSION['gmt_offset'] + $i)<= 0){echo $_SESSION['gmt_offset'] + $i +24; }else{echo $_SESSION['gmt_offset'] + $i;} ?>
-                                    </div>
+                                    <?php for ($i = 0; $i < 24; $i++) : ?>
+                                        <div class="progress-bar progress-bar-animated <?php if ($i % 2 == 0) {
+                                                                                            echo "progress-bar-striped bg-danger";
+                                                                                        } ?> " role="progressbar" aria-label="Segment one" style="width: 4.166666667%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
+                                            <?php if (($_SESSION['gmt_offset'] + $i) > 24) {
+                                                echo $_SESSION['gmt_offset'] + $i - 24;
+                                            } elseif (($_SESSION['gmt_offset'] + $i) <= 0) {
+                                                echo $_SESSION['gmt_offset'] + $i + 24;
+                                            } else {
+                                                echo $_SESSION['gmt_offset'] + $i;
+                                            } ?>
+                                        </div>
                                     <?php endfor; ?>
                                 </div>
-                                <?=$tz->timezone ?> GMT: <?= $tz->w_dts??' '  ?> <a href="<?= URLROOT.'/timezones/edit_timezone/'.$tz->id ?>" class="btn btn-light m-3">change the date</a>
+                                <?= $tz->timezone ?> GMT: <?= $tz->w_dts ?? ' '  ?> <a href="<?= URLROOT . '/timezones/edit_timezone/' . $tz->id ?>" class="btn btn-light m-3">change the date</a>
                                 <div class="progress">
-                                    <?php for ($i = 0; $i < 25; $i++) : ?>
-                                        <div class="progress-bar progress-bar-animated <?php if($i%2 == 0) {echo "progress-bar-striped bg-danger";} ?>" role="progressbar" aria-label="Segment one" style="width: 4%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">                                        <?php if (($tz->gmt_offset + $i)>24){echo $tz->gmt_offset + $i - 24;}elseif (($tz->gmt_offset + $i)<=0){echo $tz->gmt_offset + $i +24; }else{echo $tz->gmt_offset + $i;} ?>
-</div>
+                                    <?php for ($i = 0; $i < 24; $i++) : ?>
+                                        <div class="progress-bar progress-bar-animated <?php if ($i % 2 == 0) {
+                                                                                            echo "progress-bar-striped bg-danger";
+                                                                                        } ?>" role="progressbar" aria-label="Segment one" style="width: 4.166666667%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"> <?php if (($tz->gmt_offset + $i) > 24) {
+                                                                                                                                                                                                                        echo $tz->gmt_offset + $i - 24;
+                                                                                                                                                                                                                    } elseif (($tz->gmt_offset + $i) <= 0) {
+                                                                                                                                                                                                                        echo $tz->gmt_offset + $i + 24;
+                                                                                                                                                                                                                    } else {
+                                                                                                                                                                                                                        echo $tz->gmt_offset + $i;
+                                                                                                                                                                                                                    } ?></div>
                                     <?php endfor; ?>
                                 </div>
-                                    <?=$_SESSION['timezone'] ?> DST: <?= $_SESSION['w_dts']??' '  ?> <a href="<?= URLROOT.'/timezones/edit_timezone/'.$_SESSION['timezone_id'] ?>" class="btn btn-light m-3">change the date</a>
+                                <?= $_SESSION['timezone'] ?> DST: <?= $_SESSION['w_dts'] ?? ' '  ?> <a href="<?= URLROOT . '/timezones/edit_timezone/' . $_SESSION['timezone_id'] ?>" class="btn btn-light m-3">change the date</a>
                                 <div class="progress">
-                                    <?php for ($i = 0; $i < 25; $i++) : ?>
-                                        <div class="progress-bar progress-bar-animated <?php if($i%2 == 0) {echo "progress-bar-striped bg-warning";}else{echo "progress-bar-striped bg-info";} ?> " role="progressbar" aria-label="Segment one" style="width: 4%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
-                                        <?php if (($_SESSION['dst_offset'] + $i)>24){echo $_SESSION['dst_offset'] + $i - 24;}elseif (($_SESSION['dst_offset'] + $i)<= 0){echo $_SESSION['dst_offset'] + $i +24; }else{echo $_SESSION['dst_offset'] + $i;} ?>
-                                    </div>
+                                    <?php for ($i = 0; $i < 24; $i++) : ?>
+                                        <div class="progress-bar progress-bar-animated <?php if ($i % 2 == 0) {
+                                                                                            echo "progress-bar-striped bg-warning";
+                                                                                        } else {
+                                                                                            echo "progress-bar-striped bg-info";
+                                                                                        } ?> " role="progressbar" aria-label="Segment one" style="width: 4.166666667%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
+                                            <?php if (($_SESSION['dst_offset'] + $i) > 24) {
+                                                echo $_SESSION['dst_offset'] + $i - 24;
+                                            } elseif (($_SESSION['dst_offset'] + $i) <= 0) {
+                                                echo $_SESSION['dst_offset'] + $i + 24;
+                                            } else {
+                                                echo $_SESSION['dst_offset'] + $i;
+                                            } ?>
+                                        </div>
                                     <?php endfor; ?>
                                 </div>
-                                <?=$tz->timezone ?> DST: <?= $tz->s_dts??' '  ?> <a href="<?= URLROOT.'/timezones/edit_timezone/'.$tz->id ?>" class="btn btn-light m-3">change the date</a>
+                                <?= $tz->timezone ?> DST: <?= $tz->s_dts ?? ' '  ?> <a href="<?= URLROOT . '/timezones/edit_timezone/' . $tz->id ?>" class="btn btn-light m-3">change the date</a>
                                 <div class="progress">
-                                    <?php for ($i = 0; $i < 25; $i++) : ?>
-                                        <div class="progress-bar progress-bar-animated <?php if($i%2 == 0) {echo "progress-bar-striped bg-warning";}else{echo "progress-bar-striped bg-info";} ?>" role="progressbar" aria-label="Segment one" style="width: 4%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">                                        <?php if (($tz->dst_offset + $i)>24){echo $tz->dst_offset + $i - 24;}elseif (($tz->dst_offset + $i)<=0){echo $tz->dst_offset + $i +24; }else{echo $tz->dst_offset + $i;} ?>
-</div>
+                                    <?php for ($i = 0; $i < 24; $i++) : ?>
+                                        <div class="progress-bar progress-bar-animated <?php if ($i % 2 == 0) {
+                                                                                            echo "progress-bar-striped bg-warning";
+                                                                                        } else {
+                                                                                            echo "progress-bar-striped bg-info";
+                                                                                        } ?>" role="progressbar" aria-label="Segment one" style="width: 4.166666667%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"> <?php if (($tz->dst_offset + $i) > 24) {
+                                                                                                                                                                                                                        echo $tz->dst_offset + $i - 24;
+                                                                                                                                                                                                                    } elseif (($tz->dst_offset + $i) <= 0) {
+                                                                                                                                                                                                                        echo $tz->dst_offset + $i + 24;
+                                                                                                                                                                                                                    } else {
+                                                                                                                                                                                                                        echo $tz->dst_offset + $i;
+                                                                                                                                                                                                                    } ?></div>
                                     <?php endfor; ?>
                                 </div>
 

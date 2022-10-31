@@ -19,7 +19,7 @@
         </div>
         <div class="form-group">
             <label for="p_id">Belongs to:</label>
-            <span class="invalid-feedback"><?php echo $data['extra_err']; ?></span>
+            <span class="invalid-feedback"><?php echo $data['p_id_err']; ?></span>
             <select class="form-select" aria-label="Default select example" name="p_id">
                 } ?>
                 <?php if ((!isset($data['p_id'])) || ($data['p_id'] == 0)) : ?>
