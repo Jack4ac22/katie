@@ -137,21 +137,25 @@
                                         <div class="card mb-3">
                                             <div class=" row g-0">
                                                 <div class="col-md-4">
-                                                    <?php if ($relation->img != null) : ?>
-                                                        <img src="<?= IMGROOT . '/' . $relation->img ?>" class="img-thumbnail rounded" alt="<?= $relation->first_name . ' ' . $relation->last_name . ' image' ?>">
-                                                    <?php else : ?>
-                                                        <?php if ($relation->sex != 'male') : ?>
-                                                            <img src="<?= IMGROOT . '/' . 'female.png' ?>" class="img-thumbnail rounded" alt="female">
+                                                    <a href="<?php echo URLROOT . '/persons/show/' . $relation->id; ?>">
+                                                        <?php if ($relation->img != null) : ?>
+                                                            <img src="<?= IMGROOT . '/' . $relation->img ?>" class="img-thumbnail rounded" alt="<?= $relation->first_name . ' ' . $relation->last_name . ' image' ?>">
                                                         <?php else : ?>
-                                                            <img src="<?= IMGROOT . '/' . 'male.png' ?>" class="img-thumbnail rounded" alt="male">
+                                                            <?php if ($relation->sex != 'male') : ?>
+                                                                <img src="<?= IMGROOT . '/' . 'female.png' ?>" class="img-thumbnail rounded" alt="female">
+                                                            <?php else : ?>
+                                                                <img src="<?= IMGROOT . '/' . 'male.png' ?>" class="img-thumbnail rounded" alt="male">
+                                                            <?php endif; ?>
                                                         <?php endif; ?>
-                                                    <?php endif; ?>
+                                                    </a>
                                                 </div>
                                                 <div class="col-md-8">
                                                     <div class="card-body">
                                                         <h5 class="card-title"><?= $relation->description ?></h5>
                                                         <p class="card-text"><?= $relation->first_name . ' ' . $relation->last_name ?></p>
                                                         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                                            <a href="<?php echo URLROOT . '/persons/show/' . $relation->id; ?>" class="btn btn-light"><?= I_PERSON ?></a>
+
                                                             <a href="<?php echo URLROOT . '/persons/edit_relation/' . $relation->r_id; ?>" class="btn btn-warning"><?= I_EDIT ?></a>
 
 
@@ -276,7 +280,7 @@
                             <a class="btn btn-primary mb-3" href="<?php echo URLROOT . '/phones/add/' . $data['person']['person']->id; ?>">Add phone number</a>
 
                             <div class="alert alert-warning" role="alert">
-                                <h6>No phone numbers were found for <?=$data['person']['person']->first_name . ' '. $data['person']['person']->last_name ?> in the database.</h6>
+                                <h6>No phone numbers were found for <?= $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name ?> in the database.</h6>
                             </div>
                         <?php endif; ?>
                         <div class="container">
@@ -743,12 +747,12 @@
                                         <div class="progress-bar progress-bar-animated <?php if ($i % 2 == 0) {
                                                                                             echo "progress-bar-striped bg-danger";
                                                                                         } ?>" role="progressbar" aria-label="Segment one" style="width: 4.166666667%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"> <?php if (($tz->gmt_offset + $i) > 24) {
-                                                                                                                                                                                                                        echo $tz->gmt_offset + $i - 24;
-                                                                                                                                                                                                                    } elseif (($tz->gmt_offset + $i) <= 0) {
-                                                                                                                                                                                                                        echo $tz->gmt_offset + $i + 24;
-                                                                                                                                                                                                                    } else {
-                                                                                                                                                                                                                        echo $tz->gmt_offset + $i;
-                                                                                                                                                                                                                    } ?></div>
+                                                                                                                                                                                                                                    echo $tz->gmt_offset + $i - 24;
+                                                                                                                                                                                                                                } elseif (($tz->gmt_offset + $i) <= 0) {
+                                                                                                                                                                                                                                    echo $tz->gmt_offset + $i + 24;
+                                                                                                                                                                                                                                } else {
+                                                                                                                                                                                                                                    echo $tz->gmt_offset + $i;
+                                                                                                                                                                                                                                } ?></div>
                                     <?php endfor; ?>
                                 </div>
                                 <?= $_SESSION['timezone'] ?> DST: <?= $_SESSION['w_dts'] ?? ' '  ?> <a href="<?= URLROOT . '/timezones/edit_timezone/' . $_SESSION['timezone_id'] ?>" class="btn btn-light m-3">change the date</a>
@@ -777,12 +781,12 @@
                                                                                         } else {
                                                                                             echo "progress-bar-striped bg-info";
                                                                                         } ?>" role="progressbar" aria-label="Segment one" style="width: 4.166666667%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"> <?php if (($tz->dst_offset + $i) > 24) {
-                                                                                                                                                                                                                        echo $tz->dst_offset + $i - 24;
-                                                                                                                                                                                                                    } elseif (($tz->dst_offset + $i) <= 0) {
-                                                                                                                                                                                                                        echo $tz->dst_offset + $i + 24;
-                                                                                                                                                                                                                    } else {
-                                                                                                                                                                                                                        echo $tz->dst_offset + $i;
-                                                                                                                                                                                                                    } ?></div>
+                                                                                                                                                                                                                                    echo $tz->dst_offset + $i - 24;
+                                                                                                                                                                                                                                } elseif (($tz->dst_offset + $i) <= 0) {
+                                                                                                                                                                                                                                    echo $tz->dst_offset + $i + 24;
+                                                                                                                                                                                                                                } else {
+                                                                                                                                                                                                                                    echo $tz->dst_offset + $i;
+                                                                                                                                                                                                                                } ?></div>
                                     <?php endfor; ?>
                                 </div>
 

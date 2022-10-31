@@ -344,6 +344,8 @@ class Persons extends Controller
             }
             if ($_POST['p_id2'] == 0) {
                 $data['p_id2_err'] = 'please select a person.';
+            } elseif ($_POST['p_id2'] == $_POST['p_id1']) {
+                $data['p_id2_err'] = 'Every person is related to himself!! please choese someone different.';
             }
 
             if (empty($data['description_err']) && empty($data['p_id1_err']) && empty($data['p_id2_err'])) {
@@ -402,6 +404,8 @@ class Persons extends Controller
             }
             if ($_POST['p_id2'] == 0) {
                 $data['p_id2_err'] = 'please select a person.';
+            } elseif ($_POST['p_id2'] == $_POST['p_id1']) {
+                $data['p_id2_err'] = 'Every person is related to himself!! please choese someone different.';
             }
 
             if (empty($data['description_err']) && empty($data['p_id1_err']) && empty($data['p_id2_err'])) {
@@ -427,7 +431,7 @@ class Persons extends Controller
                     'p_id1' => $relation->p_id1,
                     'p_id2' => $relation->p_id2,
                     'description' => $relation->description,
-                    'id'=> $relation->id
+                    'id' => $relation->id
                 ];
                 $this->view('persons/edit_relation', $data);
             } else {
