@@ -139,6 +139,7 @@ class Users extends Controller
                 //check the data 
                 $logedin_user = $this->userModel->login($data['user_name'], $data['password']);
                 if ($logedin_user) {
+                    
                     //creat session
                     $this->creat_user_session($logedin_user);
                 } else {

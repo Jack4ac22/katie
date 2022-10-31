@@ -42,6 +42,6 @@
         </div>
     </form>
 </div>
-<?php echo '<pre>' . var_export($_SESSION, true) . '</pre>'; 
+<?php //echo '<pre>' . var_export($_SESSION, true) . '</pre>'; 
 ?>
 <?php require APPROOT . '/views/includes/footer.php'; ?>

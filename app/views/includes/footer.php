@@ -9,7 +9,7 @@
             <li class="nav-item"><a href="<?php echo URLROOT; ?>/pages/about" class="nav-link px-2 text-muted">About</a></li>
             <?php if (isset($_SESSION['timezone'])) : ?>
                 <li class="nav-item active">
-                    <a class="nav-link" href="<?php echo URLROOT; ?>/users/change_t/<?= $_SESSION['user_id'] ?>"><?= $_SESSION['timezone'] ?></a>
+                    <a class="nav-link" href="<?php echo URLROOT; ?>/users/change_t/<?= $_SESSION['user_id'] ?? '' ?>"><?= $_SESSION['timezone'] ?? ' ' ?></a>
                 </li>
             <?php endif; ?>
             <?php if (isset($_SESSION['user_id'])) : ?>
