@@ -10,9 +10,10 @@ class Pages extends Controller
         if (islogged()) {
             // redirect_to('persons');
         }
-        $data = ['title' => 'Home Page', 'description' => '<h3>Hello and welcome to this test edition of my app.</h3>
-        <h4>please read the folwing instruction and description to understand the purpose and the features of this app, do not forget, it is still under construction.</h4>
-        <p>Are you an HR person? maybe you are a manager who mange people around the world from different ethnicities, with different characters, who speak different languages, and who lives in different time zone.</p> <ul>
+        $data = ['title' => 'Home Page', 'description' =>
+        '<h3>Hello and welcome to this test edition of my app.</h3>
+        <h4>please read the following instruction and description to understand the purpose and the features of this app, do not forget, it is still under construction.</h4>
+        <p>Are you an HR person? maybe you are a manager who manages people around the world from different ethnicities, with different characters, who speak different languages, and who lives in different time zone.</p> <ul>
         <h5>This app</h5>
         <li>
             It is a private app designed for a single project, ie, the database is designed to serve one person or a group of people who work together on the same project.</li>
