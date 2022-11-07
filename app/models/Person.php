@@ -258,6 +258,46 @@ class Person
         $relations2 = $this->db->resultSet();
         $relations = array_merge($relations1, $relations2);
 
+         //prayers
+         $this->db->query("SELECT Count(C.p_id) as pr_count FROM people AS P
+         INNER JOIN prayers AS C ON P.id = C.p_id
+         WHERE P.id = :id
+         GROUP BY C.p_id");
+         $this->db->bind(':id', $id);
+         $pr_count = $this->db->resultSet();
+ 
+         $this->db->query("SELECT C.id, C.status, C.title, C.text, C.created_at, C.edited_at FROM people AS P
+         INNER JOIN prayers AS C ON P.id = C.p_id
+         WHERE P.id = :id
+         ORDER BY C.edited_at DESC, C.created_at DESC");
+         $this->db->bind(':id', $id);
+         $prayers = $this->db->resultSet();
+         if (isset($pr_count[0])) {
+             $prayers_count = $pr_count[0]->pr_count;
+         } else {
+             $prayers_count = 0;
+         }
+
+           //tasks
+           $this->db->query("SELECT Count(C.p_id) as tas_count FROM people AS P
+           INNER JOIN tasks AS C ON P.id = C.p_id
+           WHERE P.id = :id
+           GROUP BY C.p_id");
+           $this->db->bind(':id', $id);
+           $tas_count = $this->db->resultSet();
+   
+           $this->db->query("SELECT C.id, C.status, C.title, C.text, C.created_at, C.edited_at, c.d_date FROM people AS P
+           INNER JOIN tasks AS C ON P.id = C.p_id
+           WHERE P.id = :id
+           ORDER BY C.d_date DESC");
+           $this->db->bind(':id', $id);
+           $tasks = $this->db->resultSet();
+           if (isset($tas_count[0])) {
+               $tas_count = $tas_count[0]->tas_count;
+           } else {
+               $tas_count = 0;
+           }
+
 
         $person = [
             'person' => $row,
@@ -276,7 +316,11 @@ class Person
             'n_count' => $nationalities_count,
             'tz_count' => $timezones_count,
             'timezones' => $timezones,
-            'relations' => $relations
+            'relations' => $relations,
+            'prayers' => $prayers,
+            'pr_count' => $prayers_count,
+            'tasks' => $tasks,
+            'tas_count' => $tas_count,
 
         ];
         return $person;

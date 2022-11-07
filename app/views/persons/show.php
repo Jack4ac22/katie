@@ -1,6 +1,7 @@
 <?php require_once APPROOT . '/views/includes/header.php'; ?>
-<?php //echo '<pre>' . var_export($data['person']['relations'], true) . '</pre>';
+<?php //echo '<pre>' . var_export($data['person']['tasks'], true) . '</pre>';
 //echo '<pre>' . var_export($_SESSION, true) . '</pre>';
+// TODO: add the accordion items for bith prayers and tasks
 ?>
 <?php flash('msg'); ?>
 <a href="<?php echo URLROOT; ?>/persons/index" class="btn btn-light btn-block">Back to all people <?= I_ARROW_L ?></a>
@@ -1052,7 +1053,7 @@
                                             <p class="h6">created : <?= $comment->created_at ?></p> <?php if ($comment->edited_at != null) : ?><p class="h6">last update : <?= $comment->edited_at ?> <?php endif; ?></p>
 
 
-                                                <div class="progress">
+                                                <!-- <div class="progress">
                                                     <div class="progress-bar progress-bar-striped progress-bar-animated
                             <?php switch ($comment->value) {
                                     case $comment->value > 80:
@@ -1072,7 +1073,7 @@
                                 } ?>
                             
                             " role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $comment->value ?>%"></div>
-                                                </div>
+                                                </div> -->
 
                                                 <p class="card-text" style="white-space: pre-line"><?php if (strlen($comment->text) > 150) {
                                                                                                         echo substr($comment->text, 0, 150) . ' ...';
