@@ -35,9 +35,10 @@ function flash($name = '', $message = '', $class = 'alert alert-success alert-di
 
 function islogged()
 {
-    if (!isset($_SESSION['timezone_id'])) {
-        redirect_to('users/change_t/' . $_SESSION['user_id']);
-    } elseif (isset($_SESSION['user_id'])) {
+    if (isset($_SESSION['user_id'])) {
+        if (!isset($_SESSION['timezone_id'])) {
+            redirect_to('users/change_t/' . $_SESSION['user_id']);
+        }
         return true;
     } else {
         return false;
