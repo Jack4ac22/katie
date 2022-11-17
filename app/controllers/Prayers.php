@@ -217,4 +217,17 @@ class Prayers extends Controller
             }
         }
     }
+
+    public function show_person($id)
+    {
+        $person = $this->personModel->get_person_by_id_edit($id);
+        if ($person) {
+            $prayers = $this->prayerModel->get_all_prayers_for_id($id);
+            $data = ['prayer' => $prayers];
+            $this->view('prayers/show_person', $data);
+        } else {
+            flash('msg', '<p>the page which you requested does not exist, try to use other method</p>', 'aler alert-danger');
+            redirect_to('pages/notFound');
+        }
+    }
 }

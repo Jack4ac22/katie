@@ -102,5 +102,22 @@ class Task
         }
     }
 
-    // TODO: show all tasks including the finished
+   
+
+
+
+    /**
+     * @return all the prayers for a certain person, no matter what is the status
+     */
+
+    public function get_all_tasks_for_id($id)
+    {
+        $this->db->query("SELECT C.*, P.first_name, P.last_name, P.sex, P.img FROM tasks AS C 
+        INNER JOIN people AS P on P.id = C.p_id
+        WHERE C.p_id = :id
+        ORDER BY C.created_at, C.edited_at");
+        $this->db->bind(':id', $id);
+        $tasks = $this->db->resultSet();
+        return $tasks;
+    }
 }

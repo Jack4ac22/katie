@@ -21,6 +21,22 @@ class Prayer
         return $prayers;
     }
 
+
+    /**
+     * @return all the prayers for a certain person, no matter what is the status
+     */
+
+    public function get_all_prayers_for_id($id)
+    {
+        $this->db->query("SELECT C.*, P.first_name, P.last_name, P.sex, P.img FROM prayers AS C 
+        INNER JOIN people AS P on P.id = C.p_id
+        WHERE C.p_id = :id
+        ORDER BY C.created_at, C.edited_at");
+        $this->db->bind(':id', $id);
+        $prayers = $this->db->resultSet();
+        return $prayers;
+    }
+
     public function add_prayer($data)
     {
         $this->db->query("INSERT INTO prayers (p_id, status, title, text) VALUES (:p_id , :status , :title , :text );");

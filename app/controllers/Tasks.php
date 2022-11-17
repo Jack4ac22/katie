@@ -223,6 +223,16 @@ class Tasks extends Controller
             }
         }
     }
-        // TODO: show all tasks including the finished
-
+    public function show_person($id)
+    {
+        $person = $this->personModel->get_person_by_id_edit($id);
+        if ($person) {
+            $tasks = $this->taskModel->get_all_tasks_for_id($id);
+            $data = ['task' => $tasks];
+            $this->view('tasks/show_person', $data);
+        } else {
+            flash('msg', '<p>the page which you requested does not exist, try to use other method</p>', 'aler alert-danger');
+            redirect_to('pages/notFound');
+        }
+    }
 }
