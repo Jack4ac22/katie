@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Nov 07, 2022 at 09:56 AM
+-- Generation Time: Nov 18, 2022 at 05:55 PM
 -- Server version: 5.7.34
 -- PHP Version: 8.0.8
 
@@ -641,16 +641,17 @@ CREATE TABLE `imgs` (
   `p_id` int(11) NOT NULL,
   `img_path` varchar(255) NOT NULL,
   `comment` text NOT NULL,
-  `uploaded_at` datetime DEFAULT CURRENT_TIMESTAMP
+  `uploaded_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `imgs`
 --
 
-INSERT INTO `imgs` (`id`, `p_id`, `img_path`, `comment`, `uploaded_at`) VALUES
-(18, 56, '1666201103-56.jpg', '', '2022-10-19 19:38:23'),
-(24, 55, '1666249335-55.jpg', 'Orlando when will be aged', '2022-10-20 09:02:15');
+INSERT INTO `imgs` (`id`, `p_id`, `img_path`, `comment`, `uploaded_at`, `created_at`) VALUES
+(18, 56, '1666201103-56.jpg', '', '2022-10-19 19:38:23', '2022-11-17 14:12:11'),
+(24, 55, '1666249335-55.jpg', 'Orlando when will be aged', '2022-10-20 09:02:15', '2022-11-17 14:12:11');
 
 -- --------------------------------------------------------
 
@@ -874,11 +875,10 @@ CREATE TABLE `people_timezones` (
 --
 
 INSERT INTO `people_timezones` (`id`, `p_id`, `t_id`, `status`) VALUES
-(31, 42, 3, 'status'),
-(32, 42, 4, NULL),
+(31, 42, 3, NULL),
 (35, 43, 3, 'status'),
 (36, 43, 4, NULL),
-(38, 42, 1, NULL),
+(38, 42, 1, 'status'),
 (39, 42, 108, NULL),
 (40, 45, 402, NULL);
 
@@ -950,7 +950,8 @@ INSERT INTO `phone_numbers` (`id`, `number`, `p_id`, `description`, `created_at`
 (57, '13213123123', 45, 'General', '2022-10-19 21:35:09', NULL),
 (58, '1233333', 45, 'asd', '2022-10-19 21:36:02', NULL),
 (59, '990123', 55, 'net', '2022-10-19 21:37:43', NULL),
-(66, '9988776655', 56, 'personal privte.', '2022-10-20 10:40:03', NULL);
+(66, '9988776655', 56, 'personal privte.', '2022-10-20 10:40:03', NULL),
+(67, '6659874562', 42, 'private and ', '2022-11-08 08:47:02', NULL);
 
 -- --------------------------------------------------------
 
@@ -974,9 +975,11 @@ CREATE TABLE `prayers` (
 
 INSERT INTO `prayers` (`id`, `title`, `text`, `status`, `p_id`, `edited_at`, `created_at`) VALUES
 (1, 'test prayer item', 'this is a text to test the prayers feature.', 'nothing', 42, '2022-11-04 14:11:42', '2022-11-06 00:42:13'),
-(2, 'test prayer item 22', 'this is a text to test the prayers feature.222', 'nothing', 42, '2022-11-04 14:11:42', '2022-11-04 13:11:00'),
+(2, 'another', 'testing', 'nothing', 42, '2022-11-04 14:11:42', '2022-11-08 15:28:10'),
 (3, 'as', 'qqq\r\nssss', 'nothing', 47, '2022-11-06 00:46:34', '2022-11-06 00:54:54'),
-(4, 'pr', 'dlldld', 'show', 46, '2022-11-06 00:55:20', NULL);
+(4, 'pr', 'dlldld', 'show', 46, '2022-11-06 00:55:20', NULL),
+(5, 'something', 'lksjdflksjdf\r\n', 'show', 42, '2022-11-17 13:28:18', NULL),
+(6, 'asdasdasd', 'asdasdasdasdasd as dasd asd asd', 'show', 43, '2022-11-17 14:37:27', NULL);
 
 -- --------------------------------------------------------
 
@@ -1011,17 +1014,19 @@ CREATE TABLE `tasks` (
   `title` varchar(255) NOT NULL,
   `text` text NOT NULL,
   `status` varchar(255) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `edited_at` datetime DEFAULT NULL,
-  `p_id` int(11) NOT NULL
+  `p_id` int(11) NOT NULL,
+  `d_date` date DEFAULT NULL,
+  `edited_at` date DEFAULT NULL,
+  `created_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tasks`
 --
 
-INSERT INTO `tasks` (`id`, `title`, `text`, `status`, `created_at`, `edited_at`, `p_id`) VALUES
-(1, 'upgrade the profile', 'try to communicate with your supperviser.', 'show', '2022-11-07 10:51:43', NULL, 42);
+INSERT INTO `tasks` (`id`, `title`, `text`, `status`, `p_id`, `d_date`, `edited_at`, `created_at`) VALUES
+(4, 'update your self', 'add some extra data about me', 'show', 43, '2022-11-25', NULL, NULL),
+(5, 'lkajsd', 'laksjdlkajd \r\nalskdj alskdj \r\nalksdj laksdj alskdj alksdja d \r\n\'dasd', 'show', 43, '2022-11-27', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1706,13 +1711,13 @@ ALTER TABLE `people_titles`
 -- AUTO_INCREMENT for table `phone_numbers`
 --
 ALTER TABLE `phone_numbers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `prayers`
 --
 ALTER TABLE `prayers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `relations`
@@ -1724,7 +1729,7 @@ ALTER TABLE `relations`
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `timezones`
