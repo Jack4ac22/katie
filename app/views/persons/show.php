@@ -1,5 +1,5 @@
 <?php require_once APPROOT . '/views/includes/header.php'; ?>
-<?php echo '<pre>' . var_export($data['person']['tasks'], true) . '</pre>';
+<?php //echo '<pre>' . var_export($data['person']['tasks'], true) . '</pre>';
 //echo '<pre>' . var_export($_SESSION, true) . '</pre>';
 // TODO: add the accordion items for bith prayers and tasks
 ?>

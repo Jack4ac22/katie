@@ -29,6 +29,9 @@ class Task
         $this->db->bind(':status', 'show');
         $this->db->bind(':title', $data['title']);
         $this->db->bind(':text', $data['text']);
+        if ($data['d_date'] == "") {
+            $data['d_date'] = Null;
+        }
         $this->db->bind(':d_date', $data['d_date']);
         if ($this->db->execute()) {
             return true;
@@ -67,6 +70,9 @@ class Task
         $this->db->bind(':title', $data['title']);
         $this->db->bind(':text', $data['text']);
         $this->db->bind(':p_id', $data['p_id']);
+        if ($data['d_date'] == "") {
+            $data['d_date'] = Null;
+        }
         $this->db->bind(':d_date', $data['d_date']);
         $this->db->bind(':id', $data['id']);
 
@@ -102,7 +108,7 @@ class Task
         }
     }
 
-   
+
 
 
 

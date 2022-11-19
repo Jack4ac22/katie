@@ -208,8 +208,8 @@ class Prayers extends Controller
                 redirect_to('prayers');
             }
             if ($this->prayerModel->hide_prayer($id)) {
-                flash('msg', '<p>The prayer was removed from your database.</p>
-                <p> you can check <a href="' . URLROOT . '/prayers' . '" class="alert-link">all prayers</a> page or <a href="' . URLROOT . '/persosns/show/' . $prayer->p_id . '" class="alert-link"> ' . $prayer->first_name . ' ' . $prayer->last_name . '</a> personal page.</p>');
+                flash('msg', '<p>The prayer was hidden from' . $prayer->first_name . ' ' . $prayer->last_name  . ' personal page.</p>
+                <p> you can still check it on the prayers page of' . $prayer->first_name . ' ' . $prayer->last_name . '<a href="' . URLROOT . '/prayers/show_person/' . $prayer->p_id . '" class="alert-link"> all prayers</a> page.</p>');
                 redirect_to('persons/show/' . $prayer->p_id);
             } else {
                 flash('msg', 'something went wrong, please try again or contact support.', 'alert alert-danger alert-dismissible fade show');

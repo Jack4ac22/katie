@@ -262,6 +262,7 @@ class Person
          $this->db->query("SELECT Count(C.p_id) as pr_count FROM people AS P
          INNER JOIN prayers AS C ON P.id = C.p_id
          WHERE P.id = :id
+         AND C.status = 'show'
          GROUP BY C.p_id");
          $this->db->bind(':id', $id);
          $pr_count = $this->db->resultSet();
@@ -282,11 +283,12 @@ class Person
            $this->db->query("SELECT Count(C.p_id) as tas_count FROM people AS P
            INNER JOIN tasks AS C ON P.id = C.p_id
            WHERE P.id = :id
+           AND C.status = 'show'
            GROUP BY C.p_id");
            $this->db->bind(':id', $id);
            $tas_count = $this->db->resultSet();
    
-           $this->db->query("SELECT C.id, C.status, C.title, C.text, C.created_at, C.edited_at, c.d_date FROM people AS P
+           $this->db->query("SELECT C.id, C.status, C.title, C.text, C.created_at, C.edited_at, C                  .d_date FROM people AS P
            INNER JOIN tasks AS C ON P.id = C.p_id
            WHERE P.id = :id
            ORDER BY C.d_date DESC");

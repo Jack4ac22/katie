@@ -16,7 +16,11 @@
     <?php if (count($data['tasks']) > 0) : ?>
         <?php foreach ($data['tasks'] as $task) : ?>
             <div class="col-md-6 g-3">
-                <div class="card">
+            <div class="card <?php if ($task->status == "show") {
+                                        echo "border-primary";
+                                    } else {
+                                        echo "border-secondary";
+                                    } ?>">
                     <div class="card-header">
                         <div class="row justify-content-between">
                             <div class="col">

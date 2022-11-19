@@ -7,7 +7,7 @@ class Tasks extends Controller
             flash('msg', '<p>you do not have permission to see this data, please login.</p>', 'alert alert-danger alert-dismissible fade show');
             redirect_to('users/login');
         }
-        $this->taskModel = $this->model('task');
+        $this->taskModel = $this->model('Task');
         $this->personModel = $this->model('Person');
     }
 
@@ -33,7 +33,7 @@ class Tasks extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_POST = filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
             $data = [
-                'd_date' => $_POST['d_date'],
+                'd_date' => $_POST['d_date'] ?? null,
                 'p_id' => $_POST['p_id'],
                 'title' => $_POST['title'],
                 'text' => $_POST['text'],
@@ -85,7 +85,7 @@ class Tasks extends Controller
                 'text' => '',
                 'persons' => $persons,
                 'p_id' => $p_id,
-                'd_date' => ''
+                'd_date' => Null
             ];
             $this->view('tasks/add', $data);
         }
@@ -106,7 +106,7 @@ class Tasks extends Controller
                 'title' => $_POST['title'],
                 'text' => htmlspecialchars($_POST['text']),
                 'id' => $id,
-                'd_date' => $_POST['d_date'],
+                'd_date' => $_POST['d_date'] ?? Null,
                 'd_date_err' => '',
                 'p_id_err' => '',
                 'title_err' => '',
@@ -160,7 +160,7 @@ class Tasks extends Controller
                 $persons = $this->personModel->getPersons(null, null);
                 $data = [
                     'id' => $task->id,
-                    'd_date' => $task->d_date,
+                    'd_date' => $task->d_date ?? Null,
                     'p_id' => $task->p_id,
                     'title' => $task->title,
                     'text' => $task->text,

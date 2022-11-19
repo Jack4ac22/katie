@@ -16,7 +16,11 @@
     <?php if (count($data['prayers']) > 0) : ?>
         <?php foreach ($data['prayers'] as $prayer) : ?>
             <div class="col-md-6 g-3">
-                <div class="card">
+                <div class="card <?php if ($prayer->status == "show") {
+                                        echo "border-primary";
+                                    } else {
+                                        echo "border-secondary";
+                                    } ?>">
                     <div class="card-header">
                         <div class="row justify-content-between">
                             <div class="col">
@@ -66,7 +70,9 @@
                             </div>
                         </div>
 
-                        <button type="button" class="btn btn-dark me-md-2" data-bs-toggle="modal" data-bs-target="#hid_prayer<?= $prayer->id ?>Modal">Hide</button>
+                        <button type="button" class="btn btn-dark me-md-2" data-bs-toggle="modal" data-bs-target="#hid_prayer<?= $prayer->id ?>Modal" <?php if ($prayer->status !== "show") {
+                                                                                                                                                            echo "disabled";
+                                                                                                                                                        } ?>>Hide</button>
                         <!-- Modal delete -->
                         <div class="modal fade" id="hid_prayer<?= $prayer->id ?>Modal" tabindex="-1" aria-labelledby="hid_prayer<?= $prayer->id ?>ModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
