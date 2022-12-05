@@ -109,7 +109,7 @@ class Timezone
                 $this->de_acvtiveate($z->id);
             }
         }
-        $this->db->query("INSERT INTO people_timezones (id, p_id, t_id, status) VALUES (NULL, :p_id, :t_id,  :status)");
+        $this->db->query("INSERT INTO people_timezones ( p_id, t_id, status) VALUES ( :p_id, :t_id,  :status)");
         $this->db->bind(':p_id', $data['p_id']);
         $this->db->bind(':t_id', $data['t_id']);
         $this->db->bind(':status', $data['status']);
