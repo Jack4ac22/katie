@@ -69,7 +69,7 @@
                     <?php else : ?>
                         <a class="btn btn-primary mb-3" href="<?php echo URLROOT . '/pepcous/add/' . $data['person']['person']->id; ?>">Add passport</a>
                         <div class="alert alert-warning" role="alert">
-                            <h4 class="alert-heading">No passport was cound for <?php echo $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name; ?></h4>
+                            <h4 class="alert-heading">No passport was found for <?php echo $data['person']['person']->first_name . ' ' . $data['person']['person']->last_name; ?></h4>
                             <p>You can check the <a href="<?= URLROOT ?>/pepcous" class="alert-link">countries page</a> and use the search. </p>
                             <hr>
                             <p class="mb-0">Otherwise, you can add a passport by clicking on the add button, or by using <a href="<?= URLROOT ?>/pepcous/add/<?= $data['person']['person']->id ?>" class="alert-link">this link</a>.</p>
