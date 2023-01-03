@@ -16,7 +16,8 @@ class Peptit
         $this->db->query("SELECT PT.*, PP.first_name, PP.last_name, PP.sex, JT.title, JT.description AS t_description
         FROM people_titles AS PT
         LEFT JOIN people AS PP ON PP.id = PT.p_id
-        LEFT JOIN job_titles AS JT ON JT.id = PT.t_id ");
+        LEFT JOIN job_titles AS JT ON JT.id = PT.t_id
+        ORDER BY PP.last_name");
         $pep_tit = $this->db->resultSet();
 
         $this->db->query("SELECT * FROM job_titles");

@@ -70,7 +70,8 @@ class Group
     $this->db->query("SELECT PG.*, P.first_name, P.last_name, P.sex, G.title FROM people_groups AS PG
     INNER JOIN people AS P ON P.id = PG.p_id
     INNER JOIN groups AS G ON PG.group_id = G.id
-    WHERE PG.group_id = :t_id");
+    WHERE PG.group_id = :t_id
+    ORDER BY P.last_name");
     $this->db->bind(':t_id', $id);
     $people = $this->db->resultSet();
     $row = ['title' => $row, 'people' => $people];

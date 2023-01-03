@@ -46,7 +46,7 @@ class Image
         $this->db->query('SELECT I.*, P.first_name, P.last_name, P.sex, P.img
         FROM imgs AS I 
         INNER JOIN people AS P ON I.p_id = P.id
-        ORDER BY I.uploaded_at DESC');
+        ORDER BY P.last_name ,I.uploaded_at DESC');
         if ($this->db->execute()) {
             $images = $this->db->resultSet();
             return $images;

@@ -84,7 +84,8 @@ class Pepcou
         $this->db->query("SELECT PN.*, P.first_name, P.last_name, P.sex, P.email, P.img, P.birthday
         FROM people_countries AS PN
         INNER JOIN people AS P ON P.id = PN.p_id
-        WHERE PN.c_id = :id");
+        WHERE PN.c_id = :id
+        ORDER BY P.last_name");
         $this->db->bind(':id', $id);
         $people = $this->db->resultSet();
         if ($people) {

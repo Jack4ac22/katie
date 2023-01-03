@@ -17,7 +17,7 @@ class Peplan
         FROM people_languages AS PL
         LEFT JOIN people AS PP ON PP.id = PL.p_id
         LEFT JOIN languages AS L ON L.id = PL.lan_id
-        ORDER BY PL.comment");
+        ORDER BY PP.last_name, PL.comment");
         $languages = $this->db->resultSet();
 
         $this->db->query("SELECT * FROM languages");

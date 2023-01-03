@@ -17,7 +17,7 @@ class Task
         $this->db->query("SELECT C.*, P.first_name, P.last_name, P.sex, P.img FROM tasks AS C 
         INNER JOIN people AS P on P.id = C.p_id
         WHERE C.status = 'show'
-        ORDER BY C.created_at, C.edited_at");
+        ORDER BY P.last_name, C.created_at, C.edited_at");
         $tasks = $this->db->resultSet();
         return $tasks;
     }

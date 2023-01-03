@@ -15,7 +15,7 @@ class Prayer
     {
         $this->db->query("SELECT C.*, P.first_name, P.last_name, P.sex, P.img FROM prayers AS C 
         INNER JOIN people AS P on P.id = C.p_id
-        ORDER BY C.created_at, C.edited_at");
+        ORDER BY p.last_name, C.created_at, C.edited_at");
         $prayers = $this->db->resultSet();
         return $prayers;
     }

@@ -1,7 +1,7 @@
 <?php require APPROOT . '/views/includes/header.php'; ?>
 <?php flash('msg'); ?>
 
-<?php  echo '<pre>' . var_export($data, true) . '</pre>'; ?>
+<?php  #echo '<pre>' . var_export($data, true) . '</pre>'; ?>
 <a href="<?php echo URLROOT; ?>/peplans" class="btn btn-light"><?= I_ARROW_L ?> Back to all languages-people relations</a>
 
 <?php if (islogged()) : ?>

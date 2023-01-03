@@ -17,7 +17,7 @@ class Comment
         INNER JOIN people AS P on P.id = C.p_id
         WHERE C.title LIKE '%$search%'
         OR C.text LIKE '%$search%'
-        ORDER BY C.created_at, C.edited_at");
+        ORDER BY P.last_name,C.created_at, C.edited_at");
         $comments = $this->db->resultSet();
         return $comments;
     }

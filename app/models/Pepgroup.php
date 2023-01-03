@@ -16,7 +16,8 @@ class Pepgroup
         $this->db->query("SELECT PG.*, PP.first_name, PP.last_name, PP.sex, G.title, G.description AS g_description
         FROM people_groups AS PG
         LEFT JOIN people AS PP ON PP.id = PG.p_id
-        LEFT JOIN groups AS G ON G.id = PG.group_id ");
+        LEFT JOIN groups AS G ON G.id = PG.group_id
+        ORDER BY PP.last_name");
         $pep_groups = $this->db->resultSet();
 
         $this->db->query("SELECT * FROM groups");
@@ -40,7 +41,8 @@ class Pepgroup
         FROM people_groups AS PG
         INNER JOIN people AS P ON P.id = PG.p_id
         INNER JOIN groups AS G ON G.id = PG.group_id
-        WHERE PG.id = :id");
+        WHERE PG.id = :id
+        ORDER BY P.last_name");
         $this->db->bind(':id', $id);
         $row = $this->db->single();
 

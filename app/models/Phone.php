@@ -16,7 +16,7 @@ class Phone
         $this->db->query("SELECT PN.*, P.first_name, P.last_name, P.sex, P.email FROM phone_numbers AS PN
         INNER JOIN people AS P
         ON PN.p_id = P.id
-        ORDER BY P.id");
+        ORDER BY P.last_name");
         $results = $this->db->resultSet();
         return $results;
     }

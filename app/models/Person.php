@@ -23,6 +23,7 @@ class Person
         WHERE P.first_name LIKE :search_f 
         OR P.last_name LIKE :search_l
         OR P.email LIKE :search_e
+        ORDER BY P.last_name
         ;");
 
         $this->db->bind(':search_f', '%' . $search . '%');
